@@ -270,8 +270,8 @@
 
 </div>
 
-<script src="{{asset('js/core.min.js')}}"></script>
-<script src="{{asset('js/script.js')}}"></script>
+<script src="{{secure_asset('js/core.min.js')}}"></script>
+<script src="{{secure_asset('js/script.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script data-cfasync="false" type="text/javascript">

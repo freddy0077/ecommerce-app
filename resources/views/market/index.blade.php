@@ -62,7 +62,7 @@
                                                 <a href=""><i class="fa fa-thumbs-up " aria-hidden="true"></i></a>
                                                 <a href="">&#x263a;</a>
                                                 ({{$product->like_counts}})
-                                                <a href=""><img  src="{{asset('images/fancy1.png')}}" class="img-responsive" style="width:25px" height="20px" /></a>
+                                                <a href=""><img  src="{{secure_asset('images/fancy1.png')}}" class="img-responsive" style="width:25px" height="20px" /></a>
 
 {{--                                                <a href=""><img  src="{{asset('images/fancy1.png')}}" class="img-responsive" style="width:10px" height="10px" /></a>--}}
                                             </div>
