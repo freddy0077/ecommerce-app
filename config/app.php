@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Shopaholicks',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,7 +162,14 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Leantony\Modal\ServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Watson\BootstrapForm\BootstrapFormServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -225,6 +232,14 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form'     => Collective\Html\FormFacade::class,
+        'HTML'     => Collective\Html\HtmlFacade::class,
+        'BootForm' => Watson\BootstrapForm\Facades\BootstrapForm::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Uuid'      => Webpatser\Uuid\Uuid::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
 
     ],
 

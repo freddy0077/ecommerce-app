@@ -59,7 +59,52 @@
                                 </a>
                             </div>
                         </div>
+
                     </form>
+
+                    <script>
+
+                        BootstrapDialog.show({
+                            message:
+//                            '<form id="data-form"> ' +
+//                            '<div class="row"> ' +
+//
+//                            '<div class="col-sm-4"><label>Name </label></div>' +
+//                            '<div class="col-sm-8"><input type="text" class="form-control"></div>'+
+//
+//                            '</div>'+
+//                            '' +
+//                            '</form>',
+                            '',
+                            buttons: [{
+                                icon: 'glyphicon glyphicon-send',
+                                label: 'Send ajax request',
+                                cssClass: 'btn-primary',
+                                autospin: true,
+                                action: function(dialogRef){
+                                    dialogRef.enableButtons(false);
+                                    dialogRef.setClosable(false);
+                                    dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
+
+                                    $.post('/send',$('#data-form').serialize(),function(){
+                                        alert('hello');
+                                    })
+                                    setTimeout(function(){
+//                                        dialogRef.close();
+
+                                    }, 5000);
+                                }
+                            }, {
+                                label: 'Close',
+                                action: function(dialogRef){
+                                    dialogRef.close();
+                                }
+                            }]
+                        });
+
+
+                    </script>
+
                 </div>
             </div>
         </div>

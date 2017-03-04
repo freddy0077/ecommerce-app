@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Webpatser\Uuid\Uuid;
 
 class RegisterController extends Controller
 {
@@ -62,10 +65,48 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone_number' => $data['phone_number'],
+            'gender' => $data['gender']
         ]);
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+      event( new Registered( $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'phone_number' => $request->phone_number,
+            'gender'    => $request->gender,
+            'has_store' => $request->store == "on"? true: false
+        ])));
+
+//        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+            return $this->registered($request, $user) ?: redirect($this->redirectPath());
+
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        //
+//         return $user->have_store ?:"";
+//        return $request->store;
+
+        if ($request->exists('store') && $request->get('store') == 'on') {
+            return ['message'=>'/store/add-store','status'=>301];
+        }else{
+            return ['message'=>'/','status'=>200];
+        }
+    }
+
 }
