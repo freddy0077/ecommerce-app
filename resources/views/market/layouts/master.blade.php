@@ -410,7 +410,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url:"{{url('/register')}}",
+                    url:"{{secure_url('/register')}}",
                     type:"POST",
                     data: $('#user_register_form').serialize(),
                     dataType: 'json',
@@ -450,7 +450,7 @@
         function login() {
             $('#user_login_form').on('submit', function (e) {
                 e.preventDefault();
-                $.post("{{url('login')}}", $('#user_login_form').serialize(), function () {
+                $.post("{{secure_url('login')}}", $('#user_login_form').serialize(), function () {
 
                 }).success(function (data) {
                     // Display a success toast, with a title
