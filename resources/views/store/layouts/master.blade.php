@@ -174,36 +174,28 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav">
                         <li><a class="home_link" title="Home" href="#"><span>Home</span></a></li>
+
                         <li class="dropdown"><a>Shop by Categories</a>
                             <div class="dropdown-menu">
                                 <ul>
-                                    <li> <a href="category.html">Clothing<span>&rsaquo;</span></a>
+                                    @foreach(\App\ProductCategory::all() as $category)
+                                    <li> <a href="#">{{$category->name}}<span>&rsaquo;</span></a>
                                         <div class="dropdown-menu">
                                             <ul>
-                                                <li><a href="category.html">Men <span>&rsaquo;</span></a>
+                                                @foreach(\App\SubCategory::whereProductCategoryId($category->id)->get() as $subcategory)
+                                                <li><a href="">{{$subcategory->name}} <span>&rsaquo;</span></a>
                                                     <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">Sub Categories</a></li>
-                                                            <li><a href="category.html">Sub Categories</a></li>
-                                                            <li><a href="category.html">Sub Categories</a></li>
-                                                            <li><a href="category.html">Sub Categories</a></li>
-                                                            <li><a href="category.html">Sub Categories New</a></li>
-                                                        </ul>
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories New</a></li>--}}
+                                                        {{--</ul>--}}
                                                     </div>
                                                 </li>
-                                                <li><a href="category.html" >Women</a> </li>
-                                                <li><a href="category.html">Girls<span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">Sub Categories </a></li>
-                                                            <li><a href="category.html">Sub Categories New</a></li>
-                                                            <li><a href="category.html">Sub Categories New</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Boys</a></li>
-                                                <li><a href="category.html">Baby</a></li>
-                                                <li><a href="category.html">Accessories <span>&rsaquo;</span></a>
+
+                                                @endforeach
                                                     <div class="dropdown-menu">
                                                         <ul>
                                                             <li><a href="category.html">New Sub Categories</a></li>
@@ -213,194 +205,196 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li> <a href="category.html">Electronics<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li> <a href="category.html">Laptops <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li> <a href="category.html">New Sub Categories </a> </li>
-                                                            <li> <a href="category.html">New Sub Categories </a> </li>
-                                                            <li> <a href="category.html">Sub Categories New </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li> <a href="category.html">Desktops <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li> <a href="category.html">New Sub Categories </a> </li>
-                                                            <li> <a href="category.html">Sub Categories New </a> </li>
-                                                            <li> <a href="category.html">Sub Categories New </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li> <a href="category.html">Cameras <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li> <a href="category.html">New Sub Categories</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Mobile Phones <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories</a></li>
-                                                            <li><a href="category.html">New Sub Categories</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">TV &amp; Home Audio <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories </a> </li>
-                                                            <li><a href="category.html">Sub Categories New </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">MP3 Players</a> </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="category.html">Shoes<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li><a href="category.html">Men</a> </li>
-                                                <li><a href="category.html">Women <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories </a> </li>
-                                                            <li><a href="category.html">Sub Categories </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Girls</a> </li>
-                                                <li><a href="category.html">Boys</a> </li>
-                                                <li><a href="category.html">Baby</a> </li>
-                                                <li><a href="category.html">Accessories <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories</a></li>
-                                                            <li><a href="category.html">New Sub Categories</a></li>
-                                                            <li><a href="category.html">Sub Categories</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Watches<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li> <a href="category.html">Men's Watches</a></li>
-                                                <li> <a href="category.html">Women's Watches</a></li>
-                                                <li> <a href="category.html">Kids' Watches</a></li>
-                                                <li> <a href="category.html">Accessories</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Jewellery<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li> <a href="category.html">Silver <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li> <a href="category.html">New Sub Categories</a></li>
-                                                            <li> <a href="category.html">New Sub Categories</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Gold <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">test 1</a></li>
-                                                            <li><a href="category.html">test 2</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Diamond</a></li>
-                                                <li><a href="category.html">Pearl <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Men's Jewellery</a></li>
-                                                <li><a href="category.html">Children's Jewellery <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">New Sub Categories </a> </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="category.html">Health &amp; Beauty<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li> <a href="category.html">Perfumes</a></li>
-                                                <li> <a href="category.html">Makeup</a></li>
-                                                <li> <a href="category.html">Sun Care</a></li>
-                                                <li> <a href="category.html">Skin Care</a></li>
-                                                <li> <a href="category.html">Eye Care</a></li>
-                                                <li> <a href="category.html">Hair Care</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Kids &amp; Babies<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li><a href="category.html">Toys</a></li>
-                                                <li><a href="category.html">Games <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
-                                                        <ul>
-                                                            <li><a href="category.html">test 25</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a href="category.html">Puzzles</a></li>
-                                                <li><a href="category.html">Hobbies</a></li>
-                                                <li><a href="category.html">Strollers</a></li>
-                                                <li><a href="category.html">Health &amp; Safety</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Sports<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li><a href="category.html">Cycling</a></li>
-                                                <li><a href="category.html">Running</a></li>
-                                                <li><a href="category.html">Swimming</a></li>
-                                                <li><a href="category.html">Football</a></li>
-                                                <li><a href="category.html">Golf</a></li>
-                                                <li><a href="category.html">Windsurfing</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Home &amp; Garden<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li><a href="category.html">Bedding</a></li>
-                                                <li><a href="category.html">Food</a></li>
-                                                <li><a href="category.html">Furniture</a></li>
-                                                <li><a href="category.html">Kitchen</a></li>
-                                                <li><a href="category.html">Lighting</a></li>
-                                                <li><a href="category.html">Tools</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li> <a href="category.html">Wines &amp; Spirits<span>&rsaquo;</span></a>
-                                        <div class="dropdown-menu">
-                                            <ul>
-                                                <li><a href="category.html">Wine</a></li>
-                                                <li><a href="category.html">Whiskey</a></li>
-                                                <li><a href="category.html">Vodka</a></li>
-                                                <li><a href="category.html">Liqueurs</a></li>
-                                                <li><a href="category.html">Beer</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+
+                                    @endforeach
+                                    {{--<li> <a href="category.html">Electronics<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li> <a href="category.html">Laptops <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories </a> </li>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories </a> </li>--}}
+                                                            {{--<li> <a href="category.html">Sub Categories New </a> </li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li> <a href="category.html">Desktops <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories </a> </li>--}}
+                                                            {{--<li> <a href="category.html">Sub Categories New </a> </li>--}}
+                                                            {{--<li> <a href="category.html">Sub Categories New </a> </li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li> <a href="category.html">Cameras <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Mobile Phones <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">TV &amp; Home Audio <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories </a> </li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories New </a> </li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">MP3 Players</a> </li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="category.html">Shoes<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li><a href="category.html">Men</a> </li>--}}
+                                                {{--<li><a href="category.html">Women <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories </a> </li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories </a> </li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Girls</a> </li>--}}
+                                                {{--<li><a href="category.html">Boys</a> </li>--}}
+                                                {{--<li><a href="category.html">Baby</a> </li>--}}
+                                                {{--<li><a href="category.html">Accessories <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories</a></li>--}}
+                                                            {{--<li><a href="category.html">Sub Categories</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Watches<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li> <a href="category.html">Men's Watches</a></li>--}}
+                                                {{--<li> <a href="category.html">Women's Watches</a></li>--}}
+                                                {{--<li> <a href="category.html">Kids' Watches</a></li>--}}
+                                                {{--<li> <a href="category.html">Accessories</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Jewellery<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li> <a href="category.html">Silver <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories</a></li>--}}
+                                                            {{--<li> <a href="category.html">New Sub Categories</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Gold <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">test 1</a></li>--}}
+                                                            {{--<li><a href="category.html">test 2</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Diamond</a></li>--}}
+                                                {{--<li><a href="category.html">Pearl <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Men's Jewellery</a></li>--}}
+                                                {{--<li><a href="category.html">Children's Jewellery <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">New Sub Categories </a> </li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="category.html">Health &amp; Beauty<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li> <a href="category.html">Perfumes</a></li>--}}
+                                                {{--<li> <a href="category.html">Makeup</a></li>--}}
+                                                {{--<li> <a href="category.html">Sun Care</a></li>--}}
+                                                {{--<li> <a href="category.html">Skin Care</a></li>--}}
+                                                {{--<li> <a href="category.html">Eye Care</a></li>--}}
+                                                {{--<li> <a href="category.html">Hair Care</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Kids &amp; Babies<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li><a href="category.html">Toys</a></li>--}}
+                                                {{--<li><a href="category.html">Games <span>&rsaquo;</span></a>--}}
+                                                    {{--<div class="dropdown-menu">--}}
+                                                        {{--<ul>--}}
+                                                            {{--<li><a href="category.html">test 25</a></li>--}}
+                                                        {{--</ul>--}}
+                                                    {{--</div>--}}
+                                                {{--</li>--}}
+                                                {{--<li><a href="category.html">Puzzles</a></li>--}}
+                                                {{--<li><a href="category.html">Hobbies</a></li>--}}
+                                                {{--<li><a href="category.html">Strollers</a></li>--}}
+                                                {{--<li><a href="category.html">Health &amp; Safety</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Sports<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li><a href="category.html">Cycling</a></li>--}}
+                                                {{--<li><a href="category.html">Running</a></li>--}}
+                                                {{--<li><a href="category.html">Swimming</a></li>--}}
+                                                {{--<li><a href="category.html">Football</a></li>--}}
+                                                {{--<li><a href="category.html">Golf</a></li>--}}
+                                                {{--<li><a href="category.html">Windsurfing</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Home &amp; Garden<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li><a href="category.html">Bedding</a></li>--}}
+                                                {{--<li><a href="category.html">Food</a></li>--}}
+                                                {{--<li><a href="category.html">Furniture</a></li>--}}
+                                                {{--<li><a href="category.html">Kitchen</a></li>--}}
+                                                {{--<li><a href="category.html">Lighting</a></li>--}}
+                                                {{--<li><a href="category.html">Tools</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
+                                    {{--<li> <a href="category.html">Wines &amp; Spirits<span>&rsaquo;</span></a>--}}
+                                        {{--<div class="dropdown-menu">--}}
+                                            {{--<ul>--}}
+                                                {{--<li><a href="category.html">Wine</a></li>--}}
+                                                {{--<li><a href="category.html">Whiskey</a></li>--}}
+                                                {{--<li><a href="category.html">Vodka</a></li>--}}
+                                                {{--<li><a href="category.html">Liqueurs</a></li>--}}
+                                                {{--<li><a href="category.html">Beer</a></li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</li>--}}
                                 </ul>
                             </div>
                         </li>
