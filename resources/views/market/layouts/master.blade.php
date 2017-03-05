@@ -487,19 +487,18 @@
             })
         }
 
-
-        function fancy(product_id){
-            @if(Auth::check())
-             {{--$.post("{{secure_url('/fancy-it')}}")--}}
-             alert(product_id);
-
-            @elseif(Auth::guest())
-                alert('logged out');
-            login();
-            @endif
-    }
-
     })
+
+    function fancy(product_id){
+        @if(Auth::check())
+         {{--$.post("{{secure_url('/fancy-it')}}")--}}
+         alert(product_id);
+
+        @elseif(Auth::guest())
+            alert('logged out');
+        login();
+        @endif
+}
 </script>
 {{--<noscript><a href="https://www.olark.com/site/7830-582-10-3714/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by<a href="https://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>--}}
 
