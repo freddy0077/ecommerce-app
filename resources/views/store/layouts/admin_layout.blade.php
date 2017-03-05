@@ -17,29 +17,29 @@
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <link href="{{asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/global/plugins/jqvmap/jqvmap/jqvmap.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/plugins/jqvmap/jqvmap/jqvmap.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="{{asset('backend/assets/global/css/components-rounded.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="{{asset('backend/assets/global/css/plugins.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/css/components-rounded.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/global/css/plugins.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="{{asset('backend/assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
-    <link href="{{asset('backend/assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{secure_asset('backend/secure_assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="{{secure_asset('backend/secure_assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
-    <link rel="shortcut icon" href="{{asset('backend/favicon.ico')}}" /> </head>
+    <link rel="shortcut icon" href="{{secure_asset('backend/favicon.ico')}}" /> </head>
 <!-- END HEAD -->
 
 <body class="page-container-bg-solid page-boxed">
@@ -51,7 +51,7 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="">
-{{--                    <img src="{{asset('backend/assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}
+{{--                    <img src="{{secure_asset('backend/secure_assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}
                     <h1>{{config('app.name')}}</h1>
                 </a>
             </div>
@@ -295,7 +295,7 @@
                                     <li>
                                         <a href="#">
                                                     <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../secure_assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Lisa Wong </span>
                                                         <span class="time">Just Now </span>
@@ -306,7 +306,7 @@
                                     <li>
                                         <a href="#">
                                                     <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../secure_assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Richard Doe </span>
                                                         <span class="time">16 mins </span>
@@ -317,7 +317,7 @@
                                     <li>
                                         <a href="#">
                                                     <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../secure_assets/layouts/layout3/img/avatar1.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Bob Nilson </span>
                                                         <span class="time">2 hrs </span>
@@ -328,7 +328,7 @@
                                     <li>
                                         <a href="#">
                                                     <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../secure_assets/layouts/layout3/img/avatar2.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Lisa Wong </span>
                                                         <span class="time">40 mins </span>
@@ -339,7 +339,7 @@
                                     <li>
                                         <a href="#">
                                                     <span class="photo">
-                                                        <img src="../assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="../secure_assets/layouts/layout3/img/avatar3.jpg" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> Richard Doe </span>
                                                         <span class="time">46 mins </span>
@@ -356,7 +356,7 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="{{asset('backend/assets/layouts/layout3/img/avatar9.jpg')}}">
+                            <img alt="" class="img-circle" src="{{secure_asset('backend/secure_assets/layouts/layout3/img/avatar9.jpg')}}">
                             <span class="username username-hide-mobile">Nick</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
@@ -500,46 +500,46 @@
 <!-- END INNER FOOTER -->
 <!-- END FOOTER -->
 <!--[if lt IE 9]>
-<script src="{{asset('backend/assets/global/plugins/respond.min.js')}}"></script>
-<script src="{{asset('backend/assets/global/plugins/excanvas.min.js')}}"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/respond.min.js')}}"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/excanvas.min.js')}}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{asset('backend/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend//assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend//secure_assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="{{asset('backend/assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/flot/jquery.flot.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/flot/jquery.flot.resize.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/flot/jquery.flot.categories.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jquery.sparkline.min.js')}}" type="text/javascript"></script>
-<script src="../assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/moment.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/fullcalendar/fullcalendar.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/flot/jquery.flot.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/flot/jquery.flot.resize.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/flot/jquery.flot.categories.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jquery.sparkline.min.js')}}" type="text/javascript"></script>
+<script src="../secure_assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+<script src="../secure_assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+<script src="../secure_assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js')}}" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="{{asset('backend/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="{{asset('backend/assets/pages/scripts/ecommerce-dashboard.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/pages/scripts/ecommerce-dashboard.min.js')}}" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="{{asset('backend/assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('backend/assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script>
+<script src="{{secure_asset('backend/secure_assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" type="text/javascript"></script>
 
 <!-- END THEME LAYOUT SCRIPTS -->
