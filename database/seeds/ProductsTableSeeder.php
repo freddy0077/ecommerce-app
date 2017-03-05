@@ -26,13 +26,13 @@ class ProductsTableSeeder extends Seeder
         $user_id = 1;
         $categories = ['Clothing','Beauty & Accessories','Home Appliances','Electronics','Arts & Photography','Agric & Food'];
 //
-//        \Illuminate\Support\Facades\DB::table('users')->insert([
-//                'name'    => 'Frederick Ankamah',
-//                'email'   => 'frederickankamah988@gmail.com',
-//                'password' => bcrypt('topman88'),
-//                'gender'  => 'male'
-//            ]
-//        );
+        \Illuminate\Support\Facades\DB::table('users')->insert([
+                'name'    => 'Frederick Ankamah',
+                'email'   => 'frederickankamah988@gmail.com',
+                'password' => bcrypt('topman88'),
+                'gender'  => 'male'
+            ]
+        );
 //
 //
 //        \App\Store::create([
