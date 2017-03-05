@@ -37,9 +37,6 @@
     <main class="page-content offset-top-30">
         <div id="fb-root"></div>
 
-        {{--<h4 class="text-center">TOP ADVERTISEMENTS</h4>--}}
-
-
         <h4 class="text-center">PRODUCTS BY POPULARITY</h4>
 
         <div class="row">
@@ -92,14 +89,12 @@
             @endforeach
         </div>
         <br>
-
-
+        <br>
 
         <div style="text-align: center">
             <button class="btn btn-success" style="margin-bottom: 21px;" id="load_more">Load More.. </button>
             <span class="fa fa-spinner fa-spin fa-5x text-center" ></span>
         </div>
-
 
     </main>
 
