@@ -182,6 +182,15 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Enable</label>
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" class="form-control" name="enable">
+                                                        <span> Check to enable the store </span>
+                                                    </div>
+                                                </div>
+
+
                                                 {{--<div class="form-group">--}}
                                                     {{--<label class="control-label col-md-3">Image</label>--}}
                                                     {{--<div class="col-md-4">--}}
