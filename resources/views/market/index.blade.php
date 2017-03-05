@@ -106,7 +106,7 @@
                                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>
                                     </p>
-                                    <a href="#"><img src='{{secure_asset("images/{{$product->image}}")}}' width="370" height="231" alt="" class="img-responsive post-image"/></a>
+                                    <a href="#"><img src='{{secure_asset("images/$product->image")}}' width="370" height="231" alt="" class="img-responsive post-image"/></a>
                                     <ul class="post-categories list-inline-0">
                                         <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
                                     </ul>
