@@ -10,6 +10,12 @@ class ProductsTableSeeder extends Seeder
      * @return void
      */
 
+    private $mainCategories = ['Clothing','Beauty & Accessories','Home & Appliances','Electronics',
+                               'Arts & Photography','Agric & Food'];
+
+
+    private $user_names = ['frederickankamah988','Evans','Sandra','Abigail','Deborah'];
+
     private function saveSubCategory($id,$name,$category_id){
         \App\SubCategory::create([
             'id' => $id,
@@ -18,86 +24,124 @@ class ProductsTableSeeder extends Seeder
         ]);
     }
 
+    private function saveUsers(){
+      foreach($this->user_names as $key => $value){
+          \App\User::create([
+              'name' => $value,
+              'email' => "$value@gmail.com",
+              'password' => bcrypt('topman88'),
+              'phone_number' => "024012025$key",
+              'has_store'    => true,
+          ]);
+      }
+    }
+
+    private function saveProducts($id,$name,$price,$store_id,$sub_category_id){
+        \App\Product::create([
+            'id' => $id,
+            'name' => $name,
+            'price' => $price,
+            'description'=>"",
+            'ad' => true,
+            'store_id' => $store_id,
+            'sub_category_id' => $sub_category_id
+        ]);
+    }
+
+
     public function run()
     {
 
-        $sub_category_id = Webpatser\Uuid\Uuid::generate();
+        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        \Illuminate\Support\Facades\DB::statement('truncate table users');
+        \Illuminate\Support\Facades\DB::statement('truncate table product_categories');
+        \Illuminate\Support\Facades\DB::statement('truncate table sub_categories');
+        \Illuminate\Support\Facades\DB::statement('truncate table products');
+//        \DB::statement('truncate table cities');
+//        \App\Area::truncate();
+
+        $this->saveUsers();
+
         $store_id = \Webpatser\Uuid\Uuid::generate();
-        $user_id = 1;
-        $categories = ['Clothing','Beauty & Accessories','Home Appliances','Electronics','Arts & Photography','Agric & Food'];
-//
-        \Illuminate\Support\Facades\DB::table('users')->insert([
-                'name'    => 'Frederick Ankamah',
-                'email'   => 'frederickankamah988@gmail.com',
-                'password' => bcrypt('topman88'),
-                'gender'  => 'male'
-            ]
-        );
-//
-//
-//        \App\Store::create([
-//            'id' => $store_id,
-//            'user_id' => $user_id,
-//            'name'  => 'Shop 1',
-//            'domain'  => 'store1.shopaholick.dev',
-//            'city' => 'Accra'
-//        ]);
+        \App\Store::create([
+            'id' => $store_id,
+            'name' => 'Evergreen Store',
+            'email' => 'evergreen@gmail.com',
+            'phone_number' => '0240120250',
+            'user_id'      => 1,
+            'domain' => 'evergreen-store@shopaholicks.com'
+        ]);
 
+        foreach($this->mainCategories as $key=>$category){
 
-        foreach($categories as $key=>$category){
-            $category_id = \Webpatser\Uuid\Uuid::generate();
+            $id = Webpatser\Uuid\Uuid::generate();
+            $categoryObject = new \App\ProductCategory();
+            $categoryObject->id = $id;
+            $categoryObject->user_id = 1;
+            $categoryObject->name = $category;
+            $categoryObject->image = 'carousel-07.jpg';
+            $categoryObject->save();
+            echo  " $category saved ";
 
+            switch($category){
+                case "Clothing":
+                    $men_id = \Webpatser\Uuid\Uuid::generate();
+                    $this->saveSubCategory($men_id,'Men',$id);
+                    for($i = 0; $i < 10; $i++){
+                        $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
+                    }
 
-//            $categories_id = \Webpatser\Uuid\Uuid::generate();
-            $subcategory_id = \Webpatser\Uuid\Uuid::generate();
+                    $women_id = \Webpatser\Uuid\Uuid::generate();
 
+                    $this->saveSubCategory($women_id,'Women',$id);
 
-                \App\ProductCategory::create([
-                    'id' => $category_id ,
-                    'user_id' => $user_id,
-                    'name' => $category,
-                    'image'  => 'carousel-07.jpg'
+                    for($i = 0; $i < 10; $i++){
+                        $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
+                    }
 
-                ]);
+                    $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
+                    $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
 
-                switch($category){
-                    case "Clothing":
-                        $this->saveSubCategory($subcategory_id,'Men',$category_id);
-//                    $this->saveSubCategory($subcategory_id,'Women',$categories_id);
-                        break;
-                    case "Beauty & Accessories":
-                        $this->saveSubCategory($subcategory_id,"Men's",$category_id);
-                        break;
+                    for($i = 0; $i < 10; $i++){
+                        $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
+                    }
 
-                    case "Home Appliances":
-                        $this->saveSubCategory($subcategory_id,"Decor",$category_id);
-                        break;
+                    break;
 
-                    case "Electronics":
-                        $this->saveSubCategory($subcategory_id,"Computers",$category_id);
-//                    $this->saveSubCategory($subcategory_id,"Phones",$categories_id);
-                        break;
-                }
+                case "Beauty & Accessories":
+                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Men',$id);
+                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Women',$id);
 
-            for($index =0; $index < 100; $index++){
+                    $kids_id = \Webpatser\Uuid\Uuid::generate();
+                    $this->saveSubCategory($kids_id,'Kids',$id);
 
-                \App\Product::create([
-                    'id' => \Webpatser\Uuid\Uuid::generate(),
-                    'store_id' => $store_id,
-                    'name' => 'product '.$index,
-                    'description' => 'Description'.$index,
-                    'price'=> 5*$index,
-                    'image' => 'carousel-07.jpg',
-                    'sub_category_id' => $subcategory_id,
-                    'feature' => true,
-                    'published' => true,
-                    'show_buy_button' => true,
-                    'ad' => true,
-                    'like_counts' => $index
-                ]);
+                    for($i = 0; $i < 10; $i++){
+                        $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids$i",7*$i,$store_id,$kids_id);
+                    }
+                    break;
+
+                case "Home & Appliances":
+                    $appliance_id = \Webpatser\Uuid\Uuid::generate();
+                    $this->saveSubCategory($appliance_id,'Appliances',$id);
+
+                    for($i = 0; $i < 10; $i++){
+                        $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"appliance$i",7*$i,$store_id,$appliance_id);
+                    }
+
+                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
+                    break;
+
+                case "Electronics":
+                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Computers',$id);
+                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Phones',$id);
+                    break;
+
+                case "Arts & Photography":
+//                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Appliances',$id);
+//                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
+                    break;
             }
-
         }
 
-        }
+    }
 }
