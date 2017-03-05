@@ -50,7 +50,7 @@
                                             <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>
                                         </p>
-                                        <a href="#"><img src="images/{{$product->image}}" width="370" height="231" alt="" class="img-responsive post-image"/></a>
+                                        <a href="#"><img src='{{secure_asset("images/{{$product->image}}")}}' width="370" height="231" alt="" class="img-responsive post-image"/></a>
                                         <ul class="post-categories list-inline-0">
                                             <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
                                         </ul>
@@ -106,7 +106,7 @@
                                         <!-- Go to www.addthis.com/dashboard to customize your tools -->
                                         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>
                                     </p>
-                                    <a href="#"><img src="images/{{$product->image}}" width="370" height="231" alt="" class="img-responsive post-image"/></a>
+                                    <a href="#"><img src='{{secure_asset("images/{{$product->image}}")}}' width="370" height="231" alt="" class="img-responsive post-image"/></a>
                                     <ul class="post-categories list-inline-0">
                                         <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
                                     </ul>
@@ -118,7 +118,7 @@
                                             <a href=""><i class="fa fa-thumbs-up " aria-hidden="true"></i></a>
                                             <a href="">&#x263a;</a>
                                             ({{$product->like_counts}})
-                                            <a href=""><img  src="{{asset('images/fancy1.png')}}" class="img-responsive" style="width:25px" height="20px" /></a>
+                                            <a href=""><img  src="{{secure_asset('images/fancy1.png')}}" class="img-responsive" style="width:25px" height="20px" /></a>
                                         </div>
 
 

@@ -38,7 +38,7 @@ class Store extends Model
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.id')
             ->leftJoin('stores','stores.id','products.store_id')
             ->where('sub_categories.id',$category_id)
-//            ->where('product_categories.user_id',Auth::user()->id)
+            ->where('product_categories.user_id',Auth::user()->id)
             ->selectRaw('products.*')
             ->get();
     }
