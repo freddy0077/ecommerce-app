@@ -6,6 +6,10 @@
         $('#top-list-items a').css('margin-right','20px')
 
         $(document).ready(function () {
+            function fancy(product_id){
+                alert(product_id);
+
+            }
 //            $('#myFancy').on('click', function () {
 //                alert('hello');
 {{--//            })--}}
@@ -68,7 +72,8 @@
 
                                         <h6>
                                             <a class="text-center" href="#"> {{$product->name}}</a>
-                                            <button id="myFancy"> <i class="" ></i>fancy it</button>
+                                            <?php  ?>
+                                            <button id="myFancy" onclick="fancy('{{$product->id}}')"> <i class="" ></i>fancy it</button>
                                         </h6>
                                         <div><a href=""><i class="fa fa-eye"></i></a> Listed in <a href="#">{{$product->store_name}}</a></div>
                                         {{--<div class="col-sm-6"> price: {{$product->price}}</div>--}}

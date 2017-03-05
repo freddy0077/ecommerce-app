@@ -32,6 +32,7 @@ class HomeController extends Controller
         $builder = DB::table('products')
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftjoin('stores','stores.id','=','products.store_id');
+//            ->leftJoin('users','users.store_id','=','stores.id');
 
 //        $ad_products = $builder
 //            ->where('ad',true)
