@@ -33,10 +33,10 @@ class HomeController extends Controller
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftjoin('stores','stores.id','=','products.store_id');
 
-        $ad_products = $builder
-            ->where('ad',true)
-            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id')
-            ->take(8)->get();
+//        $ad_products = $builder
+//            ->where('ad',true)
+//            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id')
+//            ->take(20)->get();
 
         $products = $builder
             ->where('ad',true)
