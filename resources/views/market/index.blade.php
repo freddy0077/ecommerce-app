@@ -6,8 +6,14 @@
         $('#top-list-items a').css('margin-right','20px')
 
             function fancy(product_id){
+               @if(Auth::check())
+                {{--$.post("{{secure_url('/fancy-it')}}")--}}
                 alert(product_id);
             }
+        @elseif(Auth::guest())
+            alert('logged out');
+             login();
+        @endif
 
     </script>
 
