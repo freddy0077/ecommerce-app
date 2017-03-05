@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="image/favicon.png" rel="icon" />
+    <link href="{{secure_asset('image/favicon.png')}}" rel="icon" />
     <title>{{$store->name}}</title>
     <META NAME="robots" CONTENT="index">
     <meta name="description" content="">
@@ -184,7 +184,7 @@
                                             <ul>
                                                 @foreach(\App\SubCategory::whereProductCategoryId($category->id)->get() as $subcategory)
                                                 <li><a href="">{{$subcategory->name}} <span>&rsaquo;</span></a>
-                                                    <div class="dropdown-menu">
+                                                    {{--<div class="dropdown-menu">--}}
                                                         {{--<ul>--}}
                                                             {{--<li><a href="category.html">Sub Categories</a></li>--}}
                                                             {{--<li><a href="category.html">Sub Categories</a></li>--}}
@@ -192,7 +192,7 @@
                                                             {{--<li><a href="category.html">Sub Categories</a></li>--}}
                                                             {{--<li><a href="category.html">Sub Categories New</a></li>--}}
                                                         {{--</ul>--}}
-                                                    </div>
+                                                    {{--</div>--}}
                                                 </li>
 
                                                 @endforeach

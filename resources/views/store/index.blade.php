@@ -102,11 +102,21 @@
                                     <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
                                     <div class="caption">
                                         <h4><a href="product.html">{{$product->name}}</a></h4>
-                                        <p class="price"> <span class="price-new">$230.00</span> <span class="price-old">$241.99</span> <span class="saving">-5%</span> </p>
-                                        <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
+                                        <p class="price"> <span class="price-new">$230.00</span>
+                                            <span class="price-old">{{$product->price}}</span>
+                                            <span class="saving">-5%</span> </p>
+                                        <div class="rating">
+                                            <span class="fa fa-stack">
+                                                <i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x">
+                                                </i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
                                     </div>
                                     <div class="button-group">
-                                        <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+                                        <button class="btn-primary" type="button" onclick='addToCart("{{$product->id}}","{{$product->name}}",1,"{{$product->price}}")'>
+                                            <span>Add to Cart</span></button>
                                         <div class="add-to-links">
                                             <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
                                             <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
