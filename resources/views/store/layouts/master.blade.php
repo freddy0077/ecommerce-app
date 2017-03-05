@@ -11,13 +11,14 @@
     <meta name="description" content="">
     <!-- CSS Part Start-->
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/js/bootstrap/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/font-awesome/css/font-awesome.min.css')}}" />
+    {{--<link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/font-awesome/css/font-awesome.min.css')}}" />--}}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/stylesheet.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/owl.carousel.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/owl.transitions.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/responsive.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/stylesheet-skin3.css')}}" />
-    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <!-- CSS Part End-->
 </head>
 <body>
