@@ -279,7 +279,7 @@
 </script>
 
 <script>
-    $(document).ready(function(){
+//    $(document).ready(function(){
 
         $('#new-registration-button').on('click',function(){
 //            alert('hello');
@@ -487,7 +487,7 @@
             })
         }
 
-    })
+//    })
 
     function fancy(product_id){
         @if(Auth::check())
