@@ -43,6 +43,7 @@ class ProductsTableSeeder extends Seeder
             'price' => $price,
             'description'=>"",
             'ad' => true,
+            "images" => 'carousel-01.jpg',
             'store_id' => $store_id,
             'sub_category_id' => $sub_category_id
         ]);
