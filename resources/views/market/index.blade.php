@@ -5,16 +5,16 @@
         //style top list items
         $('#top-list-items a').css('margin-right','20px')
 
-            function fancy(product_id){
-               @if(Auth::check())
+            {{--function fancy(product_id){--}}
+               {{--@if(Auth::check())--}}
                 {{--$.post("{{secure_url('/fancy-it')}}")--}}
-                alert(product_id);
+                {{--alert(product_id);--}}
 
-        @elseif(Auth::guest())
-            alert('logged out');
-             login();
-        @endif
-}
+        {{--@elseif(Auth::guest())--}}
+            {{--alert('logged out');--}}
+             {{--login();--}}
+        {{--@endif--}}
+{{--}--}}
     </script>
 
 
