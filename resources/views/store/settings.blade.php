@@ -108,7 +108,7 @@
                                                     <label class="control-label col-md-3">Shop Name </label>
                                                     <div class="col-md-4">
                                                         {{--<div class="input-group">--}}
-                                                        <input type="text" class="form-control" name="name" id="name" value="{{$store->name}}">
+                                                        <input type="text" class="form-control" name="name" id="name" value='{{isset($store->name) ? $store->name : ""}}'>
                                                         <div class="help-block"> </div>
                                                     </div>
                                                 </div>
@@ -117,7 +117,7 @@
                                                     <label class="control-label col-md-3">Phone Number </label>
                                                     <div class="col-md-4">
                                                         {{--<div class="input-group">--}}
-                                                        <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{$store->phone_number}}">
+                                                        <input type="text" class="form-control" name="phone_number" id="phone_number" value='{{isset($store->phone_number)?$store->phone_number :""}}'>
                                                         <div class="help-block"> </div>
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                                     <label class="control-label col-md-3">Email </label>
                                                     <div class="col-md-4">
                                                         {{--<div class="input-group">--}}
-                                                        <input type="text" class="form-control" name="email" id="email" value="{{$store->email}}">
+                                                        <input type="text" class="form-control" name="email" id="email" value="{{isset($store->email)? $store->email :''}}">
                                                         <div class="help-block"> </div>
                                                     </div>
                                                 </div>
@@ -135,7 +135,7 @@
                                                     <label class="control-label col-md-3">Address </label>
                                                     <div class="col-md-4">
                                                         {{--<div class="input-group">--}}
-                                                        <input type="text" class="form-control" name="address" id="address" value="{{$store->address}}">
+                                                        <input type="text" class="form-control" name="address" id="address" value="{{isset($store->address) ? $store->address : ''}}">
                                                         <div class="help-block"> </div>
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@
                                                     <div class="col-md-4">
                                                         <div class="input-icon right">
                                                             <i class="icon-exclamation-sign"></i>
-                                                            <textarea class="form-control" class="form-control" name="about">{{$store->address}}</textarea>
+                                                            <textarea class="form-control" class="form-control" name="about">{{isset($store->about) ? $store->about :''}}</textarea>
                                                         </div>
                                                         <div class="help-block"> </div>
                                                     </div>
@@ -154,7 +154,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">City</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control" name="city" id="city" value="{{$store->city}}">
+                                                        <input type="text" class="form-control" name="city" id="city" value="{{isset($store->city)?$store->city:''}}">
                                                         <span class="help-block">  </span>
                                                     </div>
                                                 </div>
@@ -162,7 +162,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Domain</label>
                                                     <div class="col-md-4">
-                                                        <input type="text" class="form-control" name="domain" id="domain" readonly value="{{$store->domain}}">
+                                                        <input type="text" class="form-control" name="domain" id="domain" readonly value="{{isset($store->domain) ? $store->domain : ''}}">
                                                         <span class="help-block">  </span>
                                                     </div>
                                                 </div>
@@ -171,7 +171,7 @@
                                                     <label class="control-label col-md-3">Business type</label>
                                                     <div class="col-md-4">
                                                       <select class="form-control" name="business_type">
-                                                          <option>{{$store->business_type}}</option>
+                                                          <option>{{isset($store->business_type) ? $store->business_type : ""}}</option>
                                                           <option>Sole Proprietor</option>
                                                           <option>Corporation</option>
                                                           <option>Non Profit</option>
