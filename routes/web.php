@@ -41,7 +41,7 @@ Route::get('/sub-category/{name}', 'HomeController@getSubCategory');
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholick.dev'], function () {
+Route::group(['domain' => '{account}.shopaholicks.herokuapp.com'], function () {
     Route::get('user', function ($account) {
         //
         return $account;
