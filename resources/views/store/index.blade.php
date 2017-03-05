@@ -101,8 +101,8 @@
                                 <div class="product-thumb">
                                     <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
                                     <div class="caption">
-                                        <h4><a href="product.html">{{$product->name}}</a></h4>
-                                        <p class="price"> <span class="price-new">$230.00</span>
+                                        <h4><a href="#">{{$product->name}}</a></h4>
+                                        <p class="price"> <span class="price-new">{{$product->price}}</span>
                                             <span class="price-old">{{$product->price}}</span>
                                             <span class="saving">-5%</span> </p>
                                         <div class="rating">

@@ -79,23 +79,23 @@ class ProductsTableSeeder extends Seeder
                         break;
                 }
 
-//            for($index =0; $index < 100; $index++){
-//
-//                \App\Product::create([
-//                    'id' => \Webpatser\Uuid\Uuid::generate(),
-//                    'store_id' => $store_id,
-//                    'name' => 'product '.$index,
-//                    'description' => 'Description'.$index,
-//                    'price'=> 5*$index,
-//                    'image' => 'carousel-07.jpg',
-//                    'sub_category_id' => $subcategory_id,
-//                    'feature' => true,
-//                    'published' => true,
-//                    'show_buy_button' => true,
-//                    'ad' => true,
-//                    'like_counts' => $index
-//                ]);
-//            }
+            for($index =0; $index < 100; $index++){
+
+                \App\Product::create([
+                    'id' => \Webpatser\Uuid\Uuid::generate(),
+                    'store_id' => $store_id,
+                    'name' => 'product '.$index,
+                    'description' => 'Description'.$index,
+                    'price'=> 5*$index,
+                    'image' => 'carousel-07.jpg',
+                    'sub_category_id' => $subcategory_id,
+                    'feature' => true,
+                    'published' => true,
+                    'show_buy_button' => true,
+                    'ad' => true,
+                    'like_counts' => $index
+                ]);
+            }
 
         }
 
