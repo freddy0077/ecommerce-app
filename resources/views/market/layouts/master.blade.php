@@ -418,16 +418,12 @@
 //
                     },
                     complete:function( data ) {
-                        setTimeout(function(){},5000);
 
                         if(data.status == 301){
                             location.href = data.message;
                         }
                     },
                     success:function( data ) {
-
-                        // Display a success toast, with a title
-                        toastr.success('Have fun storming the castle!', 'Miracle Max Says')
 
                         location.href = data.message;
 
@@ -453,12 +449,8 @@
                 $.post("{{secure_url('login')}}", $('#user_login_form').serialize(), function () {
 
                 }).success(function (data) {
-                    // Display a success toast, with a title
-                    toastr.success('Have fun storming the castle!', 'Miracle Max Says')
-                    setTimeout(function(){
-                        location.reload();
 
-                    },5000);
+                        location.reload();
 
                 }).fail(function (data) {
                     for (var field in data.responseJSON) {
