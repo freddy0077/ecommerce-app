@@ -30,15 +30,15 @@
                     <?php $store_name = \App\Store::where('user_id',Auth::user()->id)->first() ? \App\Store::where('user_id',Auth::user()->id)->first()->slug : ""; ?>
                     <li class="upper-links dropdown"><a class="links" href="/store"><h6>Store</h6></a>
                         <ul class="dropdown-menu">
-                            <li class="profile-li"><a class="profile-links" href="{{url('/store/'.$store_name)}}">My Store</a></li>
+                            <li class="profile-li"><a class="profile-links" href="{{url('/store/store-settings')}}">My Store</a></li>
                             {{--<li class="profile-li"><a class="profile-links" href="{{url('/store/store-settings')}}/"{{\App\Store::where('user_id',Auth::user()->id)->first()->id}}>Store Settings</a></li>--}}
                         </ul>
                     </li>
 
                 @elseif(Auth::check() && Auth::user()->has_store == false)
-                    <li class="upper-links"><a class="links" href='{{url("store/$user_id/add-store")}}'><h6>Create Store</h6></a></li>
+                    <li class="upper-links"><a class="links" href='{{url("/store/store-settings")}}'><h6>Create Store</h6></a></li>
                 @elseif(Auth::check() && Auth::user()->has_store == true)
-                    <li class="upper-links"><a class="links" href='{{url("store/$user_id/edit-store")}}'><h6>Edit Store</h6></a></li>
+                    <li class="upper-links"><a class="links" href='{{url("/store/store-settings")}}'><h6>Edit Store</h6></a></li>
                 @endif
 
                 {{--<li class="upper-links">--}}
