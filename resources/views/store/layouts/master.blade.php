@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="{{secure_asset('image/favicon.png')}}" rel="icon" />
-    <title>{{$store->name}}</title>
+    <title>{{isset($store->name)? $store->name :""}}</title>
     <META NAME="robots" CONTENT="index">
     <meta name="description" content="">
     <!-- CSS Part Start-->
