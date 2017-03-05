@@ -16,6 +16,8 @@ class VerifyCsrfToken extends BaseVerifier
         '/',
         '/register-user',
         '/register',
+        '/fancy-it/*',
+        '/like-it/*',
         '/login',
         'store/add-store',
         '/store/store-settings',

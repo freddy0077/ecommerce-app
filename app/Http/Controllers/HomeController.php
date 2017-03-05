@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Fancy;
+use App\Like;
 use App\Product;
 use App\ProductCategory;
 use App\Store;
 use App\SubCategory;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
 {
@@ -100,6 +104,40 @@ class HomeController extends Controller
 
         return view('market.sub_categories',compact('products','ad_products','category'));
 
+    }
+
+    public function postFancyIt($product_id){
+        Fancy::create([
+            'id' => Uuid::generate(),
+            'product_id' => $product_id,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return ['message' => 'success','status' => 200];
+
+    }
+
+    public function postLikeIt($product_id){
+        $user_id = Auth::user()->id;
+        $product =Like::whereUserId($user_id)->whereProductId($product_id)->first();
+        if(!$product){
+            Like::create([
+                'id' => Uuid::generate(),
+                'user_id' => Auth::user()->id,
+                'product_id'=> $product_id
+            ]);
+
+            $product = Product::find($product_id);
+
+            $product->update([
+                'like_counts' => $product->like_counts+1
+            ]);
+
+            return ['message' => 'success','status' => 200,'likes' =>$product->like_counts];
+
+        }else{
+            return ['message' => 'user already liked it','status' => 401];
+        }
     }
 
     public function postRegisterUser(Request $request){

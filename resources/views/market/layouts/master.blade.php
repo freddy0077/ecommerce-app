@@ -279,47 +279,94 @@
 </script>
 
 <script>
-//    $(document).ready(function(){
 
-        $('#new-registration-button').on('click',function(){
+    $('.like').on('click',function(event){
+        event.preventDefault();
+        var product_id = $(this).data('id')
+
+        @if(Auth::check())
+
+        $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+            $('.counts-'+product_id).text(data.likes)
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+
+    });
+    function fancy(product_id) {
+        @if(Auth::check())
+
+         $.post("{{secure_url('/fancy-it')}}/"+product_id,function(data){
+            $('.fancy').click(function(){
+                $(this).addClass('fa fa-spinner fa-spin')
+
+            })
+
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+    }
+
+    function like(product_id) {
+        @if(Auth::check())
+
+         $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+    }
+
+    $(document).ready(function() {
+
+        $('#new-registration-button').on('click', function () {
 //            alert('hello');
             var registerForm = '<div id="register-form">' +
-                    '<form method="post" id="user_register_form">'+
-                    '<div class="form-group">'+
+                    '<form method="post" id="user_register_form">' +
+                    '<div class="form-group">' +
 
-                    '<input type="text" placeholder="Enter your name" name="name" required class="form-control login-field">'+
-                    '<i class="fa fa-user login-field-icon"></i>'+
-                    '</div>'+
+                    '<input type="text" placeholder="Enter your name" name="name" required class="form-control login-field">' +
+                    '<i class="fa fa-user login-field-icon"></i>' +
+                    '</div>' +
 
-                    '<div class="form-group">'+
-                    '<input type="text" id="phone_number" placeholder="Enter your phone number" required class="form-control login-field">'+
-                    '<i class="fa fa-phone login-field-icon"></i>'+
-                    '</div>'+
+                    '<div class="form-group">' +
+                    '<input type="text" id="phone_number" placeholder="Enter your phone number" required class="form-control login-field">' +
+                    '<i class="fa fa-phone login-field-icon"></i>' +
+                    '</div>' +
 
-                    '<div class="form-group">'+
-                    '<input type="email" id="email" placeholder="Enter your email" name="email" class="form-control login-field">'+
-                    '<i class="fa fa-envelope login-field-icon"></i>'+
-                    '</div>'+
+                    '<div class="form-group">' +
+                    '<input type="email" id="email" placeholder="Enter your email" name="email" class="form-control login-field">' +
+                    '<i class="fa fa-envelope login-field-icon"></i>' +
+                    '</div>' +
 
-                    '<div class="form-group">'+
-                    '<input type="password" id="login-pass" placeholder="Password" name="password" required class="form-control login-field">'+
-                    '<i class="fa fa-lock login-field-icon"></i>'+
-                    '</div>'+
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password" required class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '</div>' +
 
-                    '<div class="form-group">'+
-                    '<input type="password" id="login-pass" placeholder="Password" name="password_confirmation" class="form-control login-field">'+
-                    '<i class="fa fa-lock login-field-icon"></i>'+
-                     '<span class="help-block"> </span>'+
-                    '</div>'+
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password_confirmation" class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '<span class="help-block"> </span>' +
+                    '</div>' +
 
-                    '<div class="form-group">'+
-                    '  <label  style="word-wrap:break-word">'+
-                    '<input id="create-store-checkbox" type="checkbox" name="store" style=" vertical-align:middle;"/>create store '+
-                    '</label>'+
-                    '</div>'+
+                    '<div class="form-group">' +
+                    '  <label  style="word-wrap:break-word">' +
+                    '<input id="create-store-checkbox" type="checkbox" name="store" style=" vertical-align:middle;"/>create store ' +
+                    '</label>' +
+                    '</div>' +
 
 //                    '<a href="#" class="btn btn-success modal-login-btn" id="register_user">Register</a>'+
-                    '<button type="submit" class="btn btn-success modal-login-btn" id="register_user">Register</button>'+
+                    '<button type="submit" class="btn btn-success modal-login-btn" id="register_user">Register</button>' +
 
                     '</form>';
 //                    '<a href="#" class="login-link text-center">Lost your password?</a></form></div>';
@@ -334,19 +381,19 @@
 
         })
 
-        $('#login-button').on('click',function(){
+        $('#login-button').on('click', function () {
 //            alert('hello');
             var loginForm = '<div id="login-form">' +
-                    '<form id="user_login_form" method="post">'+
-                    '<div class="form-group">'+
-                    '<input type="email" placeholder="Enter your name" name="email" class="form-control login-field">'+
-                    '<i class="fa fa-user login-field-icon"></i>'+
-                    '</div>'+
-                    '<div class="form-group">'+
-                    '<input type="password" id="login-pass" placeholder="Password" name="password" class="form-control login-field">'+
-                    '<i class="fa fa-lock login-field-icon"></i>'+
+                    '<form id="user_login_form" method="post">' +
+                    '<div class="form-group">' +
+                    '<input type="email" placeholder="Enter your name" name="email" class="form-control login-field">' +
+                    '<i class="fa fa-user login-field-icon"></i>' +
                     '</div>' +
-                    '<button class="btn btn-success modal-login-btn" id="login_user">Login</button>'+
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password" class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '</div>' +
+                    '<button class="btn btn-success modal-login-btn" id="login_user">Login</button>' +
                     '<a href="#" class="login-link text-center">Lost your password?</a>' +
                     '</form>' +
                     '</div>';
@@ -356,45 +403,20 @@
             $("#new-registration-button").show();
             $("#login-button").hide();
 
-            $('#user_login_form').on('submit',function(e){
+            $('#user_login_form').on('submit', function (e) {
                 e.preventDefault();
-                $.post("{{url('login')}}",$('#user_login_form').serialize(),function(){
+                $.post("{{url('login')}}", $('#user_login_form').serialize(), function () {
 
-                }).success(function(data){
+                }).success(function (data) {
                     location.reload();
 
-                }).fail(function(data){
+                }).fail(function (data) {
                     for (var field in data.responseJSON) {
                         var el = $(':input[name="' + field + '"]');
                         el.parent('.form-group').addClass('has-error');
                         el.next('.help-block').text(data.responseJSON[field][0]);
                     }
                 })
-
-                {{--$.ajax({--}}
-                {{--url:"{{url('/login')}}",--}}
-                {{--type:"POST",--}}
-                {{--data: $(this).serialize(),--}}
-                {{--dataType: 'json',--}}
-                {{--beforeSend:function( ) {--}}
-                {{--//--}}
-                {{--},--}}
-                {{--complete:function( data ) {--}}
-
-                {{--},--}}
-                {{--success:function(data) {--}}
-                {{--location.reload();--}}
-
-                {{--},--}}
-                {{--error:function( data ) {--}}
-                {{--for (var field in data.responseJSON) {--}}
-                {{--var el = $(':input[name="' + field + '"]');--}}
-                {{--el.parent('.form-group').addClass('has-error');--}}
-                {{--el.next('.help-block').text(data.responseJSON[field][0]);--}}
-                {{--}--}}
-
-                {{--}--}}
-                {{--});--}}
 
             })
 
@@ -404,25 +426,25 @@
         register();
         login();
 
-        function register(){
-            $('#user_register_form').submit(function(e){
+        function register() {
+            $('#user_register_form').submit(function (e) {
                 e.preventDefault();
 
                 $.ajax({
-                    url:"{{secure_url('/register')}}",
-                    type:"POST",
+                    url: "{{secure_url('/register')}}",
+                    type: "POST",
                     data: $('#user_register_form').serialize(),
                     dataType: 'json',
-                    beforeSend:function( ) {
+                    beforeSend: function () {
 //
                     },
-                    complete:function( data ) {
+                    complete: function (data) {
 
-                        if(data.status == 301){
+                        if (data.status == 301) {
                             location.href = data.message;
                         }
                     },
-                    success:function( data ) {
+                    success: function (data) {
 
                         location.href = data.message;
 
@@ -430,7 +452,7 @@
 //                           location.href = '/store/add-store';
 //                        }
                     },
-                    error:function( data ) {
+                    error: function (data) {
                         for (var field in data.responseJSON) {
                             var el = $(':input[name="' + field + '"]');
                             el.parent('.form-group').addClass('has-error');
@@ -442,6 +464,7 @@
 
             })
         }
+
         function login() {
             $('#user_login_form').on('submit', function (e) {
                 e.preventDefault();
@@ -449,7 +472,7 @@
 
                 }).success(function (data) {
 
-                        location.reload();
+                    location.reload();
 
                 }).fail(function (data) {
                     for (var field in data.responseJSON) {
@@ -487,18 +510,8 @@
             })
         }
 
-//    })
 
-    function fancy(product_id){
-        @if(Auth::check())
-         {{--$.post("{{secure_url('/fancy-it')}}")--}}
-         alert(product_id);
-
-        @elseif(Auth::guest())
-            alert('logged out');
-        login();
-        @endif
-}
+    });
 </script>
 {{--<noscript><a href="https://www.olark.com/site/7830-582-10-3714/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by<a href="https://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>--}}
 

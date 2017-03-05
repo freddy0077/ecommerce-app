@@ -36,12 +36,16 @@ Route::get('/category/{name}', 'HomeController@getCategory');
 
 Route::get('/sub-category/{name}', 'HomeController@getSubCategory');
 
+Route::post('/fancy-it/{product_id}','HomeController@postFancyIt');
+
+Route::post('/like-it/{product_id}','HomeController@postLikeIt');
+
 
 //Route::get('/category', 'HomeController@getCategory');
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholicks.herokuapp.com'], function () {
+Route::group(['domain' => '{account}.shopaholicks.com'], function () {
     Route::get('user', function ($account) {
         //
         return $account;
