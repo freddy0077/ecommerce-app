@@ -58,10 +58,14 @@ class ProductsTableSeeder extends Seeder
 //        \Illuminate\Support\Facades\DB::statement('truncate table sub_categories');
 //        \Illuminate\Support\Facades\DB::statement('truncate table products');
 //        \DB::statement('truncate table cities');
-        \App\User::truncate();
-        \App\ProductCategory::truncate();
-        \App\SubCategory::truncate();
-        \App\Product::truncate();
+//        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
+//        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE posts");
+//        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE users CASCADE");
+//        \App\Product::truncate();
+//        \App\ProductCategory::truncate();
+//        \App\SubCategory::truncate();
+//        \App\User::truncate();
+
 
         $this->saveUsers();
 
