@@ -5,31 +5,9 @@
         //style top list items
         $('#top-list-items a').css('margin-right','20px')
 
-        $(document).ready(function () {
             function fancy(product_id){
                 alert(product_id);
-
             }
-//            $('#myFancy').on('click', function () {
-//                alert('hello');
-{{--//            })--}}
-            {{--$('#load_more').on('click',function(){--}}
-{{--//                alert('hello');--}}
-                {{--$.get("{{url($nextpageurl)}}",function(data){--}}
-                   {{--setTimeout(function(){--}}
-                       {{--$('#more_products').append(data)}--}}
-                           {{--,1000--}}
-                   {{--)--}}
-                    {{--console.log(data)--}}
-                {{--})--}}
-
-                {{--$( "#more_products" ).load("{{url($nextpageurl)}}", function(data) {--}}
-                    {{--alert( "Load was performed."+data );--}}
-                {{--});--}}
-            })
-
-//        })
-
 
     </script>
 
