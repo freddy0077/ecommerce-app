@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="image/favicon.png" rel="icon" />
     <title>{{$store->name}}</title>
-    <META NAME="robots" CONTENT="noindex">
-    <meta name="description" content="Responsive and clean html template design for any kind of ecommerce webshop">
+    <META NAME="robots" CONTENT="index">
+    <meta name="description" content="">
     <!-- CSS Part Start-->
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/js/bootstrap/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/font-awesome/css/font-awesome.min.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/stylesheet.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/owl.carousel.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/owl.transitions.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/responsive.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('store_resources/css/stylesheet-skin3.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/js/bootstrap/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/font-awesome/css/font-awesome.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/stylesheet.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/owl.carousel.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/owl.transitions.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/responsive.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{secure_asset('store_resources/css/stylesheet-skin3.css')}}" />
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
     <!-- CSS Part End-->
 </head>
@@ -37,7 +37,7 @@
                             </ul>
                         </div>
                         <div id="language" class="btn-group">
-                            <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> <img src="{{asset('store_resources/image/flags/gb.png')}}" alt="English" title="English">English <i class="fa fa-caret-down"></i></span></button>
+                            <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> <img src="{{secure_asset('store_resources/image/flags/gb.png')}}" alt="English" title="English">English <i class="fa fa-caret-down"></i></span></button>
                             {{--<ul class="dropdown-menu">--}}
                                 {{--<li>--}}
                                     {{--<button class="btn btn-link btn-block language-select" type="button" name="GB"><img src="image/flags/gb.png" alt="English" title="English" /> English</button>--}}
@@ -78,7 +78,7 @@
                 <div class="table-container">
                     <!-- Logo Start -->
                     <div class="col-table-cell col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
-                        {{--<div id="logo"><a href="index.html"><img class="img-responsive" src="{{asset('store_resources/image/logo.png')}}" title="MarketShop" alt="MarketShop" /></a></div>--}}
+                        {{--<div id="logo"><a href="index.html"><img class="img-responsive" src="{{secure_asset('store_resources/image/logo.png')}}" title="MarketShop" alt="MarketShop" /></a></div>--}}
                         <div id="logo"><a href="index.html">
                                 <h1>{{\App\Store::whereUserId(Auth::user()->id)->first()->name}}</h1>
                             </a></div>
@@ -103,7 +103,7 @@
                                         <tbody>
 
                                         {{--<tr>--}}
-                                            {{--<td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Xitefun Causal Wear Fancy Shoes" alt="Xitefun Causal Wear Fancy Shoes" src="{{asset('store_resources/image/product/sony_vaio_1-50x50.jpg')}}"></a></td>--}}
+                                            {{--<td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Xitefun Causal Wear Fancy Shoes" alt="Xitefun Causal Wear Fancy Shoes" src="{{secure_asset('store_resources/image/product/sony_vaio_1-50x50.jpg')}}"></a></td>--}}
                                             {{--<td class="text-left"><a href="product.html">Xitefun Causal Wear Fancy Shoes</a></td>--}}
                                             {{--<td class="text-right">x 1</td>--}}
                                             {{--<td class="text-right">$902.00</td>--}}
@@ -112,7 +112,7 @@
                                         @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $content)
 
                                         <tr>
-                                            <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Xitefun Causal Wear Fancy Shoes" alt="Xitefun Causal Wear Fancy Shoes" src="{{asset('store_resources/image/product/sony_vaio_1-50x50.jpg')}}"></a></td>
+                                            <td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Xitefun Causal Wear Fancy Shoes" alt="Xitefun Causal Wear Fancy Shoes" src="{{secure_asset('store_resources/image/product/sony_vaio_1-50x50.jpg')}}"></a></td>
                                             <td class="text-left"><a href="product.html">{{$content->name}}</a></td>
                                             <td class="text-right">x {{$content->qty}}</td>
                                             <td class="text-right">GHS {{$content->price}}</td>
@@ -123,7 +123,7 @@
                                         </tr>
                                         @endforeach
                                         {{--<tr>--}}
-                                            {{--<td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop" src="{{asset('store_resources/image/product/samsung_tab_1-50x50.jpg')}}"></a></td>--}}
+                                            {{--<td class="text-center"><a href="product.html"><img class="img-thumbnail" title="Aspire Ultrabook Laptop" alt="Aspire Ultrabook Laptop" src="{{secure_asset('store_resources/image/product/samsung_tab_1-50x50.jpg')}}"></a></td>--}}
                                             {{--<td class="text-left"><a href="product.html">Aspire Ultrabook Laptop</a></td>--}}
                                             {{--<td class="text-right">x 1</td>--}}
                                             {{--<td class="text-right">$230.00</td>--}}
@@ -155,7 +155,7 @@
                                             </tbody>
                                         </table>
                                         <p class="checkout"><a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>
-                                                View Cart</a>&nbsp;&nbsp;&nbsp;<a href="{{url('/store/checkout')}}" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
+                                                View Cart</a>&nbsp;&nbsp;&nbsp;<a href="{{secure_url('/store/checkout')}}" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
                                     </div>
                                 </li>
                             </ul>
@@ -405,19 +405,19 @@
                         </li>
                         {{--<li class="menu_brands dropdown"><a href="#">Brands</a>--}}
                             {{--<div class="dropdown-menu">--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="Apple" alt="Apple" /></a><a href="#">Apple</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="Canon" alt="Canon" /></a><a href="#">Canon</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"> <a href="#"><img src="{{asset('store_resources/image/product/hp_logo-60x60.jpg')}}" title="Hewlett-Packard" alt="Hewlett-Packard" /></a><a href="#">Hewlett-Packard</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/htc_logo-60x60.jpg')}}" title="HTC" alt="HTC" /></a><a href="#">HTC</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/palm_logo-60x60.jpg')}}" title="Palm" alt="Palm" /></a><a href="#">Palm</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/sony_logo-60x60.jpg')}}" title="Sony" alt="Sony" /></a><a href="#">Sony</a> </div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test" alt="test" /></a><a href="#">test</a> </div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="test 3" alt="test 3" /></a><a href="#">test 3</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test 5" alt="test 5" /></a><a href="#">test 5</a> </div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test 6" alt="test 6" /></a><a href="#">test 6</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="test 7" alt="test 7" /></a><a href="#">test 7</a> </div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test1" alt="test1" /></a><a href="#">test1</a></div>--}}
-                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{asset('image/product/apple_logo-60x60.jpg')}}" title="test2" alt="test2" /></a><a href="#">test2</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="Apple" alt="Apple" /></a><a href="#">Apple</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="Canon" alt="Canon" /></a><a href="#">Canon</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"> <a href="#"><img src="{{secure_asset('store_resources/image/product/hp_logo-60x60.jpg')}}" title="Hewlett-Packard" alt="Hewlett-Packard" /></a><a href="#">Hewlett-Packard</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/htc_logo-60x60.jpg')}}" title="HTC" alt="HTC" /></a><a href="#">HTC</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/palm_logo-60x60.jpg')}}" title="Palm" alt="Palm" /></a><a href="#">Palm</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/sony_logo-60x60.jpg')}}" title="Sony" alt="Sony" /></a><a href="#">Sony</a> </div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test" alt="test" /></a><a href="#">test</a> </div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="test 3" alt="test 3" /></a><a href="#">test 3</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test 5" alt="test 5" /></a><a href="#">test 5</a> </div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test 6" alt="test 6" /></a><a href="#">test 6</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/apple_logo-60x60.jpg')}}" title="test 7" alt="test 7" /></a><a href="#">test 7</a> </div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('store_resources/image/product/canon_logo-60x60.jpg')}}" title="test1" alt="test1" /></a><a href="#">test1</a></div>--}}
+                                {{--<div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="{{secure_asset('image/product/apple_logo-60x60.jpg')}}" title="test2" alt="test2" /></a><a href="#">test2</a></div>--}}
                             {{--</div>--}}
                         {{--</li>--}}
                         {{--<li class="custom-link"><a href="#">Custom Links</a></li>--}}
@@ -428,9 +428,9 @@
                                         {{--<table>--}}
                                             {{--<tbody>--}}
                                             {{--<tr>--}}
-                                                {{--<td><img alt="" src="{{asset('store_resources/image/banner/cms-block.jpg')}}"></td>--}}
-                                                {{--<td><img alt="" src="{{asset('store_resources/image/banner/responsive.jpg')}}"></td>--}}
-                                                {{--<td><img alt="" src="{{asset('store_resources/image/banner/cms-block.jpg')}}"></td>--}}
+                                                {{--<td><img alt="" src="{{secure_asset('store_resources/image/banner/cms-block.jpg')}}"></td>--}}
+                                                {{--<td><img alt="" src="{{secure_asset('store_resources/image/banner/responsive.jpg')}}"></td>--}}
+                                                {{--<td><img alt="" src="{{secure_asset('store_resources/image/banner/cms-block.jpg')}}"></td>--}}
                                             {{--</tr>--}}
                                             {{--<tr>--}}
                                                 {{--<td><h4>CMS Blocks</h4></td>--}}
@@ -550,12 +550,12 @@
         </div>
 </div>
 <!-- JS Part Start-->
-<script type="text/javascript" src="{{asset('store_resources/js/jquery-2.1.1.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('store_resources/js/bootstrap/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('store_resources/js/jquery.easing-1.3.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('store_resources/js/jquery.dcjqaccordion.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('store_resources/js/owl.carousel.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('store_resources/js/custom.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/jquery-2.1.1.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/bootstrap/js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/jquery.easing-1.3.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/jquery.dcjqaccordion.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/owl.carousel.min.js')}}"></script>
+<script type="text/javascript" src="{{secure_asset('store_resources/js/custom.js')}}"></script>
 <!-- JS Part End-->
 
 <script>
@@ -582,7 +582,7 @@
     function checkOutRemoveFromCart(id){
         $.post('/store/checkout-remove-from-cart/'+id,function(data){
             $('#shopping-cart').html(data);
-            $('#cart').load('{{url('/store/cart-view')}}')
+            $('#cart').load('{{secure_url('/store/cart-view')}}')
             alert('removed an item from cart');
         });
     }

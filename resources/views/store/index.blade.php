@@ -5,23 +5,6 @@
     <script>
 
 
-//       function addToCart(id,name,qty,price){
-////           alert(one+', ' + two + ', '+three+', '+four);
-//
-//           $.post('/store/add-to-cart/'+id+'/'+name+'/'+qty+'/'+price,function(data){
-//               alert('added an item to cart');
-//               $('#cart').html(data);
-//
-//           });
-//       }
-//
-//        function removeFromCart(id){
-//            $.post('/store/remove-from-cart/'+id,function(data){
-//                $('#cart').html(data);
-//                alert('removed an item from cart');
-//
-//            });
-//        }
     </script>
 
 @endsection
@@ -37,17 +20,17 @@
                     <div class="col-sm-8">
                         <!-- Slideshow Start-->
                         <div class="slideshow single-slider owl-carousel">
-                            <div class="item"> <a href="#"><img class="img-responsive" src="{{asset('store_resources/image/slider/banner-1-750x400.jpg')}}" alt="banner 1" /></a></div>
-                            <div class="item"> <a href="#"><img class="img-responsive" src="{{asset('store_resources/image/slider/banner-2-750x400.jpg')}}" alt="banner 2" /></a></div>
-                            <div class="item"> <a href="#"><img class="img-responsive" src="{{asset('store_resources/image/slider/banner-3-750x400.jpg')}}" alt="banner 3" /></a></div>
+                            <div class="item"> <a href="#"><img class="img-responsive" src="{{secure_asset('store_resources/image/slider/banner-1-750x400.jpg')}}" alt="banner 1" /></a></div>
+                            <div class="item"> <a href="#"><img class="img-responsive" src="{{secure_asset('store_resources/image/slider/banner-2-750x400.jpg')}}" alt="banner 2" /></a></div>
+                            <div class="item"> <a href="#"><img class="img-responsive" src="{{secure_asset('store_resources/image/slider/banner-3-750x400.jpg')}}" alt="banner 3" /></a></div>
                         </div>
                         <!-- Slideshow End-->
                     </div>
                     <div class="col-sm-4 pull-right flip">
                         <div class="marketshop-banner">
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner1" alt="sample-banner1" src="{{asset('store_resources/image/banner/sp-small-banner-360x185.jpg')}}"></a></div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner" alt="sample-banner" src="{{asset('store_resources/image/banner/sp-small-banner1-360x185.jpg')}}"></a></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner1" alt="sample-banner1" src="{{secure_asset('store_resources/image/banner/sp-small-banner-360x185.jpg')}}"></a></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="sample-banner" alt="sample-banner" src="{{secure_asset('store_resources/image/banner/sp-small-banner1-360x185.jpg')}}"></a></div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +43,7 @@
 
                     <div class="product-thumb clearfix">
                         <div class="image"><a href="#">
-                                <img src="{{asset('store_resources/image/product/iphone_1-200x200.jpg')}}"
+                                <img src="{{secure_asset('store_resources/image/product/iphone_1-200x200.jpg')}}"
                                                             alt="iPhone5" title="iPhone5" class="img-responsive" /></a>
                         </div>
                         <div class="caption">
@@ -91,9 +74,9 @@
                 <!-- Banner Start-->
                 <div class="marketshop-banner">
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner 2" alt="Sample Banner 2" src="{{asset('store_resources/image/banner/sample-banner-3-360x360.jpg')}}"></a></div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner" alt="Sample Banner" src="{{asset('store_resources/image/banner/sample-banner-1-360x360.jpg')}}"></a></div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner 3" alt="Sample Banner 3" src="{{asset('store_resources/image/banner/sample-banner-2-360x360.jpg')}}"></a></div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner 2" alt="Sample Banner 2" src="{{secure_asset('store_resources/image/banner/sample-banner-3-360x360.jpg')}}"></a></div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner" alt="Sample Banner" src="{{secure_asset('store_resources/image/banner/sample-banner-1-360x360.jpg')}}"></a></div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><a href="#"><img title="Sample Banner 3" alt="Sample Banner 3" src="{{secure_asset('store_resources/image/banner/sample-banner-2-360x360.jpg')}}"></a></div>
                     </div>
                 </div>
                 <!-- Banner End-->
@@ -116,7 +99,7 @@
                                 @foreach(\App\Store::getProductsByCategory($sub_category->id) as $product)
 
                                 <div class="product-thumb">
-                                    <div class="image"><a href="#"><img src="{{asset('store_resources/image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
+                                    <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>
                                     <div class="caption">
                                         <h4><a href="product.html">{{$product->name}}</a></h4>
                                         <p class="price"> <span class="price-new">$230.00</span> <span class="price-old">$241.99</span> <span class="saving">-5%</span> </p>
@@ -147,7 +130,7 @@
                 <h3 class="subtitle">Health &amp; Beauty - <a class="viewall" href="category.html">view all</a></h3>
                 <div class="owl-carousel latest_category_carousel">
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{asset('store_resources/image/product/iphone_6-200x200.jpg')}}" alt="Hair Care Cream for Men" title="Hair Care Cream for Men" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/iphone_6-200x200.jpg')}}" alt="Hair Care Cream for Men" title="Hair Care Cream for Men" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Hair Care Cream for Men</a></h4>
                             <p class="price"> $134.00 </p>
@@ -162,7 +145,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{asset('store_resources/image/product/nikon_d300_5-200x200.jpg')}}" alt="Hair Care Products" title="Hair Care Products" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_5-200x200.jpg')}}" alt="Hair Care Products" title="Hair Care Products" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Hair Care Products</a></h4>
                             <p class="price"> <span class="price-new">$66.80</span> <span class="price-old">$90.80</span> <span class="saving">-27%</span> </p>
@@ -177,7 +160,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{asset('store_resources/image/product/nikon_d300_4-200x200.jpg')}}" alt="Bed Head Foxy Curls Contour Cream" title="Bed Head Foxy Curls Contour Cream" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_4-200x200.jpg')}}" alt="Bed Head Foxy Curls Contour Cream" title="Bed Head Foxy Curls Contour Cream" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Bed Head Foxy Curls Contour Cream</a></h4>
                             <p class="price"> $88.00 </p>
@@ -191,7 +174,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="#"><img src="{{asset('store_resources/image/product/macbook_5-200x200.jpg')}}" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>
+                        <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/macbook_5-200x200.jpg')}}" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Shower Gel Perfume for Women</a></h4>
                             <p class="price"> <span class="price-new">$95.00</span> <span class="price-old">$99.00</span> <span class="saving">-4%</span> </p>
@@ -205,7 +188,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src={{asset('store_resources/image/product/macbook_4-200x200.jpg')}} alt="Perfumes for Women" title="Perfumes for Women" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src={{secure_asset('store_resources/image/product/macbook_4-200x200.jpg')}} alt="Perfumes for Women" title="Perfumes for Women" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Perfumes for Women</a></h4>
                             <p class="price"> $85.00 </p>
@@ -220,7 +203,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{asset('store_resources/image/product/macbook_3-200x200.jpg')}}" alt="Make Up for Naturally Beautiful Better" title="Make Up for Naturally Beautiful Better" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_3-200x200.jpg')}}" alt="Make Up for Naturally Beautiful Better" title="Make Up for Naturally Beautiful Better" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Make Up for Naturally Beautiful Better</a></h4>
                             <p class="price"> $123.00 </p>
@@ -234,7 +217,7 @@
                         </div>
                     </div>
                     <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{asset('store_resources/image/product/macbook_2-200x200.jpg')}}" alt="Pnina Tornai Perfume" title="Pnina Tornai Perfume" class="img-responsive" /></a></div>
+                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_2-200x200.jpg')}}" alt="Pnina Tornai Perfume" title="Pnina Tornai Perfume" class="img-responsive" /></a></div>
                         <div class="caption">
                             <h4><a href="product.html">Pnina Tornai Perfume</a></h4>
                             <p class="price"> $110.00 </p>
@@ -252,7 +235,7 @@
                 <!-- Banner Start -->
                 <div class="marketshop-banner">
                     <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src="{{asset('store_resources/image/banner/1blockbanner-1140x75.jpg')}}"></a></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> <a href="#"><img title="1 Block Banner" alt="1 Block Banner" src="{{secure_asset('store_resources/image/banner/1blockbanner-1140x75.jpg')}}"></a></div>
                     </div>
                 </div>
 
