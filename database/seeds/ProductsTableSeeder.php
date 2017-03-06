@@ -52,7 +52,6 @@ class ProductsTableSeeder extends Seeder
     private function saveMainCategories(){
 
 
-
         $id = Webpatser\Uuid\Uuid::generate();
         $categoryObject = new \App\ProductCategory();
         $categoryObject->id = $id;
