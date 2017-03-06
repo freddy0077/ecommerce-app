@@ -33,12 +33,12 @@ class Store extends Model
         ];
     }
 
-    public static function getProductsByCategory($category_id){
+    public static function getProductsByCategory($category_id,$user_id){
        return Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.id')
             ->leftJoin('stores','stores.id','products.store_id')
             ->where('sub_categories.id',$category_id)
-            ->where('product_categories.user_id',Auth::user()->id)
+            ->where('product_categories.user_id',$user_id)
             ->selectRaw('products.*')
             ->get();
     }

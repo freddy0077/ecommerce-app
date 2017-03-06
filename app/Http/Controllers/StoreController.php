@@ -20,32 +20,52 @@ class StoreController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
 
+    public function getStore($slug,$user_id){
+
+        $user = $user_id;
+        $store = Store::leftJoin('users','users.id','=','stores.user_id')
+            ->whereUserId($user)
+            ->whereSlug($slug)
+            ->selectRaw('stores.*')
+            ->first();
+
+        $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
+            ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
+//            ->leftJoin('users','users.id','=','product_categories.user_id')
+//            ->where('users.id',$user)
+            ->selectRaw('products.*')
+            ->take(10)->get();
+        $categories = ProductCategory::all('id','name');
+        $sub_categories = SubCategory::all();
+
+        return view('store.index',compact('store','products','categories','sub_categories','user'));
+    }
     public function getDashboard(){
         return view('store.dashboard');
     }
 
     public function getIndex(){
 
-        $user = Auth::user();
+        $user = Auth::user()->id;
          $store = Store::leftJoin('users','users.id','=','stores.user_id')
-           ->whereUserId($user->id)
+           ->whereUserId($user)
            ->selectRaw('stores.*')
             ->first();
 
          $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
             ->leftJoin('users','users.id','=','product_categories.user_id')
-            ->where('users.id',Auth::user()->id)
+            ->where('users.id',$user)
             ->selectRaw('products.*,users.name as user_name')
             ->take(10)->get();
         $categories = ProductCategory::all('id','name');
         $sub_categories = SubCategory::all();
 
-            return view('store.index',compact('store','products','categories','sub_categories'));
+            return view('store.index',compact('store','products','categories','sub_categories','user'));
     }
 
     public function getAddStore(){

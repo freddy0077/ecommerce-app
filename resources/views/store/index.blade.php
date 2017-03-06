@@ -96,7 +96,7 @@
                         <div id="{{$sub_category->product_category_id}}" class="tab_content">
                             <div class="owl-carousel latest_category_tabs">
 
-                                @foreach(\App\Store::getProductsByCategory($sub_category->id) as $product)
+                                @foreach(\App\Store::getProductsByCategory($sub_category->id,$user) as $product)
 
                                 <div class="product-thumb">
                                     <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/samsung_tab_1-200x200.jpg')}}" alt="Aspire Ultrabook Laptop" title="Aspire Ultrabook Laptop" class="img-responsive" /></a></div>

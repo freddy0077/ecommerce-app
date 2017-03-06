@@ -52,6 +52,11 @@ Route::group(['domain' => '{account}.shopaholicks.com'], function () {
     });
 });
 
+Route::group(['prefix' => 'stores'], function () {
+
+    Route::get('/{slug}/{user_id}','StoreController@getStore');
+
+});
 
 Route::group(['prefix' => 'store'], function () {
 

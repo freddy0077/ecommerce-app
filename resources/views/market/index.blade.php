@@ -48,7 +48,9 @@
                                             <?php  ?>
                                             {{--<button  onclick="fancy('{{$product->id}}')"> <i class="fancy" ></i>fancy it</button>--}}
                                         </h6>
-                                        <div><a href=""><i class="fa fa-eye"></i></a> Listed in <a href="#">{{$product->store_name}}</a></div>
+                                        <div><a href=""><i class="fa fa-eye"></i></a> Listed in
+                                            <a href='{{secure_url("/stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a>
+                                        </div>
                                         {{--<div class="col-sm-6"> price: {{$product->price}}</div>--}}
                                         {{--<div class="col-sm-6"><a href=""><i class="fa fa-thumbs-up" aria-hidden="true"></i></a><a href="">&#x263a;</a>({{$product->like_counts}})</div>--}}
                                     </div>

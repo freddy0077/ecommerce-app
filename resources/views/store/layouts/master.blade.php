@@ -81,7 +81,7 @@
                     <div class="col-table-cell col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
                         {{--<div id="logo"><a href="index.html"><img class="img-responsive" src="{{secure_asset('store_resources/image/logo.png')}}" title="MarketShop" alt="MarketShop" /></a></div>--}}
                         <div id="logo"><a href="index.html">
-                                <?php $user = \App\Store::whereUserId(Auth::user()->id)->first() ?>
+                                <?php $user = \App\User::find($user) ?>
                                 <h1>{{isset($user->name) ? $user->name :""}}</h1>
                             </a></div>
                     </div>

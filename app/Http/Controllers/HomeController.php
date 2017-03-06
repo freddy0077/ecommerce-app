@@ -35,8 +35,8 @@ class HomeController extends Controller
     {
         $builder = DB::table('products')
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
-            ->leftjoin('stores','stores.id','=','products.store_id');
-//            ->leftJoin('users','users.store_id','=','stores.id');
+            ->leftjoin('stores','stores.id','=','products.store_id')
+            ->leftJoin('users','users.id','=','stores.user_id');
 
 //        $ad_products = $builder
 //            ->where('ad',true)
@@ -45,9 +45,9 @@ class HomeController extends Controller
 
         $products = $builder
             ->where('ad',true)
-            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id')
-            ->orderBy('like_counts','desc')
-            ->paginate(20);
+            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id,stores.slug as store_slug,users.id as user_id')
+            ->orderBy('created_at','desc')
+            ->paginate(50);
 
         $nextpageurl = $products->nextPageUrl();
 
