@@ -4,6 +4,21 @@
     <script>
         //style top list items
         $('#top-list-items a').css('margin-right','20px')
+
+        $('#loading').hide();
+
+        var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
+
+        $('#load-more').on('click',function(){
+            $.get(nextPageUrl,function(data){
+                $('#loading').show();
+                $('#loader').append(data);
+            }).success(function(){
+                $('#loading').hide();
+            });
+
+            {{--$('.loader').load('{{url($nextpageurl)}}')--}}
+        })
     </script>
 
 
@@ -23,11 +38,10 @@
                         <div class="post post-variant-1 post-variant-1-short box post-variant-1-equal-height">
                             <div>
                                 <div class="post-media-wrap">
-                                    <p>
-                                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>
-                                    </p>
-                                    <a href="#"><img src='{{secure_asset("images/$product->image")}}' width="370" height="231" alt="" class="img-responsive post-image"/></a>
+                                    <a href="#">
+                                        {{--<img src='{{secure_asset("images/$product->image")}}' width="370" height="231" alt="" class="img-responsive post-image"/>--}}
+                                        <img src='{{secure_asset("images/nike_shoes.jpg")}}' width="370" height="231" alt="" class="img-responsive post-image"/>
+                                    </a>
                                     <ul class="post-categories list-inline-0">
                                         <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
                                     </ul>
@@ -65,14 +79,21 @@
                         </div>
                     </div>
 
+                    <br>
+
                 </div>
             @endforeach
         </div>
 
+        <div id="loader">
 
-        <div style="text-align: center">
-            <button class="btn btn-success" style="margin-bottom: 21px;" id="load_more">Load More.. </button>
-            <span class="fa fa-spinner fa-spin fa-5x text-center" ></span>
+        </div>
+
+
+
+        <div style="text-align: center" >
+            <button class="btn btn-success" style="margin-bottom: 21px;" id="load-more">Load More.. </button>
+            <span id="loading" class="fa fa-spinner fa-spin fa-5x text-center" ></span>
         </div>
 
     </main>
