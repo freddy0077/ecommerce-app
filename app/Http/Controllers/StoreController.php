@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRequest;
+use App\Notifications\NewOrder;
+use App\Order;
+use App\OrderItem;
 use App\Product;
 use App\ProductCategory;
 use App\Store;
@@ -11,6 +14,7 @@ use App\User;
 use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use Webpatser\Uuid\Uuid;
@@ -379,7 +383,43 @@ class StoreController extends Controller
 
     public function getCheckOut(){
 
-        return view('store.checkout');
+        $user = Auth::user()->id;
+
+        return view('store.checkout',compact('user'));
+    }
+
+    public function postCheckOut(){
+
+        $order_id = Uuid::generate();
+        $text = "";
+
+        Order::create([
+            'id' =>$order_id,
+            'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
+            'user_id' => Auth::user()->id
+        ]);
+
+        foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
+
+            $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
+//            $text.= "$item->qty \n";
+            OrderItem::create([
+                'id' => Uuid::generate(),
+                'product_id' => $item->id,
+                'qty' => $item->qty,
+                'order_id' => $order_id,
+            ]);
+        }
+        $amount="GHS".\Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+        $qty = \Gloudemans\Shoppingcart\Facades\Cart::count();
+
+
+//        \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+        $user = Auth::user()->first();
+        $shop = Store::whereUserId($user->id)->first();
+
+       Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
+
     }
 
 

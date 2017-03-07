@@ -41,14 +41,15 @@
                                             <p>Please select the preferred shipping method to use on this order.</p>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" checked="checked" name="Free Shipping">
-                                                    Delivery - $0.00</label>
+                                                    <input type="checkbox" name="delivery" id="delivery">
+                                                    Delivery - <i>delivery price will be communicated to you via phone</i>
+                                                </label>
                                             </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="Flat Shipping Rate">
-                                                    Pick Up - $8.00</label>
-                                            </div>
+                                            {{--<div class="radio">--}}
+                                                {{--<label>--}}
+                                                    {{--<input type="radio" name="delivery" id="delivery" value="pickup">--}}
+                                                    {{--Pick Up</label>--}}
+                                            {{--</div>--}}
                                             {{--<div class="radio">--}}
                                                 {{--<label>--}}
                                                     {{--<input type="radio" name="Per Item Shipping Rate">--}}
@@ -66,12 +67,12 @@
                                             <p>Please select the preferred payment method to use on this order.</p>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" checked="checked" name="Cash On Delivery">
+                                                    <input type="radio" checked="checked" name="payment_method">
                                                     Cash</label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="Bank Transfer">
+                                                    <input type="radio" name="payment_method">
                                                     Mobile Money</label>
                                             </div>
                                             {{--<div class="radio">--}}
@@ -121,10 +122,10 @@
                                                     @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $content)
                                                     <tr>
 
-                                                        <td class="text-center"><a href="product.html">
-                                                                <img src="http://placehold.it/50x75" alt="Xitefun Causal Wear Fancy Shoes"
+                                                        <td class="text-center"><a href="#">
+                                                                <img src="http://placehold.it/50x75" alt="{{$content->name}}"
                                                                      title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail"></a></td>
-                                                        <td class="text-left"><a href="product.html">{{$content->name}}</a></td>
+                                                        <td class="text-left"><a href="#">{{$content->name}}</a></td>
                                                         <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
                                                                 <input type="text" name="quantity" value="{{$content->qty}}" size="1" class="form-control qty">
                                     <span class="input-group-btn">
@@ -179,7 +180,7 @@
                                                 <span>I have read and agree to the <a class="agree" href="#"><b>Terms &amp; Conditions</b></a></span> </label>
                                             <div class="buttons">
                                                 <div class="pull-right">
-                                                    <input type="button" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                                                    <input type="button" class="btn btn-primary" id="button-confirm" onclick="confirmOrder()" value="Confirm Order">
                                                 </div>
                                             </div>
                                         </div>

@@ -582,6 +582,20 @@
             alert('removed an item from cart');
         });
     }
+
+    function confirmOrder(){
+        var delivery = $('#delivery:checked').val() == undefined ? false: true;
+
+        $.post('{{url('/store/check-out')}}',function(data){
+
+            alert('ordered successfully');
+
+//            location.reload();
+
+        })
+
+//        console.log(delivery)
+    }
 </script>
 
 @yield('scripts')

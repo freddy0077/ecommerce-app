@@ -18,6 +18,8 @@ class User extends Authenticatable
         'id','name','phone_number', 'email', 'password','has_store','gender','store'
     ];
 
+    protected  $slack_webhook_url = 'https://hooks.slack.com/services/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';
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -30,5 +32,10 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany('App\ProductCategory');
+    }
+
+    public function routeNotificationForSlack()
+    {
+        return $this->slack_webhook_url;
     }
 }

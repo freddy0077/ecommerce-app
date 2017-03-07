@@ -14,7 +14,7 @@ class ProductsTableSeeder extends Seeder
                                'Arts & Photography','Agric & Food'];
 
 
-    private $user_names = ['frederickankamah988','Evans','Sandra','Abigail','Deborah'];
+    private $user_names = ['frederick ankamah','Evans','Sandra','Abigail','Deborah'];
 
     private function saveSubCategory($id,$name,$category_id){
         \App\SubCategory::create([
