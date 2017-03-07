@@ -137,110 +137,111 @@
                 </div>
                 <!-- Categories Product Slider End-->
                 <!-- Categories Product Slider Start -->
-                <h3 class="subtitle">Health &amp; Beauty - <a class="viewall" href="category.html">view all</a></h3>
-                <div class="owl-carousel latest_category_carousel">
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/iphone_6-200x200.jpg')}}" alt="Hair Care Cream for Men" title="Hair Care Cream for Men" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Hair Care Cream for Men</a></h4>
-                            <p class="price"> $134.00 </p>
-                            <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_5-200x200.jpg')}}" alt="Hair Care Products" title="Hair Care Products" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Hair Care Products</a></h4>
-                            <p class="price"> <span class="price-new">$66.80</span> <span class="price-old">$90.80</span> <span class="saving">-27%</span> </p>
-                            <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_4-200x200.jpg')}}" alt="Bed Head Foxy Curls Contour Cream" title="Bed Head Foxy Curls Contour Cream" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Bed Head Foxy Curls Contour Cream</a></h4>
-                            <p class="price"> $88.00 </p>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/macbook_5-200x200.jpg')}}" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Shower Gel Perfume for Women</a></h4>
-                            <p class="price"> <span class="price-new">$95.00</span> <span class="price-old">$99.00</span> <span class="saving">-4%</span> </p>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick="wishlist.add('61');"><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick="compare.add('61');"><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src={{secure_asset('store_resources/image/product/macbook_4-200x200.jpg')}} alt="Perfumes for Women" title="Perfumes for Women" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Perfumes for Women</a></h4>
-                            <p class="price"> $85.00 </p>
-                            <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_3-200x200.jpg')}}" alt="Make Up for Naturally Beautiful Better" title="Make Up for Naturally Beautiful Better" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Make Up for Naturally Beautiful Better</a></h4>
-                            <p class="price"> $123.00 </p>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-thumb">
-                        <div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_2-200x200.jpg')}}" alt="Pnina Tornai Perfume" title="Pnina Tornai Perfume" class="img-responsive" /></a></div>
-                        <div class="caption">
-                            <h4><a href="product.html">Pnina Tornai Perfume</a></h4>
-                            <p class="price"> $110.00 </p>
-                        </div>
-                        <div class="button-group">
-                            <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
-                            <div class="add-to-links">
-                                <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                                <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{--<h3 class="subtitle">Health &amp; Beauty - <a class="viewall" href="category.html">view all</a></h3>--}}
+
+                {{--<div class="owl-carousel latest_category_carousel">--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/iphone_6-200x200.jpg')}}" alt="Hair Care Cream for Men" title="Hair Care Cream for Men" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Hair Care Cream for Men</a></h4>--}}
+                            {{--<p class="price"> $134.00 </p>--}}
+                            {{--<div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_5-200x200.jpg')}}" alt="Hair Care Products" title="Hair Care Products" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Hair Care Products</a></h4>--}}
+                            {{--<p class="price"> <span class="price-new">$66.80</span> <span class="price-old">$90.80</span> <span class="saving">-27%</span> </p>--}}
+                            {{--<div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/nikon_d300_4-200x200.jpg')}}" alt="Bed Head Foxy Curls Contour Cream" title="Bed Head Foxy Curls Contour Cream" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Bed Head Foxy Curls Contour Cream</a></h4>--}}
+                            {{--<p class="price"> $88.00 </p>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="#"><img src="{{secure_asset('store_resources/image/product/macbook_5-200x200.jpg')}}" alt="Shower Gel Perfume for Women" title="Shower Gel Perfume for Women" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Shower Gel Perfume for Women</a></h4>--}}
+                            {{--<p class="price"> <span class="price-new">$95.00</span> <span class="price-old">$99.00</span> <span class="saving">-4%</span> </p>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick="cart.add('61');"><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick="wishlist.add('61');"><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick="compare.add('61');"><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src={{secure_asset('store_resources/image/product/macbook_4-200x200.jpg')}} alt="Perfumes for Women" title="Perfumes for Women" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Perfumes for Women</a></h4>--}}
+                            {{--<p class="price"> $85.00 </p>--}}
+                            {{--<div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> </div>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_3-200x200.jpg')}}" alt="Make Up for Naturally Beautiful Better" title="Make Up for Naturally Beautiful Better" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Make Up for Naturally Beautiful Better</a></h4>--}}
+                            {{--<p class="price"> $123.00 </p>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="product-thumb">--}}
+                        {{--<div class="image"><a href="product.html"><img src="{{secure_asset('store_resources/image/product/macbook_2-200x200.jpg')}}" alt="Pnina Tornai Perfume" title="Pnina Tornai Perfume" class="img-responsive" /></a></div>--}}
+                        {{--<div class="caption">--}}
+                            {{--<h4><a href="product.html">Pnina Tornai Perfume</a></h4>--}}
+                            {{--<p class="price"> $110.00 </p>--}}
+                        {{--</div>--}}
+                        {{--<div class="button-group">--}}
+                            {{--<button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>--}}
+                            {{--<div class="add-to-links">--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>--}}
+                                {{--<button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
                 <!-- Categories Product Slider End -->
                 <!-- Banner Start -->
                 <div class="marketshop-banner">
