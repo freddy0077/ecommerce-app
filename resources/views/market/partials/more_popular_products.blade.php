@@ -1,6 +1,6 @@
 <script>
     @if($nextpageurl)
-        nextPageUrl = "{{$nextpageurl}}";
+        nextPageUrl = "{{secure_url($nextpageurl)}}";
     $('#load-more').show();
     @else
         nextPageUrl = null;
