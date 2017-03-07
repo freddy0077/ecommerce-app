@@ -11,7 +11,7 @@
 
             var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
 
-            alert('{{(int)$products->currentpage()+1}}')
+{{--            alert('{{(int)$products->currentpage()+1}}')--}}
 
             var page = '{{(int)$products->currentpage()}}';
 
