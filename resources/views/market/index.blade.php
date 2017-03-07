@@ -1,25 +1,65 @@
 @extends('market.layouts.master')
 
 @section('scripts')
+    <div id="unusable-scripts">
     <script>
-        //style top list items
-        $('#top-list-items a').css('margin-right','20px')
+        $(document).ready(function(){
+            //style top list items
+            $('#top-list-items a').css('margin-right','20px')
 
-        $('#loading').hide();
+            $('#loading').hide();
 
-        var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
+            var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
+
+            alert('{{(int)$products->currentpage()+1}}')
+
+            var page = '{{(int)$products->currentpage()}}';
+
+            var url = "{{url('/')}}/"+'?page=';
+
 
         $('#load-more').on('click',function(){
-            $.get(nextPageUrl,function(data){
-                $('#loading').show();
-                $('#loader').append(data);
-            }).success(function(){
-                $('#loading').hide();
-            });
+            page++
 
-            {{--$('.loader').load('{{url($nextpageurl)}}')--}}
+                $.ajax({
+                    url: url+page,
+                    dataType: "text",
+                    success: function(data) {
+//                    $(".demo-card").html(data);
+                        $('#loader').append(data);
+//                        $('#loader').append(data);
+//                        $('#loader h4').hide()
+//                        $('#loader #load-button').hide()
+//                        $('#loader header').hide()
+//                        $('#loader footer').hide()
+//                        $('#loader .modal').hide()
+
+                    }
+                });
+
+                {{--$.get(nextPageUrl,function(data){--}}
+                {{--@include('market.partials.more_popular_products', ['some' => 'data'])--}}
+
+                {{--//                $('#loading').show();--}}
+                {{--$('#loader').append(data);--}}
+                {{--$('#loader h4').hide()--}}
+                {{--$('#loader #load-button').hide()--}}
+                {{--$('#loader header').hide()--}}
+                {{--$('#loader footer').hide()--}}
+                {{--$('#loader .modal').hide()--}}
+
+                {{--}).success(function(){--}}
+                {{--$('#loading').hide();--}}
+                {{--});--}}
+
+
+                {{--$('.loader').load('{{url($nextpageurl)}}')--}}
+            })
         })
+
     </script>
+
+    </div>
 
 
 @endsection
@@ -85,15 +125,13 @@
             @endforeach
         </div>
 
-        <div id="loader">
-
-        </div>
+        <div id="loader"></div>
 
 
 
-        <div style="text-align: center" >
+        <div id="load-button" style="text-align: center" >
             <button class="btn btn-success" style="margin-bottom: 21px;" id="load-more">Load More.. </button>
-            <span id="loading" class="fa fa-spinner fa-spin fa-5x text-center" ></span>
+            {{--<span id="loading" class="fa fa-spinner fa-spin fa-5x text-center" ></span>--}}
         </div>
 
     </main>

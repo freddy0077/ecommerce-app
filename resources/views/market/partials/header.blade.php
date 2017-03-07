@@ -3,8 +3,6 @@
 
 <header class="page-header page-header-with-slider">
 
-
-
    @include('market.partials.nav_menu')
 
     <section data-min-height="250px"style="margin-top: 10px;" data-height="calc(100vh - 152px)" data-autoplay="true" class="swiper-container swiper-slider">

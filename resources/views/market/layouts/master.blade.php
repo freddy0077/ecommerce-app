@@ -296,6 +296,7 @@
 
 
     });
+
     function fancy(product_id) {
         @if(Auth::check())
 
@@ -481,31 +482,6 @@
                         el.next('.help-block').text(data.responseJSON[field][0]);
                     }
                 })
-
-                {{--$.ajax({--}}
-                {{--url:"{{url('/login')}}",--}}
-                {{--type:"POST",--}}
-                {{--data: $(this).serialize(),--}}
-                {{--dataType: 'json',--}}
-                {{--beforeSend:function( ) {--}}
-                {{--//--}}
-                {{--},--}}
-                {{--complete:function( data ) {--}}
-
-                {{--},--}}
-                {{--success:function(data) {--}}
-                {{--location.reload();--}}
-
-                {{--},--}}
-                {{--error:function( data ) {--}}
-                {{--for (var field in data.responseJSON) {--}}
-                {{--var el = $(':input[name="' + field + '"]');--}}
-                {{--el.parent('.form-group').addClass('has-error');--}}
-                {{--el.next('.help-block').text(data.responseJSON[field][0]);--}}
-                {{--}--}}
-
-                {{--}--}}
-                {{--});--}}
 
             })
         }

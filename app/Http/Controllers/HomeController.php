@@ -48,14 +48,16 @@ class HomeController extends Controller
             ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id,stores.slug as store_slug,users.id as user_id')
             ->orderBy('created_at','desc')
             ->paginate(20);
+//        $products->setPath('https://' . $request->getHttpHost(). $request->path());
 
-        $nextpageurl = $products->nextPageUrl();
+
+         $nextpageurl = $products->nextPageUrl();
 
         if($request->ajax()){
             return view('market.partials.more_popular_products',compact('products','nextpageurl'));
         }
 
-        return view('market.index',compact('ad_products','products','nextpageurl'));
+        return view('market.index',compact('products','nextpageurl'));
     }
 
     public function getProfile(){

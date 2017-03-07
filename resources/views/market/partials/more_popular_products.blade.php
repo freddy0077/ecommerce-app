@@ -1,13 +1,13 @@
 <script>
     @if($nextpageurl)
-        nextPageUrl = "{{secure_url($nextpageurl)}}";
+        nextPageUrl = "{{$nextpageurl}}";
     $('#load-more').show();
     @else
         nextPageUrl = null;
     $('#load-more').hide();
     @endif
 </script>
-<?php $newPageUrl = $nextpageurl;  ?>
+
 <div class="row">
     @foreach($products as $product)
         <div class="col-md-3 col-sm-4">
@@ -59,7 +59,6 @@
             </div>
 
             <br>
-
         </div>
     @endforeach
 </div>
