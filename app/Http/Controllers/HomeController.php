@@ -38,10 +38,6 @@ class HomeController extends Controller
             ->leftjoin('stores','stores.id','=','products.store_id')
             ->leftJoin('users','users.id','=','stores.user_id');
 
-//        $ad_products = $builder
-//            ->where('ad',true)
-//            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id')
-//            ->take(20)->get();
 
          $products = $builder
             ->where('ad',true)
