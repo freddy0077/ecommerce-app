@@ -49,7 +49,7 @@ Route::post('/like-it/{product_id}','HomeController@postLikeIt');
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholicks.com'], function () {
+Route::group(['domain' => '{account}.shopaholick.dev'], function () {
     Route::get('user', function ($account) {
         //
         return $account;

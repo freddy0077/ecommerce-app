@@ -43,7 +43,7 @@ class HomeController extends Controller
             ->where('ad',true)
             ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id,stores.slug as store_slug,users.id as user_id')
             ->orderBy('created_at','desc')
-            ->paginate(20);
+            ->paginate(12);
 //        $products->setPath('https://' . $request->getHttpHost(). $request->path());
 
 
@@ -53,6 +53,7 @@ class HomeController extends Controller
             return view('market.partials.more_popular_products',compact('products','nextpageurl'));
         }
 
+//        return view('market.index',compact('products','nextpageurl'));
         return view('market.index',compact('products','nextpageurl'));
     }
 

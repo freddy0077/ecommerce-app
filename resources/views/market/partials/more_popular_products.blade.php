@@ -25,7 +25,7 @@
                         </div>
                         <div class="post-content-wrap" style="padding-bottom: 10px;">
                             <div class="row">
-                                <div class="col-sm-6" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
+                                <div class="col-sm-6 price-tag" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
                                 <div class="col-sm-6" style="margin-top:-15px;">
                                     <a href="#">
                                         <i class="fa fa-thumbs-up like" data-id ="{{$product->id}}" aria-hidden="true"></i>

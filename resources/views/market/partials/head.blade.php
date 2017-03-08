@@ -43,6 +43,37 @@
 
     <style>
 
+        body{
+
+            min-height: 80%;
+
+        }
+
+        /*.row {*/
+            /*margin: 80px 0px 80px 0px;*/
+        /*}*/
+
+        /*img {*/
+            /*margin: 10px 10px 10px 10px;*/
+            /*-webkit-transform: scale(1, 1);*/
+            /*-ms-transform: scale(1, 1);*/
+            /*transform: scale(1, 1);*/
+            /*transition-duration: 0.3s;*/
+            /*-webkit-transition-duration: 0.3s; !* Safari *!*/
+        /*}*/
+
+        /*img:hover {*/
+            /*cursor: pointer;*/
+            /*-webkit-transform: scale(2, 2);*/
+            /*-ms-transform: scale(2, 2);*/
+            /*transform: scale(2, 2);*/
+            /*transition-duration: 0.3s;*/
+            /*-webkit-transition-duration: 0.3s; !* Safari *!*/
+            /*box-shadow: 10px 10px 5px #888888;*/
+            /*z-index: 1;*/
+        /*}*/
+
+
         @media only screen and (max-width: 1000px) {
             #flipkart-navbar > div > div.row.row2 > div.cart.col-sm-1 > li > a > h6 > i
             {
@@ -55,7 +86,6 @@
             .price-tag{
                 margin-bottom: 10px;
             }
-
         }
     </style>
 
