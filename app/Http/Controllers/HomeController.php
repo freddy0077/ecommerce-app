@@ -72,11 +72,13 @@ class HomeController extends Controller
 
         $builder = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
+            ->leftjoin('stores','stores.id','=','products.store_id')
+            ->leftJoin('users','users.id','=','stores.user_id')
             ->where('product_categories.slug',$category_slug);
 
          $products = $builder
             ->selectRaw('products.*,sub_categories.name as category_name,
-              product_categories.name as product_category_name,product_categories.slug as category_slug')
+              product_categories.name as product_category_name,product_categories.slug as category_slug,stores.name as store_name')
             ->paginate(36);
 
 
@@ -146,7 +148,6 @@ class HomeController extends Controller
 
         $query = $request->query('q');
         return Product::where('name', 'LIKE', "%$query%")->pluck('name');
-
     }
 
     public function postRegisterUser(Request $request){
