@@ -1,9 +1,41 @@
 @extends('market.layouts.master')
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>
+
     <div id="unusable-scripts">
+
+
     <script>
-        $(document).ready(function(){
+
+                $(document).ready(function(){
+                    // Sonstructs the suggestion engine
+//                    var countries = new Bloodhound({
+//                        datumTokenizer: Bloodhound.tokenizers.whitespace,
+//                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+//                        // The url points to a json file that contains an array of country names
+//                        prefetch: '/search-query'
+//                    });
+//
+//
+
+                    var products = new Bloodhound({
+                        hint: false,
+                        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                        queryTokenizer: Bloodhound.tokenizers.whitespace,
+                        remote: {
+                            url: '/search-query?q=%QUERY%',
+                            wildcard: '%QUERY%'
+                        }
+                    });
+
+//                     Initializing the typeahead with remote dataset without highlighting
+                    $('.typeahead').typeahead(null, {
+                        name: 'products',
+                        source: products,
+                        limit: 20 /* Specify max number of suggestions to be displayed */
+                    });
+
             //style top list items
             $('#top-list-items a').css('margin-right','20px')
 
@@ -27,13 +59,6 @@
                     success: function(data) {
 //                    $(".demo-card").html(data);
                         $('#loader').append(data);
-//                        $('#loader').append(data);
-//                        $('#loader h4').hide()
-//                        $('#loader #load-button').hide()
-//                        $('#loader header').hide()
-//                        $('#loader footer').hide()
-//                        $('#loader .modal').hide()
-
                     }
                 });
 
@@ -65,6 +90,11 @@
 @endsection
 
 @section('content')
+
+    {{--<div class="bs-example">--}}
+        {{--<h2>Type your favorite car name</h2>--}}
+        {{--<input type="text" class="typeahead tt-query" autocomplete="off" spellcheck="false">--}}
+    {{--</div>--}}
 
     <main class="page-content offset-top-30">
         {{--<div id="fb-root"></div>--}}

@@ -142,6 +142,13 @@ class HomeController extends Controller
         }
     }
 
+    public function getSearchQuery(Request $request){
+
+        $query = $request->query('q');
+        return Product::where('name', 'LIKE', "%$query%")->pluck('name');
+
+    }
+
     public function postRegisterUser(Request $request){
 
 

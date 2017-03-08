@@ -32,13 +32,72 @@
     <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
 
     <!--[if lt IE 10]>
-    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;">
-        <a href="https://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    <script src="js/html5shiv.min.js"></script>
+    <!--<div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;">-->
+        {{--<a href="https://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>--}}
+    {{--<script src="js/html5shiv.min.js"></script>--}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>--}}
+
+
+
+    <style type="text/css">
+        /*.bs-example {*/
+            /*font-family: sans-serif;*/
+            /*position: relative;*/
+            /*margin: 100px;*/
+        /*}*/
+        .typeahead,.tt-query, .tt-hint {
+            border: 2px solid #CCCCCC;
+            border-radius: 8px;
+            font-size: 22px; /* Set input font size */
+            /*height: 30px;*/
+            line-height: 30px;
+            outline: medium none;
+            /*padding: 8px 12px;*/
+            width: calc(120vh - 152px);
+            /*height: 70px;*/
+            /*color: black;*/
+
+        }
+        .typeahead {
+            background-color: #FFFFFF;
+            /*color: black;*/
+        }
+        .typeahead:focus {
+            border: 2px solid #0097CF;
+        }
+        .tt-query {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+        .tt-hint {
+            color: #999999;
+        }
+        .tt-menu {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 12px;
+            padding: 8px 0;
+            width: 422px;
+        }
+        .tt-suggestion {
+            font-size: 22px;  /* Set suggestion dropdown font size */
+            padding: 3px 20px;
+            color: black;
+
+        }
+        .tt-suggestion:hover {
+            cursor: pointer;
+            background-color: #0097CF;
+            color: #FFFFFF;
+        }
+        .tt-suggestion p {
+            margin: 0;
+        }
+    </style>
 
     <![endif]-->
 

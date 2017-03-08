@@ -41,7 +41,7 @@
     .cart-button {
         background-color: #2469d9;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .23), inset 1px 1px 0 0 hsla(0, 0%, 100%, .2);
-        padding: 10px 0;
+        /*padding: 10px 0;*/
         text-align: center;
         height: 41px;
         border-radius: 2px;
@@ -485,7 +485,6 @@
 
             })
         }
-
 
     });
 </script>

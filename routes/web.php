@@ -28,6 +28,8 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 Route::any('/', 'HomeController@index');
 
+Route::get('/search-query', 'HomeController@getSearchQuery');
+
 
 
 Route::get('/profile','HomeController@getProfile');

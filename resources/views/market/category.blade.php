@@ -1,10 +1,11 @@
 @extends('market.layouts.without_slider_layout')
 
 @section('scripts')
-    <script>
-
-
-            </script>
+   <style>
+       body{
+           min-height: 80%;
+       }
+   </style>
 @endsection
 
 @section('content')
