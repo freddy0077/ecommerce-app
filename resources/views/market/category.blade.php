@@ -6,6 +6,62 @@
            min-height: 80%;
        }
    </style>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>
+
+   <div id="unusable-scripts">
+
+
+       <script>
+
+           $(document).ready(function(){
+               var products = new Bloodhound({
+                   hint: false,
+                   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                   queryTokenizer: Bloodhound.tokenizers.whitespace,
+                   remote: {
+                       url: '/search-query?q=%QUERY%',
+                       wildcard: '%QUERY%'
+                   }
+               });
+
+//                     Initializing the typeahead with remote dataset without highlighting
+               $('.typeahead').typeahead(null, {
+                   name: 'products',
+                   source: products,
+                   limit: 20 /* Specify max number of suggestions to be displayed */
+               });
+
+               //style top list items
+               $('#top-list-items a').css('margin-right','20px')
+
+               $('#loading').hide();
+
+               {{--var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}--}}
+
+{{--            alert('{{(int)$products->currentpage()+1}}')--}}
+
+            {{--var page = '{{(int)$products->currentpage()}}';--}}
+
+               {{--var url = "{{url('/')}}/"+'?page=';--}}
+
+
+//               $('#load-more').on('click',function(){
+//                   page++
+//
+//                   $.ajax({
+//                       url: url+page,
+//                       dataType: "text",
+//                       success: function(data) {
+////                    $(".demo-card").html(data);
+//                           $('#loader').append(data);
+//                       }
+//                   });
+//
+//               })
+           })
+
+       </script>
 @endsection
 
 @section('content')

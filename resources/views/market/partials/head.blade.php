@@ -41,6 +41,25 @@
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>--}}
 
 
+    <style>
+
+        @media only screen and (max-width: 1000px) {
+            #flipkart-navbar > div > div.row.row2 > div.cart.col-sm-1 > li > a > h6 > i
+            {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 770px) and (min-width: 480px) {
+
+            .price-tag{
+                margin-bottom: 10px;
+            }
+
+        }
+    </style>
+
+
 
     <style type="text/css">
         /*.bs-example {*/

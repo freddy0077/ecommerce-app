@@ -3,21 +3,62 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>
 
+
     <div id="unusable-scripts">
 
 
     <script>
 
+        function loadScriptsAgain(){
+            $('.like').on('click',function(event){
+                event.preventDefault();
+                var product_id = $(this).data('id')
+
+                @if(Auth::check())
+
+                $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+                    $('.counts-'+product_id).text(data.likes)
+                });
+
+                @elseif(Auth::guest())
+                $('#login-modal').modal();
+                @endif
+
+
+            });
+
+            function fancy(product_id) {
+                @if(Auth::check())
+
+                 $.post("{{secure_url('/fancy-it')}}/"+product_id,function(data){
+                    $('.fancy').click(function(){
+                        $(this).addClass('fa fa-spinner fa-spin')
+
+                    })
+
+                });
+
+                @elseif(Auth::guest())
+                $('#login-modal').modal();
+                @endif
+
+            }
+
+            function like(product_id) {
+                @if(Auth::check())
+
+                 $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+
+                });
+
+                @elseif(Auth::guest())
+                $('#login-modal').modal();
+                @endif
+
+            }
+        }
+
                 $(document).ready(function(){
-                    // Sonstructs the suggestion engine
-//                    var countries = new Bloodhound({
-//                        datumTokenizer: Bloodhound.tokenizers.whitespace,
-//                        queryTokenizer: Bloodhound.tokenizers.whitespace,
-//                        // The url points to a json file that contains an array of country names
-//                        prefetch: '/search-query'
-//                    });
-//
-//
 
                     var products = new Bloodhound({
                         hint: false,
@@ -59,6 +100,7 @@
                     success: function(data) {
 //                    $(".demo-card").html(data);
                         $('#loader').append(data);
+                        loadScriptsAgain();
                     }
                 });
 
@@ -103,7 +145,7 @@
 
         <div class="row">
             @foreach($products as $product)
-                <div class="col-md-3 col-sm-4">
+                <div class="col-md-3 col-sm-4 col-xs-4">
                     <div class="owl-item">
                         <div class="post post-variant-1 post-variant-1-short box post-variant-1-equal-height">
                             <div>
@@ -118,7 +160,7 @@
                                 </div>
                                 <div class="post-content-wrap" style="padding-bottom: 10px;">
                                     <div class="row">
-                                        <div class="col-sm-6" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
+                                        <div class="col-sm-6 price-tag" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
                                         <div class="col-sm-6" style="margin-top:-15px;">
                                             <a href="#"><i class="fa fa-thumbs-up like" data-id ="{{$product->id}}" aria-hidden="true"></i></a>
                                             {{--<a href="">&#x263a;</a>--}}

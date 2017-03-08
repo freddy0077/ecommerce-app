@@ -280,54 +280,56 @@
 
 <script>
 
-    $('.like').on('click',function(event){
-        event.preventDefault();
-        var product_id = $(this).data('id')
 
-        @if(Auth::check())
-
-        $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
-            $('.counts-'+product_id).text(data.likes)
-        });
-
-        @elseif(Auth::guest())
-        $('#login-modal').modal();
-        @endif
-
-
-    });
-
-    function fancy(product_id) {
-        @if(Auth::check())
-
-         $.post("{{secure_url('/fancy-it')}}/"+product_id,function(data){
-            $('.fancy').click(function(){
-                $(this).addClass('fa fa-spinner fa-spin')
-
-            })
-
-        });
-
-        @elseif(Auth::guest())
-        $('#login-modal').modal();
-        @endif
-
-    }
-
-    function like(product_id) {
-        @if(Auth::check())
-
-         $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
-
-        });
-
-        @elseif(Auth::guest())
-        $('#login-modal').modal();
-        @endif
-
-    }
 
     $(document).ready(function() {
+
+        $('.like').on('click',function(event){
+            event.preventDefault();
+            var product_id = $(this).data('id')
+
+            @if(Auth::check())
+
+            $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+                $('.counts-'+product_id).text(data.likes)
+            });
+
+            @elseif(Auth::guest())
+            $('#login-modal').modal();
+            @endif
+
+
+        });
+
+        function fancy(product_id) {
+            @if(Auth::check())
+
+             $.post("{{secure_url('/fancy-it')}}/"+product_id,function(data){
+                $('.fancy').click(function(){
+                    $(this).addClass('fa fa-spinner fa-spin')
+
+                })
+
+            });
+
+            @elseif(Auth::guest())
+            $('#login-modal').modal();
+            @endif
+
+        }
+
+        function like(product_id) {
+            @if(Auth::check())
+
+             $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+
+            });
+
+            @elseif(Auth::guest())
+            $('#login-modal').modal();
+            @endif
+
+        }
 
         $('#new-registration-button').on('click', function () {
 //            alert('hello');

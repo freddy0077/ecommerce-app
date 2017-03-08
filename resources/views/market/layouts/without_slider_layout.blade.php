@@ -271,7 +271,279 @@
 <script src="{{asset('js/core.min.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
 
+<script>
+
+    $('.like').on('click',function(event){
+        event.preventDefault();
+        var product_id = $(this).data('id')
+
+        @if(Auth::check())
+
+        $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+            $('.counts-'+product_id).text(data.likes)
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+
+    });
+
+    function fancy(product_id) {
+        @if(Auth::check())
+
+         $.post("{{secure_url('/fancy-it')}}/"+product_id,function(data){
+            $('.fancy').click(function(){
+                $(this).addClass('fa fa-spinner fa-spin')
+
+            })
+
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+    }
+
+    function like(product_id) {
+        @if(Auth::check())
+
+         $.post("{{secure_url('/like-it')}}/"+product_id,function(data){
+
+        });
+
+        @elseif(Auth::guest())
+        $('#login-modal').modal();
+        @endif
+
+    }
+
+    $(document).ready(function() {
+
+        $('#new-registration-button').on('click', function () {
+//            alert('hello');
+            var registerForm = '<div id="register-form">' +
+                    '<form method="post" id="user_register_form">' +
+                    '<div class="form-group">' +
+
+                    '<input type="text" placeholder="Enter your name" name="name" required class="form-control login-field">' +
+                    '<i class="fa fa-user login-field-icon"></i>' +
+                    '</div>' +
+
+                    '<div class="form-group">' +
+                    '<input type="text" id="phone_number" placeholder="Enter your phone number" required class="form-control login-field">' +
+                    '<i class="fa fa-phone login-field-icon"></i>' +
+                    '</div>' +
+
+                    '<div class="form-group">' +
+                    '<input type="email" id="email" placeholder="Enter your email" name="email" class="form-control login-field">' +
+                    '<i class="fa fa-envelope login-field-icon"></i>' +
+                    '</div>' +
+
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password" required class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '</div>' +
+
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password_confirmation" class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '<span class="help-block"> </span>' +
+                    '</div>' +
+
+                    '<div class="form-group">' +
+                    '  <label  style="word-wrap:break-word">' +
+                    '<input id="create-store-checkbox" type="checkbox" name="store" style=" vertical-align:middle;"/>create store ' +
+                    '</label>' +
+                    '</div>' +
+
+//                    '<a href="#" class="btn btn-success modal-login-btn" id="register_user">Register</a>'+
+                    '<button type="submit" class="btn btn-success modal-login-btn" id="register_user">Register</button>' +
+
+                    '</form>';
+//                    '<a href="#" class="login-link text-center">Lost your password?</a></form></div>';
+
+            $('#login-form').html(registerForm);
+            $("#login-button").hide();
+            $("#login-button").show();
+
+            $("#new-registration-button").hide();
+
+            register();
+
+        })
+
+        $('#login-button').on('click', function () {
+//            alert('hello');
+            var loginForm = '<div id="login-form">' +
+                    '<form id="user_login_form" method="post">' +
+                    '<div class="form-group">' +
+                    '<input type="email" placeholder="Enter your name" name="email" class="form-control login-field">' +
+                    '<i class="fa fa-user login-field-icon"></i>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<input type="password" id="login-pass" placeholder="Password" name="password" class="form-control login-field">' +
+                    '<i class="fa fa-lock login-field-icon"></i>' +
+                    '</div>' +
+                    '<button class="btn btn-success modal-login-btn" id="login_user">Login</button>' +
+                    '<a href="#" class="login-link text-center">Lost your password?</a>' +
+                    '</form>' +
+                    '</div>';
+
+            $('#register-form').html(loginForm);
+            $("#new-registration-button").hide();
+            $("#new-registration-button").show();
+            $("#login-button").hide();
+
+            $('#user_login_form').on('submit', function (e) {
+                e.preventDefault();
+                $.post("{{url('login')}}", $('#user_login_form').serialize(), function () {
+
+                }).success(function (data) {
+                    location.reload();
+
+                }).fail(function (data) {
+                    for (var field in data.responseJSON) {
+                        var el = $(':input[name="' + field + '"]');
+                        el.parent('.form-group').addClass('has-error');
+                        el.next('.help-block').text(data.responseJSON[field][0]);
+                    }
+                })
+
+            })
+
+            login();
+        });
+
+        register();
+        login();
+
+        function register() {
+            $('#user_register_form').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "{{secure_url('/register')}}",
+                    type: "POST",
+                    data: $('#user_register_form').serialize(),
+                    dataType: 'json',
+                    beforeSend: function () {
+//
+                    },
+                    complete: function (data) {
+
+                        if (data.status == 301) {
+                            location.href = data.message;
+                        }
+                    },
+                    success: function (data) {
+
+                        location.href = data.message;
+
+//                        if($('#create-store-checkbox').is(':checked')){
+//                           location.href = '/store/add-store';
+//                        }
+                    },
+                    error: function (data) {
+                        for (var field in data.responseJSON) {
+                            var el = $(':input[name="' + field + '"]');
+                            el.parent('.form-group').addClass('has-error');
+                            el.next('.help-block').text(data.responseJSON[field][0]);
+                        }
+
+                    }
+                });
+
+            })
+        }
+
+        function login() {
+            $('#user_login_form').on('submit', function (e) {
+                e.preventDefault();
+                $.post("{{secure_url('login')}}", $('#user_login_form').serialize(), function () {
+
+                }).success(function (data) {
+
+                    location.reload();
+
+                }).fail(function (data) {
+                    for (var field in data.responseJSON) {
+                        var el = $(':input[name="' + field + '"]');
+                        el.parent('.form-group').addClass('has-error');
+                        el.next('.help-block').text(data.responseJSON[field][0]);
+                    }
+                })
+
+            })
+        }
+
+    });
+</script>
+
+
 @yield('scripts')
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header login_modal_header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h5 class="modal-title" id="myModalLabel">Login to Your Account</h5>
+            </div>
+            <div class="modal-body login-modal">
+                <p>Shopaholicks Login</p>
+                <br/>
+                <div class="clearfix"></div>
+                <div id='social-icons-conatainer'>
+
+                    <div class='modal-body-left'>
+                        <div id="login-form">
+                            <form method="post" id="user_login_form">
+                                <div class="form-group">
+                                    <input type="text" id="email" placeholder="Enter your name" name="email" class="form-control login-field">
+                                    <i class="fa fa-user login-field-icon"></i>
+                                    <span class="help-block"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" id="login-pass" placeholder="Password" name="password" class="form-control login-field">
+                                    <i class="fa fa-lock login-field-icon"></i>
+                                    <span class="help-block"></span>
+                                </div>
+
+                                <button class="btn btn-success modal-login-btn">Login</button>
+                                <a href="#" class="login-link text-center">Lost your password?</a>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <div class='modal-body-right'>
+                        <div class="modal-social-icons">
+                            <a href='{{url('redirect/facebook')}}' class="btn btn-default facebook"> <i class="fa fa-facebook modal-icons"></i> Sign In with Facebook </a>
+                            <a href='{{url('redirect/twitter')}}' class="btn btn-default twitter"> <i class="fa fa-twitter modal-icons"></i> Sign In with Twitter </a>
+                            <a href='{{url('redirect/google')}}' class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Sign In with Google </a>
+                            {{--<a href='#' class="btn btn-default linkedin"> <i class="fa fa-linkedin modal-icons"></i> Sign In with Linkedin </a>--}}
+                        </div>
+                    </div>
+                    <div id='center-line'> OR </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="form-group modal-register-btn">
+                    <button class="btn btn-default" id="new-registration-button"> New User ? Please Register</button>
+                    <button class="btn btn-default" id="login-button" style="display: none"> Login to your account</button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer login_modal_footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
-<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FT69');</script><!-- End Google Tag Manager -->
+{{--<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P9FT69"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P9FT69');</script><!-- End Google Tag Manager -->--}}
 </html>
