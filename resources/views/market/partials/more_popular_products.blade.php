@@ -10,7 +10,7 @@
 
 <div class="row">
     @foreach($products as $product)
-        <div class="col-md-3 col-sm-4">
+        <div class="col-md-3 col-sm-4 col-xs-4">
             <div class="owl-item">
                 <div class="post post-variant-1 post-variant-1-short box post-variant-1-equal-height">
                     <div>
