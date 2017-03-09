@@ -212,38 +212,43 @@
 
                         <div class="row">
 
-                            <div class="col-xs-18 col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE">
-                                    <div class="caption">
-                                        <h6 class="text-center">Category</h6>
+                            @foreach($categories as $category)
+
+                                <div class="col-xs-18 col-sm-6 col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="http://placehold.it/500x250/EEE">
+                                        <div class="caption">
+                                            <h6 class="text-center">{{$category->name}}</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-18 col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE">
-                                    <div class="caption">
-                                        <h6 class="text-center">Category</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-18 col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE">
-                                    <div class="caption">
-                                        <h6 class="text-center">Category</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-18 col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/500x250/EEE">
-                                    <div class="caption">
-                                        <h6 class="text-center">Category</h6>
-                                    </div>
-                                </div>
-                            </div>
+
+                            @endforeach
+
+                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
+                                    {{--<div class="caption">--}}
+                                        {{--<h6 class="text-center">Category</h6>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
+                                    {{--<div class="caption">--}}
+                                        {{--<h6 class="text-center">Category</h6>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
+                                    {{--<div class="caption">--}}
+                                        {{--<h6 class="text-center">Category</h6>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                         </div><!--/row-->
                     {{--</div><!--/container -->--}}
@@ -316,12 +321,12 @@
                     <div class="range offset-top-30 offset-md-top-0">
                         <div class="cell-sm-8 cell-sm-preffix-2 cell-md-12 cell-md-preffix-0">
                             <div class="box text-center">
-                                <div class="section-xs-size section-bottom-10"><img src="images/sidebar-01.jpg" width="193" height="193" alt="" class="img-circle img-responsive offset-top-5">
-                                    <h5>Startup by Daryl & Ray<br>Chief Guys and Founders</h5>
-                                    <p>Our journey for an ecologically friendly yet energetic and powerful bicycle started out in Antarctica.</p>
-                                </div>
+                                {{--<div class="section-xs-size section-bottom-10"><img src="images/sidebar-01.jpg" width="193" height="193" alt="" class="img-circle img-responsive offset-top-5">--}}
+                                    {{--<h5>Startup by Daryl & Ray<br>Chief Guys and Founders</h5>--}}
+                                    {{--<p>Our journey for an ecologically friendly yet energetic and powerful bicycle started out in Antarctica.</p>--}}
+                                {{--</div>--}}
                                 <hr class="divider">
-                                <div class="section-xs-size"><a href="#" class="btn btn-primary">Read more</a></div>
+                                {{--<div class="section-xs-size"><a href="#" class="btn btn-primary">Read more</a></div>--}}
                             </div>
                         </div>
                         <div class="cell-sm-8 cell-sm-preffix-2 cell-md-12 cell-md-preffix-0 offset-top-30">

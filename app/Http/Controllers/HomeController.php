@@ -36,15 +36,24 @@ class HomeController extends Controller
         $builder = DB::table('products')
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftjoin('stores','stores.id','=','products.store_id')
-            ->leftJoin('users','users.id','=','stores.user_id');
+            ->leftJoin('users','users.id','=','stores.user_id')
+            ->leftJoin('product_categories','product_categories.user_id','=','users.id');
 
 
          $products = $builder
             ->where('ad',true)
             ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id,stores.slug as store_slug,users.id as user_id')
-            ->orderBy('created_at','desc')
+            ->orderBy('products.like_counts','desc')
             ->paginate(12);
 //        $products->setPath('https://' . $request->getHttpHost(). $request->path());
+
+        $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
+            ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
+            ->orderBy('products.like_counts')
+            ->selectRaw('product_categories.name')
+            ->take(4)
+            ->get();
+
 
 
          $nextpageurl = $products->nextPageUrl();
@@ -54,7 +63,7 @@ class HomeController extends Controller
         }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index',compact('products','nextpageurl'));
+        return view('market.index',compact('products','categories','nextpageurl'));
     }
 
     public function getProfile(){

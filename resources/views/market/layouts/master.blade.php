@@ -284,6 +284,11 @@
 
     $(document).ready(function() {
 
+        $('.typeahead').on('change',function(){
+            $('#search-form').submit();
+
+        })
+
         $('.like').on('click',function(event){
             event.preventDefault();
             var product_id = $(this).data('id')

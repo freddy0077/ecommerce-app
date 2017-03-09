@@ -60,8 +60,12 @@
             </div>
             <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
                 <div class="row">
-                    <input class="flipkart-navbar-input col-xs-11 typeahead tt-query" type="text"
-                           placeholder="Search for Products, Brands and more" name="" autocomplete="off" spellcheck="false" style="color: black">
+                    <form id="search-form">
+
+                        <input class="flipkart-navbar-input col-xs-11 typeahead tt-query" type="text" name="search"
+                               placeholder="Search for Products, Brands and more" name="" autocomplete="off" spellcheck="false" style="color: black">
+                    </form>
+
                    {{--<button class="btn btn-success">Search</button>--}}
                     {{--<button class="flipkart-navbar-button col-xs-1">--}}
                         {{--<svg width="15px" height="15px">--}}
