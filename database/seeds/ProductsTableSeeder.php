@@ -67,6 +67,7 @@ class ProductsTableSeeder extends Seeder
 
     public function run()
     {
+        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
 
 //        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 //        \Illuminate\Support\Facades\DB::statement('truncate table users');
@@ -80,7 +81,7 @@ class ProductsTableSeeder extends Seeder
 //        \App\Product::truncate();
 //        \App\ProductCategory::truncate();
 //        \App\SubCategory::truncate();
-        \App\User::truncate();
+//        \App\User::truncate();
 //        \App\OrderItem::truncate();
 //        \App\Order::truncate();
 //        \App\TopSellingProduct::truncate();

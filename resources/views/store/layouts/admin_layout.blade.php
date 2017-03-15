@@ -178,8 +178,13 @@
 
                     </li>
 
+                    @if(Auth::check() && Auth::user()->has_store)
+
                     <li class="menu-dropdown classic-menu-dropdown ">
+
+
                         <?php
+
                         $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
                         $user_id = Auth::user()->id;
 
@@ -189,6 +194,8 @@
                         </a>
 
                     </li>
+
+                    @endif
                     {{--<li class="menu-dropdown classic-menu-dropdown">--}}
                         {{--<a href="#">--}}
                             {{--<i class="icon-briefcase"></i> Pages--}}
