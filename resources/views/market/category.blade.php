@@ -54,7 +54,7 @@
 
     {{--{{$products->product_category_name}}--}}
 
-    <h1 class="h2"> {{$category->name}}</h1>
+    <h1 class="h2"> </h1>
     <main class="page-content offset-top-30">
         <div id="fb-root"></div>
 
