@@ -76,116 +76,116 @@ class ProductsTableSeeder extends Seeder
 //        \DB::statement('truncate table cities');
 //        \Illuminate\Support\Facades\Schema::disableForeignKeyConstraints();
 //        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE posts");
-//        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE users CASCADE");
-        \App\Product::truncate();
-        \App\ProductCategory::truncate();
-        \App\SubCategory::truncate();
-        \App\User::truncate();
-        \App\OrderItem::truncate();
-        \App\Order::truncate();
+////        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE users CASCADE");
+//        \App\Product::truncate();
+//        \App\ProductCategory::truncate();
+//        \App\SubCategory::truncate();
+//        \App\User::truncate();
+//        \App\OrderItem::truncate();
+//        \App\Order::truncate();
         \App\TopSellingProduct::truncate();
 
 
-        $this->saveUsers();
-
-        $store_id = \Webpatser\Uuid\Uuid::generate();
-        $store_id2 = \Webpatser\Uuid\Uuid::generate();
-        \App\Store::create([
-            'id' => $store_id,
-            'name' => 'Evergreen Store',
-            'email' => 'evergreen@gmail.com',
-            'phone_number' => '0240120250',
-            'user_id'      => 1,
-            'domain' => 'evergreen-store@shopaholicks.com'
-        ]);
-
-
-        \App\Store::create([
-            'id' => $store_id2,
-            'name' => 'Second Store',
-            'email' => 'second@gmail.com',
-            'phone_number' => '0240120250',
-            'user_id'      => 2,
-            'domain' => 'second-store@shopaholicks.com'
-        ]);
-
-
-        foreach($this->mainCategories as $key=>$category){
-
-                $id = Webpatser\Uuid\Uuid::generate();
-                $categoryObject = new \App\ProductCategory();
-                $categoryObject->id = $id;
-                $categoryObject->user_id = 1;
-                $categoryObject->name = $category;
-                $categoryObject->image = 'carousel-07.jpg';
-                $categoryObject->save();
-                echo  " $category product category saved \n";
-
-
-
-                switch($category){
-                    case "Clothing":
-                        $men_id = \Webpatser\Uuid\Uuid::generate();
-                        $this->saveSubCategory($men_id,'Men',$id);
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
-//                        }
-
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"new men$i",10*$i,$store_id2,$men_id);
-//                        }
-
-                        $women_id = \Webpatser\Uuid\Uuid::generate();
-
-                        $this->saveSubCategory($women_id,'Women',$id);
-
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
-//                        }
-
-                        $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
-                        $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
-
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
-//                        }
-
-                        break;
-
-                    case "Beauty & Accessories":
-                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Men',$id);
-                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Women',$id);
-
-                        $kids_id = \Webpatser\Uuid\Uuid::generate();
-                        $this->saveSubCategory($kids_id,'Kids',$id);
-
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids$i",7*$i,$store_id,$kids_id);
-//                        }
-                        break;
-
-                    case "Home & Appliances":
-                        $appliance_id = \Webpatser\Uuid\Uuid::generate();
-                        $this->saveSubCategory($appliance_id,'Appliances',$id);
-
-//                        for($i = 0; $i < 10; $i++){
-//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"appliance$i",7*$i,$store_id,$appliance_id);
-//                        }
-
-                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
-                        break;
-
-                    case "Electronics":
-                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Computers',$id);
-                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Phones',$id);
-                        break;
-
-                    case "Arts & Photography":
-//                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Appliances',$id);
-//                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
-                        break;
-                }
-            }
+//        $this->saveUsers();
+//
+//        $store_id = \Webpatser\Uuid\Uuid::generate();
+//        $store_id2 = \Webpatser\Uuid\Uuid::generate();
+//        \App\Store::create([
+//            'id' => $store_id,
+//            'name' => 'Evergreen Store',
+//            'email' => 'evergreen@gmail.com',
+//            'phone_number' => '0240120250',
+//            'user_id'      => 1,
+//            'domain' => 'evergreen-store@shopaholicks.com'
+//        ]);
+//
+//
+//        \App\Store::create([
+//            'id' => $store_id2,
+//            'name' => 'Second Store',
+//            'email' => 'second@gmail.com',
+//            'phone_number' => '0240120250',
+//            'user_id'      => 2,
+//            'domain' => 'second-store@shopaholicks.com'
+//        ]);
+//
+//
+//        foreach($this->mainCategories as $key=>$category){
+//
+//                $id = Webpatser\Uuid\Uuid::generate();
+//                $categoryObject = new \App\ProductCategory();
+//                $categoryObject->id = $id;
+//                $categoryObject->user_id = 1;
+//                $categoryObject->name = $category;
+//                $categoryObject->image = 'carousel-07.jpg';
+//                $categoryObject->save();
+//                echo  " $category product category saved \n";
+//
+//
+//
+//                switch($category){
+//                    case "Clothing":
+//                        $men_id = \Webpatser\Uuid\Uuid::generate();
+//                        $this->saveSubCategory($men_id,'Men',$id);
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
+////                        }
+//
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"new men$i",10*$i,$store_id2,$men_id);
+////                        }
+//
+//                        $women_id = \Webpatser\Uuid\Uuid::generate();
+//
+//                        $this->saveSubCategory($women_id,'Women',$id);
+//
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
+////                        }
+//
+//                        $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
+//                        $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
+//
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
+////                        }
+//
+//                        break;
+//
+//                    case "Beauty & Accessories":
+//                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Men',$id);
+//                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Women',$id);
+//
+//                        $kids_id = \Webpatser\Uuid\Uuid::generate();
+//                        $this->saveSubCategory($kids_id,'Kids',$id);
+//
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids$i",7*$i,$store_id,$kids_id);
+////                        }
+//                        break;
+//
+//                    case "Home & Appliances":
+//                        $appliance_id = \Webpatser\Uuid\Uuid::generate();
+//                        $this->saveSubCategory($appliance_id,'Appliances',$id);
+//
+////                        for($i = 0; $i < 10; $i++){
+////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"appliance$i",7*$i,$store_id,$appliance_id);
+////                        }
+//
+//                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
+//                        break;
+//
+//                    case "Electronics":
+//                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Computers',$id);
+//                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Phones',$id);
+//                        break;
+//
+//                    case "Arts & Photography":
+////                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Appliances',$id);
+////                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
+//                        break;
+//                }
+//            }
 
         }
 }
