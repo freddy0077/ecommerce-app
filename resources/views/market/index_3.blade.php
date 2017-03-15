@@ -54,7 +54,7 @@
     <div class="ip-header">
         <h1 class="ip-logo">
             <a href="#">
-                <img src="{{url('frontend_2/image/logo.png')}}" alt="SW Shoppy">
+                <img src="{{url('frontend_2/image/logo.png')}}" alt="Shopaholicks">
             </a>
         </h1>
         <div class="ip-loader">
@@ -285,7 +285,7 @@
                                         <div class="megamenu-pattern">
                                             <div class="container">
                                                 <ul class="megamenu " data-transition="slide" data-animationtime="250">
-                                                    <li class="home hover">
+                                                    <li class="home">
                                                         <a href="index.html">Home <b class="caret"></b></a>
                                                         <div class="sub-menu" style="width:100%;" >
                                                             <div class="content" >
@@ -395,6 +395,14 @@
                                                         </div>
                                                     </li>
 
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="{{url('/category')}}" class="clearfix">
+                                                            <strong>ALL SHOPS</strong>
+                                                            <span class="label"></span>
+                                                        </a>
+                                                    </li>
+
                                                     @foreach(\App\ProductCategory::all('id','name') as $category)
 
                                                         <li class="">
@@ -408,6 +416,14 @@
 
                                                     @endforeach
 
+
+                                                    <li class="">
+                                                        <p class="close-menu"></p>
+                                                        <a href="{{url('/category')}}" class="clearfix">
+                                                            <strong>BLOG</strong>
+                                                            <span class="label"></span>
+                                                        </a>
+                                                    </li>
                                                     {{--<li class="">--}}
                                                         {{--<p class="close-menu"></p>--}}
                                                         {{--<a href="" class="clearfix">--}}
