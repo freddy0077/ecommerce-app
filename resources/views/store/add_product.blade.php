@@ -1,23 +1,16 @@
 @extends('store.layouts.admin_layout')
 
 @section('scripts')
+    <link href="{{asset('backend/assets/global/plugins/jcrop/css/jquery.Jcrop.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/pages/css/image-crop.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <script src="{{asset('backend/assets/global/plugins/jcrop/js/jquery.color.js')}}" type="text/javascript"></script>
+    <script src="{{asset('backend/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js')}}" type="text/javascript"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{asset('backend/assets/pages/scripts/form-image-crop.min.js')}}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
     <script>
 
-//        $(document).ready(function (e) {
-
-//            $('#product-form').submit(function(e){
-//                e.preventDefault();
-//                $.post($(this).attr('action'),$(this).serialize(),function(){
-//                    alert('hello world');
-//                }).fail(function(data){
-//                    for (var field in data.responseJSON) {
-//                        var el = $(':input[name="' + field + '"]');
-//                        el.parent('.form-group').addClass('has-error');
-//                        el.next('.help-block').text(data.responseJSON[field][0]);
-//                        el.next('.validation_error').text(data.responseJSON[field][0]);
-//                    }
-//                })
-//            })
 
             $("#product-form").on('submit',(function(e) {
                 e.preventDefault();
@@ -35,33 +28,22 @@
                         el.parent('.form-group').addClass('has-error');
                         el.next('.help-block').text(data.responseJSON[field][0]);
                         el.next('.validation_error').text(data.responseJSON[field][0]);
+                        swal("Error!",data.responseJSON[field][0] , "error");
+
                     }
+                }).success(function() {
+                    swal("Good job!", 'you have added a product !', "success");
                 });
             }));
 
         $('#category').on('change',function(){
             var category_value = $(this).val();
-//            $.load('/sub-categories-partial/'+);
-//            $.get("/store/sub-categories-partial/"+category_value ,function(data){
-//                $('#sub_category').html(data)
-//            })
+//
             $( "#sub_category" ).load( "/store/sub-categories-partial/"+category_value );
 
         })
 
-//        $('#product-form').submit(function(e){
-//            e.preventDefault();
-//            $.post($(this).attr('action'),$(this).serialize(),function(){
-//                alert('hello world');
-//            }).fail(function(data){
-//                for (var field in data.responseJSON) {
-//                    var el = $(':input[name="' + field + '"]');
-//                    el.parent('.form-group').addClass('has-error');
-//                    el.next('.help-block').text(data.responseJSON[field][0]);
-//                    el.next('.validation_error').text(data.responseJSON[field][0]);
-//                }
-//            })
-//        })
+//
     </script>
 @endsection
 
@@ -235,52 +217,7 @@
             <!-- END CONTENT BODY -->
         </div>
         <!-- END CONTENT -->
-        <!-- BEGIN QUICK SIDEBAR -->
-        <a href="javascript:;" class="page-quick-sidebar-toggler">
-            <i class="icon-login"></i>
-        </a>
-        <div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
-            <div class="page-quick-sidebar">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> Users
-                            <span class="badge badge-danger">2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab"> Alerts
-                            <span class="badge badge-success">7</span>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> More
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-bell"></i> Alerts </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-info"></i> Notifications </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-speech"></i> Activities </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-settings"></i> Settings </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
 
-            </div>
-        </div>
-        <!-- END QUICK SIDEBAR -->
     </div>
 
 

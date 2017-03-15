@@ -17,118 +17,7 @@
                     </h1>
                 </div>
                 <!-- END PAGE TITLE -->
-                <!-- BEGIN PAGE TOOLBAR -->
-                <div class="page-toolbar">
-                    <!-- BEGIN THEME PANEL -->
-                    <div class="btn-group btn-theme-panel">
-                        <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-settings"></i>
-                        </a>
-                        <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <h3>THEME COLORS</h3>
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <ul class="theme-colors">
-                                                <li class="theme-color theme-color-default" data-theme="default">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Default</span>
-                                                </li>
-                                                <li class="theme-color theme-color-blue-hoki" data-theme="blue-hoki">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Blue Hoki</span>
-                                                </li>
-                                                <li class="theme-color theme-color-blue-steel" data-theme="blue-steel">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Blue Steel</span>
-                                                </li>
-                                                <li class="theme-color theme-color-yellow-orange" data-theme="yellow-orange">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Orange</span>
-                                                </li>
-                                                <li class="theme-color theme-color-yellow-crusta" data-theme="yellow-crusta">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Yellow Crusta</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <ul class="theme-colors">
-                                                <li class="theme-color theme-color-green-haze" data-theme="green-haze">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Green Haze</span>
-                                                </li>
-                                                <li class="theme-color theme-color-red-sunglo" data-theme="red-sunglo">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Red Sunglo</span>
-                                                </li>
-                                                <li class="theme-color theme-color-red-intense" data-theme="red-intense">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Red Intense</span>
-                                                </li>
-                                                <li class="theme-color theme-color-purple-plum" data-theme="purple-plum">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Purple Plum</span>
-                                                </li>
-                                                <li class="theme-color theme-color-purple-studio" data-theme="purple-studio">
-                                                    <span class="theme-color-view"></span>
-                                                    <span class="theme-color-name">Purple Studio</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 seperator">
-                                    <h3>LAYOUT</h3>
-                                    <ul class="theme-settings">
-                                        <li> Theme Style
-                                            <select class="theme-setting theme-setting-style form-control input-sm input-small input-inline tooltips" data-original-title="Change theme style" data-container="body" data-placement="left">
-                                                <option value="boxed" selected="selected">Square corners</option>
-                                                <option value="rounded">Rounded corners</option>
-                                            </select>
-                                        </li>
-                                        <li> Layout
-                                            <select class="theme-setting theme-setting-layout form-control input-sm input-small input-inline tooltips" data-original-title="Change layout type" data-container="body" data-placement="left">
-                                                <option value="boxed" selected="selected">Boxed</option>
-                                                <option value="fluid">Fluid</option>
-                                            </select>
-                                        </li>
-                                        <li> Top Menu Style
-                                            <select class="theme-setting theme-setting-top-menu-style form-control input-sm input-small input-inline tooltips" data-original-title="Change top menu dropdowns style" data-container="body"
-                                                    data-placement="left">
-                                                <option value="dark" selected="selected">Dark</option>
-                                                <option value="light">Light</option>
-                                            </select>
-                                        </li>
-                                        <li> Top Menu Mode
-                                            <select class="theme-setting theme-setting-top-menu-mode form-control input-sm input-small input-inline tooltips" data-original-title="Enable fixed(sticky) top menu" data-container="body" data-placement="left">
-                                                <option value="fixed">Fixed</option>
-                                                <option value="not-fixed" selected="selected">Not Fixed</option>
-                                            </select>
-                                        </li>
-                                        <li> Mega Menu Style
-                                            <select class="theme-setting theme-setting-mega-menu-style form-control input-sm input-small input-inline tooltips" data-original-title="Change mega menu dropdowns style" data-container="body"
-                                                    data-placement="left">
-                                                <option value="dark" selected="selected">Dark</option>
-                                                <option value="light">Light</option>
-                                            </select>
-                                        </li>
-                                        <li> Mega Menu Mode
-                                            <select class="theme-setting theme-setting-mega-menu-mode form-control input-sm input-small input-inline tooltips" data-original-title="Enable fixed(sticky) mega menu" data-container="body"
-                                                    data-placement="left">
-                                                <option value="fixed" selected="selected">Fixed</option>
-                                                <option value="not-fixed">Not Fixed</option>
-                                            </select>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END THEME PANEL -->
-                </div>
-                <!-- END PAGE TOOLBAR -->
+
             </div>
         </div>
         <!-- END PAGE HEAD-->
@@ -137,16 +26,10 @@
             <div class="container">
                 <!-- BEGIN PAGE BREADCRUMBS -->
                 <ul class="page-breadcrumb breadcrumb">
+
+
                     <li>
-                        <a href="index-2.html">Home</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <a href="#">Pages</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                    <li>
-                        <span>eCommerce</span>
+                        <span>Dashboard</span>
                     </li>
                 </ul>
                 <!-- END PAGE BREADCRUMBS -->
@@ -159,10 +42,10 @@
                                     <i class="fa fa-briefcase fa-icon-medium"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number"> $168,492.54 </div>
+                                    <div class="number">GHS {{\App\Order::whereUserId(Auth::user()->id)->sum('amount')}} </div>
                                     <div class="desc"> Lifetime Sales </div>
                                 </div>
-                                <a class="more" href="javascript:;"> View more
+                                <a class="more" href="{{url('store/orders')}}"> View more
                                     <i class="m-icon-swapright m-icon-white"></i>
                                 </a>
                             </div>
@@ -173,10 +56,10 @@
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number"> 1,127,390 </div>
+                                    <div class="number"> {{\App\Order::count()}} </div>
                                     <div class="desc"> Total Orders </div>
                                 </div>
-                                <a class="more" href="javascript:;"> View more
+                                <a class="more" href="{{url('store/orders')}}"> View more
                                     <i class="m-icon-swapright m-icon-white"></i>
                                 </a>
                             </div>
@@ -187,7 +70,7 @@
                                     <i class="fa fa-group fa-icon-medium"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number"> $670.54 </div>
+                                    <div class="number"> {{(int)\App\Order::avg('amount')}} </div>
                                     <div class="desc"> Average Orders </div>
                                 </div>
                                 <a class="more" href="javascript:;"> View more
@@ -206,44 +89,44 @@
                                         <span class="caption-subject font-blue bold uppercase">Overview</span>
                                         <span class="caption-helper">report overview...</span>
                                     </div>
-                                    <div class="actions">
-                                        <div class="btn-group">
-                                            <a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                <i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;"> All Project </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> AirAsia </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Cruise </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> HSBC </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> Pending
-                                                        <span class="badge badge-danger"> 4 </span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Completed
-                                                        <span class="badge badge-success"> 12 </span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Overdue
-                                                        <span class="badge badge-warning"> 9 </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    {{--<div class="actions">--}}
+                                        {{--<div class="btn-group">--}}
+                                            {{--<a class="btn green btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
+                                                {{--<i class="fa fa-angle-down"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<ul class="dropdown-menu pull-right">--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> All Project </a>--}}
+                                                {{--</li>--}}
+                                                {{--<li class="divider"> </li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> AirAsia </a>--}}
+                                                {{--</li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> Cruise </a>--}}
+                                                {{--</li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> HSBC </a>--}}
+                                                {{--</li>--}}
+                                                {{--<li class="divider"> </li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> Pending--}}
+                                                        {{--<span class="badge badge-danger"> 4 </span>--}}
+                                                    {{--</a>--}}
+                                                {{--</li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> Completed--}}
+                                                        {{--<span class="badge badge-success"> 12 </span>--}}
+                                                    {{--</a>--}}
+                                                {{--</li>--}}
+                                                {{--<li>--}}
+                                                    {{--<a href="javascript:;"> Overdue--}}
+                                                        {{--<span class="badge badge-warning"> 9 </span>--}}
+                                                    {{--</a>--}}
+                                                {{--</li>--}}
+                                            {{--</ul>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tabbable-line">
@@ -257,30 +140,30 @@
                                             <li>
                                                 <a href="#overview_3" data-toggle="tab"> New Customers </a>
                                             </li>
-                                            <li class="dropdown">
-                                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> Orders
-                                                    <i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <ul class="dropdown-menu pull-right">
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-bell"></i> Latest 10 Orders </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-info"></i> Pending Orders </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-speech"></i> Completed Orders </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <a href="#overview_4" data-toggle="tab">
-                                                            <i class="icon-settings"></i> Rejected Orders </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                            {{--<li class="dropdown">--}}
+                                                {{--<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> Orders--}}
+                                                    {{--<i class="fa fa-angle-down"></i>--}}
+                                                {{--</a>--}}
+                                                {{--<ul class="dropdown-menu pull-right">--}}
+                                                    {{--<li>--}}
+                                                        {{--<a href="#overview_4" data-toggle="tab">--}}
+                                                            {{--<i class="icon-bell"></i> Latest 10 Orders </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                        {{--<a href="#overview_4" data-toggle="tab">--}}
+                                                            {{--<i class="icon-info"></i> Pending Orders </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li>--}}
+                                                        {{--<a href="#overview_4" data-toggle="tab">--}}
+                                                            {{--<i class="icon-speech"></i> Completed Orders </a>--}}
+                                                    {{--</li>--}}
+                                                    {{--<li class="divider"></li>--}}
+                                                    {{--<li>--}}
+                                                        {{--<a href="#overview_4" data-toggle="tab">--}}
+                                                            {{--<i class="icon-settings"></i> Rejected Orders </a>--}}
+                                                    {{--</li>--}}
+                                                {{--</ul>--}}
+                                            {{--</li>--}}
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="overview_1">
@@ -295,72 +178,14 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                            </td>
-                                                            <td> $625.50 </td>
-                                                            <td> 809 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                            </td>
-                                                            <td> $915.50 </td>
-                                                            <td> 6709 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                            </td>
-                                                            <td> $878.50 </td>
-                                                            <td> 784 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Samsung Galaxy Note 4 </a>
-                                                            </td>
-                                                            <td> $925.50 </td>
-                                                            <td> 21245 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                            </td>
-                                                            <td> $25.50 </td>
-                                                            <td> 1245 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Samsung Galaxy Note 3 </a>
-                                                            </td>
-                                                            <td> $925.50 </td>
-                                                            <td> 21245 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
+                                                        @foreach($products as $product)
+                                                            <tr>
+                                                                <td>{{$product->name}}</td>
+                                                                <td>GHS {{$product->price}}</td>
+                                                                <td>{{ $product->count}}</td>
+                                                            </tr>
+                                                        @endforeach
+
                                                         </tbody>
                                                     </table>
                                                 </div>

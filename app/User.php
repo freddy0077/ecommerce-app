@@ -38,4 +38,18 @@ class User extends Authenticatable
     {
         return $this->slack_webhook_url;
     }
+
+    public function order(){
+        return $this->hasOne('App\Order');
+    }
+
+    public function products(){
+        return $this->hasMany('App\Product');
+    }
+
+    public function store(){
+        $this->hasOne('App\Store');
+    }
+
+
 }

@@ -10,14 +10,14 @@
                 {{--<li class="upper-links dropdown"><a class="links" href="#"><h6>{{$subcategory->name}}</h6></a>--}}
                     <ul class="dropdown-menu">
                     @foreach(\App\SubCategory::whereProductCategoryId($category->id)->get() as $subcategory)
-                        <li class="profile-li"><a class="profile-links" href="{{url('sub-category',$subcategory->slug)}}">{{$subcategory->name}}</a></li>
+                        <li class="profile-li"><a class="profile-links" href="{{url('sub-category',$subcategory->id)}}">{{$subcategory->name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
                 @endforeach
 
 
-                <li class="upper-links"><a class="links" href="/"><h6>Trending</h6></a></li>
+                {{--<li class="upper-links"><a class="links" href="/"><h6>Trending</h6></a></li>--}}
 
                 <?php
 
@@ -36,7 +36,7 @@
                     </li>
 
                 @elseif(Auth::check() && Auth::user()->has_store == false)
-                    <li class="upper-links"><a class="links" href='{{url("/store/store-settings")}}'><h6>Create Store</h6></a></li>
+                    <li class="upper-links"><a class="links" href='{{url("/store/store-settings")}}'><h6>Open Store</h6></a></li>
                 @elseif(Auth::check() && Auth::user()->has_store == true)
                     <li class="upper-links"><a class="links" href='{{url("/store/store-settings")}}'><h6>Edit Store</h6></a></li>
                 @endif
@@ -118,16 +118,16 @@
         </div>
     </div>
 </div>
-{{--<div id="mySidenav" class="sidenav">--}}
-    {{--<div class="container" style="background-color: #2874f0; padding-top: 10px;">--}}
-        {{--<span class="sidenav-heading">Home</span>--}}
-        {{--<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>--}}
-    {{--</div>--}}
-    {{--<a href="">Link</a>--}}
-    {{--<a href="">Link</a>--}}
-    {{--<a href="">Link</a>--}}
-    {{--<a href="">Link</a>--}}
-{{--</div>--}}
+<div id="mySidenav" class="sidenav">
+    <div class="container" style="background-color: #2874f0; padding-top: 10px;">
+        <span class="sidenav-heading">Home</span>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    </div>
+    <a href="">Link</a>
+    <a href="">Link</a>
+    <a href="">Link</a>
+    <a href="">Link</a>
+</div>
 
 
 

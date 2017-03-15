@@ -11,14 +11,34 @@
             if(columns == ''){
                 swal("Error!", 'you need to provide a value !', "error")
 
+
+            }else if( columns > 50){
+
+                swal({
+                            title: "Sorry",
+                            text: "You have exceeded your products threshold",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Upgrade Now!",
+                            closeOnConfirm: false
+                        },
+                        function(){
+
+                            swal("Great!", "You have decided to upgrade. redirecting...", "success");
+
+                            setTimeout(function(){
+                                location.href="marketplace-signup"
+                            },2000)
+
+
+                        });
+
             }else {
 //                alert(columns);
                 $( "#product-form" ).load( "/store/quick-add-product-partial/"+columns);
-
             }
 
-
-//            $( "#column-form" ).load( "/store/quick-add-product-partial/"+columns);
 
         });
 //        $(document).off('click').on('click', '#product-form',function() {

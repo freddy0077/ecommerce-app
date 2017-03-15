@@ -20,9 +20,9 @@ class Store extends Model
         $this->belongsTo('App\ProductCategory');
     }
 
-//    public function storeProducts(){
-//        $this->hasMany('App\Product');
-//    }
+    public function user(){
+        $this->belongsTo('App\User');
+    }
 
     public function sluggable()
     {

@@ -6,6 +6,7 @@ use App\Fancy;
 use App\Like;
 use App\Product;
 use App\ProductCategory;
+use App\ProductGallery;
 use App\Store;
 use App\SubCategory;
 use App\User;
@@ -33,25 +34,22 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $builder = DB::table('products')
-            ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
-            ->leftjoin('stores','stores.id','=','products.store_id')
-            ->leftJoin('users','users.id','=','stores.user_id')
-            ->leftJoin('product_categories','product_categories.user_id','=','users.id');
 
+//       $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
+//           ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
+//           ->leftJoin('users','users.id','=','product_categories.user_id')
+//           ->leftJoin('stores','stores.user_id','=','users.id')
+//           ->selectRaw('products.*,stores.id as store_id,users.id as user_id')
+//           ->paginate();
+        $products = Product::paginate();
 
-         $products = $builder
-            ->where('ad',true)
-            ->selectRaw('products.*,sub_categories.name as category_name,stores.name as store_name,stores.id as store_id,stores.slug as store_slug,users.id as user_id')
-            ->orderBy('products.like_counts','desc')
-            ->paginate(12);
-//        $products->setPath('https://' . $request->getHttpHost(). $request->path());
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
-            ->orderBy('products.like_counts')
+            ->distinct()
+//            ->orderBy('products.like_counts')
             ->selectRaw('product_categories.name')
-            ->take(4)
+            ->take(10)
             ->get();
 
 
@@ -63,7 +61,7 @@ class HomeController extends Controller
         }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index',compact('products','categories','nextpageurl'));
+        return view('market.index_3',compact('products','categories','nextpageurl'));
     }
 
     public function getProfile(){
@@ -74,7 +72,7 @@ class HomeController extends Controller
         return view('feeds');
     }
     // category page view action
-    public function getCategory($category_slug){
+    public function getCategory(Request $request,$category_slug){
 
         $builder = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
@@ -87,6 +85,10 @@ class HomeController extends Controller
               product_categories.name as product_category_name,product_categories.slug as category_slug,stores.name as store_name')
             ->paginate(36);
 
+        if($request->ajax()){
+            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
+        }
+
 
 //          $f = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
 
@@ -96,23 +98,24 @@ class HomeController extends Controller
         return view('market.category',compact('products','category'));
     }
 
-    public function getSubCategory($slug){
+    public function getSubCategory(Request $request,$id){
 
         $builder = Product::leftJoin('sub_categories','products.sub_category_id','=','sub_categories.id')
-            ->where('sub_categories.slug','=',$slug);
+            ->where('sub_categories.id','=',$id);
 
-        $ad_products = $builder->where('products.ad',true)
+        $products = $builder->where('products.ad',true)
                        ->selectRaw('products.*,sub_categories.name as category_name')
                        ->paginate(8);
 
-        $products = $builder
-            ->selectRaw('products.*,sub_categories.name as category_name')
-            ->get();
+        $category = SubCategory::where('id',$id)->first();
 
-        $category = SubCategory::where('slug',$slug)->first();
+        $nextpageurl = $products->nextPageUrl();
 
+        if($request->ajax()){
+            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
+        }
 
-        return view('market.sub_categories',compact('products','ad_products','category'));
+        return view('market.sub_categories',compact('products','id','category','nextpageurl'));
 
     }
 
@@ -160,5 +163,11 @@ class HomeController extends Controller
 
 
         return 'worked';
+    }
+
+    public function getQuickView($product_id){
+        $gallery = ProductGallery::whereProductId($product_id)->orderBy('created_at','desc')->take(3)->get();
+        $product = Product::find($product_id);
+        return view('market.partials.quick_view',compact('product','gallery'));
     }
 }

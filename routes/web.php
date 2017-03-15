@@ -19,6 +19,10 @@ Route::get('/try',function(){
     return \Webpatser\Uuid\Uuid::generate();
 });
 
+Route::get('/pusher',function(){
+    \Vinkla\Pusher\Facades\Pusher::trigger('feed-event-channel', 'my-event', ['message' => 'hello ghana']);
+});
+
 Auth::routes();
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 
@@ -29,6 +33,8 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::any('/', 'HomeController@index');
 
 Route::get('/search-query', 'HomeController@getSearchQuery');
+
+Route::get('/quick-view-product/{id}','HomeController@getQuickView');
 
 
 
@@ -43,6 +49,8 @@ Route::get('/sub-category/{name}', 'HomeController@getSubCategory');
 Route::post('/fancy-it/{product_id}','HomeController@postFancyIt');
 
 Route::post('/like-it/{product_id}','HomeController@postLikeIt');
+
+
 
 
 //Route::get('/category', 'HomeController@getCategory');
@@ -60,6 +68,11 @@ Route::group(['prefix' => 'stores'], function () {
 
     Route::get('/{slug}/{user_id}','StoreController@getStore');
 
+    Route::get('/category/{slug}/{user_id}/{category_id}','StoreController@getStoreCategory');
+
+    Route::get('/sub-category/{slug}/{user_id}/{category_id}','StoreController@getStoreSubCategory');
+
+
 });
 
 Route::group(['prefix' => 'store'], function () {
@@ -71,6 +84,13 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('/checkout','StoreController@getCheckOut');
     Route::post('/check-out','StoreController@postCheckOut');
     Route::get('/cart-view','StoreController@getCartView');
+
+    Route::get('/orders','StoreController@getOrders');
+    Route::get('/order-items/{order_id}','StoreController@getOrderItems');
+
+    Route::get('/marketplace-signup','StoreController@getMarketPlaceSignUp');
+
+    Route::get('/marketplace-packages/{package_id}','StoreController@getMarketPlacePackages');
 
 
 

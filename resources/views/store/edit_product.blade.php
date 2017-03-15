@@ -1,6 +1,20 @@
 @extends('store.layouts.admin_layout')
 
 @section('scripts')
+
+    <link href="{{asset('backend/assets/global/plugins/jcrop/css/jquery.Jcrop.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/pages/css/image-crop.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet" type="text/css" />
+
+
+    <script src="{{asset('backend/assets/global/plugins/jcrop/js/jquery.color.js')}}" type="text/javascript"></script>
+    <script src="{{asset('backend/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js')}}" type="text/javascript"></script>
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{asset('backend/assets/pages/scripts/form-image-crop.min.js')}}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{asset('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
     <script>
 
 
@@ -20,14 +34,24 @@
                     el.parent('.form-group').addClass('has-error');
                     el.next('.help-block').text(data.responseJSON[field][0]);
                     el.next('.validation_error').text(data.responseJSON[field][0]);
+                    swal("Error!",data.responseJSON[field][0] , "error");
+
                 }
-            });
+            }).success(function() {
+                swal("Good job!", 'you have successfully updated product !', "success");
+            })
         }));
 
         $('#category').on('change',function(){
             var category_value = $(this).val();
 
             $( "#sub_category" ).load( "/store/sub-categories-partial/"+category_value );
+        });
+
+        $('#upload').hide();
+
+        $('#change-image').on('click',function(){
+            $('#upload').show();
         })
 
     </script>
@@ -63,7 +87,7 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <a href="#">Store</a>
+                            <a href="{{url('store/all-products')}}">Products</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
@@ -101,7 +125,7 @@
                                                 <div class="form-group">
                                                 </div>
 
-                                                <input type="hidden" class="form-control" name="sub_category_id" id="name" value="{{$product->sub_category_id}}">
+                                                <input type="hidden" class="form-control" name="sub_category" id="name" value="{{$product->sub_category_id}}">
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Product name </label>
@@ -109,11 +133,6 @@
                                                         {{--<div class="input-group">--}}
                                                         <input type="text" class="form-control" name="name" id="name" value="{{$product->name}}">
 
-                                                        {{--<span class="input-group-btn">--}}
-                                                        {{--<a href="javascript:;" class="btn green" id="username1_checker">--}}
-                                                        {{--<i class="fa fa-check"></i> Check </a>--}}
-                                                        {{--</span>--}}
-                                                        {{--</div>--}}
                                                         <div class="help-block"> </div>
                                                     </div>
                                                 </div>
@@ -122,8 +141,7 @@
                                                     <div class="col-md-4">
                                                         <div class="input-icon right">
                                                             <i class="icon-exclamation-sign"></i>
-                                                            <textarea class="form-control" class="form-control" name="description">
-                                                            {{$product->description}}
+                                                            <textarea class="form-control" class="form-control" name="description">{{$product->description}}
                                                             </textarea>
 
                                                         </div>
@@ -142,30 +160,106 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Image</label>
                                                     <div class="col-md-4">
-                                                        <input type="file" class="form-control" name="image" id="image">
-                                                        <span class="help-block">  </span>
+                                                      <img src="/images/products/{{$product->image}}"  class="img-thumbnail"><br><br>
+                                                        <span><button type="button" id="change-image" class="btn btn-default">change</button></span>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group last password-strength">
-                                                    <label class="control-label col-md-3">Category</label>
-                                                    <div class="col-md-4">
-                                                        <select class="form-control" name="category" id="category">
-                                                            <option></option>
-                                                            @foreach($categories as $category)
-                                                                <option value="{{$category->id}}" data-id="{{$category->id}}">{{$category->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        <span class="help-block">  </span>
+                                                <div class="form-group" id="upload">
+                                                    <label class="control-label col-md-3">Image Upload</label>
+                                                    <div class="col-md-9">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                                            <div>
+                                                                    <span class="btn red btn-outline btn-file">
+                                                                        <span class="fileinput-new"> Select image </span>
+                                                                        <span class="fileinput-exists"> Change </span>
+
+                                                                        <input type="file" name="image" id="image"> </span>
+
+                                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                                {{--<a href="javascript:;" class="btn green fileinput-exists" id="crop-image"> Edit </a>--}}
+                                                                <span class="help-block">  </span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix margin-top-10">
+                                                            {{--<span class="label label-success">NOTE!</span> Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead. </div>--}}
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="modal fade" tabindex="-1" role="dialog" id="crop-image-modal">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Modal title</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{--</div>--}}
+
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-7">
+                                                                                <!-- This is the image we're attaching Jcrop to -->
+                                                                                <img  id="demo8" alt="Jcrop Example" class="img-responsive"/>
+                                                                            </div>
+                                                                            {{--<img width="500" id="demo8" alt="Jcrop Example" /> </div>--}}
+                                                                            <div class="col-sm-5">
+                                                                                <input type="hidden" id="crop_x" name="x" />
+                                                                                <input type="hidden" id="crop_y" name="y" />
+                                                                                <input type="hidden" id="crop_w" name="w" />
+                                                                                <input type="hidden" id="crop_h" name="h" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Gallery</label>
+                                                    <div class="col-md-3">
+
+                                                        <input type="file" name="gallery[]" class="form-control" />
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="file" name="gallery[]" class="form-control" />
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="file" name="gallery[]" class="form-control" />
+
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group " id="sub_category">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Gallery</label>
 
+                                                @foreach(\App\ProductGallery::whereProductId($product->id)->orderBy('created_at','desc')->take(3)->get() as $gallery)
+                                                        <div class="col-md-3">
+                                                            <img src="/images/products/{{$gallery->image}}"  class="img-thumbnail"><br><br>
+                                                            {{--<span><button type="button" id="change-image" class="btn btn-default">change</button></span>--}}
+                                                        </div>
+                                                    @endforeach
                                                 </div>
+
+                                                <input type="hidden" name="image" value="{{$product->image}}">
                                             </div>
 
-                                            <div class="form-group">
+
+                                                <div class="form-group">
                                                 <label class="control-label col-md-3">Publish</label>
                                                 <div class="col-md-4">
                                                     <input type="checkbox" class="form-control" name="publish" {{$product->publish == true ?"checked" :""}}>
@@ -253,6 +347,7 @@
         </div>
         <!-- END QUICK SIDEBAR -->
     </div>
+
 
 
 @endsection

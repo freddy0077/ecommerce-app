@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class Product extends Model
 {
@@ -23,12 +25,13 @@ class Product extends Model
         return $this->belongsTo('App\ProductCategory');
     }
 
-//    public function store(){
-//        $this->belongsTo('App\Store');
-//
-//    }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 
-
+    public static function getProductName($id){
+       return Product::find($id);
+    }
 
     public function sluggable()
     {
@@ -37,5 +40,26 @@ class Product extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public static function processImage($image,$image_name){
+//        $date_time = date('Ymdhis');
+
+//        if($request->hasFile($image_name)){
+//            $image = $request->file($image_name);
+//            $input['imagename'] = $product_id.$date_time.'.'.$image->getClientOriginalExtension();
+
+            $destinationPath = public_path('images/products');
+            $img = Image::make($image->getRealPath());
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+//            })->save($destinationPath.'/'.$input['imagename']);
+            })->save($destinationPath.'/'.$image_name);
+
+            $destinationPath = public_path('/images');
+//            $image->move($destinationPath, $input['imagename']);
+            $image->move($destinationPath, $image_name);
+
+//        }
     }
 }

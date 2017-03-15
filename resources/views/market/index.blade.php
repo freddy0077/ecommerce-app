@@ -154,13 +154,14 @@
                                             </a>
                                             <ul class="post-categories list-inline-0">
                                                 <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
+
                                             </ul>
                                         </div>
                                         <div class="post-content-wrap" style="padding-bottom: 10px;">
                                             <div class="row">
                                                 <div class="col-sm-6 price-tag" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
                                                 <div class="col-sm-6" style="margin-top:-15px;">
-                                                    <a href="#"><i class="fa fa-thumbs-up like" data-id ="{{$product->id}}" aria-hidden="true"></i></a>
+                                                    <a href="#"><i class="fa fa-thumbs-up  like" data-id ="{{$product->id}}" aria-hidden="true"></i></a>
                                                     {{--<a href="">&#x263a;</a>--}}
                                                     <span class="counts-{{$product->id}}">({{$product->like_counts}})</span>
                                                     <a href="#"><img  src="{{secure_asset('images/fancy1.png')}}"  onclick="fancy('{{$product->id}}')" class="img-responsive" style="width:25px" height="20px" /></a>
@@ -224,32 +225,6 @@
                                 </div>
 
                             @endforeach
-
-                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
-                                {{--<div class="thumbnail">--}}
-                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
-                                    {{--<div class="caption">--}}
-                                        {{--<h6 class="text-center">Category</h6>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
-                                {{--<div class="thumbnail">--}}
-                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
-                                    {{--<div class="caption">--}}
-                                        {{--<h6 class="text-center">Category</h6>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-18 col-sm-6 col-md-3">--}}
-                                {{--<div class="thumbnail">--}}
-                                    {{--<img src="http://placehold.it/500x250/EEE">--}}
-                                    {{--<div class="caption">--}}
-                                        {{--<h6 class="text-center">Category</h6>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-
                         </div><!--/row-->
                     {{--</div><!--/container -->--}}
                 </div>

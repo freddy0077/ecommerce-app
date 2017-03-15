@@ -37,28 +37,6 @@
 
                $('#loading').hide();
 
-               {{--var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}--}}
-
-{{--            alert('{{(int)$products->currentpage()+1}}')--}}
-
-            {{--var page = '{{(int)$products->currentpage()}}';--}}
-
-               {{--var url = "{{url('/')}}/"+'?page=';--}}
-
-
-//               $('#load-more').on('click',function(){
-//                   page++
-//
-//                   $.ajax({
-//                       url: url+page,
-//                       dataType: "text",
-//                       success: function(data) {
-////                    $(".demo-card").html(data);
-//                           $('#loader').append(data);
-//                       }
-//                   });
-//
-//               })
            })
 
        </script>
@@ -69,7 +47,7 @@
     <div class="container">
         <div style="text-align: left;">
 
-            {!! Breadcrumbs::render('category', $category) !!}
+            {{--{!! Breadcrumbs::render('category', $category) !!}--}}
 
         </div>
     </div>

@@ -126,6 +126,7 @@
                                         <table class="table table-bordered">
 
                                             <tr>
+                                                <th>No.</th>
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Description</th>
@@ -133,9 +134,11 @@
                                                 <th>Action</th>
                                             </tr>
 
+                                            <?php $i = $products->firstItem() ?>
                                             @foreach($products as $product)
 
                                             <tr>
+                                                <td>{{$i++}}</td>
                                                 <td>{{$product->name}}</td>
                                                 <td>{{$product->price}}</td>
                                                 <td>{{$product->description}}</td>

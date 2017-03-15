@@ -30,7 +30,10 @@
                     el.next('.validation_error').text(data.responseJSON[field][0]);
                 }
             }).success(function(){
-                swal("Good job!", 'you have successfully saved settings !', "success")
+                swal("Good job!", 'you have successfully saved settings reloading page ... !', "success");
+                setTimeout(function(){
+                    location.reload();
+                },2000)
 
             });
         }));
