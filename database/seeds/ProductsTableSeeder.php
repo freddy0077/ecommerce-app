@@ -81,9 +81,9 @@ class ProductsTableSeeder extends Seeder
 //        \App\ProductCategory::truncate();
 //        \App\SubCategory::truncate();
 //        \App\User::truncate();
-//        \App\OrderItem::truncate();
+        \App\OrderItem::truncate();
 //        \App\Order::truncate();
-        \App\TopSellingProduct::truncate();
+//        \App\TopSellingProduct::truncate();
 
 
 //        $this->saveUsers();
