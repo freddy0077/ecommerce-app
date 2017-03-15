@@ -78,8 +78,8 @@ class ProductsTableSeeder extends Seeder
 //        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE posts");
 ////        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE users CASCADE");
 //        \App\Product::truncate();
-//        \App\ProductCategory::truncate();
-        \App\SubCategory::truncate();
+        \App\ProductCategory::truncate();
+//        \App\SubCategory::truncate();
 //        \App\User::truncate();
 //        \App\OrderItem::truncate();
 //        \App\Order::truncate();
