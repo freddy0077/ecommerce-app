@@ -18,7 +18,8 @@
         "pusher/pusher-php-server": "^2.6",
         "vinkla/pusher": "^2.5",
         "watson/bootstrap-form": "^1.1",
-        "webpatser/laravel-uuid": "^2.0"
+        "webpatser/laravel-uuid": "^2.0",
+        "ext-gd": "*"
     },
 
 
