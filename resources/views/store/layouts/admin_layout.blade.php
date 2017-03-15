@@ -184,7 +184,6 @@
 
 
                         <?php
-
                         $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
                         $user_id = Auth::user()->id;
 

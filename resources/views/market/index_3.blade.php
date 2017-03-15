@@ -606,6 +606,9 @@
                                 </div>
                                 <!--End extraslider-inner -->
 
+                                <br>
+                                <br>
+
                                 <!-- Begin extraslider-inner -->
                                 <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
 
