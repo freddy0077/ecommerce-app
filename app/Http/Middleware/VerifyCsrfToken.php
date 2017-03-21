@@ -19,6 +19,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/fancy-it/*',
         '/like-it/*',
         '/login',
+        '/watch-shop/*/*',
         'store/add-store',
         '/store/store-settings',
         'store/add-product',

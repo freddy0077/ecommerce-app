@@ -102,6 +102,21 @@
                     <div class="page-content-inner">
                         <div class="row">
                             <div class="col-md-12">
+
+                                @if(!count($products))
+                                    <div class="alert alert-block alert-info fade in">
+                                        <button type="button" class="close" data-dismiss="alert"></button>
+                                        <h4 class="alert-heading">NO PRODUCTS YET!</h4>
+                                        <p> You have currently not stored any product yet !
+                                        </p>
+                                        <p>
+                                            <a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>
+                                            <a class="btn dark" href="{{url('store/quick-add-products')}}"> Add More Products </a>
+                                        </p>
+                                    </div>
+
+                                  @else
+
                                 <!-- BEGIN PORTLET-->
                                 <div class="portlet light form-fit ">
                                     <div class="portlet-title">
@@ -122,6 +137,7 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body form">
+
                                         <!-- BEGIN FORM-->
                                         <table class="table table-bordered">
 
@@ -158,6 +174,7 @@
 
                                 </div>
                                 <!-- END PORTLET-->
+                                @endif
                             </div>
                         </div>
 

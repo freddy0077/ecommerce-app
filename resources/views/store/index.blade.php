@@ -48,6 +48,13 @@
 
     <link href="{{asset('frontend_2/css/responsive.css')}}" rel="stylesheet">
 
+    <style>
+        ul.megamenu > li > a:hover, ul.megamenu > li.active > a, ul.megamenu > li.home > a, ul.megamenu > li:hover > a {
+            background-color: rgba(255,255,255,0.0);
+            color: white;
+        }
+    </style>
+
 
 
 </head>
@@ -64,27 +71,23 @@
                         <div class="form-group languages-block ">
                             <form action="" method="post" enctype="multipart/form-data" id="bt-language">
                                 <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <img src="image/demo/flags/gb.png" alt="English" title="English">
+                                    <img src="{{asset('frontend_2/image/demo/flags/gb.png')}}" alt="English" title="English">
                                     <span class="">English</span>
                                     <span class="fa fa-angle-down"></span>
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="index.html"><img class="image_flag" src="image/demo/flags/gb.png" alt="English" title="English" /> English </a></li>
-                                    <li> <a href="index.html"> <img class="image_flag" src="image/demo/flags/lb.png" alt="Arabic" title="Arabic" /> Arabic </a> </li>
-                                </ul>
                             </form>
                         </div>
 
                         <div class="form-group currencies-block">
-                            <form action="http://demo.smartaddons.com/templates/html/market/index.html" method="post" enctype="multipart/form-data" id="currency">
+                            <form action="" method="post" enctype="multipart/form-data" id="currency">
                                 <a class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <span class="icon icon-credit "></span> US Dollar <span class="fa fa-angle-down"></span>
+                                    <span class="icon icon-credit "></span> GHS <span class="fa fa-angle-down"></span>
                                 </a>
-                                <ul class="dropdown-menu btn-xs">
-                                    <li> <a href="#">(€)&nbsp;Euro</a></li>
-                                    <li> <a href="#">(£)&nbsp;Pounds	</a></li>
-                                    <li> <a href="#">($)&nbsp;US Dollar	</a></li>
-                                </ul>
+                                {{--<ul class="dropdown-menu btn-xs">--}}
+                                    {{--<li> <a href="#">(€)&nbsp;Euro</a></li>--}}
+                                    {{--<li> <a href="#">(£)&nbsp;Pounds	</a></li>--}}
+                                    {{--<li> <a href="#">($)&nbsp;US Dollar	</a></li>--}}
+                                {{--</ul>--}}
                             </form>
                         </div>
                     </div>
@@ -94,10 +97,10 @@
                             <ul class="top-link list-inline">
                                 <li class="account" id="my_account">
                                     <a href="#" title="My Account" class="btn btn-xs dropdown-toggle" data-toggle="dropdown"> <span >My Account</span> <span class="fa fa-angle-down"></span></a>
-                                    <ul class="dropdown-menu ">
-                                        <li><a href="register.html"><i class="fa fa-user"></i> Register</a></li>
-                                        <li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>
-                                    </ul>
+                                    {{--<ul class="dropdown-menu ">--}}
+                                        {{--<li><a href="register.html"><i class="fa fa-user"></i> Register</a></li>--}}
+                                        {{--<li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>--}}
+                                    {{--</ul>--}}
                                 </li>
                                 <li class="wishlist"><a href="wishlist.html" id="wishlist-total" class="top-link-wishlist" title="Wish List (2)"><span>Wish List (2)</span></a></li>
                                 <li class="checkout"><a href="checkout.html" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
@@ -116,7 +119,8 @@
                 <div class="row">
                     <!-- Logo -->
                     <div class="navbar-logo col-md-3 col-sm-12 col-xs-12">
-                        <a href="index.html"><img src="image/demo/logos/theme_logo.png" title="Your Store" alt="Your Store" /></a>
+                        <?php $store = \App\Store::whereUserId($user_id)->first() ?>
+                        <a href=""><img src='{{asset("images/stores")}}/{{$store->image}}' title="{{$store->name}}" alt="{{$store->name}}" /></a>
                     </div>
                     <!-- //end Logo -->
 
@@ -295,55 +299,9 @@
                                         <div class="megamenu-pattern">
                                             <div class="container">
                                                 <ul class="megamenu " data-transition="slide" data-animationtime="250">
-                                                    <li class="home hover">
+                                                    <li class="home">
 
                                                         <a href='{{url("stores/$slug/$user_id")}}'>Home</a>
-                                                        <div class="sub-menu" style="width:100%;" >
-                                                            <div class="content" >
-                                                                <div class="row">
-                                                                    <div class="col-md-3">
-                                                                        <a href="index.html" class="image-link">
-													<span class="thumbnail">
-														<img class="img-responsive img-border" src="image/demo/feature/home-1.jpg" alt="">
-														<span class="btn btn-default">Read More</span>
-													</span>
-                                                                            <h3 class="figcaption">Home page - (Default)</h3>
-                                                                        </a>
-
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <a href="home2.html" class="image-link">
-													<span class="thumbnail">
-														<img class="img-responsive img-border" src="image/demo/feature/home-2.jpg" alt="">
-														<span class="btn btn-default">Read More</span>
-													</span>
-                                                                            <h3 class="figcaption">Home page - Layout 2</h3>
-                                                                        </a>
-
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <a href="home3.html" class="image-link">
-													<span class="thumbnail">
-														<img class="img-responsive img-border" src="image/demo/feature/home-3.jpg" alt="">
-														<span class="btn btn-default">Read More</span>
-													</span>
-                                                                            <h3 class="figcaption">Home page - Layout 3</h3>
-                                                                        </a>
-
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <a href="home4.html" class="image-link">
-													<span class="thumbnail">
-														<img class="img-responsive img-border" src="image/demo/feature/home-4.jpg" alt="">
-														<span class="btn btn-default">Read More</span>
-													</span>
-                                                                            <h3 class="figcaption">Home page - Layout 4</h3>
-                                                                        </a>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </li>
 
                                                 @foreach($categories as $category)
@@ -384,13 +342,13 @@
             <!--Left Part Start -->
             <aside class="col-sm-4 col-md-3" id="column-left">
                 <div class="module menu-category titleLine">
-                    <h3 class="modtitle">Categories</h3>
+                    <h3 class="modtitle">Sub Categories</h3>
                     <div class="modcontent">
                         <div class="box-category">
                             <ul id="cat_accordion" class="list-group">
 
-                                @foreach($categories as $category)
-                                <li class=""><a href="" class="cutom-parent">{{$category->name}}</a>  <span class="dcjq-icon"></span></li>
+                                @foreach($sub_categories as $category)
+                                <li class=""><a href="{{url('')}}" class="cutom-parent">{{$category->name}}</a>  <span class="dcjq-icon"></span></li>
                                 @endforeach
 
                             </ul>
@@ -400,13 +358,13 @@
                     </div>
                 </div>
                 <div class="module latest-product titleLine">
-                    <h3 class="modtitle">Latest Product</h3>
+                    <h3 class="modtitle">Latest Products</h3>
                     <div class="modcontent ">
                         @foreach($products as $product)
                         <div class="product-latest-item">
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="#"><img src="{{asset('frontend_2/image/demo/shop/product/m1.jpg')}}" alt="Cisi Chicken" title="Cisi Chicken" class="img-responsive" style="width: 100px; height: 82px;"></a>
+                                    <a href="#"><img src='{{asset("frontend_2/images/products/$product->image")}}' alt="{{$product->name}}" title="{{$product->image}}" class="img-responsive" style="width: 100px; height: 82px;"></a>
                                 </div>
                                 <div class="media-body">
                                     <div class="caption">
@@ -518,19 +476,19 @@
                             <div class="product-item-container">
                                 <div class="left-block">
                                     <div class="product-image-container lazy second_img ">
-                                        <img data-src="{{asset('frontend_2/image/demo/shop/product/e11.jpg')}}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img-responsive" />
-                                        <img data-src="{{asset('frontend_2/image/demo/shop/product/e12.jpg')}}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img_0 img-responsive" />
+                                        <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                        <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img_0 img-responsive" />
                                     </div>
                                     <!--Sale Label-->
                                     <span class="label label-sale">Sale</span>
                                     <!--countdown box-->
-                                    <div class="countdown_box">
-                                        <div class="countdown_inner">
-                                            <div class="title">This limited offer ends</div>
+                                    {{--<div class="countdown_box">--}}
+                                        {{--<div class="countdown_inner">--}}
+                                            {{--<div class="title">This limited offer ends</div>--}}
 
-                                            <div class="defaultCountdown-30"></div>
-                                        </div>
-                                    </div>
+                                            {{--<div class="defaultCountdown-30"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <!--end countdown box-->
 
                                     <!--full quick view block-->

@@ -19,9 +19,7 @@ Route::get('/try',function(){
     return \Webpatser\Uuid\Uuid::generate();
 });
 
-Route::get('/pusher',function(){
-    \Vinkla\Pusher\Facades\Pusher::trigger('feed-event-channel', 'my-event', ['message' => 'hello ghana']);
-});
+
 
 Auth::routes();
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
@@ -49,6 +47,8 @@ Route::get('/sub-category/{name}', 'HomeController@getSubCategory');
 Route::post('/fancy-it/{product_id}','HomeController@postFancyIt');
 
 Route::post('/like-it/{product_id}','HomeController@postLikeIt');
+
+Route::post('/watch-shop/{product_id}/{store_id}','HomeController@postWatchShop');
 
 
 

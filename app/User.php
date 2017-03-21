@@ -18,6 +18,8 @@ class User extends Authenticatable
         'id','name','phone_number', 'email', 'password','has_store','gender','store'
     ];
 
+    public $incrementing = false;
+
     protected  $slack_webhook_url = 'https://hooks.slack.com/services/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';
 
     /**

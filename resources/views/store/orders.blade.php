@@ -102,6 +102,20 @@
                     <div class="page-content-inner">
                         <div class="row">
                             <div class="col-md-12">
+
+                                @if(!count($orders))
+                                    <div class="alert alert-block alert-info fade in">
+                                        <button type="button" class="close" data-dismiss="alert"></button>
+                                        <h3 class="alert-heading">NO ORDERS YET!</h3>
+                                        <p> You currently have no orders !
+                                        </p>
+                                        {{--<p>--}}
+                                            {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
+                                            {{--<a class="btn dark" href="{{url('store/quick-add-products')}}"> Add More Products </a>--}}
+                                        {{--</p>--}}
+                                    </div>
+
+                                    @else
                                 <!-- BEGIN PORTLET-->
                                 <div class="portlet light form-fit ">
                                     <div class="portlet-title">
@@ -153,6 +167,7 @@
 
                                 </div>
                                 <!-- END PORTLET-->
+                                    @endif
                             </div>
                         </div>
 

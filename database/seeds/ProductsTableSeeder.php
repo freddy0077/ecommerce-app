@@ -40,6 +40,7 @@ class ProductsTableSeeder extends Seeder
         \App\Product::create([
             'id' => $id,
             'name' => $name,
+            'user_id' => 1,
             'price' => $price,
             'description'=>"",
             'ad' => true,
@@ -51,9 +52,9 @@ class ProductsTableSeeder extends Seeder
 
     }
 
-    private function saveMainCategories(){
-
-
+//    private function saveMainCategories(){
+//
+//
 //        $id = Webpatser\Uuid\Uuid::generate();
 //        $categoryObject = new \App\ProductCategory();
 //        $categoryObject->id = $id;
@@ -62,7 +63,7 @@ class ProductsTableSeeder extends Seeder
 //        $categoryObject->image = 'carousel-07.jpg';
 //        $categoryObject->save();
 //        echo  " $category product category saved \n";
-    }
+//    }
 
 
     public function run()
@@ -78,78 +79,72 @@ class ProductsTableSeeder extends Seeder
 //        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE posts");
 //        \Illuminate\Support\Facades\DB::statement("TRUNCATE TABLE users CASCADE");
 
-        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        \App\Product::truncate();
-        \App\ProductCategory::truncate();
-        \App\SubCategory::truncate();
-        \App\User::truncate();
+//        \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        \Illuminate\Support\Facades\DB::statement('ALTER TABLE b DISABLE TRIGGER ALL');
+//        \App\Product::truncate();
+//        \App\ProductCategory::truncate();
+//        \App\SubCategory::truncate();
+//        \App\User::truncate();
 
 
-//        $this->saveUsers();
+        $this->saveUsers();
 
-//        $store_id = \Webpatser\Uuid\Uuid::generate();
-//        $store_id2 = \Webpatser\Uuid\Uuid::generate();
-//        \App\Store::create([
-//            'id' => $store_id,
-//            'name' => 'Evergreen Store',
-//            'email' => 'evergreen@gmail.com',
-//            'phone_number' => '0240120250',
-//            'user_id'      => 1,
-//            'domain' => 'evergreen-store@shopaholicks.com'
-//        ]);
-//
-//
-//        \App\Store::create([
-//            'id' => $store_id2,
-//            'name' => 'Second Store',
-//            'email' => 'second@gmail.com',
-//            'phone_number' => '0240120250',
-//            'user_id'      => 2,
-//            'domain' => 'second-store@shopaholicks.com'
-//        ]);
-//
-//
-//        foreach($this->mainCategories as $key=>$category){
-//
-//                $id = Webpatser\Uuid\Uuid::generate();
-//                $categoryObject = new \App\ProductCategory();
-//                $categoryObject->id = $id;
-//                $categoryObject->user_id = 1;
-//                $categoryObject->name = $category;
-//                $categoryObject->image = 'carousel-07.jpg';
-//                $categoryObject->save();
-//                echo  " $category product category saved \n";
+
+        $store_id = \Webpatser\Uuid\Uuid::generate();
+        $store_id2 = \Webpatser\Uuid\Uuid::generate();
+        \App\Store::create([
+            'id' => $store_id,
+            'name' => 'Evergreen Store2',
+            'email' => 'evergreen@gmail.com',
+            'phone_number' => '0240120250',
+            'user_id'      => 1,
+            'domain' => 'evergreen-store2@shopaholicks.com'
+        ]);
 //
 //
 //
-//                switch($category){
-//                    case "Clothing":
-//                        $men_id = \Webpatser\Uuid\Uuid::generate();
-//                        $this->saveSubCategory($men_id,'Men',$id);
-////                        for($i = 0; $i < 10; $i++){
-////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
-////                        }
+        foreach($this->mainCategories as $key=>$category) {
+
+            $id = Webpatser\Uuid\Uuid::generate();
+            $categoryObject = new \App\ProductCategory();
+            $categoryObject->id = $id;
+            $categoryObject->user_id = 1;
+            $categoryObject->name = $category;
+            $categoryObject->image = 'carousel-07.jpg';
+            $categoryObject->save();
+            echo " $category product category saved \n";
+
+
+
 //
-////                        for($i = 0; $i < 10; $i++){
-////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"new men$i",10*$i,$store_id2,$men_id);
-////                        }
+                switch($category){
+                    case "Clothing":
+                        $men_id = \Webpatser\Uuid\Uuid::generate();
+                        $this->saveSubCategory($men_id,'Men',$id);
+                        for($i = 0; $i < 10; $i++){
+                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
+                        }
+
+//                        for($i = 0; $i < 10; $i++){
+//                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"new men$i",10*$i,$store_id2,$men_id);
+//                        }
+////
+                        $women_id = \Webpatser\Uuid\Uuid::generate();
 //
-//                        $women_id = \Webpatser\Uuid\Uuid::generate();
+                        $this->saveSubCategory($women_id,'Women',$id);
 //
-//                        $this->saveSubCategory($women_id,'Women',$id);
+                        for($i = 0; $i < 10; $i++){
+                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
+                        }
 //
-////                        for($i = 0; $i < 10; $i++){
-////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
-////                        }
-//
-//                        $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
-//                        $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
-//
-////                        for($i = 0; $i < 10; $i++){
-////                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
-////                        }
-//
-//                        break;
+                        $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
+                        $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
+
+                        for($i = 0; $i < 10; $i++){
+                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
+                        }
+
+                        break;
 //
 //                    case "Beauty & Accessories":
 //                        $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Men',$id);
@@ -183,8 +178,8 @@ class ProductsTableSeeder extends Seeder
 ////                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Appliances',$id);
 ////                    $this->saveSubCategory(\Webpatser\Uuid\Uuid::generate(),'Decor',$id);
 //                        break;
-//                }
-//            }
+                }
+            }
 
         }
 }

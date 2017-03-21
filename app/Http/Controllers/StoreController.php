@@ -20,6 +20,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Gloudemans\Shoppingcart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
@@ -29,6 +30,7 @@ use Webpatser\Uuid\Uuid;
 
 class StoreController extends Controller
 {
+    protected $threshold = 5;
     //
     public function __construct()
     {
@@ -38,16 +40,19 @@ class StoreController extends Controller
 
     public function getStore($slug,$user_id){
 
+//        $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
+//            ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
+//            ->leftJoin('users','users.id','=','product_categories.user_id')
+//            ->where('users.id',$user_id)
+////            ->where('product_categories.user_id',$user_id)
+//            ->selectRaw('products.*')
+//            ->paginate();
 
-        $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
-            ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
-            ->leftJoin('users','users.id','=','product_categories.user_id')
-            ->where('users.id',$user_id)
-//            ->where('product_categories.user_id',$user_id)
-            ->selectRaw('products.*')
-            ->paginate();
-        $categories = ProductCategory::whereUserId($user_id)->get();
-        return view('store.index',compact('products','categories','slug','user_id'));
+        $products = Product::whereUserId($user_id)->paginate();
+        $categories = ProductCategory::all();
+        $store = Store::whereUserId($user_id)->first();
+        $sub_categories = SubCategory::inRandomOrder()->get();
+        return view('store.index',compact('products','categories','slug','user_id','store','sub_categories'));
 
     }
 
@@ -56,11 +61,12 @@ class StoreController extends Controller
         $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
          ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
          ->where('product_categories.id',$category_id)
-         ->where('product_categories.user_id',$user_id)
+         ->where('products.user_id',$user_id)
          ->selectRaw('products.*')
             ->paginate();
-        $categories = ProductCategory::whereUserId($user_id)->get();
-        return view('store.index',compact('products','categories','slug','user_id'));
+        $categories = ProductCategory::all();
+        $sub_categories = SubCategory::whereProductCategoryId($category_id)->get();
+        return view('store.index',compact('products','categories','slug','user_id','sub_categories'));
 
     }
 
@@ -78,7 +84,7 @@ class StoreController extends Controller
         $user_id = Auth::user()->id;
 //
          $products = TopSellingProduct::leftJoin('products','products.id','=','top_selling_products.product_id')
-            ->whereUserId($user_id)->orderBy('count','desc')
+            ->where('top_selling_products.user_id',$user_id)->orderBy('count','desc')
             ->take(10)
             ->get();
         return view('store.dashboard',compact('products'));
@@ -170,17 +176,33 @@ class StoreController extends Controller
     public function postStoreSettings(Request $request){
         $this->validate($request, [
             'name' => 'required',
-//            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'phone_number' => 'required',
             'email' => 'required',
             'address' => 'required'
         ]);
 
+        $id = Uuid::generate();
+        $date_time = date('Ymdhis');
+
+            $image = $request->file('image');
+            $input['imagename'] = $id.$date_time.'.'.$image->getClientOriginalExtension();
+
+
+            $destinationPath = public_path('images/stores');
+            $img = Image::make($image->getRealPath());
+            $img->resize(200, 50, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
+
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
         if(User::find(Auth::user()->id)->has_store == true){
             $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
 
             Store::whereUserId(Auth::user()->id)->update([
                 'name' => $request->name,
+                'image' => $input['imagename'],
                 'phone_number' => $request->phone_number,
                 'email' => $request->email,
                 'address' => $request->address,
@@ -211,7 +233,7 @@ class StoreController extends Controller
                 'has_store' => true
             ]);
 
-            $this->saveMainCategories();
+//            $this->saveMainCategories();
 
             return 'success';
         }
@@ -233,10 +255,19 @@ class StoreController extends Controller
 
     public function getAddProduct(Request $request){
 
+        if(!Auth::user()->has_store){
 
+            return redirect('');
+
+        }
         $categories = ProductCategory::all('id','name');
+        $store_id = Store::where('user_id',Auth::user()->id)->first()->id;
 
-        return view('store.add_product',compact('categories'));
+         $productCounts = Product::whereStoreId($store_id)->count();
+         $products_limit = $this->threshold-$productCounts;
+
+
+        return view('store.add_product',compact('categories','products_limit'));
     }
 
     public function postAddProduct(Request $request){
@@ -249,39 +280,47 @@ class StoreController extends Controller
             'price' => 'required'
         ]);
 
+
         $id = Uuid::generate();
         $date_time = date('Ymdhis');
 
         $store_id = Store::where('user_id',Auth::user()->id)->first()->id;
 
-//        return $store_id;
-        $image = $request->file('image');
-        $input['imagename'] = $id.$date_time.'.'.$image->getClientOriginalExtension();
+        $productCounts = Product::whereStoreId($store_id)->count();
+        $products_limit = $this->threshold-$productCounts;
+
+        if($products_limit == 0){
+            return ['products_limit_reached' => true];
+        }else{
+
+            $image = $request->file('image');
+            $input['imagename'] = $id.$date_time.'.'.$image->getClientOriginalExtension();
 
 
-        $destinationPath = public_path('images/products');
-        $img = Image::make($image->getRealPath());
-        $img->resize(100, 100, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($destinationPath.'/'.$input['imagename']);
+            $destinationPath = public_path('images/products');
+            $img = Image::make($image->getRealPath());
+            $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
 
-        $destinationPath = public_path('/images');
-        $image->move($destinationPath, $input['imagename']);
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
 
-        Product::create([
-            'id' => $id,
-            'name' => $request->name,
-            'description'=> $request->description,
-            'price' => $request->price,
-            'image' => $input['imagename'],
-            'sub_category_id' => $request->sub_category,
-            'feature' => $request->feature == 'on'? true: false,
-            'publish' => $request->publish == 'on' ? true : false,
-            'show_buy_button' => $request->show_buy_button == 'on' ? true : false,
-            'ad' => false,
-            'store_id' => $store_id
-        ]);
-
+            Product::create([
+                'id' => $id,
+                'name' => $request->name,
+                'user_id' => Auth::user()->id,
+                'description'=> $request->description,
+                'price' => $request->price,
+                'image' => $input['imagename'],
+                'sub_category_id' => $request->sub_category,
+                'feature' => $request->feature == 'on'? true: false,
+                'publish' => $request->publish == 'on' ? true : false,
+                'show_buy_button' => $request->show_buy_button == 'on' ? true : false,
+                'ad' => false,
+                'store_id' => $store_id
+            ]);
+        }
     }
 
     public function getEditProduct($product_id){
@@ -354,6 +393,7 @@ class StoreController extends Controller
 
             Product::find($product_id)->update([
                 'name' => $request->name,
+                'user_id' => Auth::user()->id,
                 'description'=> $request->description,
                 'price' => $request->price,
                 'image' => $input['imagename'],
@@ -365,6 +405,7 @@ class StoreController extends Controller
         }else {
             Product::find($product_id)->update([
                 'name' => $request->name,
+                'user_id' => Auth::user()->id,
                 'description'=> $request->description,
                 'price' => $request->price,
                 'sub_category_id' => $request->sub_category,
@@ -388,18 +429,41 @@ class StoreController extends Controller
     }
 
     public function postQuickAddProducts(Request $request){
+        if($request->hasFile('image')){
+            $this->validate($request,[
+                'name' =>'required',
+//                'image' => 'dimensions:min_width=300,min_height=300',
+//                'description' => 'required',
+                'price' => 'required'
+            ]);
+        }
+
+        $date_time = date('Ymdhis');
+
+
+//        $image = $request->file('image');
+
         $names = $request->get('name');
          $prices = $request->get('price');
         $sub_categories = $request->get('sub_category');
+        $images = $request->file('image');
 
         foreach($names as $key=>$name){
+            $product_id = Uuid::generate();
+
+            $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
+            Product::processImage($images[$key],$input['imagename']);
+
             Product::create([
-                'id' => Uuid::generate(),
+                'id' => $product_id,
                 'name' => $name,
+                'user_id' => Auth::user()->id,
                 'price' => $prices[$key],
                 'description' =>'',
+                'image' =>  $input['imagename'],
                 'sub_category_id' => $sub_categories[$key],
-                'store_id' => Store::whereUserId(Auth::user()->id)->first()->id
+                'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
+                'user_id' => Auth::user()->id
             ]);
         }
 
@@ -411,7 +475,7 @@ class StoreController extends Controller
 
         $user = Auth::user();
         $products = Product::leftJoin('stores','stores.id','=','products.store_id')
-         ->whereUserId($user->id)
+         ->where('products.user_id',$user->id)
         ->selectRaw('products.*')->paginate(10);
 
         return view('store.all_products',compact('products'));
@@ -555,7 +619,7 @@ class StoreController extends Controller
 
     }
 
-    private function saveMainCategories()
+    public function saveMainCategories()
     {
         $mainCategories = ['Clothing','Beauty & Accessories','Home & Appliances','Electronics',
             'Arts & Photography','Agric & Food'];
@@ -571,6 +635,10 @@ class StoreController extends Controller
             ]);
 
         }
+    }
+
+    public function checkStoreDetails(){
+
     }
 
 

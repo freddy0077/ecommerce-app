@@ -10,6 +10,9 @@ use App\ProductGallery;
 use App\Store;
 use App\SubCategory;
 use App\User;
+use App\WatchedShop;
+use GetStream\Stream\Feed;
+use GetStream\StreamLaravel\Facades\FeedManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,34 +37,28 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $builder =  Product::leftJoin('stores','stores.user_id','=','products.user_id')
+            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+            ->orderBy('products.like_counts','desc');
 
-//       $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
-//           ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
-//           ->leftJoin('users','users.id','=','product_categories.user_id')
-//           ->leftJoin('stores','stores.user_id','=','users.id')
-//           ->selectRaw('products.*,stores.id as store_id,users.id as user_id')
-//           ->paginate();
-        $products = Product::paginate();
+        $products = $builder->take(10)->get();
 
+        $second_set = $builder->skip(10)->take(10)->get();
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
             ->distinct()
 //            ->orderBy('products.like_counts')
-            ->selectRaw('product_categories.name')
+            ->selectRaw('product_categories.*')
             ->take(10)
             ->get();
 
-
-
-         $nextpageurl = $products->nextPageUrl();
-
         if($request->ajax()){
-            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
+            return view('market.partials.more_popular_products',compact('products'));
         }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index_3',compact('products','categories','nextpageurl'));
+        return view('market.index_3',compact('products','categories','second_set'));
     }
 
     public function getProfile(){
@@ -69,20 +66,22 @@ class HomeController extends Controller
     }
 
     public function getFeeds(){
-        return view('feeds');
+        $activities = WatchedShop::whereUserId(Auth::user()->id)->get();
+        return view('feeds',compact('activities'));
     }
+
     // category page view action
-    public function getCategory(Request $request,$category_slug){
+    public function getCategory(Request $request,$category_id){
 
         $builder = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
             ->leftjoin('stores','stores.id','=','products.store_id')
             ->leftJoin('users','users.id','=','stores.user_id')
-            ->where('product_categories.slug',$category_slug);
+            ->where('product_categories.id',$category_id);
 
          $products = $builder
             ->selectRaw('products.*,sub_categories.name as category_name,
-              product_categories.name as product_category_name,product_categories.slug as category_slug,stores.name as store_name')
+              product_categories.name as product_category_name,product_categories.slug as category_slug,stores.id as store_id,stores.name as store_name')
             ->paginate(36);
 
         if($request->ajax()){
@@ -92,10 +91,12 @@ class HomeController extends Controller
 
 //          $f = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
 
-       $category = ProductCategory::where('slug',$category_slug)->first();
+//       $category = ProductCategory::where('slug',$category_slug)->first();
+
+        $categories = ProductCategory::all();
 
 
-        return view('market.category',compact('products','category'));
+        return view('market.category',compact('products','categories'));
     }
 
     public function getSubCategory(Request $request,$id){
@@ -120,36 +121,47 @@ class HomeController extends Controller
     }
 
     public function postFancyIt($product_id){
-        Fancy::create([
-            'id' => Uuid::generate(),
-            'product_id' => $product_id,
-            'user_id' => Auth::user()->id
-        ]);
+        if(Auth::check() && !Fancy::whereUserId(Auth::user()->id)->whereProductId($product_id)->first()) {
+            Fancy::create([
+                'id' => Uuid::generate(),
+                'product_id' => $product_id,
+                'user_id' => Auth::user()->id
+            ]);
+            return ['message' => 'Product has been added to your fancies !', 'status' => 200];
+        }elseif(Auth::guest()){
+            return ['message' => 'You need to login to add to fancies !','status' => 401];
 
-        return ['message' => 'success','status' => 200];
-
+        }else{
+            return ['message' => 'You have this product in your fancies!','status' => 401];
+        }
     }
 
     public function postLikeIt($product_id){
-        $user_id = Auth::user()->id;
+
+        $user_id = Auth::check() ? Auth::user()->id:"";
         $product =Like::whereUserId($user_id)->whereProductId($product_id)->first();
-        if(!$product){
+        if(!$product && Auth::check()) {
             Like::create([
                 'id' => Uuid::generate(),
                 'user_id' => Auth::user()->id,
-                'product_id'=> $product_id
+                'product_id' => $product_id
             ]);
 
             $product = Product::find($product_id);
 
             $product->update([
-                'like_counts' => $product->like_counts+1
+                'like_counts' => $product->like_counts + 1
             ]);
 
-            return ['message' => 'success','status' => 200,'likes' =>$product->like_counts];
+            return ['message' => 'You just liked a product', 'status' => 200, 'likes' => $product->like_counts];
+        }
 
-        }else{
-            return ['message' => 'user already liked it','status' => 401];
+            elseif(Auth::guest()){
+                return ['message' => 'You need to login to like a product', 'status' => 403];
+
+            }else{
+
+            return ['message' => "You have already liked this product",'status' => 401];
         }
     }
 
@@ -169,5 +181,34 @@ class HomeController extends Controller
         $gallery = ProductGallery::whereProductId($product_id)->orderBy('created_at','desc')->take(3)->get();
         $product = Product::find($product_id);
         return view('market.partials.quick_view',compact('product','gallery'));
+    }
+
+    public function postWatchShop($product_id,$store_id){
+        if(Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !WatchedShop::whereUserId(Auth::user()->id)->first()) {
+            $user = Auth::user();
+
+            WatchedShop::create([
+                'id' => Uuid::generate(),
+                'product_id' => $product_id,
+                'store_id' => $store_id,
+                'user_id' => $user->id,
+                'action' => "$user->name just followed your shop"
+            ]);
+            $store_builder = Store::find($store_id);
+            $builder = Product::find($product_id);
+            return ['status' => 200, 'image_url' => asset("images/products/$builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
+
+        }elseif(Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id == $store_id){
+            return ['status' => 403,'message' => 'You can not follow your shop'];
+
+        }elseif(Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()){
+            return ['status' => 404,'message' => 'You are already following this shop !'];
+        }else {
+            return ['status' => 401,'message' => 'Log in to watch a shop'];
+        }
+
+
+
+
     }
 }

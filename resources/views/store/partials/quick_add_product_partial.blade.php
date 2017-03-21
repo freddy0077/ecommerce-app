@@ -8,7 +8,7 @@
         @for($i = 0; $i < $count; $i++)
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="col-md-1"></div>
+                    {{--<div class="col-md-1"></div>--}}
                     <div class="col-md-3"><input type="text" class="form-control" name="name[]" id="name" placeholder="name of product" required></div>
                         <span class="help-block"></span>
 
@@ -28,8 +28,11 @@
                         </select>
                         {{--<input type="text" class="form-control" name="name" id="name" placeholder="product category">--}}
                     </div>
-                    <div class="col-md-1"></div>
-                </div>
+                        <div class="col-md-3">
+                            <input type="file" class="form-control" name="image[]" id="image" required>
+                        </div>
+
+                    </div>
                 </div>
 
             <br>

@@ -31,7 +31,10 @@
                         swal("Error!",data.responseJSON[field][0] , "error");
 
                     }
-                }).success(function() {
+                }).success(function(data) {
+                    if(data.products_limit_reached == true){
+                        swal("Sorry!", 'you have reached your products threshold !', "error");
+                    }
                     swal("Good job!", 'you have added a product !', "success");
                 });
             }));
@@ -92,9 +95,17 @@
                                 <!-- BEGIN PORTLET-->
                                 <div class="portlet light form-fit ">
                                     <div class="portlet-title">
+                                        <div class="alert alert-block alert-info fade in">
+                                            <button type="button" class="close" data-dismiss="alert"></button>
+                                            {{--<h4 class="alert-heading">NO PRODUCTS YET!</h4>--}}
+                                            <p>   PRODUCTS LEFT TO UPLOAD : {{$products_limit}}</p>
+
+                                        </div>
                                         <div class="caption">
                                             <i class="icon-social-dribbble font-green"></i>
                                             <span class="caption-subject font-green bold uppercase">New Product</span>
+
+
                                         </div>
                                         <div class="actions">
                                             <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">

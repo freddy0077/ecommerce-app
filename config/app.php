@@ -170,7 +170,8 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Vinkla\Pusher\PusherServiceProvider::class,
+        GetStream\StreamLaravel\StreamLaravelServiceProvider::class,
+//        Vinkla\Pusher\PusherServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -241,7 +242,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-
+        'FeedManager'  => GetStream\StreamLaravel\Facades\FeedManager::class,
 
     ],
 

@@ -1,556 +1,686 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopaholicks Register /Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <style>
+        /*--reset--*/
+        html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+        article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+        ol,ul{list-style:none;margin:0px;padding:0px;}
+        blockquote,q{quotes:none;}
+        blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+        table{border-collapse:collapse;border-spacing:0;}
+        /*--start editing from here--*/
+        a{text-decoration:none;}
+        .txt-rt{text-align:right;}/* text align right */
+        .txt-lt{text-align:left;}/* text align left */
+        .txt-center{text-align:center;}/* text align center */
+        .float-rt{float:right;}/* float right */
+        .float-lt{float:left;}/* float left */
+        .clear{clear:both;}/* clear float */
+        .pos-relative{position:relative;}/* Position Relative */
+        .pos-absolute{position:absolute;}/* Position Absolute */
+        .vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+        .vertical-top{	vertical-align:top;}/* vertical align top */
+        nav.vertical ul li{	display:block;}/* vertical menu */
+        nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+        img{max-width:100%;}
+        /*--end reset--*/
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-attachment: fixed;
+            background-color: #fa8072;
+        }
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            color: #fff;
+            font-weight: bolder;
+            letter-spacing: 4px;
+        }
+        /*-- main --*/
+        .main {
+            padding: 3em 0 0;
+        }
+        .main-agileinfo{
+            width: 40%;
+            margin: 7em auto;
+            background-color: rgba(0, 0, 0, 0.13);
+            position: relative;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .w3table-topimg {
+            margin-top: -4em;
+        }
+        .w3table-topimg img {
+            width: 100%;
+        }
+        .w3table-cell form {
+            padding: 1.5em;
+        }
+        .main-agileinfo input[type="radio"] {
+            margin: 0;
+            width: 12px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .main-agileinfo .radio {
+            display: inline-block;
+            margin-bottom: 1em;
+            float: left;
+            width: 22%;
+        }
+        .main-agileinfo .radio:nth-child(2) {
+            width: 34%;
+        }
+        .main-agileinfo label {
+            font-size: .75em;
+            color: #999;
+            margin-right: .8em;
+        }
+        .main-agileinfo h5.w3ls-ltext {
+            font-size: .8em;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 0.5em;
+        }
+        .sign-up p {
+            font-size: .7em;
+            color: #999;
+            margin-bottom: 1em;
+        }
+        /*-- forms --*/
+        .w3table {
+            display:table;
+            width: 100%;
+            height: 100%;
+        }
+        .w3table-cell {
+            display: table-cell;
+            vertical-align: middle;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .main-agileinfo .wthree-box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .main-agileinfo .wthree-box:before, .main-agileinfo .wthree-box:after {
+            content: " ";
+            position: absolute;
+            left: 153px;
+            top: 42px;
+            background-color: rgba(189, 95, 84, 0.39);
+            -webkit-transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+            -moz-transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+            -ms-transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+            -o-transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+            transform: rotateX(52deg) rotateY(15deg) rotateZ(-38deg);
+            width: 300px;
+            height: 265px;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .main-agileinfo .wthree-box:after {
+            background-color: rgba(250, 128, 114, 0.48);
+            top: 22px;
+            left: 155px;
+            width: 324px;
+            height: 220px;
+        }
+        .main-agileinfo .agileui-forms {
+            position: relative;
+        }
+        .main-agileinfo .btn {
+            cursor: pointer;
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            color: #fff;
+            background-color: #00BCD4;
+            opacity: 1;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            border: none;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .main-agileinfo .btn:hover {
+            opacity: 0.7;
+        }
+        .main-agileinfo .btn, .main-agileinfo input, .main-agileinfo textarea  {
+            padding: 8px 12px;
+        }
+        .main-agileinfo .info-w3lsitem .btn {
+            width: 35%;
+        }
+        .main-agileinfo input,.main-agileinfo textarea {
+            margin: 0 auto 15px;
+            display: block;
+            width: 89%;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+            color: #999;
+            font-size: 0.8em;
+            left: 1px;
+            outline: none;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .main-agileinfo textarea {
+            min-height: 3em;
+        }
+        .main-agileinfo .agileui-forms .container-info {
+            text-align: left;
+            font-size: 0;
+        }
+        .main-agileinfo .agileui-forms .container-info .info-w3lsitem {
+            text-align: center;
+            font-size: 16px;
+            width: 300px;
+            height: 320px;
+            display: inline-block;
+            vertical-align: top;
+            color: #fff;
+            opacity: 1;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .main-agileinfo .agileui-forms .container-info .info-w3lsitem p {
+            font-size: 20px;
+            margin: 20px;
+        }
+        .agileui-forms .container-info .info-w3lsitem .btn {
+            background-color: transparent;
+            border: 1px solid #fff;
+        }
+        .agileui-forms .container-info .info-w3lsitem .w3table-cell {
+            padding-right: 35px;
+        }
+        .agileui-forms .container-info .info-w3lsitem:nth-child(2) .w3table-cell {
+            padding-left: 35px;
+            padding-right: 0;
+        }
+        .container-form {
+            overflow: hidden;
+            position: absolute;
+            left: 40px;
+            top: -30px;
+            width: 305px;
+            height: 380px;
+            background-color: #fff;
+            -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+            -o-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+            -ms-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.2);
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .form-item {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            -moz-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .form-item.sign-up {
+            position: absolute;
+            left: -100%;
+            opacity: 0;
+        }
+        .log-in .wthree-box:before {
+            position: absolute;
+            left: 180px;
+            top: 62px;
+            height: 265px;
+        }
+        .log-in .wthree-box:after {
+            top: 22px;
+            left: 192px;
+            width: 324px;
+            height: 220px;
+        }
+        .log-in .container-form {
+            left: 280px;
+        }
+        .log-in .container-form .form-item.sign-up {
+            left: 0;
+            opacity: 1;
+        }
+        .log-in .container-form .form-item.log-in {
+            left: -100%;
+            opacity: 0;
+        }
+        /*-- //forms --*/
+        /*-- //main --*/
+        /*-- copyright --*/
+        .copyw3-agile {
+            margin: 2em 0;
+            text-align: center;
+        }
+        .copyw3-agile p {
+            font-size: 0.9em;
+            color: #fff;
+            line-height: 1.8em;
+            letter-spacing: 1px;
+            font-weight: 400;
+            padding:0 1em;
+        }
+        .copyw3-agile p a{
+            color: #fff;
+            -webkit-transition: 0.5s all;
+            -moz-transition: 0.5s all;
+            transition: 0.5s all;
+        }
+        .copyw3-agile p a:hover{
+            color: #000;
+        }
+        /*-- //copyright --*/
+        /*-- responsive-design --*/
+        @media(max-width:1440px){
+            .main-agileinfo {
+                width: 44%;
+            }
+        }
+        @media(max-width:1366px){
+            .main-agileinfo {
+                width: 47%;
+            }
+        }
+        @media(max-width:1280px){
+            .main-agileinfo {
+                width: 50%;
+            }
+        }
+        @media(max-width:1080px){
+            .main-agileinfo {
+                width: 60%;
+                margin: 6em auto;
+            }
+        }
+        @media(max-width:991px){
+            .main-agileinfo {
+                width: 65%;
+            }
+        }
+        @media(max-width:800px){
+            h1 {
+                font-size: 2.6em;
+            }
+            .main-agileinfo {
+                width: 80%;
+                margin: 5em auto;
+            }
+            .w3table-topimg {
+                margin-top: -2em;
+            }
+        }
+        @media(max-width:768px){
+            .main-agileinfo {
+                width: 83%;
+            }
+        }
+        @media(max-width:736px){
+            .main-agileinfo {
+                width: 85%;
+            }
+            .main {
+                padding: 2em 0 0;
+            }
+            h1 {
+                font-size: 2.2em;
+                letter-spacing: 3px;
+            }
+            .log-in .container-form {
+                left: 266px;
+            }
+        }
+        @media(max-width:667px){
+            .container-form {
+                left: 30px;
+            }
+            .main-agileinfo {
+                width: 93%;
+            }
+        }
+        @media(max-width:640px){
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem {
+                width: 285px;
+            }
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem p {
+                font-size: 17px;
+                margin: 15px;
+            }
+            .container-form {
+                left: 22px;
+                width: 280px;
+            }
+            .log-in .container-form {
+                left: 270px;
+            }
+            .w3table-cell form {
+                padding: 1em;
+            }
+            .main-agileinfo label {
+                font-size: .7em;
+            }
+            .main-agileinfo input, .main-agileinfo textarea {
+                width: 88%;
+            }
+            .w3table-topimg {
+                margin-top: -1.9em;
+            }
+        }
+        @media(max-width:600px){
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem {
+                width: 265px;
+            }
+            .log-in .container-form {
+                left: 232px;
+            }
+            .main-agileinfo .wthree-box:before, .main-agileinfo .wthree-box:after {
+                left: 102px;
+            }
+            .main-agileinfo .wthree-box:before, .main-agileinfo .wthree-box:after {
+                top: 32px;
+            }
+            .log-in .wthree-box:before {
+                top: 32px;
+            }
+            .log-in .wthree-box:after {
+                top: 8px;
+            }
+        }
+        @media(max-width:568px){
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem {
+                width: 253px;
+            }
+            .log-in .container-form {
+                left: 213px;
+            }
+        }
+        @media(max-width:480px){
+            .main-agileinfo {
+                width: 85%;
+                margin: 2em auto 4em;
+            }
+            .log-in .container-form {
+                left: 26px;
+            }
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem {
+                width: 50%;
+                height: 460px
+            }
+            .agileui-forms .container-info .info-w3lsitem .w3table-cell {
+                padding-right: 0;
+                vertical-align: top;
+            }
+            .agileui-forms .container-info .info-w3lsitem:nth-child(2) .w3table-cell {
+                padding-left: 0;
+            }
+            .main-agileinfo .info-w3lsitem .btn {
+                width: 44%;
+                font-size: .8em;
+            }
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem p {
+                font-size: 15px;
+                margin: 20px 0 15px;
+            }
+            .main-agileinfo .info-w3lsitem .btn {
+                width: 40%;
+                font-size: .7em;
+            }
+            .log-in .container-form ,.container-form{
+                left: 35px;
+                top: 109px;
+                width: 318px;
+            }
+            .copyw3-agile p {
+                font-size: 0.8em;
+            }
+        }
+        @media(max-width:414px){
+            .log-in .container-form, .container-form {
+                left: 20px;
+                width: 295px;
+            }
+            h1 {
+                font-size: 1.8em;
+                letter-spacing: 2px;
+            }
+        }
+        @media(max-width:384px){
+            .main-agileinfo {
+                width: 92%;
+            }
+        }
+        @media(max-width:375px){
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem p {
+                font-size: 14px;
+            }
+        }
+        @media(max-width:320px){
+            .main {
+                padding: 1em 0 0;
+            }
+            h1 {
+                font-size: 1.6em;
+                letter-spacing: 1px;
+            }
+            .main-agileinfo {
+                margin: 1em auto 4em;
+            }
+            .main-agileinfo .agileui-forms .container-info .info-w3lsitem p {
+                font-size: 13px;
+                margin: 15px 0 10px;
+            }
+            .log-in .container-form, .container-form {
+                left: 12px;
+                width: 255px;
+                top: 95px;
+            }
+            .w3table-topimg {
+                margin-top: -3em;
+            }
+            .main-agileinfo label {
+                margin-right: .4em;
+            }
+            .main-agileinfo textarea {
+                min-height: 4em;
+            }
+            .copyw3-agile p {
+                letter-spacing: 0px;
+            }
+            .main-agileinfo {
+                margin: 1em auto 3em;
+            }
+        }
+        /*-- //responsive-design --*/
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+    </style>
+    <!-- web font -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'><!--web font-->
+    <!-- //web font -->
+</head>
+<body>
+<!-- main -->
+<div class="main agileits-w3layouts">
+    {{--<h1>SHOPAHOLICKS</h1>--}}
+    <div class="main-agileinfo">
+        <div class="wthree-box"></div>
+        <div class="agileui-forms">
+            <div class="container-info">
+                <div class="info-w3lsitem">
+                    <div class="w3table">
+                        <div class="w3table-cell">
+                            <p> Have an account? </p>
+                            <div class="btn"> Log in </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                    </div>
+                </div>
+                <div class="info-w3lsitem">
+                    <div class="w3table">
+                        <div class="w3table-cell">
+                            {{--<p> Send us a message</p>--}}
+                            <div class="btn">SIGN UP</div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
+                    </div>
+                </div>
+                <div class="clear"> </div>
+            </div>
+            <div class="container-form">
+                <div class="form-item log-in"><!-- login form-->
+                    <div class="w3table agileinfo">
+                        <div class="w3table-cell">
+                            <div class="w3table-topimg">
+                                <img src="{{url('frontend_2/image/logo.png')}}">
                             </div>
+                            <form action="{{url('/login')}}" method="post" id="login-form">
+                                <input type="text" name="email" placeholder="Email" required=""/>
+                                <input type="Password" name="password" placeholder="Password" required=""/>
+                                <input type="submit" class="btn" value="Log in">
+                            </form>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
+                    </div>
+                </div>
+                <div class="form-item sign-up"><!-- sign-up form-->
+                    <div class="w3table w3-agileits">
+                        <div class="w3table-cell">
+                            <form action="{{url('/register')}}" method="post" id="register-form">
+                                {{--<p>Create an account on Shopaholicks.</p>--}}
+                                <input type="text" name="name" placeholder="Full Name" required/>
+                                {{--<i class="help-block">one</i>--}}
+                                <input type="email" name="email" placeholder="Email" required=""/>
+                                <input type="text" name="phone_number" placeholder="Phone Number" required=""/>
+                                <input type="password" name="password" placeholder="Password" required=""/>
+                                <div class="form-group">Set up a store <input type="checkbox" name="store" id="store" style="margin-top:-17px;"></div>
+                                <div class="form-group"><input type="text" name="store_name" id="store_name" placeholder="Your Store name"></div>
+                                <input type="submit" class="btn" value="Submit">
+                            </form>
                         </div>
-
-                    </form>
-
-                    <script>
-
-                        BootstrapDialog.show({
-                            message:
-//                            '<form id="data-form"> ' +
-//                            '<div class="row"> ' +
-//
-//                            '<div class="col-sm-4"><label>Name </label></div>' +
-//                            '<div class="col-sm-8"><input type="text" class="form-control"></div>'+
-//
-//                            '</div>'+
-//                            '' +
-//                            '</form>',
-                            '',
-                            buttons: [{
-                                icon: 'glyphicon glyphicon-send',
-                                label: 'Send ajax request',
-                                cssClass: 'btn-primary',
-                                autospin: true,
-                                action: function(dialogRef){
-                                    dialogRef.enableButtons(false);
-                                    dialogRef.setClosable(false);
-                                    dialogRef.getModalBody().html('Dialog closes in 5 seconds.');
-
-                                    $.post('/send',$('#data-form').serialize(),function(){
-                                        alert('hello');
-                                    })
-                                    setTimeout(function(){
-//                                        dialogRef.close();
-
-                                    }, 5000);
-                                }
-                            }, {
-                                label: 'Close',
-                                action: function(dialogRef){
-                                    dialogRef.close();
-                                }
-                            }]
-                        });
-
-
-                    </script>
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-
-        {{--<!DOCTYPE html>--}}
-{{--<!----}}
-{{--Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5--}}
-{{--Version: 4.5.2--}}
-{{--Author: KeenThemes--}}
-{{--Website: http://www.keenthemes.com/--}}
-{{--Contact: support@keenthemes.com--}}
-{{--Follow: www.twitter.com/keenthemes--}}
-{{--Like: www.facebook.com/keenthemes--}}
-{{--Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes--}}
-{{--License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.--}}
-{{---->--}}
-{{--<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->--}}
-{{--<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->--}}
-{{--<!--[if !IE]><!-->--}}
-{{--<html lang="en">--}}
-{{--<!--<![endif]-->--}}
-{{--<!-- BEGIN HEAD -->--}}
+<!-- //main -->
+<!-- copyright -->
+<div class="copyw3-agile">
+    <p> © {{date('Y')}} Shopaholicks  . All rights reserved .</p>
+</div>
+<!-- //copyright -->
+<!-- js -->
+{{--<script  src=" js/jquery-1.12.3.min.js"></script>--}}
+<script type="text/javascript" src="{{asset('frontend_2/js/jquery-2.2.4.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" type="text/javascript"></script>
 
 
-{{--<!-- Mirrored from www.keenthemes.com/preview/metronic/theme/admin_3_rounded/page_user_login_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Nov 2015 16:13:35 GMT -->--}}
-{{--<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->--}}
-{{--<head>--}}
-    {{--<meta charset="utf-8" />--}}
-    {{--<title>Metronic | User Login 1</title>--}}
-    {{--<meta http-equiv="X-UA-Compatible" content="IE=edge">--}}
-    {{--<meta content="width=device-width, initial-scale=1" name="viewport" />--}}
-    {{--<meta content="" name="description" />--}}
-    {{--<meta content="" name="author" />--}}
+<script>
+    $(".info-w3lsitem .btn").click(function() {
+        $(".main-agileinfo").toggleClass("log-in");
+    });
+    $(".container-form .btn").click(function() {
+        $(".main-agileinfo").addClass("active");
+    });
 
-    {{--<!-- BEGIN GLOBAL MANDATORY STYLES -->--}}
-    {{--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<!-- END GLOBAL MANDATORY STYLES -->--}}
+    $('#store_name').hide();
 
-    {{--<!-- BEGIN PAGE LEVEL PLUGINS -->--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<!-- END PAGE LEVEL PLUGINS -->--}}
+    $('#register-form').on('submit',function(e){
+        e.preventDefault();
+        $.post('/register',$(this).serialize(),function(data){
+        }).success(function(data){
+            if (data.status == 301) {
+                swal({
+                            title: "Great",
+                            text: "You have successfully created a store account !",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Log in",
+                            closeOnConfirm: false
+                        },
+                        function(){
 
-    {{--<!-- BEGIN THEME GLOBAL STYLES -->--}}
-    {{--<link href="{{secure_asset('backend/assets/global/css/components-rounded.min.css')}}" rel="stylesheet" id="style_components" type="text/css" />--}}
-    {{--<link href="{{secure_asset('backend/assets/global/css/plugins.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<!-- END THEME GLOBAL STYLES -->--}}
+                            swal("Great!", " redirecting to the login page", "success");
 
-    {{--<!-- BEGIN PAGE LEVEL STYLES -->--}}
-    {{--<link href="{{secure_asset('backend/assets/pages/css/login.min.css')}}" rel="stylesheet" type="text/css" />--}}
-    {{--<!-- END PAGE LEVEL STYLES -->--}}
-    {{--<!-- BEGIN THEME LAYOUT STYLES -->--}}
-    {{--<!-- END THEME LAYOUT STYLES -->--}}
-    {{--<link rel="shortcut icon" href="favicon.ico" /> </head>--}}
-{{--<!-- END HEAD -->--}}
+                            setTimeout(function(){
+                                location.reload();
+                            },2000)
+                        });
+            }
+        }).fail(function(data){
+            for (var field in data.responseJSON) {
+                var el = $(':input[name="' + field + '"]');
+                el.parent('.form-group').addClass('has-error');
+                el.next('.help-block').text(data.responseJSON[field][0]);
+                el.next('.validation_error').text(data.responseJSON[field][0]);
+                swal("Error!",data.responseJSON[field][0] , "error");
+            }
+        })
+    })
 
-{{--<body class=" login">--}}
-{{--<div class="menu-toggler sidebar-toggler"></div>--}}
-{{--<!-- END SIDEBAR TOGGLER BUTTON -->--}}
-{{--<!-- BEGIN LOGO -->--}}
-{{--<div class="logo">--}}
-    {{--<a href="index-2.html">--}}
-        {{--<img src="{{asset('backend/assets/pages/img/logo-big.png')}}" alt="" /> </a>--}}
-{{--</div>--}}
-{{--<!-- END LOGO -->--}}
-{{--<!-- BEGIN LOGIN -->--}}
-{{--<div class="content">--}}
-    {{--<!-- BEGIN LOGIN FORM -->--}}
-    {{--<form class="login-form" action="" method="post">--}}
-        {{--<h3 class="form-title font-green">Sign In</h3>--}}
-        {{--<div class="alert alert-danger display-hide">--}}
-            {{--<button class="close" data-close="alert"></button>--}}
-            {{--<span> Enter any username and password. </span>--}}
-        {{--</div>--}}
-        {{--<div class="form-group">--}}
-            {{--<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Username</label>--}}
-            {{--<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Password</label>--}}
-            {{--<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" /> </div>--}}
-        {{--<div class="form-actions">--}}
-            {{--<button type="submit" class="btn green uppercase">Login</button>--}}
-            {{--<label class="rememberme check">--}}
-                {{--<input type="checkbox" name="remember" value="1" />Remember </label>--}}
-            {{--<a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>--}}
-        {{--</div>--}}
-        {{--<div class="login-options">--}}
-            {{--<h4>Or login with</h4>--}}
-            {{--<ul class="social-icons">--}}
-                {{--<li>--}}
-                    {{--<a class="social-icon-color facebook" data-original-title="facebook" href="javascript:;"></a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a class="social-icon-color twitter" data-original-title="Twitter" href="javascript:;"></a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a class="social-icon-color googleplus" data-original-title="Goole Plus" href="javascript:;"></a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>--}}
-                {{--</li>--}}
-            {{--</ul>--}}
-        {{--</div>--}}
-        {{--<div class="create-account">--}}
-            {{--<p>--}}
-                {{--<a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>--}}
-            {{--</p>--}}
-        {{--</div>--}}
-    {{--</form>--}}
-    {{--<!-- END LOGIN FORM -->--}}
-    {{--<!-- BEGIN FORGOT PASSWORD FORM -->--}}
-    {{--<form class="forget-form" action="http://www.keenthemes.com/preview/metronic/theme/admin_3_rounded/index.html" method="post">--}}
-        {{--<h3 class="font-green">Forget Password ?</h3>--}}
-        {{--<p> Enter your e-mail address below to reset your password. </p>--}}
-        {{--<div class="form-group">--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>--}}
-        {{--<div class="form-actions">--}}
-            {{--<button type="button" id="back-btn" class="btn btn-default">Back</button>--}}
-            {{--<button type="submit" class="btn btn-success uppercase pull-right">Submit</button>--}}
-        {{--</div>--}}
-    {{--</form>--}}
-    {{--<!-- END FORGOT PASSWORD FORM -->--}}
-    {{--<!-- BEGIN REGISTRATION FORM -->--}}
-    {{--<form class="register-form" action="http://www.keenthemes.com/preview/metronic/theme/admin_3_rounded/index.html" method="post">--}}
-        {{--<h3 class="font-green">Sign Up</h3>--}}
-        {{--<p class="hint"> Enter your personal details below: </p>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Full Name</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" placeholder="Full Name" name="fullname" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Email</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Address</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" placeholder="Address" name="address" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">City/Town</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" placeholder="City/Town" name="city" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Country</label>--}}
-            {{--<select name="country" class="form-control">--}}
-                {{--<option value="">Country</option>--}}
-                {{--<option value="AF">Afghanistan</option>--}}
-                {{--<option value="AL">Albania</option>--}}
-                {{--<option value="DZ">Algeria</option>--}}
-                {{--<option value="AS">American Samoa</option>--}}
-                {{--<option value="AD">Andorra</option>--}}
-                {{--<option value="AO">Angola</option>--}}
-                {{--<option value="AI">Anguilla</option>--}}
-                {{--<option value="AR">Argentina</option>--}}
-                {{--<option value="AM">Armenia</option>--}}
-                {{--<option value="AW">Aruba</option>--}}
-                {{--<option value="AU">Australia</option>--}}
-                {{--<option value="AT">Austria</option>--}}
-                {{--<option value="AZ">Azerbaijan</option>--}}
-                {{--<option value="BS">Bahamas</option>--}}
-                {{--<option value="BH">Bahrain</option>--}}
-                {{--<option value="BD">Bangladesh</option>--}}
-                {{--<option value="BB">Barbados</option>--}}
-                {{--<option value="BY">Belarus</option>--}}
-                {{--<option value="BE">Belgium</option>--}}
-                {{--<option value="BZ">Belize</option>--}}
-                {{--<option value="BJ">Benin</option>--}}
-                {{--<option value="BM">Bermuda</option>--}}
-                {{--<option value="BT">Bhutan</option>--}}
-                {{--<option value="BO">Bolivia</option>--}}
-                {{--<option value="BA">Bosnia and Herzegowina</option>--}}
-                {{--<option value="BW">Botswana</option>--}}
-                {{--<option value="BV">Bouvet Island</option>--}}
-                {{--<option value="BR">Brazil</option>--}}
-                {{--<option value="IO">British Indian Ocean Territory</option>--}}
-                {{--<option value="BN">Brunei Darussalam</option>--}}
-                {{--<option value="BG">Bulgaria</option>--}}
-                {{--<option value="BF">Burkina Faso</option>--}}
-                {{--<option value="BI">Burundi</option>--}}
-                {{--<option value="KH">Cambodia</option>--}}
-                {{--<option value="CM">Cameroon</option>--}}
-                {{--<option value="CA">Canada</option>--}}
-                {{--<option value="CV">Cape Verde</option>--}}
-                {{--<option value="KY">Cayman Islands</option>--}}
-                {{--<option value="CF">Central African Republic</option>--}}
-                {{--<option value="TD">Chad</option>--}}
-                {{--<option value="CL">Chile</option>--}}
-                {{--<option value="CN">China</option>--}}
-                {{--<option value="CX">Christmas Island</option>--}}
-                {{--<option value="CC">Cocos (Keeling) Islands</option>--}}
-                {{--<option value="CO">Colombia</option>--}}
-                {{--<option value="KM">Comoros</option>--}}
-                {{--<option value="CG">Congo</option>--}}
-                {{--<option value="CD">Congo, the Democratic Republic of the</option>--}}
-                {{--<option value="CK">Cook Islands</option>--}}
-                {{--<option value="CR">Costa Rica</option>--}}
-                {{--<option value="CI">Cote d'Ivoire</option>--}}
-                {{--<option value="HR">Croatia (Hrvatska)</option>--}}
-                {{--<option value="CU">Cuba</option>--}}
-                {{--<option value="CY">Cyprus</option>--}}
-                {{--<option value="CZ">Czech Republic</option>--}}
-                {{--<option value="DK">Denmark</option>--}}
-                {{--<option value="DJ">Djibouti</option>--}}
-                {{--<option value="DM">Dominica</option>--}}
-                {{--<option value="DO">Dominican Republic</option>--}}
-                {{--<option value="EC">Ecuador</option>--}}
-                {{--<option value="EG">Egypt</option>--}}
-                {{--<option value="SV">El Salvador</option>--}}
-                {{--<option value="GQ">Equatorial Guinea</option>--}}
-                {{--<option value="ER">Eritrea</option>--}}
-                {{--<option value="EE">Estonia</option>--}}
-                {{--<option value="ET">Ethiopia</option>--}}
-                {{--<option value="FK">Falkland Islands (Malvinas)</option>--}}
-                {{--<option value="FO">Faroe Islands</option>--}}
-                {{--<option value="FJ">Fiji</option>--}}
-                {{--<option value="FI">Finland</option>--}}
-                {{--<option value="FR">France</option>--}}
-                {{--<option value="GF">French Guiana</option>--}}
-                {{--<option value="PF">French Polynesia</option>--}}
-                {{--<option value="TF">French Southern Territories</option>--}}
-                {{--<option value="GA">Gabon</option>--}}
-                {{--<option value="GM">Gambia</option>--}}
-                {{--<option value="GE">Georgia</option>--}}
-                {{--<option value="DE">Germany</option>--}}
-                {{--<option value="GH">Ghana</option>--}}
-                {{--<option value="GI">Gibraltar</option>--}}
-                {{--<option value="GR">Greece</option>--}}
-                {{--<option value="GL">Greenland</option>--}}
-                {{--<option value="GD">Grenada</option>--}}
-                {{--<option value="GP">Guadeloupe</option>--}}
-                {{--<option value="GU">Guam</option>--}}
-                {{--<option value="GT">Guatemala</option>--}}
-                {{--<option value="GN">Guinea</option>--}}
-                {{--<option value="GW">Guinea-Bissau</option>--}}
-                {{--<option value="GY">Guyana</option>--}}
-                {{--<option value="HT">Haiti</option>--}}
-                {{--<option value="HM">Heard and Mc Donald Islands</option>--}}
-                {{--<option value="VA">Holy See (Vatican City State)</option>--}}
-                {{--<option value="HN">Honduras</option>--}}
-                {{--<option value="HK">Hong Kong</option>--}}
-                {{--<option value="HU">Hungary</option>--}}
-                {{--<option value="IS">Iceland</option>--}}
-                {{--<option value="IN">India</option>--}}
-                {{--<option value="ID">Indonesia</option>--}}
-                {{--<option value="IR">Iran (Islamic Republic of)</option>--}}
-                {{--<option value="IQ">Iraq</option>--}}
-                {{--<option value="IE">Ireland</option>--}}
-                {{--<option value="IL">Israel</option>--}}
-                {{--<option value="IT">Italy</option>--}}
-                {{--<option value="JM">Jamaica</option>--}}
-                {{--<option value="JP">Japan</option>--}}
-                {{--<option value="JO">Jordan</option>--}}
-                {{--<option value="KZ">Kazakhstan</option>--}}
-                {{--<option value="KE">Kenya</option>--}}
-                {{--<option value="KI">Kiribati</option>--}}
-                {{--<option value="KP">Korea, Democratic People's Republic of</option>--}}
-                {{--<option value="KR">Korea, Republic of</option>--}}
-                {{--<option value="KW">Kuwait</option>--}}
-                {{--<option value="KG">Kyrgyzstan</option>--}}
-                {{--<option value="LA">Lao People's Democratic Republic</option>--}}
-                {{--<option value="LV">Latvia</option>--}}
-                {{--<option value="LB">Lebanon</option>--}}
-                {{--<option value="LS">Lesotho</option>--}}
-                {{--<option value="LR">Liberia</option>--}}
-                {{--<option value="LY">Libyan Arab Jamahiriya</option>--}}
-                {{--<option value="LI">Liechtenstein</option>--}}
-                {{--<option value="LT">Lithuania</option>--}}
-                {{--<option value="LU">Luxembourg</option>--}}
-                {{--<option value="MO">Macau</option>--}}
-                {{--<option value="MK">Macedonia, The Former Yugoslav Republic of</option>--}}
-                {{--<option value="MG">Madagascar</option>--}}
-                {{--<option value="MW">Malawi</option>--}}
-                {{--<option value="MY">Malaysia</option>--}}
-                {{--<option value="MV">Maldives</option>--}}
-                {{--<option value="ML">Mali</option>--}}
-                {{--<option value="MT">Malta</option>--}}
-                {{--<option value="MH">Marshall Islands</option>--}}
-                {{--<option value="MQ">Martinique</option>--}}
-                {{--<option value="MR">Mauritania</option>--}}
-                {{--<option value="MU">Mauritius</option>--}}
-                {{--<option value="YT">Mayotte</option>--}}
-                {{--<option value="MX">Mexico</option>--}}
-                {{--<option value="FM">Micronesia, Federated States of</option>--}}
-                {{--<option value="MD">Moldova, Republic of</option>--}}
-                {{--<option value="MC">Monaco</option>--}}
-                {{--<option value="MN">Mongolia</option>--}}
-                {{--<option value="MS">Montserrat</option>--}}
-                {{--<option value="MA">Morocco</option>--}}
-                {{--<option value="MZ">Mozambique</option>--}}
-                {{--<option value="MM">Myanmar</option>--}}
-                {{--<option value="NA">Namibia</option>--}}
-                {{--<option value="NR">Nauru</option>--}}
-                {{--<option value="NP">Nepal</option>--}}
-                {{--<option value="NL">Netherlands</option>--}}
-                {{--<option value="AN">Netherlands Antilles</option>--}}
-                {{--<option value="NC">New Caledonia</option>--}}
-                {{--<option value="NZ">New Zealand</option>--}}
-                {{--<option value="NI">Nicaragua</option>--}}
-                {{--<option value="NE">Niger</option>--}}
-                {{--<option value="NG">Nigeria</option>--}}
-                {{--<option value="NU">Niue</option>--}}
-                {{--<option value="NF">Norfolk Island</option>--}}
-                {{--<option value="MP">Northern Mariana Islands</option>--}}
-                {{--<option value="NO">Norway</option>--}}
-                {{--<option value="OM">Oman</option>--}}
-                {{--<option value="PK">Pakistan</option>--}}
-                {{--<option value="PW">Palau</option>--}}
-                {{--<option value="PA">Panama</option>--}}
-                {{--<option value="PG">Papua New Guinea</option>--}}
-                {{--<option value="PY">Paraguay</option>--}}
-                {{--<option value="PE">Peru</option>--}}
-                {{--<option value="PH">Philippines</option>--}}
-                {{--<option value="PN">Pitcairn</option>--}}
-                {{--<option value="PL">Poland</option>--}}
-                {{--<option value="PT">Portugal</option>--}}
-                {{--<option value="PR">Puerto Rico</option>--}}
-                {{--<option value="QA">Qatar</option>--}}
-                {{--<option value="RE">Reunion</option>--}}
-                {{--<option value="RO">Romania</option>--}}
-                {{--<option value="RU">Russian Federation</option>--}}
-                {{--<option value="RW">Rwanda</option>--}}
-                {{--<option value="KN">Saint Kitts and Nevis</option>--}}
-                {{--<option value="LC">Saint LUCIA</option>--}}
-                {{--<option value="VC">Saint Vincent and the Grenadines</option>--}}
-                {{--<option value="WS">Samoa</option>--}}
-                {{--<option value="SM">San Marino</option>--}}
-                {{--<option value="ST">Sao Tome and Principe</option>--}}
-                {{--<option value="SA">Saudi Arabia</option>--}}
-                {{--<option value="SN">Senegal</option>--}}
-                {{--<option value="SC">Seychelles</option>--}}
-                {{--<option value="SL">Sierra Leone</option>--}}
-                {{--<option value="SG">Singapore</option>--}}
-                {{--<option value="SK">Slovakia (Slovak Republic)</option>--}}
-                {{--<option value="SI">Slovenia</option>--}}
-                {{--<option value="SB">Solomon Islands</option>--}}
-                {{--<option value="SO">Somalia</option>--}}
-                {{--<option value="ZA">South Africa</option>--}}
-                {{--<option value="GS">South Georgia and the South Sandwich Islands</option>--}}
-                {{--<option value="ES">Spain</option>--}}
-                {{--<option value="LK">Sri Lanka</option>--}}
-                {{--<option value="SH">St. Helena</option>--}}
-                {{--<option value="PM">St. Pierre and Miquelon</option>--}}
-                {{--<option value="SD">Sudan</option>--}}
-                {{--<option value="SR">Suriname</option>--}}
-                {{--<option value="SJ">Svalbard and Jan Mayen Islands</option>--}}
-                {{--<option value="SZ">Swaziland</option>--}}
-                {{--<option value="SE">Sweden</option>--}}
-                {{--<option value="CH">Switzerland</option>--}}
-                {{--<option value="SY">Syrian Arab Republic</option>--}}
-                {{--<option value="TW">Taiwan, Province of China</option>--}}
-                {{--<option value="TJ">Tajikistan</option>--}}
-                {{--<option value="TZ">Tanzania, United Republic of</option>--}}
-                {{--<option value="TH">Thailand</option>--}}
-                {{--<option value="TG">Togo</option>--}}
-                {{--<option value="TK">Tokelau</option>--}}
-                {{--<option value="TO">Tonga</option>--}}
-                {{--<option value="TT">Trinidad and Tobago</option>--}}
-                {{--<option value="TN">Tunisia</option>--}}
-                {{--<option value="TR">Turkey</option>--}}
-                {{--<option value="TM">Turkmenistan</option>--}}
-                {{--<option value="TC">Turks and Caicos Islands</option>--}}
-                {{--<option value="TV">Tuvalu</option>--}}
-                {{--<option value="UG">Uganda</option>--}}
-                {{--<option value="UA">Ukraine</option>--}}
-                {{--<option value="AE">United Arab Emirates</option>--}}
-                {{--<option value="GB">United Kingdom</option>--}}
-                {{--<option value="US">United States</option>--}}
-                {{--<option value="UM">United States Minor Outlying Islands</option>--}}
-                {{--<option value="UY">Uruguay</option>--}}
-                {{--<option value="UZ">Uzbekistan</option>--}}
-                {{--<option value="VU">Vanuatu</option>--}}
-                {{--<option value="VE">Venezuela</option>--}}
-                {{--<option value="VN">Viet Nam</option>--}}
-                {{--<option value="VG">Virgin Islands (British)</option>--}}
-                {{--<option value="VI">Virgin Islands (U.S.)</option>--}}
-                {{--<option value="WF">Wallis and Futuna Islands</option>--}}
-                {{--<option value="EH">Western Sahara</option>--}}
-                {{--<option value="YE">Yemen</option>--}}
-                {{--<option value="ZM">Zambia</option>--}}
-                {{--<option value="ZW">Zimbabwe</option>--}}
-            {{--</select>--}}
-        {{--</div>--}}
-        {{--<p class="hint"> Enter your account details below: </p>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Username</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Password</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="Password" name="password" /> </div>--}}
-        {{--<div class="form-group">--}}
-            {{--<label class="control-label visible-ie8 visible-ie9">Re-type Your Password</label>--}}
-            {{--<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Re-type Your Password" name="rpassword" /> </div>--}}
-        {{--<div class="form-group margin-top-20 margin-bottom-20">--}}
-            {{--<label class="check">--}}
-                {{--<input type="checkbox" name="tnc" /> I agree to the--}}
-                {{--<a href="javascript:;"> Terms of Service </a> &--}}
-                {{--<a href="javascript:;"> Privacy Policy </a>--}}
-            {{--</label>--}}
-            {{--<div id="register_tnc_error"> </div>--}}
-        {{--</div>--}}
-        {{--<div class="form-actions">--}}
-            {{--<button type="button" id="register-back-btn" class="btn btn-default">Back</button>--}}
-            {{--<button type="submit" id="register-submit-btn" class="btn btn-success uppercase pull-right">Submit</button>--}}
-        {{--</div>--}}
-    {{--</form>--}}
-    {{--<!-- END REGISTRATION FORM -->--}}
-{{--</div>--}}
-{{--<div class="copyright"> 2014 © Metronic. Admin Dashboard Template. </div>--}}
-{{--<!--[if lt IE 9]>--}}
-{{--<script src="../assets/global/plugins/respond.min.js"></script>--}}
-{{--<script src="../assets/global/plugins/excanvas.min.js"></script>--}}
-{{--<![endif]-->--}}
+    $('#login-form').on('submit',function(e){
+        e.preventDefault();
+        $.post('/login',$(this).serialize(),function(data){
 
-{{--<<!-- BEGIN CORE PLUGINS -->--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/js.cookie.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend/assets/global/plugins/uniform/jquery.uniform.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{secure_asset('backend//assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}" type="text/javascript"></script>--}}
-{{--<!-- END CORE PLUGINS -->--}}
+        }).fail(function(data){
+            for (var field in data.responseJSON) {
+                var el = $(':input[name="' + field + '"]');
+                el.parent('.form-group').addClass('has-error');
+                el.next('.help-block').text(data.responseJSON[field][0]);
+                el.next('.validation_error').text(data.responseJSON[field][0]);
+                swal("Error!",data.responseJSON[field][0] , "error");
+            }
+        }).success(function(){
+            location.href="/home";
+        })
+    })
 
-{{--<!-- BEGIN PAGE LEVEL PLUGINS -->--}}
-{{--<script src="{{asset('backend/assets/global/plugins/jquery-validation/js/jquery.validate.min.js')}}" type="text/javascript"></script>--}}
-{{--<script src="{{asset('backend//assets/global/plugins/jquery-validation/js/additional-methods.min.js')}}.." type="text/javascript"></script>--}}
-{{--<script src="{{asset('backend/assets/global/plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>--}}
-{{--<!-- END PAGE LEVEL PLUGINS -->--}}
-{{--<!-- BEGIN THEME GLOBAL SCRIPTS -->--}}
-{{--<script src="{{asset('backend/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>--}}
-{{--<!-- END THEME GLOBAL SCRIPTS -->--}}
-{{--<!-- BEGIN PAGE LEVEL SCRIPTS -->--}}
-{{--<script src="{{asset('backend/assets/pages/scripts/login.min.js')}}" type="text/javascript"></script>--}}
-{{--<!-- END PAGE LEVEL SCRIPTS -->--}}
-{{--<!-- BEGIN THEME LAYOUT SCRIPTS -->--}}
-{{--<!-- END THEME LAYOUT SCRIPTS -->--}}
-{{--<script>--}}
+   $('#store').on('click',function(){
+//       alert($('#store:checked').val())
+       var store_name = $('#store_name');
+       if($('#store:checked').val() == 'on'){
+           store_name.show();
+          store_name.attr('required',true);
+       }else {
+           store_name.hide();
+           store_name.removeAttr('required');
+       }
+   })
 
-{{--</script>--}}
-{{--</body>--}}
 
-{{--</html>--}}
+</script>
+<!-- //js -->
+</body>
+</html>

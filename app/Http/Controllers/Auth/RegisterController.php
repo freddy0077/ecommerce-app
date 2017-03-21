@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\StoreController;
+use App\ProductCategory;
+use App\Store;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -53,7 +56,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
         ]);
     }
 
@@ -79,7 +82,8 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
 
-      event( new Registered( $user = User::create([
+      event( new Registered(
+           $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
@@ -87,6 +91,17 @@ class RegisterController extends Controller
             'gender'    => $request->gender,
             'has_store' => $request->store == "on"? true: false
         ])));
+
+        if($request->store == "on"){
+
+            $user_id = User::where('email',$request->email)->first()->id;
+
+            Store::create([
+                'id' => Uuid::generate(),
+                'user_id' => $user_id,
+                'name' => $request->store_name
+            ]);
+        }
 
 //        event(new Registered($user = $this->create($request->all())));
 
@@ -103,7 +118,7 @@ class RegisterController extends Controller
 //        return $request->store;
 
         if ($request->exists('store') && $request->get('store') == 'on') {
-            return ['message'=>'/store/add-store','status'=>301];
+            return ['message'=>'/store/store-settings','status'=>301];
         }else{
             return ['message'=>'/','status'=>200];
         }

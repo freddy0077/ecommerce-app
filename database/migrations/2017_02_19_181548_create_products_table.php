@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('store_id');
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('description');

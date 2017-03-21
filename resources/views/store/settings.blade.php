@@ -117,6 +117,15 @@
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label class="control-label col-md-3">Image </label>
+                                                    <div class="col-md-4">
+                                                        {{--<div class="input-group">--}}
+                                                        <input type="file" class="form-control" name="image" id="image">
+                                                        <div class="help-block"> </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label class="control-label col-md-3">Phone Number </label>
                                                     <div class="col-md-4">
                                                         {{--<div class="input-group">--}}
