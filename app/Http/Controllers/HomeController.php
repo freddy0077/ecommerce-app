@@ -139,8 +139,8 @@ class HomeController extends Controller
     public function postLikeIt($product_id){
 
         $user_id = Auth::check() ? Auth::user()->id:"";
-        $product =Like::whereUserId($user_id)->whereProductId($product_id)->first();
-        if(!$product && Auth::check()) {
+        $product = Auth::check() ? Like::whereUserId($user_id)->whereProductId($product_id)->first():"";
+        if(Auth::check() && !$product ) {
             Like::create([
                 'id' => Uuid::generate(),
                 'user_id' => Auth::user()->id,
