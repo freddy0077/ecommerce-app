@@ -15,8 +15,6 @@ class CreateWatchedShopsTable extends Migration
     {
         Schema::create('watched_shops', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->uuid('store_id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

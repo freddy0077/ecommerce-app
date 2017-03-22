@@ -6,8 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "ext-gd": "*",
         "cviebrock/eloquent-sluggable": "^4.1",
         "davejamesmiller/laravel-breadcrumbs": "^3.0.2",
+        "get-stream/stream-laravel": "~2.2.6",
         "gloudemans/shoppingcart": "^2.3",
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
@@ -15,10 +17,9 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "leantony/laravel_modal": "dev-master",
+        "pusher/pusher-php-server": "^2.6",
         "watson/bootstrap-form": "^1.1",
-        "webpatser/laravel-uuid": "^2.0",
-        "ext-gd": "*",
-        "get-stream/stream-laravel": "~2.2.6"
+        "webpatser/laravel-uuid": "^2.0"
     },
 
 

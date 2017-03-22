@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WatchedShop extends Model
 {
     //
-    protected $fillable = ['id','user_id','product_id','action','store_id'];
+    protected $fillable = ['id','user_id','action','store_id'];
 
     protected $casts = ['id' =>'string'];
 }

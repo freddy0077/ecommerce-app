@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatMessageReceived;
 use App\Fancy;
 use App\Like;
 use App\Product;
@@ -65,38 +66,40 @@ class HomeController extends Controller
         return view('profile');
     }
 
-    public function getFeeds(){
+    public function getFeeds(Request $request){
         $activities = WatchedShop::whereUserId(Auth::user()->id)->get();
+
+        if($request->ajax()){
+            return view('partials.feed_partials',compact('activities'));
+        }
         return view('feeds',compact('activities'));
     }
 
+    public function getFetchFeeds(){
+        return view('partials.feed_partials');
+    }
     // category page view action
     public function getCategory(Request $request,$category_id){
 
-        $builder = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
+        $builder =  Product::leftJoin('stores','stores.user_id','=','products.user_id')
+            ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
-            ->leftjoin('stores','stores.id','=','products.store_id')
-            ->leftJoin('users','users.id','=','stores.user_id')
-            ->where('product_categories.id',$category_id);
+            ->where('product_categories.id',$category_id)
+            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+            ->orderBy('products.like_counts','desc');
 
-         $products = $builder
-            ->selectRaw('products.*,sub_categories.name as category_name,
-              product_categories.name as product_category_name,product_categories.slug as category_slug,stores.id as store_id,stores.name as store_name')
-            ->paginate(36);
+        $products = $builder->take(10)->get();
+
+          $second_set = $builder->skip(10)->take(10)->paginate();
+
+         $nextpageurl = $second_set->nextpageurl();
 
         if($request->ajax()){
-            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
+            return view('market.partials.more_popular_products',compact('products','second_set','nextpageurl'));
         }
 
 
-//          $f = new \NumberFormatter("en", \NumberFormatter::SPELLOUT);
-
-//       $category = ProductCategory::where('slug',$category_slug)->first();
-
-        $categories = ProductCategory::all();
-
-
-        return view('market.category',compact('products','categories'));
+        return view('market.category',compact('products','categories','category_id','second_set','nextpageurl'));
     }
 
     public function getSubCategory(Request $request,$id){
@@ -196,6 +199,9 @@ class HomeController extends Controller
             ]);
             $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
+
+            event(new ChatMessageReceived("testing for the first time",$user));
+
             return ['status' => 200, 'image_url' => asset("images/products/$builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
         }elseif(Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id == $store_id){
@@ -206,6 +212,8 @@ class HomeController extends Controller
         }else {
             return ['status' => 401,'message' => 'Log in to watch a shop'];
         }
+
+
 
 
 

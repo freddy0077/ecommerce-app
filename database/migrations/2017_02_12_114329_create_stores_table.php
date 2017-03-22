@@ -27,6 +27,8 @@ class CreateStoresTable extends Migration
             $table->string('city')->nullable();
             $table->enum('business_type', ['Sole Proprietor', 'Corporation','Non Profit','Partnership','LLC'])->nullable();
             $table->text('about')->nullable();
+            $table->boolean('enabled')->default(false);
+            $table->string('colour')->nullable();
             $table->timestamps();
         });
     }

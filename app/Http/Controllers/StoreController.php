@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feed;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\StoreRequest;
 use App\Notifications\NewOrder;
@@ -261,9 +262,9 @@ class StoreController extends Controller
 
         }
         $categories = ProductCategory::all('id','name');
-        $store_id = Store::where('user_id',Auth::user()->id)->first()->id;
+        $store_id = Store::where('user_id',Auth::user()->id)->first();
 
-         $productCounts = Product::whereStoreId($store_id)->count();
+         $productCounts = Product::whereStoreId($store_id->id)->count();
          $products_limit = $this->threshold-$productCounts;
 
 

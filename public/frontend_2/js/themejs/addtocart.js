@@ -49,6 +49,7 @@
                     '<h3><a href="#">'+data.message+'!</h3>',
                     'success');
                 $('.like-counts-'+product_id).text(data.likes)
+                $('#like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
 
             });
 

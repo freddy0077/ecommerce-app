@@ -116,6 +116,59 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group last">
+                                                    <label class="control-label col-md-3"></label>
+                                                    <div class="col-md-4">
+                                                        <a class="btn dark btn-outline" href="#form_modal3" data-toggle="modal"> Customize shop
+                                                            <i class="fa fa-share"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div id="form_modal3" class="modal fade" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                                <h4 class="modal-title">Customize Shop </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="#" class="form-horizontal">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">Colour</label>
+                                                                        <div class="col-md-3">
+                                                                            <input type="text" class="colorpicker-default form-control" value="#000" /> </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label col-md-3">RGBA</label>
+                                                                        <div class="col-md-3">
+                                                                            <input type="text" class="colorpicker-rgba form-control" value="rgb(0,194,255,0.78)" data-color-format="rgba" /> </div>
+                                                                    </div>
+                                                                    <div class="form-group last">
+                                                                        <label class="control-label col-md-3">As Component</label>
+                                                                        <div class="col-md-3">
+                                                                            <div class="input-group color colorpicker-default" data-color="#3865a8" data-color-format="rgba">
+                                                                                <input type="text" class="form-control" value="#3865a8" readonly>
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button">
+                                                                                    <i style="background-color: #3865a8;"></i>&nbsp;</button>
+                                                                            </span>
+                                                                            </div>
+                                                                            <!-- /input-group -->
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn dark btn-outline" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                                <button class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Image </label>
                                                     <div class="col-md-4">

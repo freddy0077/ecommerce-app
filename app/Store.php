@@ -11,7 +11,7 @@ class Store extends Model
 {
     use Sluggable;
 
-    protected $fillable = ['id','user_id', 'name', 'email', 'phone_number' ,'address', 'domain', 'city','business_type','about'];
+    protected $fillable = ['id','user_id', 'name', 'email', 'phone_number' ,'address', 'domain', 'city','business_type','about','colour'];
     //
 
     protected $casts = ['id' =>'string'];

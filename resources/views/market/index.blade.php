@@ -89,7 +89,7 @@
 
             var page = '{{(int)$products->currentpage()}}';
 
-            var url = "{{url('/')}}/"+'?page=';
+            var url = '{{url("/category/$category_id")}}/'+'?page=';
 
 
         $('#load-more').on('click',function(){

@@ -53,6 +53,12 @@
             background-color: rgba(255,255,255,0.0);
             color: white;
         }
+
+        .header-bottom {
+            background: #000;
+            min-height: 45px;
+            margin-bottom: 15px;
+        }
     </style>
 
 

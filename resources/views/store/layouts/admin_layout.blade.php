@@ -40,7 +40,13 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME LAYOUT STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{asset('backend/assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/assets/global/plugins/jquery-minicolors/jquery.minicolors.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
     <link rel="shortcut icon" href="{{asset('backend/favicon.ico')}}" /> </head>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- END HEAD -->
 
 <body class="page-container-bg-solid page-boxed">
@@ -263,9 +269,39 @@
 <script src="{{secure_asset('backend/assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
 <script src="{{secure_asset('backend/assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script>
 <script src="{{secure_asset('backend/assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" type="text/javascript"></script>
 
-<!-- END THEME LAYOUT SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{asset('backend/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js')}}" type="text/javascript"></script>
+<script src="{{asset('backend/assets/global/plugins/jquery-minicolors/jquery.minicolors.min.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN THEME GLOBAL SCRIPTS -->
+<script src="{{asset('backend/assets/global/scripts/app.min.js')}}" type="text/javascript"></script>
+<!-- END THEME GLOBAL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{asset('backend/assets/pages/scripts/components-color-pickers.min.js')}}" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+
+<script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+<script>
+
+    // Enable pusher logging - don't include this in production
+//    Pusher.logToConsole = true;
+//
+//    var pusher = new Pusher('b0fb81b15a4dfff2c4f4', {
+//        cluster: 'eu',
+//        encrypted: true
+//    });
+//
+//    var channel = pusher.subscribe('chat-room.1');
+//    channel.bind('App\\Events\\ChatMessageReceived', function(data) {
+//        alert(data.chatMessage.message);
+//    });
+</script>
 
 @yield('scripts')
 

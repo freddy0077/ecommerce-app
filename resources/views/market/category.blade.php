@@ -2,6 +2,30 @@
 
 @section('scripts')
 
+        <script>
+            var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
+
+{{--            alert('{{(int)$products->currentpage()+1}}')--}}
+
+            var page = '{{(int)$second_set->currentpage()}}';
+
+            var url = '{{url("/category/$category_id")}}/'+'?page=';
+
+
+            $('#load-more').on('click',function() {
+                page++
+
+                $.ajax({
+                    url: url + page,
+                    dataType: "html",
+                    success: function (data) {
+                        $('#load').append(data);
+                    }
+                });
+            })
+
+        </script>
+
 @endsection
 
 @section('content')
@@ -69,11 +93,11 @@
                 <div class="col-xs-12 clearfix">
 
                     <div class="module so-extraslider--new titleLine">
-                        <h3 class="modtitle">Products by Popularity</h3>
+                        <h3 class="modtitle">All Products</h3>
                         <div id="so_extraslider1" >
 
                             <!-- Begin extraslider-inner -->
-                            <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                            <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
 
                                 @foreach($products as $product)
                                         <!--Begin Items-->
@@ -112,10 +136,10 @@
                                             </div>
 
                                             <div class="button-group">
-                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '1');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                <button class="wishlist" type="button" onclick="fancy.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                <button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-thumbs-up"></i>{{$product->like_counts}}  </button>
-                                                <button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
+                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
+                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
+                                                <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
 
                                             </div>
                                         </div><!-- right block -->
@@ -123,9 +147,7 @@
                                 </div>
 
                                 @endforeach
-
                                         <!--End Items-->
-
                             </div>
                             <!--End extraslider-inner -->
 
@@ -133,9 +155,9 @@
                             <br>
 
                             <!-- Begin extraslider-inner -->
-                            <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                            <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
 
-                                @foreach($products as $product)
+                                @foreach($second_set as $product)
                                         <!--Begin Items-->
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
@@ -145,7 +167,7 @@
                                                 <img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />
                                             </div>
                                             <!--Sale Label-->
-                                            <span class="label label-sale">Sale</span>
+                                            {{--<span class="label label-sale">Sale</span>--}}
                                             <span class="label label-new">New</span>
 
                                             <!--full quick view block-->
@@ -173,9 +195,9 @@
 
                                             <div class="button-group">
                                                 <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                <button class="wishlist" type="button" onclick="fancy.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                <button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-thumbs-up"></i>{{$product->like_counts}}  </button>
-                                                <button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
+                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
+                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
+                                                <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
 
                                             </div>
                                         </div><!-- right block -->
@@ -186,6 +208,17 @@
                                         <!--End Items-->
                             </div>
                             <!--End extraslider-inner -->
+
+                            <br>
+                            <br>
+
+                            <div id="load"></div>
+
+
+                            <button class="text-center btn btn-default" id="load-more">Load More ...</button>
+
+                            <br>
+
                         </div>
                     </div>
                 </div>

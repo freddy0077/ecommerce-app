@@ -40,6 +40,8 @@ Route::get('/profile','HomeController@getProfile');
 
 Route::get('/feeds','HomeController@getFeeds');
 
+Route::get('/fetch-feeds','HomeController@getFetchFeeds');
+
 Route::get('/category/{name}', 'HomeController@getCategory');
 
 Route::get('/sub-category/{name}', 'HomeController@getSubCategory');

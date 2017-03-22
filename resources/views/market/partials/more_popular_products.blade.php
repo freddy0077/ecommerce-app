@@ -8,57 +8,57 @@
     @endif
 </script>
 
-<div class="row">
-    @foreach($products as $product)
-        <div class="col-md-3 col-sm-4 col-xs-4">
-            <div class="owl-item">
-                <div class="post post-variant-1 post-variant-1-short box post-variant-1-equal-height">
-                    <div>
-                        <div class="post-media-wrap">
-                            <a href="#">
-                                {{--<img src='{{secure_asset("images/$product->image")}}' width="370" height="231" alt="" class="img-responsive post-image"/>--}}
-                                <img src='{{secure_asset("images/another_shoes.jpg")}}' width="370" height="231" alt="" class="img-responsive post-image"/>
-                            </a>
-                            <ul class="post-categories list-inline-0">
-                                <li><a href="#"><span class="label label-primary">{{$product->category_name}}</span></a></li>
-                            </ul>
+<!-- Begin extraslider-inner -->
+<div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+
+    @foreach($second_set as $product)
+            <!--Begin Items-->
+    <div class="ltabs-item product-layout">
+        <div class="product-item-container">
+            <div class="left-block">
+                <div class="product-image-container second_img">
+                    <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />
+                    <img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />
+                </div>
+                <!--Sale Label-->
+                {{--<span class="label label-sale">Sale</span>--}}
+                <span class="label label-new">New</span>
+
+                <!--full quick view block-->
+                <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
+                <!--end full quick view block-->
+            </div>
+            <div class="right-block">
+                <div class="caption">
+                    <h4><a href="">{{$product->name}} </a></h4>
+                    <div class="ratings">
+                        <div class="rating-box">
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
                         </div>
-                        <div class="post-content-wrap" style="padding-bottom: 10px;">
-                            <div class="row">
-                                <div class="col-sm-6 price-tag" style="margin-top:-15px; margin-left: -14px;"> GHS {{$product->price}}</div>
-                                <div class="col-sm-6" style="margin-top:-15px;">
-                                    <a href="#">
-                                        <i class="fa fa-thumbs-up like" data-id ="{{$product->id}}" aria-hidden="true"></i>
-                                    </a>
-                                    {{--<a href="">&#x263a;</a>--}}
-                                    <span class="counts-{{$product->id}}">({{$product->like_counts}})</span>
-                                    <a href="#"><img  src="{{secure_asset('images/fancy1.png')}}"  onclick="fancy('{{$product->id}}')" class="img-responsive" style="width:20px" height="20px" /></a>
-                                </div>
+                    </div>
 
-
-                                <h6>
-                                    <a class="text-center" href="#"> {{$product->name}}</a>
-                                    <?php  ?>
-                                    {{--<button  onclick="fancy('{{$product->id}}')"> <i class="fancy" ></i>fancy it</button>--}}
-                                </h6>
-                                <div><a href=""><i class="fa fa-eye"></i></a> Listed in
-                                    <a href='{{secure_url("/stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a>
-                                </div>
-                                {{--<div class="col-sm-6"> price: {{$product->price}}</div>--}}
-                                {{--<div class="col-sm-6"><a href=""><i class="fa fa-thumbs-up" aria-hidden="true"></i></a><a href="">&#x263a;</a>({{$product->like_counts}})</div>--}}
-                            </div>
-
-                            {{--<div class="small text-gray-dark post-meta-author">--}}
-                            {{--<a href=""> <i class="fa fa-eye" aria-hidden="true"></i></a>--}}
-                            {{--Listed <span class="text-primary"> in <a href="#"></a></span>--}}
-                            {{--</div>--}}
-                        </div>
-
+                    <div class="price">
+                        <span class="price-new">GHS {{$product->price}}</span>
+                        <span class="price-old">GHS {{$product->price}}</span>
                     </div>
                 </div>
-            </div>
 
-            <br>
+                <div class="button-group">
+                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                    <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
+                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
+                    <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
+
+                </div>
+            </div><!-- right block -->
         </div>
+    </div>
+
     @endforeach
+            <!--End Items-->
 </div>
+<!--End extraslider-inner -->

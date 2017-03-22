@@ -100,6 +100,15 @@ class ProductsTableSeeder extends Seeder
             'user_id'      => 1,
             'domain' => 'evergreen-store2@shopaholicks.com'
         ]);
+
+        \App\Store::create([
+            'id' => \Webpatser\Uuid\Uuid::generate(),
+            'name' => 'Evanacus',
+            'email' => 'evanacus@gmail.com',
+            'phone_number' => '0240120250',
+            'user_id'      => 2,
+            'domain' => 'evergreen-store2@shopaholicks.com'
+        ]);
 //
 //
 //
