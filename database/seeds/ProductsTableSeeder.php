@@ -44,7 +44,7 @@ class ProductsTableSeeder extends Seeder
             'price' => $price,
             'description'=>"",
             'ad' => true,
-            "image" => 'carousel-01.jpg',
+            "image" => 'soap.jpg',
             'store_id' => $store_id,
             'sub_category_id' => $sub_category_id
         ]);
@@ -109,8 +109,26 @@ class ProductsTableSeeder extends Seeder
             'user_id'      => 2,
             'domain' => 'evergreen-store2@shopaholicks.com'
         ]);
-//
-//
+
+        \App\Package::create([
+            'id' => \Webpatser\Uuid\Uuid::generate(),
+            'name' => 'Basic Subscription',
+            'charge' => 25,
+            'description' => 'Basic subscription (50 products ) for 30 days',
+            'number_of_products' => 50,
+            'duration' => 30,
+            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/73b1fec15e149ed17391af7b'
+        ]);
+
+        \App\Package::create([
+            'id' => \Webpatser\Uuid\Uuid::generate(),
+            'name' => '90 Day Subscription',
+            'charge' => 50,
+            'description' => '90 Day subscription (50 products ) for 90 days',
+            'number_of_products' => 50,
+            'duration' => 90,
+            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/5f59dbe3ee305b1cf425f921'
+        ]);
 //
         foreach($this->mainCategories as $key=>$category) {
 

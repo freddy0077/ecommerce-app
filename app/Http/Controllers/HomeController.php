@@ -46,6 +46,10 @@ class HomeController extends Controller
 
         $second_set = $builder->skip(10)->take(10)->get();
 
+        $second_set = $builder->skip(10)->take(10)->paginate();
+
+        $nextpageurl = $second_set->nextpageurl();
+
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
             ->distinct()
@@ -55,11 +59,11 @@ class HomeController extends Controller
             ->get();
 
         if($request->ajax()){
-            return view('market.partials.more_popular_products',compact('products'));
+            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
         }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index_3',compact('products','categories','second_set'));
+        return view('market.index_3',compact('products','categories','second_set','nextpageurl'));
     }
 
     public function getProfile(){
@@ -68,11 +72,13 @@ class HomeController extends Controller
 
     public function getFeeds(Request $request){
         $activities = WatchedShop::whereUserId(Auth::user()->id)->get();
+        $user = Auth::user();
 
         if($request->ajax()){
             return view('partials.feed_partials',compact('activities'));
         }
-        return view('feeds',compact('activities'));
+
+        return view('feeds',compact('activities','user'));
     }
 
     public function getFetchFeeds(){
@@ -156,6 +162,10 @@ class HomeController extends Controller
                 'like_counts' => $product->like_counts + 1
             ]);
 
+            $user = Auth::user();
+
+            event(new ChatMessageReceived("$user->name just liked a product",$user));
+
             return ['message' => 'You just liked a product', 'status' => 200, 'likes' => $product->like_counts];
         }
 
@@ -200,7 +210,7 @@ class HomeController extends Controller
             $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
 
-            event(new ChatMessageReceived("testing for the first time",$user));
+            event(new ChatMessageReceived("$user->name just followed your shop",$user));
 
             return ['status' => 200, 'image_url' => asset("images/products/$builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 

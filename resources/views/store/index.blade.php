@@ -16,6 +16,8 @@
     ============================================ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicon
     ============================================ -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
@@ -55,7 +57,8 @@
         }
 
         .header-bottom {
-            background: #000;
+            /*background: #000;*/
+            background: {{$store->colour}};
             min-height: 45px;
             margin-bottom: 15px;
         }
@@ -268,7 +271,7 @@
                                                             <span></span>
                                                             <span></span>
                                                         </div>
-                                                        All Categories
+                                                       MarketPlace
                                                         <i class="fa pull-right arrow-circle fa-chevron-circle-up"></i>
                                                     </div>
                                                 </div>
@@ -420,7 +423,8 @@
                             <div class="col-sm-12">
                                 <div class="banners">
                                     <div>
-                                        <a  href="#"><img src="{{asset('frontend_2/image/demo/shop/category/electronic-cat.png')}}" alt="Apple Cinema 30&quot;"><br></a>
+{{--                                        <a  href="#"><img src="{{asset('frontend_2/image/demo/shop/category/electronic-cat.png')}}" alt="Apple Cinema 30&quot;"><br></a>--}}
+                                        <a  href="#"><img src="https://placehold.it/870x260" alt="Apple Cinema 30&quot;"><br></a>
                                     </div>
                                 </div>
 
@@ -439,43 +443,56 @@
                                 </div>
                             </div>
                             <div class="short-by-show form-inline text-right col-md-7 col-sm-8 col-xs-12">
-                                <div class="form-group short-by">
-                                    <label class="control-label" for="input-sort">Sort By:</label>
-                                    <select id="input-sort" class="form-control"
-                                            onchange="location = this.value;">
-                                        <option value="" selected="selected">Default</option>
-                                        <option value="">Name (A - Z)</option>
-                                        <option value="">Name (Z - A)</option>
-                                        <option value="">Price (Low &gt; High)</option>
-                                        <option value="">Price (High &gt; Low)</option>
-                                        <option value="">Rating (Highest)</option>
-                                        <option value="">Rating (Lowest)</option>
-                                        <option value="">Model (A - Z)</option>
-                                        <option value="">Model (Z - A)</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" for="input-limit">Show:</label>
-                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
-                                        <option value="" selected="selected">9</option>
-                                        <option value="">25</option>
-                                        <option value="">50</option>
-                                        <option value="">75</option>
-                                        <option value="">100</option>
-                                    </select>
-                                </div>
+                                {{--<div class="form-group short-by">--}}
+                                    {{--<label class="control-label" for="input-sort">Sort By:</label>--}}
+                                    {{--<select id="input-sort" class="form-control"--}}
+                                            {{--onchange="location = this.value;">--}}
+                                        {{--<option value="" selected="selected">Default</option>--}}
+                                        {{--<option value="">Name (A - Z)</option>--}}
+                                        {{--<option value="">Name (Z - A)</option>--}}
+                                        {{--<option value="">Price (Low &gt; High)</option>--}}
+                                        {{--<option value="">Price (High &gt; Low)</option>--}}
+                                        {{--<option value="">Rating (Highest)</option>--}}
+                                        {{--<option value="">Rating (Lowest)</option>--}}
+                                        {{--<option value="">Model (A - Z)</option>--}}
+                                        {{--<option value="">Model (Z - A)</option>--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
+                                {{--<div class="form-group">--}}
+                                    {{--<label class="control-label" for="input-limit">Show:</label>--}}
+                                    {{--<select id="input-limit" class="form-control" onchange="location = this.value;">--}}
+                                        {{--<option value="" selected="selected">9</option>--}}
+                                        {{--<option value="">25</option>--}}
+                                        {{--<option value="">50</option>--}}
+                                        {{--<option value="">75</option>--}}
+                                        {{--<option value="">100</option>--}}
+                                    {{--</select>--}}
+                                {{--</div>--}}
                             </div>
-                            <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
-                                <ul class="pagination">
-                                    <li class="active"><span>1</span></li>
-                                    <li><a href="#">2</a></li><li><a href="#">&gt;</a></li>
-                                    <li><a href="#">&gt;|</a></li>
-                                </ul>
-                            </div>
+                            {{--<div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">--}}
+                                {{--<ul class="pagination">--}}
+                                    {{--<li class="active"><span>1</span></li>--}}
+                                    {{--<li><a href="#">2</a></li><li><a href="#">&gt;</a></li>--}}
+                                    {{--<li><a href="#">&gt;|</a></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                     <!-- //end Filters -->
                     <!--changed listings-->
+
+                    @if(!count($products))
+                        <div class="alert alert-block alert-info fade in">
+                            <button type="button" class="close" data-dismiss="alert"></button>
+                            <h4 class="alert-heading">NO PRODUCTS IN THIS STORE</h4>
+                            {{--<p> You have currently not stored any product yet !</p>--}}
+                            <p>
+                                {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
+                                {{--<a class="btn dark" href="{{url('store/quick-add-products')}}"> Add More Products </a>--}}
+                            </p>
+                        </div>
+
+                    @else
                     <div class="products-list row grid">
                         @foreach($products as $product)
                         <div class="product-layout col-md-4 col-sm-6 col-xs-12 ">
@@ -541,8 +558,7 @@
 
                         @endforeach
 
-
-
+                        @endif
                     </div>					<!--// End Changed listings-->
                     <!-- Filters -->
                     <div class="product-filter product-filter-bottom filters-panel" >

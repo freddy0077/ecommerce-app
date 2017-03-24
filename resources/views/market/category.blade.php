@@ -92,6 +92,19 @@
             <div id="content" class="clearfix">
                 <div class="col-xs-12 clearfix">
 
+
+                    @if(!count($products))
+                        <div class="alert alert-block alert-info fade in">
+                            <button type="button" class="close" data-dismiss="alert"></button>
+                            <h4 class="alert-heading">NO PRODUCT IN THIS CATEGORY</h4>
+                            {{--<p> You have currently not stored any product yet !</p>--}}
+                            <p>
+                                {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
+                                {{--<a class="btn dark" href="{{url('store/quick-add-products')}}"> Add More Products </a>--}}
+                            </p>
+                        </div>
+                    @else
+
                     <div class="module so-extraslider--new titleLine">
                         <h3 class="modtitle">All Products</h3>
                         <div id="so_extraslider1" >
@@ -215,12 +228,15 @@
                             <div id="load"></div>
 
 
+
                             <button class="text-center btn btn-default" id="load-more">Load More ...</button>
 
                             <br>
 
                         </div>
                     </div>
+
+                        @endif
                 </div>
             </div>
         </div>

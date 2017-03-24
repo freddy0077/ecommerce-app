@@ -8,11 +8,15 @@
     @endif
 </script>
 
+<div class="row">
 <!-- Begin extraslider-inner -->
-<div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+<div class="so-extraslider products-list grid owl2-carousel owl2-theme owl2-loaded owl2-responsive-768"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
 
     @foreach($second_set as $product)
             <!--Begin Items-->
+    {{--<div class="owl2-item" style="width: 223.333px">--}}
+    <div class="owl2-item col-md-3">
+
     <div class="ltabs-item product-layout">
         <div class="product-item-container">
             <div class="left-block">
@@ -58,7 +62,11 @@
         </div>
     </div>
 
+        </div>
+
     @endforeach
             <!--End Items-->
 </div>
 <!--End extraslider-inner -->
+
+</div>

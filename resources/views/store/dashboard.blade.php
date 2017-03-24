@@ -463,6 +463,7 @@
                         </div>
                         <div class="col-md-6">
                             <!-- Begin: life time stats -->
+
                             <!-- BEGIN PORTLET-->
                             <div class="portlet light ">
                                 <div class="portlet-title tabbable-line">
@@ -488,26 +489,26 @@
                                             <div id="statistics_2" class="chart"> </div>
                                         </div>
                                     </div>
-                                    <div class="well margin-top-20">
-                                        <div class="row">
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-success"> Revenue: </span>
-                                                <h3>$1,234,112.20</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-info"> Tax: </span>
-                                                <h3>$134,90.10</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-danger"> Shipment: </span>
-                                                <h3>$1,134,90.10</h3>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
-                                                <span class="label label-warning"> Orders: </span>
-                                                <h3>235090</h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="well margin-top-20">--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-md-3 col-sm-3 col-xs-6 text-stat">--}}
+                                                {{--<span class="label label-success"> Revenue: </span>--}}
+                                                {{--<h3>$1,234,112.20</h3>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-md-3 col-sm-3 col-xs-6 text-stat">--}}
+                                                {{--<span class="label label-info"> Tax: </span>--}}
+                                                {{--<h3>$134,90.10</h3>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-md-3 col-sm-3 col-xs-6 text-stat">--}}
+                                                {{--<span class="label label-danger"> Shipment: </span>--}}
+                                                {{--<h3>$1,134,90.10</h3>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-md-3 col-sm-3 col-xs-6 text-stat">--}}
+                                                {{--<span class="label label-warning"> Orders: </span>--}}
+                                                {{--<h3>235090</h3>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                             <!-- End: life time stats -->

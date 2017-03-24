@@ -1,7 +1,13 @@
 @extends('store.layouts.admin_layout')
 
 @section('scripts')
+    <link href="{{asset('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet" type="text/css" />
+
+    <script src="{{asset('backend/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js')}}" type="text/javascript"></script>
+
     <script>
+
+
 
 //        $(document).ready(function(){
             $('#name').on('change',function(){
@@ -10,6 +16,14 @@
                 $('#domain').val(str+'.shopaholicks.com')
             })
 //        })
+
+
+        $('#customize-shop').on('click',function(e){
+            e.preventDefault();
+            $.post($(this).attr('action'),$(this).serialize(),function(){
+
+            });
+        });
 
 
         $("#settings-form").on('submit',(function(e) {
@@ -28,6 +42,8 @@
                     el.parent('.form-group').addClass('has-error');
                     el.next('.help-block').text(data.responseJSON[field][0]);
                     el.next('.validation_error').text(data.responseJSON[field][0]);
+                    swal("Error!", data.responseJSON[field][0], "error");
+
                 }
             }).success(function(){
                 swal("Good job!", 'you have successfully saved settings reloading page ... !', "success");
@@ -37,6 +53,14 @@
 
             });
         }));
+
+
+        $('#upload').hide();
+
+        $('#change-image').on('click',function(){
+            $('#upload').show();
+        })
+
 
     </script>
 @endsection
@@ -116,6 +140,14 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Domain</label>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control" name="domain" id="domain" readonly value="{{isset($store->domain) ? $store->domain : ''}}">
+                                                        <span class="help-block">  </span>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group last">
                                                     <label class="control-label col-md-3"></label>
                                                     <div class="col-md-4">
@@ -133,35 +165,35 @@
                                                                 <h4 class="modal-title">Customize Shop </h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="#" class="form-horizontal">
-                                                                    <div class="form-group">
+                                                                {{--<form action="#" class="form-horizontal">--}}
+                                                                    <div class="form-group last">
                                                                         <label class="control-label col-md-3">Colour</label>
                                                                         <div class="col-md-3">
-                                                                            <input type="text" class="colorpicker-default form-control" value="#000" /> </div>
+                                                                            <input type="text" class="colorpicker-default form-control" name="colour" value="{{$store->colour}}" /> </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label class="control-label col-md-3">RGBA</label>
-                                                                        <div class="col-md-3">
-                                                                            <input type="text" class="colorpicker-rgba form-control" value="rgb(0,194,255,0.78)" data-color-format="rgba" /> </div>
-                                                                    </div>
-                                                                    <div class="form-group last">
-                                                                        <label class="control-label col-md-3">As Component</label>
-                                                                        <div class="col-md-3">
-                                                                            <div class="input-group color colorpicker-default" data-color="#3865a8" data-color-format="rgba">
-                                                                                <input type="text" class="form-control" value="#3865a8" readonly>
-                                                                            <span class="input-group-btn">
-                                                                                <button class="btn default" type="button">
-                                                                                    <i style="background-color: #3865a8;"></i>&nbsp;</button>
-                                                                            </span>
-                                                                            </div>
-                                                                            <!-- /input-group -->
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
+                                                                    {{--<div class="form-group">--}}
+                                                                        {{--<label class="control-label col-md-3">RGBA</label>--}}
+                                                                        {{--<div class="col-md-3">--}}
+                                                                            {{--<input type="text" class="colorpicker-rgba form-control" value="rgb(0,194,255,0.78)" data-color-format="rgba" /> </div>--}}
+                                                                    {{--</div>--}}
+                                                                    {{--<div class="form-group last">--}}
+                                                                        {{--<label class="control-label col-md-3">As Component</label>--}}
+                                                                        {{--<div class="col-md-3">--}}
+                                                                            {{--<div class="input-group color colorpicker-default" data-color="#3865a8" data-color-format="rgba">--}}
+                                                                                {{--<input type="text" class="form-control" value="#3865a8" readonly>--}}
+                                                                            {{--<span class="input-group-btn">--}}
+                                                                                {{--<button class="btn default" type="button">--}}
+                                                                                    {{--<i style="background-color: #3865a8;"></i>&nbsp;</button>--}}
+                                                                            {{--</span>--}}
+                                                                            {{--</div>--}}
+                                                                            {{--<!-- /input-group -->--}}
+                                                                        {{--</div>--}}
+                                                                    {{--</div>--}}
+                                                                {{--</form>--}}
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button class="btn dark btn-outline" data-dismiss="modal" aria-hidden="true">Close</button>
-                                                                <button class="btn green btn-primary" data-dismiss="modal">Save changes</button>
+                                                                {{--<button class="btn dark btn-outline" data-dismiss="modal" aria-hidden="true">Close</button>--}}
+                                                                <button class="btn green btn-primary" type="button" data-dismiss="modal">Save changes</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,13 +201,85 @@
 
 
 
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Image </label>
-                                                    <div class="col-md-4">
+                                                {{--<div class="form-group">--}}
+                                                    {{--<label class="control-label col-md-3">Image </label>--}}
+                                                    {{--<div class="col-md-4">--}}
                                                         {{--<div class="input-group">--}}
-                                                        <input type="file" class="form-control" name="image" id="image">
-                                                        <div class="help-block"> </div>
+                                                        {{--<input type="file" class="form-control" name="image" id="image">--}}
+                                                        {{--<div class="help-block"> </div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Image</label>
+                                                    <div class="col-md-4">
+                                                        <img src="/images/stores/{{$store->image}}"  class="img-thumbnail"><br><br>
+                                                        <span><button type="button" id="change-image" class="btn btn-default">change</button></span>
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group" id="upload">
+                                                    <label class="control-label col-md-3">Image Upload</label>
+                                                    <div class="col-md-9">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                                            <div>
+                                                                    <span class="btn red btn-outline btn-file">
+                                                                        <span class="fileinput-new"> Select image </span>
+                                                                        <span class="fileinput-exists"> Change </span>
+
+                                                                        <input type="file" name="image" id="image"> </span>
+
+                                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                                {{--<a href="javascript:;" class="btn green fileinput-exists" id="crop-image"> Edit </a>--}}
+                                                                <span class="help-block">  </span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix margin-top-10">
+                                                            {{--<span class="label label-success">NOTE!</span> Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead. </div>--}}
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="modal fade" tabindex="-1" role="dialog" id="crop-image-modal">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Modal title</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{--</div>--}}
+
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-7">
+                                                                                <!-- This is the image we're attaching Jcrop to -->
+                                                                                <img  id="demo8" alt="Jcrop Example" class="img-responsive"/>
+                                                                            </div>
+                                                                            {{--<img width="500" id="demo8" alt="Jcrop Example" /> </div>--}}
+                                                                            <div class="col-sm-5">
+                                                                                <input type="hidden" id="crop_x" name="x" />
+                                                                                <input type="hidden" id="crop_y" name="y" />
+                                                                                <input type="hidden" id="crop_w" name="w" />
+                                                                                <input type="hidden" id="crop_h" name="h" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+
                                                 </div>
 
                                                 <div class="form-group">
@@ -224,13 +328,6 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label class="control-label col-md-3">Domain</label>
-                                                    <div class="col-md-4">
-                                                        <input type="text" class="form-control" name="domain" id="domain" readonly value="{{isset($store->domain) ? $store->domain : ''}}">
-                                                        <span class="help-block">  </span>
-                                                    </div>
-                                                </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Business type</label>

@@ -74,7 +74,6 @@ Route::group(['prefix' => 'stores'], function () {
 
     Route::get('/sub-category/{slug}/{user_id}/{category_id}','StoreController@getStoreSubCategory');
 
-
 });
 
 Route::group(['prefix' => 'store'], function () {

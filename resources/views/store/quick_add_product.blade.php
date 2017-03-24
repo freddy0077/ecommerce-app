@@ -53,11 +53,13 @@
                     processData: false,        // To send DOMDocument or non processed data file it is set to false
                 }).fail(function(data){
                     for (var field in data.responseJSON) {
-                        alert('hello failed');
+//                        alert('hello failed');
                         var el = $(':input[name="' + field + '"]');
                         el.parent('.form-group').addClass('has-error');
                         el.next('.help-block').text(data.responseJSON[field][0]);
                         el.next('.validation_error').text(data.responseJSON[field][0]);
+                        swal("Error!", data.responseJSON[field][0], "error")
+
                     }
                 }).success(function(data){
 //                    alert(data.message);

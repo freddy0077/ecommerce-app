@@ -106,15 +106,19 @@
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 @if(\Illuminate\Support\Facades\Auth::check() && Auth::user()->has_store == true)
+                                    {{--<li class="account" id="my_account">--}}
+                                        {{--<a href="{{url('store/dashboard')}}" title="My Account" class="btn btn-xs dropdown-toggle" > <i class="fa fa-user" ></i> My Account </a>--}}
+                                    {{--</li>--}}
+
                                     <li class="account" id="my_account">
-                                        <a href="{{url('store/dashboard')}}" title="My Account" class="btn btn-xs dropdown-toggle" > <i class="fa fa-user" ></i> My Account </a>
+                                        <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>Store Settings </a>
                                     </li>
                                 @endif
                                 <li class="checkout"><a href="{{url('/store/checkout')}}" class="top-link-checkout" title="Checkout"><i class="fa fa-check-square-o" ></i> Checkout</a></li>
                                 @if(Auth::check())
-                                    <li class="wishlist"><a href="{{url('/fancies')}}" class="top-link-wishlist" title="wishlist"><i class="fa fa-heart" ></i> My Fancies</a></li>
+                                    {{--<li class="wishlist"><a href="{{url('/fancies')}}" class="top-link-wishlist" title="wishlist"><i class="fa fa-heart" ></i> My Fancies</a></li>--}}
 
-                                    <li class="signin"><a href="{{url('/feeds')}}" class="top-link-checkout" title="login"><i class="fa fa-user" ></i> Profile</a></li>
+                                    <li class="signin"><a href="{{url('/feeds')}}" class="top-link-checkout" title="profile"><i class="fa fa-user" ></i> Profile</a></li>
 
                                 @else
                                     <li class="signin"><a href="{{url('/login')}}" class="top-link-checkout" title="login"><i class="fa fa-lock" ></i> Sign In</a></li>

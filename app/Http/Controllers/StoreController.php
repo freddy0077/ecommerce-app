@@ -31,7 +31,7 @@ use Webpatser\Uuid\Uuid;
 
 class StoreController extends Controller
 {
-    protected $threshold = 5;
+    protected $threshold = 50;
     //
     public function __construct()
     {
@@ -66,8 +66,10 @@ class StoreController extends Controller
          ->selectRaw('products.*')
             ->paginate();
         $categories = ProductCategory::all();
+        $store = Store::whereUserId($user_id)->first();
+
         $sub_categories = SubCategory::whereProductCategoryId($category_id)->get();
-        return view('store.index',compact('products','categories','slug','user_id','sub_categories'));
+        return view('store.index',compact('products','categories','slug','user_id','sub_categories','store'));
 
     }
 
@@ -75,7 +77,9 @@ class StoreController extends Controller
 
         $products = Product::paginate();
         $categories = ProductCategory::whereUserId($user_id)->get();
-        return view('store.index',compact('products','categories','slug','user_id'));
+        $store = Store::whereUserId($user_id)->first();
+
+        return view('store.index',compact('products','categories','slug','user_id','store'));
 
     }
 
@@ -175,16 +179,17 @@ class StoreController extends Controller
 
 
     public function postStoreSettings(Request $request){
-        $this->validate($request, [
-            'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'phone_number' => 'required',
-            'email' => 'required',
-            'address' => 'required'
-        ]);
 
-        $id = Uuid::generate();
-        $date_time = date('Ymdhis');
+        if($request->hasFile('image')){
+            $this->validate($request,[
+                    'name' => 'required',
+                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'phone_number' => 'required',
+                    'email' => 'required',
+                    'address' => 'required'
+            ]);
+            $id = Uuid::generate();
+            $date_time = date('Ymdhis');
 
             $image = $request->file('image');
             $input['imagename'] = $id.$date_time.'.'.$image->getClientOriginalExtension();
@@ -198,22 +203,53 @@ class StoreController extends Controller
 
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $input['imagename']);
+        }else {
+            $this->validate($request,[
+                'name' => 'required',
+//                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'phone_number' => 'required',
+                'email' => 'required',
+                'address' => 'required'
+            ]);
+        }
+
+
         if(User::find(Auth::user()->id)->has_store == true){
             $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
 
-            Store::whereUserId(Auth::user()->id)->update([
-                'name' => $request->name,
-                'image' => $input['imagename'],
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'business_type' => $request->business_type,
-                'domain' => $request->domain,
-                'about' => $request->about,
-                'slug'  => $slug,
-                'user_id' => Auth::user()->id
-            ]);
+            if($request->hasFile('image')){
+                Store::whereUserId(Auth::user()->id)->update([
+                    'name' => $request->name,
+                    'image' => $input['imagename'],
+                    'phone_number' => $request->phone_number,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'business_type' => $request->business_type,
+                    'domain' => $request->domain,
+                    'about' => $request->about,
+                    'slug'  => $slug,
+                    'user_id' => Auth::user()->id,
+                    'colour' => $request->colour
+                ]);
+            }else {
+                Store::whereUserId(Auth::user()->id)->update([
+                    'name' => $request->name,
+                    'phone_number' => $request->phone_number,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'business_type' => $request->business_type,
+                    'domain' => $request->domain,
+                    'about' => $request->about,
+                    'slug'  => $slug,
+                    'user_id' => Auth::user()->id,
+                    'colour' => $request->colour
+                ]);
+
+            }
+
+
 
         }else{
 
@@ -433,6 +469,7 @@ class StoreController extends Controller
         if($request->hasFile('image')){
             $this->validate($request,[
                 'name' =>'required',
+//                'image' => 'required',
 //                'image' => 'dimensions:min_width=300,min_height=300',
 //                'description' => 'required',
                 'price' => 'required'
@@ -452,20 +489,25 @@ class StoreController extends Controller
         foreach($names as $key=>$name){
             $product_id = Uuid::generate();
 
-            $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
-            Product::processImage($images[$key],$input['imagename']);
+            $rules = array('image' => 'dimensions:min_width=300,min_height=300'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+            $validator = Validator::make(array('image'=> $images[$key]), $rules);
+            if($validator->passes()){
+                $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
+                Product::processImage($images[$key],$input['imagename']);
 
-            Product::create([
-                'id' => $product_id,
-                'name' => $name,
-                'user_id' => Auth::user()->id,
-                'price' => $prices[$key],
-                'description' =>'',
-                'image' =>  $input['imagename'],
-                'sub_category_id' => $sub_categories[$key],
-                'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
-                'user_id' => Auth::user()->id
-            ]);
+                Product::create([
+                    'id' => $product_id,
+                    'name' => $name,
+                    'user_id' => Auth::user()->id,
+                    'price' => $prices[$key],
+                    'description' =>'',
+                    'image' =>  $input['imagename'],
+                    'sub_category_id' => $sub_categories[$key],
+                    'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
+
+                ]);
+            }
+
         }
 
         return ['message'=>'successful saved '.count($names).' product(s)','status'=>200];
