@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         //
         Commands\SendAddProductEvent::class,
         Commands\SendChatMessage::class,
+        Commands\DeleteFeed::class,
     ];
 
     /**
