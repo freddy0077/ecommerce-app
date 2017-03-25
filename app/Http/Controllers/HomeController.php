@@ -223,7 +223,7 @@ class HomeController extends Controller
 
             $stream = new StreamFeed($user->id);
 //            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
-//            $stream->followFeed("flat",$store_id);
+            $stream->followFeed("flat",$user_id);
 
             $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
 
