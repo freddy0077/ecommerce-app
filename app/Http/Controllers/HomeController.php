@@ -88,7 +88,7 @@ class HomeController extends Controller
             return view('partials.feed_partials',compact('activities','following','followers'));
         }
 
-        return view('feeds',compact('activities','user'));
+        return view('feeds',compact('activities','user','following','followers'));
     }
 
     public function getFetchFeeds(){
