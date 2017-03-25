@@ -345,7 +345,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{$fol['user']}}
+                                                                                        <div class="desc"> {{$fol['feed_id']['user']}}
                                                                                                 <span class="label label-danger label-sm"> Take action
                                                                                                     <i class="fa fa-share"></i>
                                                                                                 </span>

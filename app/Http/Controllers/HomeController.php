@@ -80,7 +80,7 @@ class HomeController extends Controller
         $stream = new StreamFeed($user->id);
 //        $stream->deleteFeed();
          $activities = $stream->getActivities()['results'];
-        return $following   = $stream->getFollowing()['results'];
+         $following   = $stream->getFollowing()['results'];
          $followers   = $stream->getFollowers()['results'];
 
 
