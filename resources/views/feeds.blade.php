@@ -345,7 +345,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{$fol['feed_id'['user']]}}
+                                                                                        <div class="desc"> {{"you are following ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}
                                                                                                 <span class="label label-danger label-sm"> Take action
                                                                                                     <i class="fa fa-share"></i>
                                                                                                 </span>
@@ -354,8 +354,8 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col2">
-                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromDate($activity->created_at)->diffForHumans()}} </div>--}}
-                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
+                                                                                <div class="date"> {{\Carbon\Carbon::parse($fol['created_at'])->diffForHumans()}} </div>
+{{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d T H:i:s',$fol['created_at'])->diffForHumans()}} </div>--}}
                                                                             </div>
                                                                         </li>
                                                                         @endforeach

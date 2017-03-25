@@ -53,5 +53,9 @@ class User extends Authenticatable
         $this->hasOne('App\Store');
     }
 
+    public static function getNameById($id){
+       return User::find($id)->name;
+    }
+
 
 }
