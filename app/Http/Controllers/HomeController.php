@@ -62,7 +62,7 @@ class HomeController extends Controller
             ->get();
 
         if($request->ajax()){
-            return view('market.partials.more_popular_products',compact('products','nextpageurl'));
+            return view('market.partials.more_popular_products',compact('second_set','nextpageurl'));
         }
 
 //        return view('market.index',compact('products','nextpageurl'));
