@@ -181,7 +181,7 @@
                     <!-- BEGIN PAGE BREADCRUMBS -->
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="index-2.html">Home</a>
+                            <a href="#">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
@@ -345,9 +345,9 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{"you are following ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}
+                                                                                        <div class="desc"> {{" ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}
                                                                                                 <span class="label label-danger label-sm"> Take action
-                                                                                                    <i class="fa fa-share"></i>
+                                                                                                    <a href="{{url('/')}}"><i class="fa fa-eye"></i></a>
                                                                                                 </span>
                                                                                         </div>
                                                                                     </div>
