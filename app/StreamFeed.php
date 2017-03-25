@@ -69,13 +69,15 @@ class StreamFeed
         $this->user->addActivity($data);
     }
 
-    public function addToManyFeeds(){
+    public function addToManyFeeds($actor,$verb,$object,$feeds_array=[]){
         // Batch operations (batch activity add, batch follow)
         $batcher = $this->client->batcher();
 
 // Add one activity to many feeds
-        $activity = array('actor' => '1', 'verb' => 'tweet', 'object' => '1');
-        $feeds = ['flat:user1', 'flat:user2'];
+//        $activity = array('actor' => '1', 'verb' => 'tweet', 'object' => '1');
+        $activity = array('actor' => $actor, 'verb' => $verb, 'object' => $object);
+//        $feeds = ['flat:user1', 'flat:user2'];
+        $feeds = $feeds_array;
         $batcher->addToMany($activity, $feeds);
     }
 

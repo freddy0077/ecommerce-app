@@ -222,8 +222,11 @@ class HomeController extends Controller
             $builder = Product::find($product_id);
 
             $stream = new StreamFeed($user->id);
-            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
-            $stream->followFeed("flat",$store_id);
+//            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
+//            $stream->followFeed("flat",$store_id);
+
+            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
+
 
             event(new ChatMessageReceived("you just followed $store_builder->name", $user));
 
