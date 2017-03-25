@@ -333,33 +333,33 @@
 
 <!--                                                                    --><?php //var_dump (\GetStream\StreamLaravel\Facades\FeedManager::getUserFeed(Auth::user()->id))  ?>
 
-                                                                    {{--<ul class="feeds" id="feeds">--}}
+                                                                    <ul class="feeds" id="feeds">
 
-                                                                        {{--@foreach($activities as $activity)--}}
-                                                                        {{--<li>--}}
-                                                                            {{--<div class="col1">--}}
-                                                                                {{--<div class="cont">--}}
-                                                                                    {{--<div class="cont-col1">--}}
-                                                                                        {{--<div class="label label-success">--}}
-                                                                                            {{--<i class="fa fa-bell-o"></i>--}}
-                                                                                        {{--</div>--}}
-                                                                                    {{--</div>--}}
-                                                                                    {{--<div class="cont-col2">--}}
-                                                                                        {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
-                                                                                                {{--<span class="label label-danger label-sm"> Take action--}}
-                                                                                                    {{--<i class="fa fa-share"></i>--}}
-                                                                                                {{--</span>--}}
-                                                                                        {{--</div>--}}
-                                                                                    {{--</div>--}}
-                                                                                {{--</div>--}}
-                                                                            {{--</div>--}}
-                                                                            {{--<div class="col2">--}}
-{{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromDate($activity->created_at)->diffForHumans()}} </div>--}}
+                                                                        @foreach($following as $fol)
+                                                                        <li>
+                                                                            <div class="col1">
+                                                                                <div class="cont">
+                                                                                    <div class="cont-col1">
+                                                                                        <div class="label label-success">
+                                                                                            <i class="fa fa-bell-o"></i>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cont-col2">
+                                                                                        <div class="desc"> {{$fol['user']}}
+                                                                                                <span class="label label-danger label-sm"> Take action
+                                                                                                    <i class="fa fa-share"></i>
+                                                                                                </span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col2">
+                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromDate($activity->created_at)->diffForHumans()}} </div>--}}
                                                                                 {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
-                                                                            {{--</div>--}}
-                                                                        {{--</li>--}}
-                                                                        {{--@endforeach--}}
-                                                                    {{--</ul>--}}
+                                                                            </div>
+                                                                        </li>
+                                                                        @endforeach
+                                                                    </ul>
 
                                                                 </div>
                                                             </div>

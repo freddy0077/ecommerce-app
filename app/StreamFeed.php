@@ -79,7 +79,13 @@ class StreamFeed
         $batcher->addToMany($activity, $feeds);
     }
 
+    public function getFollowing(){
+        return $this->user->following(0,20);
+    }
 
+    public function getFollowers(){
+        return $this->user->followers(0,20);
+    }
 
 
 }
