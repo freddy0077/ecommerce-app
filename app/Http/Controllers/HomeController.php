@@ -49,7 +49,7 @@ class HomeController extends Controller
 
         $second_set = $builder->skip(10)->take(10)->get();
 
-        $second_set = $builder->skip(10)->take(10)->paginate();
+        $second_set = $builder->skip(10)->take(30)->paginate();
 
         $nextpageurl = $second_set->nextpageurl();
 
