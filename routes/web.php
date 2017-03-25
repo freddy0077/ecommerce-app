@@ -52,7 +52,7 @@ Route::post('/fancy-it/{product_id}','HomeController@postFancyIt');
 
 Route::post('/like-it/{product_id}','HomeController@postLikeIt');
 
-Route::post('/watch-shop/{product_id}/{store_id}','HomeController@postWatchShop');
+Route::post('/watch-shop/{product_id}/{store_id}/{user_id}','HomeController@postWatchShop');
 
 
 
