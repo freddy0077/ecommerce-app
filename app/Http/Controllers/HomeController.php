@@ -206,7 +206,7 @@ class HomeController extends Controller
         return view('market.partials.quick_view',compact('product','gallery'));
     }
 
-    public function postWatchShop($product_id,$store_id)
+    public function postWatchShop($product_id,$store_id,$user_id)
     {
         if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
             $user = Auth::user();
@@ -222,11 +222,12 @@ class HomeController extends Controller
             $builder = Product::find($product_id);
 
             $stream = new StreamFeed($user->id);
-            $stream->addActivity($user->name, 'just watched', $store_builder->name,$user->id);
+            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
+            $stream->followFeed($store_id);
 
-            event(new ChatMessageReceived("$user->name just followed your shop", $user));
+            event(new ChatMessageReceived("you just followed $store_builder->name", $user));
 
-            return ['status' => 200, 'image_url' => asset("images/products/$builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
+            return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
         } elseif (Auth::check() && $store == $store_id) {
             return ['status' => 403, 'message' => 'You can not follow your shop'];

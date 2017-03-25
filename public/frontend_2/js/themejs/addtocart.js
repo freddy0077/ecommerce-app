@@ -11,9 +11,9 @@
 
 	var watch = {
 
-		'add': function(product_id, store_id) {
+		'add': function(product_id, store_id,user_id) {
 
-			$.post('/watch-shop/'+product_id+'/'+store_id,function(data){
+			$.post('/watch-shop/'+product_id+'/'+store_id+'/'+user_id,function(data){
 				var image_url = data.image_url;
 				if(data.status == 401) {
 					addProductNotice('Sorry !', '', '<h3><a href="#">You have to Log in first to follow a shop !</h3>', 'error');
