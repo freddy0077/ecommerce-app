@@ -13,6 +13,7 @@ use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
 use App\Store;
+use App\StreamFeed;
 use App\SubCategory;
 use App\TopSellingProduct;
 use App\User;
@@ -321,9 +322,9 @@ class StoreController extends Controller
         $id = Uuid::generate();
         $date_time = date('Ymdhis');
 
-        $store_id = Store::where('user_id',Auth::user()->id)->first()->id;
+        $store_id = Store::where('user_id',Auth::user()->id)->first();;
 
-        $productCounts = Product::whereStoreId($store_id)->count();
+        $productCounts = Product::whereStoreId($store_id->id)->count();
         $products_limit = $this->threshold-$productCounts;
 
         if($products_limit == 0){
@@ -355,8 +356,11 @@ class StoreController extends Controller
                 'publish' => $request->publish == 'on' ? true : false,
                 'show_buy_button' => $request->show_buy_button == 'on' ? true : false,
                 'ad' => false,
-                'store_id' => $store_id
+                'store_id' => $store_id->id
             ]);
+
+            $stream = new StreamFeed($store_id->id);
+            $stream->addActivity($store_id->name,'added','new products');
         }
     }
 
