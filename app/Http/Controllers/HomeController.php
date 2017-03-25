@@ -223,7 +223,7 @@ class HomeController extends Controller
 
             $stream = new StreamFeed($user->id);
             $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
-            $stream->followFeed($store_id);
+            $stream->followFeed("flat",$store_id);
 
             event(new ChatMessageReceived("you just followed $store_builder->name", $user));
 
