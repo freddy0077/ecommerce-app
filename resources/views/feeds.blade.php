@@ -7,7 +7,12 @@
     <script>
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('b0fb81b15a4dfff2c4f4', {
+//        var pusher = new Pusher('b0fb81b15a4dfff2c4f4', {
+//            cluster: 'eu',
+//            encrypted: true
+//        });
+
+        var pusher = new Pusher('d7c6fc127150c78d0f33', {
             cluster: 'eu',
             encrypted: true
         });
