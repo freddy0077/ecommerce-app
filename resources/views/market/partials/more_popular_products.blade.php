@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
                     <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
                     <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
