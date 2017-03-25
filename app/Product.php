@@ -57,7 +57,6 @@ class Product extends Model
             $destinationPath = public_path('/images');
 //            $image->move($destinationPath, $input['imagename']);
             $image->move($destinationPath, $image_name);
-
 //        }
     }
 }

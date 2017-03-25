@@ -78,7 +78,7 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $stream = new StreamFeed($user->id);
-//        $stream->deleteFeed();
+        $stream->deleteFeed();
          $activities = $stream->getActivities()['results'];
 
         if($request->ajax()){
