@@ -9,9 +9,9 @@
                         </div>
                     </div>
                     <div class="cont-col2">
-                        <div class="desc"> {{$activity->action}}
+                        <div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}
                             <span class="label label-danger label-sm"> Take action
-                                                                                                    <i class="fa fa-share"></i>
+                                <i class="fa fa-share"></i>
                                                                                                 </span>
                         </div>
                     </div>

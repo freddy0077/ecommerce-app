@@ -19,8 +19,10 @@
                 alert('event reached');
                 $.get('/feeds',function(data){
                     $('#feeds').html(data)
+                }).fail(function(){
+                    alert('error')
                 })
-            },3000);
+            },5000);
 
             if(window.Notification && Notification.permission !== "denied") {
                 alert(data.chatMessage.message);
@@ -293,16 +295,19 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{$activity->action}}
-                                                                                            <span class="label label-danger label-sm"> Take action
-                                                                                                    <i class="fa fa-share"></i>
+                                                                                        <div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}
+                                                                                            <span class="label label-danger label-sm">
+                                                                                                {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
+                                                                                                    Take action
+                                                                                                {{--</a>--}}
+                                                                                                     <a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>
                                                                                                 </span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col2">
-                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>
+                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
 
                                                                             </div>
                                                                         </li>
@@ -319,33 +324,33 @@
 
 <!--                                                                    --><?php //var_dump (\GetStream\StreamLaravel\Facades\FeedManager::getUserFeed(Auth::user()->id))  ?>
 
-                                                                    <ul class="feeds" id="feeds">
+                                                                    {{--<ul class="feeds" id="feeds">--}}
 
-                                                                        @foreach($activities as $activity)
-                                                                        <li>
-                                                                            <div class="col1">
-                                                                                <div class="cont">
-                                                                                    <div class="cont-col1">
-                                                                                        <div class="label label-success">
-                                                                                            <i class="fa fa-bell-o"></i>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="cont-col2">
-                                                                                        <div class="desc"> {{$activity->action}}
-                                                                                                <span class="label label-danger label-sm"> Take action
-                                                                                                    <i class="fa fa-share"></i>
-                                                                                                </span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col2">
+                                                                        {{--@foreach($activities as $activity)--}}
+                                                                        {{--<li>--}}
+                                                                            {{--<div class="col1">--}}
+                                                                                {{--<div class="cont">--}}
+                                                                                    {{--<div class="cont-col1">--}}
+                                                                                        {{--<div class="label label-success">--}}
+                                                                                            {{--<i class="fa fa-bell-o"></i>--}}
+                                                                                        {{--</div>--}}
+                                                                                    {{--</div>--}}
+                                                                                    {{--<div class="cont-col2">--}}
+                                                                                        {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
+                                                                                                {{--<span class="label label-danger label-sm"> Take action--}}
+                                                                                                    {{--<i class="fa fa-share"></i>--}}
+                                                                                                {{--</span>--}}
+                                                                                        {{--</div>--}}
+                                                                                    {{--</div>--}}
+                                                                                {{--</div>--}}
+                                                                            {{--</div>--}}
+                                                                            {{--<div class="col2">--}}
 {{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromDate($activity->created_at)->diffForHumans()}} </div>--}}
                                                                                 {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
-                                                                            </div>
-                                                                        </li>
-                                                                        @endforeach
-                                                                    </ul>
+                                                                            {{--</div>--}}
+                                                                        {{--</li>--}}
+                                                                        {{--@endforeach--}}
+                                                                    {{--</ul>--}}
 
                                                                 </div>
                                                             </div>

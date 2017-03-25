@@ -9,10 +9,13 @@ use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
 use App\Store;
+use App\StreamFeed;
 use App\SubCategory;
 use App\User;
 use App\WatchedShop;
+use GetStream\Stream\Client;
 use GetStream\Stream\Feed;
+use GetStream\StreamLaravel\Enrich;
 use GetStream\StreamLaravel\Facades\FeedManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,8 +74,12 @@ class HomeController extends Controller
     }
 
     public function getFeeds(Request $request){
-        $activities = WatchedShop::whereUserId(Auth::user()->id)->get();
+
         $user = Auth::user();
+
+        $stream = new StreamFeed($user->id);
+//        $stream->deleteFeed();
+         $activities = $stream->getActivities()['results'];
 
         if($request->ajax()){
             return view('partials.feed_partials',compact('activities'));
@@ -196,8 +203,9 @@ class HomeController extends Controller
         return view('market.partials.quick_view',compact('product','gallery'));
     }
 
-    public function postWatchShop($product_id,$store_id){
-        if(Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !WatchedShop::whereUserId(Auth::user()->id)->first()) {
+    public function postWatchShop($product_id,$store_id)
+    {
+        if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
             $user = Auth::user();
 
             WatchedShop::create([
@@ -210,23 +218,27 @@ class HomeController extends Controller
             $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
 
-            event(new ChatMessageReceived("$user->name just followed your shop",$user));
+            $stream = new StreamFeed($user->id);
+            $stream->addActivity($user->name, 'just watched', $store_builder->name,$user->id);
+
+            event(new ChatMessageReceived("$user->name just followed your shop", $user));
 
             return ['status' => 200, 'image_url' => asset("images/products/$builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
-        }elseif(Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id == $store_id){
-            return ['status' => 403,'message' => 'You can not follow your shop'];
+        } elseif (Auth::check() && $store == $store_id) {
+            return ['status' => 403, 'message' => 'You can not follow your shop'];
 
-        }elseif(Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()){
-            return ['status' => 404,'message' => 'You are already following this shop !'];
-        }else {
-            return ['status' => 401,'message' => 'Log in to watch a shop'];
+        } elseif (Auth::check() && $watchedshop) {
+            return ['status' => 404, 'message' => 'You are already following this shop !'];
+        } else {
+            return ['status' => 401, 'message' => 'Log in to watch a shop'];
+        }
+    }
+
+        public function getFollowUser($id){
+            $user = Auth::user();
+            $stream = new StreamFeed($user->id);
+            $stream->followFeed("flat",$id);
         }
 
-
-
-
-
-
-    }
 }
