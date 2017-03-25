@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\StreamFeed;
 use App\User;
+use App\WatchedShop;
 use Illuminate\Console\Command;
 
 class DeleteFeed extends Command
@@ -40,6 +41,7 @@ class DeleteFeed extends Command
     public function handle()
     {
         //
+        WatchedShop::truncate();
         $user_id = User::whereName($this->argument('name'))->first()->id;
         $stream = new StreamFeed($user_id);
         $stream->deleteFeed();
