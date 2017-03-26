@@ -101,7 +101,7 @@
 
                                 </div>
 
-                                <div class="col-sm-12" id="shopping-cart">
+                                <div class="col-sm-12" id="checkout-shopping-cart">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title"><i class="fa fa-shopping-cart"></i> Shopping cart</h4>
@@ -130,7 +130,9 @@
                                                                 <input type="text" name="quantity" value="{{$content->qty}}" size="1" class="form-control qty">
                                     <span class="input-group-btn">
                                     <button data-toggle="tooltip" title="Update" onclick="updateCart('{{$content->rowId}}')" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-                                    <button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger" onClick="checkOutRemoveFromCart('{{$content->rowId}}')"><i class="fa fa-times-circle"></i></button>
+                                    <button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger"
+                                            onclick="cart.checkoutRemove('{{$content->rowId}}','{{$user_id}}');"><i class="fa fa-times-circle"></i>
+                                    </button>
                                     </span></div></td>
                                                         <td class="text-right">{{$content->price}}</td>
                                                         <td class="text-right">{{$content->subtotal}}</td>

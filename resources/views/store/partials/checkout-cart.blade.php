@@ -17,7 +17,6 @@
                 <tbody>
                 @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $content)
                     <tr>
-
                         <td class="text-center"><a href="product.html">
                                 <img src="http://placehold.it/50x75" alt="Xitefun Causal Wear Fancy Shoes"
                                      title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail"></a></td>

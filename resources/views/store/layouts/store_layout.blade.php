@@ -111,9 +111,9 @@
                                     {{--<li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>--}}
                                     {{--</ul>--}}
                                 </li>
-                                <li class="wishlist"><a href="wishlist.html" id="wishlist-total" class="top-link-wishlist" title="Wish List (2)"><span>Wish List (2)</span></a></li>
-                                <li class="checkout"><a href="checkout.html" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
-                                <li class="login"><a href="cart.html" title="Shopping Cart"><span >Shopping Cart</span></a></li>
+                                <li class="wishlist"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Wish List (2)"><span>Wish List (2)</span></a></li>
+                                <li class="checkout"><a href="{{url('/store/checkout',$user_id)}}" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
+                                <li class="login"><a href="{{url('/store/checkout',$user_id)}}" title="Shopping Cart"><span >Shopping Cart</span></a></li>
                             </ul>
                         </div>
                     </div>

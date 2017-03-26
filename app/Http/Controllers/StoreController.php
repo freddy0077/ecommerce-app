@@ -573,8 +573,8 @@ class StoreController extends Controller
         return view('store.partials.checkout-cart');
     }
 
-    public function getCartView(){
-        return view('store.partials.shopping_cart_partial');
+    public function getCartView($user_id){
+        return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
 
     public function getCartContents(){
