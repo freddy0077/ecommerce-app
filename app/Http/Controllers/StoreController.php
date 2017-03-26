@@ -642,7 +642,7 @@ class StoreController extends Controller
 
 
         \Gloudemans\Shoppingcart\Facades\Cart::destroy();
-        $user = Auth::user()->first();
+        $user = Auth::user();
         $shop = Store::whereUserId($user_id)->first();
 
        Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
