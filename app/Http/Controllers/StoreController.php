@@ -42,19 +42,12 @@ class StoreController extends Controller
 
     public function getStore($slug,$user_id){
 
-//        $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
-//            ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
-//            ->leftJoin('users','users.id','=','product_categories.user_id')
-//            ->where('users.id',$user_id)
-////            ->where('product_categories.user_id',$user_id)
-//            ->selectRaw('products.*')
-//            ->paginate();
-
-        $products = Product::whereUserId($user_id)->paginate();
+        $products = Product::inRandomOrder()->whereUserId($user_id)->paginate(14);
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
         $sub_categories = SubCategory::inRandomOrder()->get();
-        return view('store.index',compact('products','categories','slug','user_id','store','sub_categories'));
+        return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories'));
 
     }
 
@@ -93,7 +86,11 @@ class StoreController extends Controller
             ->where('top_selling_products.user_id',$user_id)->orderBy('count','desc')
             ->take(10)
             ->get();
-        return view('store.dashboard',compact('products'));
+        $order_builder = Order::whereUserId($user_id);
+        $count = $order_builder->count();
+        $average = $order_builder->avg('amount');
+
+        return view('store.dashboard',compact('products','average','count'));
     }
 
     public function getIndex(){

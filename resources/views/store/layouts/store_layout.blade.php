@@ -129,7 +129,7 @@
                     <!-- Logo -->
                     <div class="navbar-logo col-md-3 col-sm-12 col-xs-12">
                         <?php $store = \App\Store::whereUserId($user_id)->first() ?>
-                        <a href=""><img src='{{asset("images/stores")}}/{{$store->image}}' title="{{$store->name}}" alt="{{$store->name}}" /></a>
+                        <a href='{{url("/stores/$slug/$user_id")}}'><img src='{{asset("images/stores")}}/{{$store->image}}' title="{{$store->name}}" alt="{{$store->name}}" /></a>
                     </div>
                     <!-- //end Logo -->
 

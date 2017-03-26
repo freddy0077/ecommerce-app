@@ -28,14 +28,14 @@
 
                 </div>
             </div>
-            <div class="module latest-product titleLine">
+            <div class="module latest-product titleLine hidden-xs">
                 <h3 class="modtitle">Latest Products</h3>
                 <div class="modcontent ">
-                    @foreach($products as $product)
+                    @foreach($latest_products as $product)
                         <div class="product-latest-item">
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="#"><img src='{{asset("frontend_2/images/products/$product->image")}}' alt="{{$product->name}}" title="{{$product->image}}" class="img-responsive" style="width: 100px; height: 82px;"></a>
+                                    <a href="#"><img src='{{asset("images/products/$product->image")}}' alt="{{$product->name}}" title="{{$product->image}}" class="img-responsive" style="width: 100px; height: 82px;"></a>
                                 </div>
                                 <div class="media-body">
                                     <div class="caption">
@@ -64,7 +64,7 @@
                 </div>
 
             </div>
-            <div class="module">
+            <div class="module hidden-xs">
                 <div class="modcontent clearfix">
                     <div class="banners">
                         <div>

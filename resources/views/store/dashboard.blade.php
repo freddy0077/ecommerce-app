@@ -41,6 +41,7 @@
                                 <div class="visual">
                                     <i class="fa fa-briefcase fa-icon-medium"></i>
                                 </div>
+
                                 <div class="details">
                                     <div class="number">GHS {{\App\Order::whereUserId(Auth::user()->id)->sum('amount')}} </div>
                                     <div class="desc"> Lifetime Sales </div>
@@ -56,7 +57,7 @@
                                     <i class="fa fa-shopping-cart"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number"> {{\App\Order::count()}} </div>
+                                    <div class="number"> {{$count}} </div>
                                     <div class="desc"> Total Orders </div>
                                 </div>
                                 <a class="more" href="{{url('store/orders')}}"> View more
@@ -70,7 +71,7 @@
                                     <i class="fa fa-group fa-icon-medium"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number"> {{(int)\App\Order::avg('amount')}} </div>
+                                    <div class="number"> {{(int)$average}} </div>
                                     <div class="desc"> Average Orders </div>
                                 </div>
                                 <a class="more" href="javascript:;"> View more
