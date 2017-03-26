@@ -227,14 +227,16 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p class="text-right"> <a class="btn view-cart" href="{{url('/store/checkout')}}"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp;
-                                            <a class="btn btn-mega checkout-cart" href="{{url('store/checkout')}}"><i class="fa fa-share"></i>Checkout</a> </p>
+                                        <p class="text-right"> <a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp;
+                                            <a class="btn btn-mega checkout-cart" href="{{url('store/checkout',$user_id)}}"><i class="fa fa-share"></i>Checkout</a>
+                                        </p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <!--//cart-->
                     </div>
+
                 </div>
 
             </div>

@@ -33,7 +33,7 @@ class VerifyCsrfToken extends BaseVerifier
         'store/remove-from-cart/*',
         'store/checkout-remove-from-cart/*',
         'store/update-cart/*/*',
-        'store/check-out',
+        'store/check-out/*',
         'store/cart-view',
         'store/marketplace-packages/*'
     ];

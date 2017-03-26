@@ -586,23 +586,21 @@ class StoreController extends Controller
         return \Gloudemans\Shoppingcart\Facades\Cart::destroy();
     }
 
-    public function getCheckOut(){
+    public function getCheckOut($user_id){
 
-        $user = Auth::user();
-        $user_id = $user->id;
 
-        $store = Store::whereUserId($user->id)->first();
+        $store = Store::whereUserId($user_id)->first();
         $slug = $store->slug;
         $categories = ProductCategory::all();
 
         return view('store.checkout',compact('user','store','user_id','slug','categories'));
     }
 
-    public function postCheckOut(){
+    public function postCheckOut($user_id){
 
         $order_id = Uuid::generate();
         $text = "";
-        $user_id = Auth::user()->id;
+//        $user_id = Auth::user()->id;
         $store = Store::whereUserId($user_id)->first();
 
 
@@ -645,7 +643,7 @@ class StoreController extends Controller
 
         \Gloudemans\Shoppingcart\Facades\Cart::destroy();
         $user = Auth::user()->first();
-        $shop = Store::whereUserId($user->id)->first();
+        $shop = Store::whereUserId($user_id)->first();
 
        Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
 

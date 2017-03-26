@@ -90,10 +90,12 @@
 
 		},
 
-		'confirmOrder': function () {
+		'confirmOrder': function (user_id) {
 			var delivery = $('#delivery:checked').val() == undefined ? false: true;
 
-			$.post('/store/check-out',function(data){
+			//alert(user_id);
+
+			$.post('/store/check-out/'+user_id,function(data){
 
 				addProductNotice('Successful',
 						//'<img src="images/products/"'+product_id+'.jpg' alt="">',

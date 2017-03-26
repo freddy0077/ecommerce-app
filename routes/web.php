@@ -84,8 +84,8 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::get('/cart-contents','StoreController@getCartContents');
     Route::get('/cart-destroy','StoreController@getCartDestroy');
-    Route::get('/checkout','StoreController@getCheckOut');
-    Route::post('/check-out','StoreController@postCheckOut');
+    Route::get('/checkout/{id}','StoreController@getCheckOut');
+    Route::post('/check-out/{id}','StoreController@postCheckOut');
     Route::get('/cart-view','StoreController@getCartView');
 
     Route::get('/orders','StoreController@getOrders');
