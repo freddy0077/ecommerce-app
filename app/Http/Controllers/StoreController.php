@@ -549,10 +549,10 @@ class StoreController extends Controller
         return view('store.single_product',compact('store'));
     }
 
-    public function postAddToCart($id,$name,$qty,$price){
+    public function postAddToCart($id,$name,$qty,$price,$user_id){
         \Gloudemans\Shoppingcart\Facades\Cart::add($id, $name, $qty, $price, ['size' => 'large']);
 
-        return view('store.partials.shopping_cart_partial');
+        return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
 
     public function postUpdateCart($rowId,$qty){
@@ -560,10 +560,10 @@ class StoreController extends Controller
         return view('store.partials.shopping_cart_partial');
     }
 
-    public function postRemoveFromCart($rowId){
+    public function postRemoveFromCart($rowId,$user_id){
 
         \Gloudemans\Shoppingcart\Facades\Cart::remove($rowId);
-        return view('store.partials.shopping_cart_partial');
+        return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
 
     public function postCheckOutRemoveFromCart($rowId){
@@ -646,6 +646,12 @@ class StoreController extends Controller
         $shop = Store::whereUserId($user_id)->first();
 
        Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
+
+        $order = Order::with(['items','user' =>function($query){}])
+            ->whereId($order_id)
+            ->first();
+
+        return view('store.partials.order_details',compact('order_id','order'));
 
     }
 

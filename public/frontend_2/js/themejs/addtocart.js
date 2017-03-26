@@ -59,23 +59,23 @@
 
 	var cart = {
 
-		'add': function (product_id, name, quantity, price) {
-			$.post('/store/add-to-cart/' + product_id + '/' + name + '/' + quantity + '/' + price, function (data) {
+		'add': function (product_id, name, quantity, price,user_id) {
+			$.post('/store/add-to-cart/' + product_id + '/' + name + '/' + quantity + '/' + price+'/'+user_id, function (data) {
 
 				$('#shopping-cart').html(data);
 
 				addProductNotice('Product added to Cart',
 						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
 						'',
-						'<h3><a href="#">' + name + '</a> added to <a href="#"> cart</a>!</h3>',
+						'<h3><a href="#">' + name + '</a> added to <a hcref="#"> cart</a>!</h3>',
 						'success');
 
 			})
 
 		},
 
-		'remove': function (product_id) {
-			$.post('/store/remove-from-cart/' + product_id, function (data) {
+		'remove': function (product_id,user_id) {
+			$.post('/store/remove-from-cart/' + product_id+'/'+user_id, function (data) {
 
 				$('#shopping-cart').html(data);
 
@@ -104,7 +104,8 @@
 						'<h3><a href="#"></a> Ordered successfully !<a href="#"> </a>! redirecting...</h3>',
 						'success');
 				setTimeout(function(){
-					location.href="/"
+					//location.href="/"
+					$('.main-container').html(data)
 				},3000)
 			})
 

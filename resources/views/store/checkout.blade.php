@@ -17,7 +17,7 @@
 @section('content')
 
     <div id="container">
-        <div class="container">
+        <div class="container main-container">
             <!-- Breadcrumb Start-->
             <ul class="breadcrumb">
                 <li><a href="{{url('/')}}"><i class="fa fa-home"></i></a></li>

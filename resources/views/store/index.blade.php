@@ -208,7 +208,7 @@
                                         </div>
 
                                         <div class="button-group">
-                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
+                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
                                             <button class="wishlist" type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('42');"><i class="fa fa-heart"></i></button>
                                             <button class="compare" type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('42');"><i class="fa fa-exchange"></i></button>
                                         </div>

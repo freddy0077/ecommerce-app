@@ -132,11 +132,11 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::get('/{slug}/single-product','StoreController@getSingleProduct');
 
-    Route::post('/add-to-cart/{id}/{name}/{qty}/{price}','StoreController@postAddToCart');
+    Route::post('/add-to-cart/{id}/{name}/{qty}/{price}/{user_id}','StoreController@postAddToCart');
 
     Route::post('/update-cart/{rowId}/{qty}','StoreController@postUpdateCart');
 
-    Route::post('/remove-from-cart/{id}','StoreController@postRemoveFromCart');
+    Route::post('/remove-from-cart/{id}/{user_id}','StoreController@postRemoveFromCart');
 
     Route::post('/checkout-remove-from-cart/{id}','StoreController@postCheckOutRemoveFromCart');
 
