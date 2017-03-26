@@ -59,10 +59,58 @@
 
 	var cart = {
 
-		'add': function(product_id, quantity) {
-			addProductNotice('Product added to Cart', '<img src="image/demo/shop/product/e11.jpg" alt="">', '<h3><a href="#">Apple Cinema 30"</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
-		}
+		'add': function (product_id, name, quantity, price) {
+			$.post('/store/add-to-cart/' + product_id + '/' + name + '/' + quantity + '/' + price, function (data) {
+
+				$('#shopping-cart').html(data);
+
+				addProductNotice('Product added to Cart',
+						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
+						'',
+						'<h3><a href="#">' + name + '</a> added to <a href="#"> cart</a>!</h3>',
+						'success');
+
+			})
+
+		},
+
+		'remove': function (product_id) {
+			$.post('/store/remove-from-cart/' + product_id, function (data) {
+
+				$('#shopping-cart').html(data);
+
+				addProductNotice('Product added to Cart',
+						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
+						'',
+						//'<h3><a href="#">'+name+'</a> added to <a href="#"> cart</a>!</h3>',
+						'<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>',
+						'success');
+
+			})
+
+		},
+
+		'confirmOrder': function () {
+			var delivery = $('#delivery:checked').val() == undefined ? false: true;
+
+			$.post('/store/check-out',function(data){
+
+				addProductNotice('Successful',
+						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
+						'',
+						//'<h3><a href="#">'+name+'</a> added to <a href="#"> cart</a>!</h3>',
+						'<h3><a href="#"></a> Ordered successfully !<a href="#"> </a>! redirecting...</h3>',
+						'success');
+				setTimeout(function(){
+					location.href="/"
+				},3000)
+			})
+
+		},
+
 	}
+
+
 
 	var fancy = {
 		'add': function(product_id) {
@@ -91,7 +139,7 @@
 		//Stop jGrowl
 		//$.jGrowl.defaults.sticky = true;
 		var tpl = thumb + '<h3>'+text+'</h3>';
-		$.jGrowl(tpl, {		
+		$.jGrowl(tpl, {
 			life: 4000,
 			header: title,
 			speed: 'slow',

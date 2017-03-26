@@ -179,49 +179,44 @@
                     <!-- //Main Menu -->
 
                     <!-- Shopping Cart -->
-                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 shopping_cart pull-right">
-                        <!--cart-->
-                        <div id="cart" class="btn-group btn-shopping-cart">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 shopping_cart pull-right" id="shopping-cart">
+
+                        <div id="cart" class=" btn-group btn-shopping-cart">
                             <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                 <div class="shopcart">
                                     <span class="handle pull-left"></span>
-                                    <span class="title">Shopping Cart</span>
-                                    <p class="text-shopping-cart cart-total-full">2 item(s) - GHS 1,262.00 </p>
+                                    <span class="title">My cart</span>
+                                    <p class="text-shopping-cart cart-total-full">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}} item(s) - GHS {{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}} </p>
                                 </div>
                             </a>
 
                             <ul class="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu">
+
                                 <li>
                                     <table class="table table-striped">
                                         <tbody>
-                                        <tr>
-                                            <td class="text-center" style="width:70px">
-                                                <a href="product.html"> <img src="{{asset('frontend_2/image/demo/shop/product/resize/2.jpg')}}" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview"> </a>
-                                            </td>
-                                            <td class="text-left"> <a class="cart_product_name" href="product.html">Filet Mign</a> </td>
-                                            <td class="text-center"> x1 </td>
-                                            <td class="text-center"> $1,202.00 </td>
-                                            <td class="text-right">
-                                                <a href="product.html" class="fa fa-edit"></a>
-                                            </td>
-                                            <td class="text-right">
-                                                <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" style="width:70px">
-                                                <a href="product.html"> <img src="{{asset('frontend_2/image/demo/shop/product/resize/3.jpg')}}" style="width:70px" alt="Canon EOS 5D" title="Canon EOS 5D" class="preview"> </a>
-                                            </td>
-                                            <td class="text-left"> <a class="cart_product_name" href="">Canon EOS 5D</a> </td>
-                                            <td class="text-center"> x1 </td>
-                                            <td class="text-center"> $60.00 </td>
-                                            <td class="text-right">
-                                                <a href="product.html" class="fa fa-edit"></a>
-                                            </td>
-                                            <td class="text-right">
-                                                <a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
-                                            </td>
-                                        </tr>
+
+                                        @foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $content)
+
+                                            <tr>
+                                                <td class="text-center" style="width:70px">
+                                                    <a href="product.html">
+                                                        <img src="https://placehold.it/30x30" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview">
+                                                    </a>
+                                                </td>
+                                                <td class="text-left"> <a class="cart_product_name" href="product.html">{{$content->name}}</a> </td>
+                                                <td class="text-center"> x{{$content->qty}} </td>
+                                                <td class="text-center"> GHS {{$content->price}} </td>
+                                                <td class="text-right">
+                                                    <a href="product.html" class="fa fa-edit"></a>
+                                                </td>
+                                                <td class="text-right">
+                                                    <a onclick="cart.remove('{{$content->rowId}}');" class="fa fa-times fa-delete"></a>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+
                                         </tbody>
                                     </table>
                                 </li>
@@ -232,26 +227,24 @@
                                             <tr>
                                                 <td class="text-left"><strong>Sub-Total</strong>
                                                 </td>
-                                                <td class="text-right">$1,060.00</td>
+                                                <td class="text-right">{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-left"><strong>Eco Tax (-2.00)</strong>
-                                                </td>
-                                                <td class="text-right">$2.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-left"><strong>VAT (20%)</strong>
-                                                </td>
-                                                <td class="text-right">$200.00</td>
-                                            </tr>
+
+                                            {{--<tr>--}}
+                                            {{--<td class="text-left"><strong>VAT (20%)</strong>--}}
+                                            {{--</td>--}}
+                                            {{--<td class="text-right">$200.00</td>--}}
+                                            {{--</tr>--}}
                                             <tr>
                                                 <td class="text-left"><strong>Total</strong>
                                                 </td>
-                                                <td class="text-right">$1,262.00</td>
+                                                <td class="text-right">{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p class="text-right"> <a class="btn view-cart" href="cart.html"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="checkout.html"><i class="fa fa-share"></i>Checkout</a> </p>
+                                        <p class="text-right"> <a class="btn view-cart" href="{{url('/store/checkout')}}"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp;
+                                            <a class="btn btn-mega checkout-cart" href="{{url('store/checkout')}}"><i class="fa fa-share"></i>Checkout</a>
+                                        </p>
                                     </div>
                                 </li>
                             </ul>

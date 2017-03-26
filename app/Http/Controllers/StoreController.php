@@ -588,9 +588,14 @@ class StoreController extends Controller
 
     public function getCheckOut(){
 
-        $user = Auth::user()->id;
+        $user = Auth::user();
+        $user_id = $user->id;
 
-        return view('store.checkout',compact('user'));
+        $store = Store::whereUserId($user->id)->first();
+        $slug = $store->slug;
+        $categories = ProductCategory::all();
+
+        return view('store.checkout',compact('user','store','user_id','slug','categories'));
     }
 
     public function postCheckOut(){
@@ -638,7 +643,7 @@ class StoreController extends Controller
         $qty = \Gloudemans\Shoppingcart\Facades\Cart::count();
 
 
-//        \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+        \Gloudemans\Shoppingcart\Facades\Cart::destroy();
         $user = Auth::user()->first();
         $shop = Store::whereUserId($user->id)->first();
 
