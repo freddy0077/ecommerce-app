@@ -63,8 +63,8 @@ Route::post('/register-user','HomeController@postRegisterUser');
 
 Route::group(['domain' => '{slug}.shopaholicks.com'], function () {
     Route::get('/', function ($slug) {
-        $store = \App\Store::whereSlug($slug)->first();
-        redirect("stores/$slug/$store->user_id");
+        return $store = \App\Store::whereSlug($slug)->first();
+//        redirect("stores/$slug/$store->user_id");
     });
 });
 
