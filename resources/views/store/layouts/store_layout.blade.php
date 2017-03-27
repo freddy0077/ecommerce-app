@@ -105,7 +105,7 @@
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 <li class="account" id="my_account">
-                                    @if(\App\User::find($user_id)->has_store)
+                                    @if(\Illuminate\Support\Facades\Auth::check() &&  \App\User::find($user_id)->has_store)
                                     <a href="{{url('/store/dashboard')}}" title="My Dashboard" class="btn btn-xs ">
                                         <span>My Dashboard</span> <span class="fa fa-angle-down"></span></a>
                                         @else
