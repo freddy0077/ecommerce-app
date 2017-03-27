@@ -282,7 +282,7 @@
                                         <div class="megamenu-pattern">
                                             <div class="container">
                                                 <ul class="megamenu " data-transition="slide" data-animationtime="250">
-                                                    <li class="home">
+                                                    <li>
                                                         <a href="{{url('/')}}">Home</a>
 
                                                     </li>
@@ -297,7 +297,7 @@
 
                                                     @foreach(\App\ProductCategory::all('id','name') as $category)
 
-                                                        <li class="">
+                                                        <li class="mainNav">
                                                             <p class="close-menu"></p>
                                                             <a href="{{url('/category',$category->id)}}" class="clearfix">
                                                                 <strong>{{$category->name}}</strong>
@@ -556,6 +556,10 @@
     //-->
     $('#sp-cpanel_btn > i').hide();
     $('#sp-cpanel_btn').hide();
+
+    $('.mainNav').on('click',function(){
+        $(this).addClass('home');
+    })
 
 </script>
 
