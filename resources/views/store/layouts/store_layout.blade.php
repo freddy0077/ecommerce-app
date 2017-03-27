@@ -105,7 +105,14 @@
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 <li class="account" id="my_account">
-                                    <a href="#" title="My Account" class="btn btn-xs dropdown-toggle" data-toggle="dropdown"> <span >My Account</span> <span class="fa fa-angle-down"></span></a>
+                                    @if(\App\User::find($user_id)->has_store)
+                                    <a href="{{url('/store/dashboard')}}" title="My Dashboard" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                        <span>My Dashboard</span> <span class="fa fa-angle-down"></span></a>
+                                        @else
+                                        <a href="#" title="My Account" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                            <span>My Account</span> <span class="fa fa-angle-down"></span></a>
+
+                                    @endif
                                     {{--<ul class="dropdown-menu ">--}}
                                     {{--<li><a href="register.html"><i class="fa fa-user"></i> Register</a></li>--}}
                                     {{--<li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>--}}
@@ -185,15 +192,15 @@
 
                                             <tr>
                                                 <td class="text-center" style="width:70px">
-                                                    <a href="product.html">
-                                                        <img src="https://placehold.it/30x30" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview">
+                                                    <a href="#">
+                                                        <img src="https://placehold.it/30x30" style="width:70px" alt="" title="" class="preview">
                                                     </a>
                                                 </td>
-                                                <td class="text-left"> <a class="cart_product_name" href="product.html">{{$content->name}}</a> </td>
+                                                <td class="text-left"> <a class="cart_product_name" href="#">{{$content->name}}</a> </td>
                                                 <td class="text-center"> x{{$content->qty}} </td>
                                                 <td class="text-center"> GHS {{$content->price}} </td>
                                                 <td class="text-right">
-                                                    <a href="product.html" class="fa fa-edit"></a>
+                                                    <a href="#" class="fa fa-edit"></a>
                                                 </td>
                                                 <td class="text-right">
                                                     <a onclick="cart.remove('{{$content->rowId}}','{{$user_id}}');" class="fa fa-times fa-delete"></a>
@@ -392,9 +399,70 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/so_megamenu.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/addtocart.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/application.js')}}"></script>
-<script type="text/javascript"><!--
+<script type="text/javascript">
 
-    //--></script>
+//    function Upload() {
+     $('#banner_image_form').on('submit',function(e){
+         e.preventDefault();
+         //Get reference of FileUpload.
+         var fileUpload = document.getElementById("fileUpload");
+
+         //Check whether the file is valid Image.
+         var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpeg|.jpg|.png|.gif)$");
+         if (regex.test(fileUpload.value.toLowerCase())) {
+
+             //Check whether HTML5 is supported.
+             if (typeof (fileUpload.files) != "undefined") {
+                 //Initiate the FileReader object.
+                 var reader = new FileReader();
+                 //Read the contents of Image File.
+                 reader.readAsDataURL(fileUpload.files[0]);
+                 reader.onload = function (e) {
+                     //Initiate the JavaScript Image object.
+                     var image = new Image();
+
+                     //Set the Base64 string return from FileReader as source.
+                     image.src = e.target.result;
+
+                     //Validate the File Height and Width.
+                     image.onload = function () {
+                         var height = this.height;
+                         var width = this.width;
+                         if (height > 260 || width > 870) {
+                             alert("Height must be 260 and Width must be 870px.");
+
+                             return false;
+                         }
+                         alert("Uploaded image has valid Height and Width.");
+//                        return true;
+
+                         $.ajax({
+                             url: '{{url('/store/add-store-banner')}}', // Url to which the request is send
+                             type: "POST",             // Type of request to be send, called as method
+                             data: new FormData($(this)), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+                             contentType: false,       // The content type used when sending data to the server.
+                             cache: false,             // To unable request pages to be cached
+                             processData:false,        // To send DOMDocument or non processed data file it is set to false
+                         })
+
+                     };
+
+                 }
+             } else {
+                 alert("This browser does not support HTML5.");
+                 return false;
+             }
+         } else {
+             alert("Please select a valid Image file.");
+             return false;
+//        }
+         }
+     })
+
+
+</script>
+
+
 </body>
 
 </html>

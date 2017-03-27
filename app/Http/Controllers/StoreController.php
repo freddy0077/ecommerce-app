@@ -146,6 +146,29 @@ class StoreController extends Controller
 
     }
 
+    public function postAddStoreBanner(Request $request){
+        return $request->file('image');
+        if($request->hasFile('image')) {
+            $this->validate($request, [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $id = Uuid::generate();
+            $date_time = date('Ymdhis');
+
+            $image = $request->file('image');
+
+            $input['imagename'] = Auth::user()->id;
+
+
+            $destinationPath = public_path('images/store_banners');
+            $img = Image::make($image->getRealPath());
+            $img->resize(870, 260, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['imagename']);
+        }
+
+        }
+
     public function postAddStore(StoreRequest $request){
 
         $id = Uuid::generate();
@@ -604,7 +627,7 @@ class StoreController extends Controller
         Order::create([
             'id' =>$order_id,
             'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
-            'user_id' => $user_id
+            'user_id' => Auth::user()->id
         ]);
 
         foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
@@ -648,7 +671,7 @@ class StoreController extends Controller
             ->whereId($order_id)
             ->first();
 
-        return view('store.partials.order_details',compact('order_id','order'));
+        return view('store.partials.order_details',compact('order_id','order','user_id'));
 
     }
 

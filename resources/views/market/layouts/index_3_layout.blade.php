@@ -548,7 +548,7 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/cpanel.js')}}"></script>
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>
+{{--<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a2f45d30a04120"></script>--}}
 
 <script type="text/javascript">
     <!--

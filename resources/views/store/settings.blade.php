@@ -212,7 +212,7 @@
 
 
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3">Image</label>
+                                                    <label class="control-label col-md-3">Logo</label>
                                                     <div class="col-md-4">
                                                         <img src="/images/stores/{{$store->image}}"  class="img-thumbnail"><br><br>
                                                         <span><button type="button" id="change-image" class="btn btn-default">change</button></span>

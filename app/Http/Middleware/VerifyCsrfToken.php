@@ -35,6 +35,7 @@ class VerifyCsrfToken extends BaseVerifier
         'store/update-cart/*/*',
         'store/check-out/*',
         'store/cart-view/*',
-        'store/marketplace-packages/*'
+        'store/marketplace-packages/*',
+        '/store/add-store-banner'
     ];
 }

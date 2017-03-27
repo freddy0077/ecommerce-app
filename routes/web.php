@@ -98,6 +98,8 @@ Route::group(['prefix' => 'store'], function () {
 
 
     Route::get('/','StoreController@getIndex');
+
+
     Route::get('/add-product','StoreController@getAddProduct');
 
     Route::get('/edit-product/{product_id}','StoreController@getEditProduct');
@@ -129,6 +131,8 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('/store-settings','StoreController@getStoreSettings');
 
     Route::post('/store-settings','StoreController@postStoreSettings');
+
+    Route::post('/add-store-banner','StoreController@postAddStoreBanner');
 
     Route::get('/{slug}/single-product','StoreController@getSingleProduct');
 

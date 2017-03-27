@@ -131,24 +131,19 @@
                 </tr>
                 </thead>
                 <tbody>
+                @foreach(\App\Order::whereUserId($user_id)->take(10)->latest()->get() as $order)
                 <tr>
-                    <td class="text-left">20/06/2016</td>
-                    <td class="text-left">Processing</td>
+                    <td class="text-left">{{$order->created_at}}</td>
+                    <td class="text-left">Completed</td>
                 </tr>
-                <tr>
-                    <td class="text-left">21/06/2016</td>
-                    <td class="text-left">Shipped</td>
-                </tr>
-                <tr>
-                    <td class="text-left">24/06/2016</td>
-                    <td class="text-left">Complete</td>
-                </tr>
+
+                    @endforeach
                 </tbody>
             </table>
-            <div class="buttons clearfix">
-                <div class="pull-right"><a class="btn btn-primary" href="#">Continue</a>
-                </div>
-            </div>
+            {{--<div class="buttons clearfix">--}}
+                {{--<div class="pull-right"><a class="btn btn-primary" href='{{url("/stores/$slug/$user_id")}}'>Continue</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
 
 
