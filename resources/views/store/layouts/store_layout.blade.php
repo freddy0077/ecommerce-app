@@ -106,7 +106,7 @@
                             <ul class="top-link list-inline">
                                 <li class="account" id="my_account">
                                     @if(\App\User::find($user_id)->has_store)
-                                    <a href="{{url('/store/dashboard')}}" title="My Dashboard" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <a href="{{url('/store/dashboard')}}" title="My Dashboard" class="btn btn-xs ">
                                         <span>My Dashboard</span> <span class="fa fa-angle-down"></span></a>
                                         @else
                                         <a href="#" title="My Account" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -353,7 +353,7 @@
         <div class="footer-bottom-block ">
             <div class=" container">
                 <div class="row">
-                    <div class="col-sm-5 copyright-text"> © 2016 Market. All Rights Reserved. </div>
+                    <div class="col-sm-5 copyright-text"> © {{date('Y')}} Market. All Rights Reserved. </div>
                     <div class="col-sm-7">
                         <div class="block-payment text-right"><img src="image/demo/content/payment.png" alt="payment" title="payment" ></div>
                     </div>
