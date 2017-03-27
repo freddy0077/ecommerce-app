@@ -61,7 +61,7 @@ Route::post('/watch-shop/{product_id}/{store_id}/{user_id}','HomeController@post
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholick.dev'], function () {
+Route::group(['domain' => '{account}.shopaholicks.com'], function () {
     Route::get('user', function ($account) {
         //
         return $account;
