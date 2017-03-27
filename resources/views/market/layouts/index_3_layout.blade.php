@@ -483,7 +483,7 @@
                             <h3 class="modtitle">Contact Us	</h3>
                             <div class="modcontent">
                                 <ul class="contact-address">
-                                    <li><span class="fa fa-map-marker"></span> Shopaholicks Incorporate</li>
+                                    <li><span class="fa fa-map-marker"></span> Shopaholicks Ltd.</li>
                                     <li><span class="fa fa-envelope-o"></span> Email: <a href="#"> info@shopaholicks.com</a></li>
                                     <li><span class="fa fa-phone">&nbsp;</span> Phone 1:  233 20 936 9286<br>Phone 2: (233) 20 506 6233</li>
                                 </ul>
