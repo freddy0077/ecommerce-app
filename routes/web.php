@@ -61,11 +61,12 @@ Route::post('/watch-shop/{product_id}/{store_id}/{user_id}','HomeController@post
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholicks.com'], function () {
-    Route::get('user', function ($account) {
-        //
-        return $account;
-    });
+Route::group(['domain' => '{account}.shopaholicks.com'], function ()use($account) {
+    return $account;
+//    Route::get("", function ($account) {
+//        //
+//        return $account;
+//    });
 });
 
 Route::group(['prefix' => 'stores'], function () {
