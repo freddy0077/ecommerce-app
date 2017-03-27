@@ -373,25 +373,25 @@
                             <div class="modcontent">
                                 <div class="block-policy-top ">
                                     <div class="policy policy1 col-sm-4 col-xs-12">
-                                        <div class="policy-inner">
-                                            <i class="ico-policy"></i>
-                                            <h4>30 days return</h4>
-                                            <span>Money back guarantee</span>
-                                        </div>
+                                        {{--<div class="policy-inner">--}}
+                                            {{--<i class="ico-policy"></i>--}}
+                                            {{--<h4>30 days return</h4>--}}
+                                            {{--<span>Money back guarantee</span>--}}
+                                        {{--</div>--}}
                                     </div>
                                     <div class="policy policy2 col-sm-4 col-xs-12">
-                                        <div class="policy-inner">
-                                            <i class="ico-policy"></i>
-                                            <h4>free shipping on $30</h4>
-                                            <span>on all orders over $99</span>
-                                        </div>
+                                        {{--<div class="policy-inner">--}}
+                                            {{--<i class="ico-policy"></i>--}}
+                                            {{--<h4>free shipping on $30</h4>--}}
+                                            {{--<span>on all orders over $99</span>--}}
+                                        {{--</div>--}}
                                     </div>
                                     <div class="policy policy3 col-sm-4 col-xs-12">
-                                        <div class="policy-inner">
-                                            <i class="ico-policy"></i>
-                                            <h4>Safe shopping</h4>
-                                            <span>Save up to 50% now  </span>
-                                        </div>
+                                        {{--<div class="policy-inner">--}}
+                                            {{--<i class="ico-policy"></i>--}}
+                                            {{--<h4>Safe shopping</h4>--}}
+                                            {{--<span>Save up to 50% now  </span>--}}
+                                        {{--</div>--}}
                                     </div>
 
                                 </div>
@@ -440,10 +440,10 @@
                             <h3 class="modtitle">Information</h3>
                             <div class="modcontent">
                                 <ul class="menu">
-                                    <li><a href="about-us.html">About Us</a></li>
-                                    <li><a href="faq.html">FAQ</a></li>
-                                    <li><a href="order-history.html">Order history</a></li>
-                                    <li><a href="order-information.html">Order information</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Order history</a></li>
+                                    <li><a href="#">Order information</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -454,9 +454,9 @@
                             <h3 class="modtitle">Customer Service</h3>
                             <div class="modcontent">
                                 <ul class="menu">
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="return.html">Returns</a></li>
-                                    <li><a href="sitemap.html">Site Map</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Site Map</a></li>
                                     <li><a href="{{url('/feeds')}}">My Account</a></li>
                                 </ul>
                             </div>
@@ -468,7 +468,7 @@
                             <h3 class="modtitle">My Account</h3>
                             <div class="modcontent">
                                 <ul class="menu">
-                                    <li><a href="#">Brands</a></li>
+                                    {{--<li><a href="#">Brands</a></li>--}}
                                     <li><a href="gift-voucher.html">Gift Vouchers</a></li>
                                     <li><a href="#">Affiliates</a></li>
                                     <li><a href="#">Specials</a></li>
@@ -483,9 +483,9 @@
                             <h3 class="modtitle">Contact Us	</h3>
                             <div class="modcontent">
                                 <ul class="contact-address">
-                                    <li><span class="fa fa-map-marker"></span> My Company, 42 avenue des Champs Elysées 75000 Paris France</li>
-                                    <li><span class="fa fa-envelope-o"></span> Email: <a href="#"> sales@yourcompany.com</a></li>
-                                    <li><span class="fa fa-phone">&nbsp;</span> Phone 1: 0123456789 <br>Phone 2: (123) 4567890</li>
+                                    <li><span class="fa fa-map-marker"></span> Shopaholicks Incorporate</li>
+                                    <li><span class="fa fa-envelope-o"></span> Email: <a href="#"> info@shopaholicks.com</a></li>
+                                    <li><span class="fa fa-phone">&nbsp;</span> Phone 1:  233 20 936 9286<br>Phone 2: (233) 20 506 6233</li>
                                 </ul>
                             </div>
                         </div>
@@ -500,7 +500,7 @@
         <div class="footer-bottom-block ">
             <div class=" container">
                 <div class="row">
-                    <div class="col-sm-5 copyright-text"> © 2016 Market. All Rights Reserved. </div>
+                    <div class="col-sm-5 copyright-text"> © {{date('Y')}} Shopaholicks. All Rights Reserved. </div>
                     <div class="col-sm-7">
                         <div class="block-payment text-right"><img src="image/demo/content/payment.png" alt="payment" title="payment" ></div>
                     </div>
