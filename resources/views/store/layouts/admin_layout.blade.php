@@ -194,9 +194,15 @@
                         $user_id = Auth::user()->id;
 
                         ?>
-                        <a href='{{url("stores/$store/$user_id")}}'> My Shop
+                        {{--<a href='{{url("stores/$store/$user_id")}}'> My Shop--}}
+                            {{--<span class="arrow"></span>--}}
+                        {{--</a>--}}
+
+                            <a href="https://{{$slug}}.shopaholicks.com/shop"> My Shop
                             <span class="arrow"></span>
-                        </a>
+                            </a>
+
+
 
                     </li>
 
