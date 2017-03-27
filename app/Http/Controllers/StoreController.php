@@ -62,11 +62,13 @@ class StoreController extends Controller
          ->where('products.user_id',$user_id)
          ->selectRaw('products.*')
             ->paginate();
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
+
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
 
         $sub_categories = SubCategory::whereProductCategoryId($category_id)->get();
-        return view('store.index',compact('products','categories','slug','user_id','sub_categories','store'));
+        return view('store.index',compact('products','categories','slug','user_id','sub_categories','store','latest_products'));
 
     }
 
@@ -75,8 +77,9 @@ class StoreController extends Controller
         $products = Product::paginate();
         $categories = ProductCategory::whereUserId($user_id)->get();
         $store = Store::whereUserId($user_id)->first();
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
 
-        return view('store.index',compact('products','categories','slug','user_id','store'));
+        return view('store.index',compact('products','categories','slug','user_id','store','latest_products'));
 
     }
 
