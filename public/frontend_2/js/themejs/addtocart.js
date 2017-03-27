@@ -92,17 +92,21 @@
 
 		'confirmOrder': function (user_id) {
 			var delivery = $('#delivery:checked').val() == undefined ? false: true;
-
 			$.post('/store/check-out/'+user_id,function(data){
-				addProductNotice('Successful',
-						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
-						'', //'<h3><a href="#">'+name+'</a> added to <a href="#"> cart</a>!</h3>',
-						 '<h3><a href="#"></a> Ordered successfully !<a href="#"> </a>! redirecting...</h3>',
-						'success');
-				setTimeout(function(){
-					//location.href="/"
-					$('.main-container').html(data)
-				},3000)
+				if(data.status == 401){
+					addProductNotice('Error', '','<h3><a href="#"></a> You need to login to continue ! </a></h3>','success');
+					setTimeout(function(){
+                     alert('reached');
+						$('#login-modal').modal();
+					},3000)
+				}else {
+					addProductNotice('Successful', '','<h3><a href="#"></a> Ordered successfully !<a href="#"> </a> redirecting...</h3>','success');
+					setTimeout(function(){
+						//location.href="/"
+						$('.main-container').html(data)
+					},3000)
+				}
+
 			})
 
 		},

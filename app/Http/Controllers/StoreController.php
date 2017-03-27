@@ -36,7 +36,7 @@ class StoreController extends Controller
     //
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     public function getStoreDomain(){
@@ -624,61 +624,66 @@ class StoreController extends Controller
 
     public function postCheckOut($user_id){
 
-        $order_id = Uuid::generate();
-        $text = "";
+        if(Auth::guest()){
+
+            return Response::json(['data'=>'Unauthorized','status' => 401]);
+
+        }else {
+            $order_id = Uuid::generate();
+            $text = "";
 //        $user_id = Auth::user()->id;
-        $store = Store::whereUserId($user_id)->first();
+            $store = Store::whereUserId($user_id)->first();
 
 
-        Order::create([
-            'id' =>$order_id,
-            'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
-            'user_id' => Auth::user()->id
-        ]);
-
-        foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
-
-            $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
-//            $text.= "$item->qty \n";
-            OrderItem::create([
-                'id' => Uuid::generate(),
-                'product_id' => $item->id,
-                'qty' => $item->qty,
-                'order_id' => $order_id,
+            Order::create([
+                'id' =>$order_id,
+                'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
+                'user_id' => Auth::user()->id
             ]);
 
-            $top_selling_product = TopSellingProduct::whereProductId($item->id)->whereUserId($user_id);
+            foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
 
-            if($top_selling_product->first()){
-                $top_selling_product->update([
-                    'count' => $top_selling_product->first()->count+1
-                ]);
-            }else {
-                TopSellingProduct::create([
+                $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
+//            $text.= "$item->qty \n";
+                OrderItem::create([
                     'id' => Uuid::generate(),
-                    'user_id' => $user_id,
-                    'store_id' => $store->id,
                     'product_id' => $item->id,
-                    'count' => 1
+                    'qty' => $item->qty,
+                    'order_id' => $order_id,
                 ]);
+
+                $top_selling_product = TopSellingProduct::whereProductId($item->id)->whereUserId($user_id);
+
+                if($top_selling_product->first()){
+                    $top_selling_product->update([
+                        'count' => $top_selling_product->first()->count+1
+                    ]);
+                }else {
+                    TopSellingProduct::create([
+                        'id' => Uuid::generate(),
+                        'user_id' => $user_id,
+                        'store_id' => $store->id,
+                        'product_id' => $item->id,
+                        'count' => 1
+                    ]);
+                }
             }
+            $amount="GHS".\Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+            $qty = \Gloudemans\Shoppingcart\Facades\Cart::count();
+
+
+            \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+            $user = Auth::user();
+            $shop = Store::whereUserId($user_id)->first();
+
+            Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
+
+            $order = Order::with(['items','user' =>function($query){}])
+                ->whereId($order_id)
+                ->first();
+
+            return view('store.partials.order_details',compact('order_id','order','user_id'));
         }
-        $amount="GHS".\Gloudemans\Shoppingcart\Facades\Cart::subtotal();
-        $qty = \Gloudemans\Shoppingcart\Facades\Cart::count();
-
-
-        \Gloudemans\Shoppingcart\Facades\Cart::destroy();
-        $user = Auth::user();
-        $shop = Store::whereUserId($user_id)->first();
-
-       Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
-
-        $order = Order::with(['items','user' =>function($query){}])
-            ->whereId($order_id)
-            ->first();
-
-        return view('store.partials.order_details',compact('order_id','order','user_id'));
-
     }
 
     public function getOrders(){
