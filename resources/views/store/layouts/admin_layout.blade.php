@@ -198,7 +198,7 @@
                             {{--<span class="arrow"></span>--}}
                         {{--</a>--}}
 
-                            <a href="https://{{$slug}}.shopaholicks.com/shop"> My Shop
+                            <a href="https://{{$store->slug}}.shopaholicks.com/shop"> My Shop
                             <span class="arrow"></span>
                             </a>
 
