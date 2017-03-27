@@ -502,7 +502,10 @@
                 <div class="row">
                     <div class="col-sm-5 copyright-text"> © {{date('Y')}} Shopaholicks. All Rights Reserved. </div>
                     <div class="col-sm-7">
-                        <div class="block-payment text-right"><img src="image/demo/content/payment.png" alt="payment" title="payment" ></div>
+                        <div class="block-payment text-right">
+                            {{--<img src="image/demo/content/payment.png" alt="payment" title="payment" >--}}
+                            <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=kbvYzNQKXEEbGc9D4lXW7j8p6kJres0uE4E3mfKmzFTFiQfOC84LOh402CtF"></script></span>
+                        </div>
                     </div>
                     <!--Back To Top-->
                     <div class="back-to-top"><i class="fa fa-angle-up"></i><span> Top </span></div>
