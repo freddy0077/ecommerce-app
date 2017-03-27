@@ -563,7 +563,7 @@
                     <div class="w3table agileinfo">
                         <div class="w3table-cell">
                             <div class="w3table-topimg">
-                                <img src="{{url('frontend_2/image/logo.png')}}">
+                                {{--<img src="{{url('frontend_2/image/logo.png')}}">--}}
                             </div>
                             <form action="{{url('/login')}}" method="post" id="login-form">
                                 <input type="text" name="email" placeholder="Email" required=""/>
