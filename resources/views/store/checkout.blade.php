@@ -1,15 +1,11 @@
 @extends('store.layouts.store_layout')
 
 @section('scripts')
-    <script>
-//        $(document).ready(function(){
-
-           var qty1 = $('.qty').val();
-            function updateCart(rowId,qty){
-                alert('rowId: '+rowId+' '+ qty)
-            }
-//        })
-    </script>
+    <style>
+        body{
+            min-height: 80% !important;
+        }
+    </style>
 
 @endsection
 
@@ -31,6 +27,11 @@
                     <h1 class="title">Checkout</h1>
                     <div class="row">
                         <div class="col-sm-12">
+                            {{--{{\Gloudemans\Shoppingcart\Facades\Cart::count() }}--}}
+                            @if(\Gloudemans\Shoppingcart\Facades\Cart::count() === 0)
+                                <h2 class="text-center" style="margin-bottom: 150px">NO ITEMS IN CART</h2>
+
+                            @else
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="panel panel-default">
@@ -127,9 +128,10 @@
                                                                      title="Xitefun Causal Wear Fancy Shoes" class="img-thumbnail"></a></td>
                                                         <td class="text-left"><a href="#">{{$content->name}}</a></td>
                                                         <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
-                                                                <input type="text" name="quantity" value="{{$content->qty}}" size="1" class="form-control qty">
+
+                                                                <input type="text" name="quantity" data-id="{{$content->rowId}}" value="{{$content->qty}}" size="1" class="form-control qty">
                                     <span class="input-group-btn">
-                                    <button data-toggle="tooltip" title="Update" onclick="updateCart('{{$content->rowId}}')" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+                                    <button data-toggle="tooltip" title="Update"  class="btn btn-primary update"><i class="fa fa-refresh"></i></button>
                                     <button type="button" data-toggle="tooltip" title="Remove" class="btn btn-danger"
                                             onclick="cart.checkoutRemove('{{$content->rowId}}','{{$user_id}}');"><i class="fa fa-times-circle"></i>
                                     </button>
@@ -189,6 +191,8 @@
                                     </div>
                                 </div>
                             </div>
+
+                                @endif
                         </div>
                     </div>
                 </div>

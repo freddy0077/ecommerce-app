@@ -662,7 +662,7 @@
                 el.next('.validation_error').text(data.responseJSON[field][0]);
                 swal("Error!",data.responseJSON[field][0] , "error");
             }
-        }).success(function(){
+        }).success(function(data){
             location.href="/home";
         })
     })

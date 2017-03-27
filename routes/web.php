@@ -143,7 +143,7 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::post('/add-to-cart/{id}/{name}/{qty}/{price}/{user_id}','StoreController@postAddToCart');
 
-    Route::post('/update-cart/{rowId}/{qty}','StoreController@postUpdateCart');
+    Route::post('/update-cart/{rowId}/{qty}/{user_id}','StoreController@postUpdateCart');
 
     Route::post('/remove-from-cart/{id}/{user_id}','StoreController@postRemoveFromCart');
 

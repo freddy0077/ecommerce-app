@@ -373,9 +373,9 @@
 
 
 <!-- Cpanel Block -->
-<div id="sp-cpanel_btn" class="isDown visible-lg">
-    <i class="fa fa-cog"></i>
-</div>
+{{--<div id="sp-cpanel_btn" class="isDown visible-lg">--}}
+    {{--<i class="fa fa-cog"></i>--}}
+{{--</div>--}}
 
 <!-- Include Libs & Plugins
 	============================================ -->
@@ -400,6 +400,21 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/addtocart.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/application.js')}}"></script>
 <script type="text/javascript">
+
+    $('.qty').on('change',function(){
+        alert($(this).val())
+
+        var value = $(this).val();
+        var rowId = $(this).data('id');
+        var user_id = '{{$user_id}}';
+
+        $.post('/store/update-cart/'+rowId+'/'+value+'/'+user_id,function(data){
+            $('#checkout-shopping-cart').html(data);
+            $('#shopping-cart').load('/store/cart-view/'+user_id);
+
+        })
+    });
+
 
 //    function Upload() {
      $('#banner_image_form').on('submit',function(e){
@@ -471,7 +486,7 @@
             </div>
             <div class="modal-body">
 
-                
+
 
             </div>
             <div class="modal-footer">

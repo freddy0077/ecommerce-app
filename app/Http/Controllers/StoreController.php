@@ -581,9 +581,9 @@ class StoreController extends Controller
         return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
 
-    public function postUpdateCart($rowId,$qty){
+    public function postUpdateCart($rowId,$qty,$user_id){
         \Gloudemans\Shoppingcart\Facades\Cart::update($rowId,$qty);
-        return view('store.partials.shopping_cart_partial');
+        return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
 
     public function postRemoveFromCart($rowId,$user_id){
