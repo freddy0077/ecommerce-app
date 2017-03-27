@@ -39,6 +39,9 @@ class StoreController extends Controller
         $this->middleware('auth');
     }
 
+    public function getStoreDomain(){
+
+    }
 
     public function getStore($slug,$user_id){
 

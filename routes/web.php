@@ -61,10 +61,10 @@ Route::post('/watch-shop/{product_id}/{store_id}/{user_id}','HomeController@post
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
-Route::group(['domain' => '{account}.shopaholicks.com'], function () {
-    Route::get('user', function ($account) {
-        //
-        return $account;
+Route::group(['domain' => '{slug}.shopaholicks.com'], function () {
+    Route::get('/', function ($slug) {
+        $store = \App\Store::whereSlug($slug)->first();
+        redirect("stores/$slug/$store->user_id");
     });
 });
 
