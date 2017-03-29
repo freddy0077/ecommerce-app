@@ -11,6 +11,8 @@
         $('.sign-up').on('click',function(){
 //            alert($(this).data('charge'));
             var charge = $(this).data('charge');
+            var package_id = $(this).data('package');
+            $('#package_id').val(package_id);
 
             $('#signup-package-modal').modal();
 
@@ -133,7 +135,7 @@
                                                 </div>
                                                 <div class="arrow-down arrow-grey"></div>
                                                 <div class="price-table-footer">
-                                                    <button type="button" class="btn grey-salsa btn-outline sbold uppercase price-button sign-up" data-charge="{{$package->charge}}">Sign Up</button>
+                                                    <button type="button" class="btn grey-salsa btn-outline sbold uppercase price-button sign-up" data-package="{{$package->id}}" data-charge="{{$package->charge}}">Sign Up</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,6 +164,8 @@
                 </div>
                 <form action="{{url('admin/add-new-package')}}" id="add-new-package-form">
 
+                    <input type="hidden" class="form-control" name="package_id" id="package_id">
+
                     <div class="modal-body">
                         {{--<p>One fine body&hellip;</p>--}}
                         <div class="row">
@@ -177,7 +181,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Pay</button>
+                        <button type="submit" class="btn btn-primary">Pay with Mtn Mobile Money</button>
                     </div>
                 </form>
 

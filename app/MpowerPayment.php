@@ -21,7 +21,7 @@ curl_setopt_array($curl, array(
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => "",
     CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 30,
+    CURLOPT_TIMEOUT => 50,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
     CURLOPT_POSTFIELDS => "{ \"customer_name\" : \"$name\", \"customer_phone\" : \"$phone_number\", \"customer_email\" : \"$email\", \"wallet_provider\" : \"MTN\", \"merchant_name\" : \"Shopaholicks\", \"amount\" : \"$amount\" }",

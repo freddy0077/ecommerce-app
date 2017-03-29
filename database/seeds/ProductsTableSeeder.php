@@ -88,6 +88,17 @@ class ProductsTableSeeder extends Seeder
 //        \App\User::truncate();
 
 
+//        \App\Package::create([
+//            'id' => \Webpatser\Uuid\Uuid::generate(),
+//            'name' => 'Free Package',
+//            'charge' => 50,
+//            'description' => 'Free Package ',
+//            'number_of_products' => 50,
+//            'duration' => 90,
+//            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/5f59dbe3ee305b1cf425f921',
+//            'type' => 'upgrade_package'
+//        ]);
+
         $this->saveUsers();
 
 
@@ -121,15 +132,8 @@ class ProductsTableSeeder extends Seeder
 //            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/73b1fec15e149ed17391af7b'
 //        ]);
 //
-//        \App\Package::create([
-//            'id' => \Webpatser\Uuid\Uuid::generate(),
-//            'name' => '90 Day Subscription',
-//            'charge' => 50,
-//            'description' => '90 Day subscription (50 products ) for 90 days',
-//            'number_of_products' => 50,
-//            'duration' => 90,
-//            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/5f59dbe3ee305b1cf425f921'
-//        ]);
+
+
 //
         foreach($this->mainCategories as $key=>$category) {
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MpowerPayment;
 use App\Package;
+use App\PackageSignup;
 use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
@@ -52,7 +53,9 @@ class AdminController extends Controller
     {
         $mpowerpayment = new MpowerPayment();
         $results = $mpowerpayment->CheckStatus($token);
-        Payment::whereToken($token)->first()->update([
+        $builder =Payment::whereToken($token);
+
+            $builder->first()->update([
             'response_code' => $results['response_code'],
             'response_text' => $results['response_text'],
             'description' =>   $results['description'],
@@ -61,6 +64,15 @@ class AdminController extends Controller
             'mobile_invoice_no' => $results['mobile_invoice_no'],
             'cancel_reason'     => $results['cancel_reason']
         ]);
+
+        if($complete = $builder->where('tx_status','complete')->first()){
+            PackageSignup::create([
+                'id' => Uuid::generate(),
+                'user_id' => Auth::user()->id,
+                'package_id' => $complete->package_id
+            ]);
+        }
+
         return $results;
     }
 

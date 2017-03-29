@@ -753,7 +753,8 @@ class StoreController extends Controller
             'token'         => $results['token'],
             'mobile_invoice_no' => $results['mobile_invoice_no'],
             'user_id'           => Auth::user()->id,
-            'amount'            => $amount
+            'amount'            => $amount,
+            'package_id'        => $request->package_id
         ]);
 
         return $results;

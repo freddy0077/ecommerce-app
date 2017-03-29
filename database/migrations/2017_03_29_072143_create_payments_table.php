@@ -26,6 +26,8 @@ class CreatePaymentsTable extends Migration
             $table->string('mobile_invoice_no');
             $table->string('cancel_reason')->nullable();
             $table->decimal('amount');
+            $table->uuid('package_id');
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
             $table->timestamps();
         });
     }

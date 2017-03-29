@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('gender')->nullable();
             $table->boolean('has_store')->default(false);
             $table->boolean('admin')->default(false);
+//            $table->uuid('package_id');
+//            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+//            $table->integer('products_threshold');
             $table->rememberToken();
             $table->timestamps();
         });
