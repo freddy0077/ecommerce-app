@@ -33,7 +33,7 @@
                             function(){
                                 setTimeout(function(){
                                     $.post('/admin/confirm-token/'+token,function(confirmData){
-                                        swal(confirmData.cancel_reason);
+                                        swal(confirmData.description);
                                     })
                                 }, 5000);
                             });
