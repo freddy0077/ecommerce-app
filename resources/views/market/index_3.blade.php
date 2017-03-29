@@ -134,8 +134,14 @@
                                                 </div>
 
                                                 <div class="price">
-                                                    <span class="price-new">GHS {{$product->price}}</span>
-                                                    <span class="price-old">GHS {{$product->price}}</span>
+                                                    @if($product->sale)
+                                                        <span class="price-new">GHS {{$product->sale_price}}</span>
+
+                                                        <span class="price-old">GHS {{$product->price}}</span>
+                                                    @else
+                                                        <span class="price-new">GHS {{$product->price}}</span>
+
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -198,11 +204,17 @@
                                                         <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
                                                     </div>
                                                 </div>
-
                                                 <div class="price">
-                                                    <span class="price-new">GHS {{$product->price}}</span>
-                                                    <span class="price-old">GHS {{$product->price}}</span>
+                                                    @if($product->sale)
+                                                        <span class="price-new">GHS {{$product->sale_price}}</span>
+
+                                                        <span class="price-old">GHS {{$product->price}}</span>
+                                                    @else
+                                                        <span class="price-new">GHS {{$product->price}}</span>
+
+                                                    @endif
                                                 </div>
+
                                             </div>
 
                                             <div class="button-group">

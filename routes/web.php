@@ -19,6 +19,24 @@ Route::get('/try',function(){
     return \Webpatser\Uuid\Uuid::generate();
 });
 
+Route::group(['prefix' => 'admin'], function () {
+
+
+    Route::get('/payments-data', 'AdminController@getPaymentsData');
+
+    Route::get('/dashboard', 'AdminController@getDashboard');
+
+    Route::get('/users','AdminController@getUsers');
+
+    Route::post('/confirm-token/{token}','AdminController@postConfirmToken');
+
+
+});
+
+Route::post('/direct-pay/{name}/{phone_number}/{email}/{amount}','StoreController@postMpowerDirectPay');
+
+
+
 
 
 Auth::routes();
@@ -83,27 +101,14 @@ Route::group(['prefix' => 'stores'], function () {
 
 });
 
-Route::group(['prefix' => 'store'], function () {
-
+Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
     Route::get('/dashboard','StoreController@getDashboard');
-
-    Route::get('/cart-contents','StoreController@getCartContents');
-    Route::get('/cart-destroy','StoreController@getCartDestroy');
-    Route::get('/checkout/{id}','StoreController@getCheckOut');
-    Route::post('/check-out/{id}','StoreController@postCheckOut');
-    Route::get('/cart-view/{user_id}','StoreController@getCartView');
-
     Route::get('/orders','StoreController@getOrders');
     Route::get('/order-items/{order_id}','StoreController@getOrderItems');
 
     Route::get('/marketplace-signup','StoreController@getMarketPlaceSignUp');
 
     Route::get('/marketplace-packages/{package_id}','StoreController@getMarketPlacePackages');
-
-
-
-    Route::get('/','StoreController@getIndex');
-
 
     Route::get('/add-product','StoreController@getAddProduct');
 
@@ -140,6 +145,28 @@ Route::group(['prefix' => 'store'], function () {
     Route::post('/add-store-banner','StoreController@postAddStoreBanner');
 
     Route::get('/{slug}/single-product','StoreController@getSingleProduct');
+
+    Route::get('/packages','StoreController@getPackages');
+
+});
+
+Route::group(['prefix' => 'store'], function () {
+
+
+    Route::get('/cart-contents','StoreController@getCartContents');
+    Route::get('/cart-destroy','StoreController@getCartDestroy');
+    Route::get('/checkout/{id}','StoreController@getCheckOut');
+    Route::post('/check-out/{id}','StoreController@postCheckOut');
+    Route::get('/cart-view/{user_id}','StoreController@getCartView');
+
+
+
+
+
+    Route::get('/','StoreController@getIndex');
+
+
+
 
     Route::post('/add-to-cart/{id}/{name}/{qty}/{price}/{user_id}','StoreController@postAddToCart');
 

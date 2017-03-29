@@ -39,6 +39,8 @@
     <link href="{{secure_asset('backend/assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" type="text/css" />
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" type="text/javascript"></script>--}}
+
     <!-- END THEME LAYOUT STYLES -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{asset('backend/assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css')}}" rel="stylesheet" type="text/css" />
@@ -135,85 +137,87 @@
             <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
             <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
             <div class="hor-menu  ">
-                <ul class="nav navbar-nav">
-                    <li class="menu-dropdown classic-menu-dropdown ">
-                        <a href="{{url('/store/dashboard')}}"> Dashboard
-                            <span class="arrow"></span>
-                        </a>
-
-
-                    </li>
-                    <li class="menu-dropdown mega-menu-dropdown  ">
-                        <a href="{{url('store/orders')}}"> Orders
-                            <span class="arrow"></span>
-                        </a>
-                    </li>
-                    <li class="menu-dropdown classic-menu-dropdown ">
-                        <a href="#"> Products
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="dropdown-menu pull-left">
-                            <li class=" ">
-                                <a href="{{url('/store/all-products')}}" class="nav-link  ">
-                                    All Products
-                                    <span class="badge badge-success"></span>
-                                </a>
-                            </li>
-                            <li class=" ">
-                                <a href="{{url('/store/add-product')}}" class="nav-link  ">
-                                    <i class="icon-plus"></i> Add Product </a>
-                            </li>
-                            <li class=" ">
-                                <a href="{{url('/store/quick-add-products')}}" class="nav-link  ">
-                                    <i class="material-icons-plus_one"></i> Quick add products
-                                    {{--<span class="badge badge-danger">3</span>--}}
-                                </a>
-                            </li>
-                        </ul>
-
-                    </li>
-                    <li class="menu-dropdown mega-menu-dropdown  mega-menu-full">
-                        <a href="{{url('store/marketplace-signup')}}"> Market Place
-                            <span class="arrow"></span>
-                        </a>
-                    </li>
-                    <li class="menu-dropdown classic-menu-dropdown ">
-                        <a href="{{url('store/store-settings')}}"> Settings
-                            <span class="arrow"></span>
-                        </a>
-
-                    </li>
-
-                    @if(Auth::check() && Auth::user()->has_store)
-
-                    <li class="menu-dropdown classic-menu-dropdown ">
-
-
-                        <?php
-                        $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
-                        $user_id = Auth::user()->id;
-
-                        ?>
-                        {{--<a href='{{url("stores/$store/$user_id")}}'> My Shop--}}
-                            {{--<span class="arrow"></span>--}}
-                        {{--</a>--}}
-
-                            <a href="https://{{$store}}.shopaholicks.com/shop"> My Shop
-                            <span class="arrow"></span>
+                    <ul class="nav navbar-nav">
+                        <li class="menu-dropdown classic-menu-dropdown ">
+                            <a href="{{url('/store/dashboard')}}"> Dashboard
+                                <span class="arrow"></span>
                             </a>
 
 
+                        </li>
+                        <li class="menu-dropdown mega-menu-dropdown  ">
+                            <a href="{{url('store/orders')}}"> Orders
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown ">
+                            <a href="#"> Products
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li class=" ">
+                                    <a href="{{url('/store/all-products')}}" class="nav-link  ">
+                                        All Products
+                                        <span class="badge badge-success"></span>
+                                    </a>
+                                </li>
+                                <li class=" ">
+                                    <a href="{{url('/store/add-product')}}" class="nav-link  ">
+                                        <i class="icon-plus"></i> Add Product </a>
+                                </li>
+                                <li class=" ">
+                                    <a href="{{url('/store/quick-add-products')}}" class="nav-link  ">
+                                        <i class="material-icons-plus_one"></i> Quick add products
+                                        {{--<span class="badge badge-danger">3</span>--}}
+                                    </a>
+                                </li>
+                            </ul>
 
-                    </li>
+                        </li>
+                        <li class="menu-dropdown mega-menu-dropdown  mega-menu-full">
+                            <a href="{{url('store/marketplace-signup')}}"> Market Place
+                                <span class="arrow"></span>
+                            </a>
+                        </li>
+                        <li class="menu-dropdown classic-menu-dropdown ">
+                            <a href="{{url('store/store-settings')}}"> Settings
+                                <span class="arrow"></span>
+                            </a>
 
-                    @endif
-                    {{--<li class="menu-dropdown classic-menu-dropdown">--}}
+                        </li>
+
+                        @if(Auth::check() && Auth::user()->has_store)
+
+                            <li class="menu-dropdown classic-menu-dropdown ">
+
+
+                                <?php
+                                $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
+                                $user_id = Auth::user()->id;
+
+                                ?>
+                                {{--<a href='{{url("stores/$store/$user_id")}}'> My Shop--}}
+                                {{--<span class="arrow"></span>--}}
+                                {{--</a>--}}
+
+                                <a href="https://{{$store}}.shopaholicks.com/shop"> My Shop
+                                    <span class="arrow"></span>
+                                </a>
+
+
+
+                            </li>
+
+                        @endif
+                        {{--<li class="menu-dropdown classic-menu-dropdown">--}}
                         {{--<a href="#">--}}
-                            {{--<i class="icon-briefcase"></i> Pages--}}
-                            {{--<span class="arrow"></span>--}}
+                        {{--<i class="icon-briefcase"></i> Pages--}}
+                        {{--<span class="arrow"></span>--}}
                         {{--</a>--}}
-                    {{--</li>--}}
-                </ul>
+                        {{--</li>--}}
+                    </ul>
+
+
             </div>
             <!-- END MEGA MENU -->
         </div>
@@ -307,7 +311,29 @@
 //    channel.bind('App\\Events\\ChatMessageReceived', function(data) {
 //        alert(data.chatMessage.message);
 //    });
+
+    {{--var settings = {--}}
+        {{--"async": true,--}}
+        {{--"crossDomain": true,--}}
+        {{--"url": "https://app.mpowerpayments.com/api/v1/direct-mobile/charge",--}}
+        {{--"method": "POST",--}}
+        {{--"headers": {--}}
+            {{--"mp-master-key": "6aa08205-b195-467b-ad0a-a761fc210d30",--}}
+            {{--"mp-private-key": "live_private_e_cbpF28gEH9SSgxDnK-_niztNg",--}}
+            {{--"mp-token": "85b97819a15b51648135",--}}
+            {{--"content-type": "application/json",--}}
+            {{--"cache-control": "no-cache",--}}
+            {{--"postman-token": "c8c9e319-8e23-76ca-afd5-52041d82f530"--}}
+        {{--},--}}
+        {{--"processData": false,--}}
+        {{--'data' :{'customer_name':'frederick ankamah','customer_phone':'0241715148','customer_email':'customer@domainname.com','wallet_provider':'MTN','merchant_name':'Shopaholicks','amount':1,},--}}
+    {{--}--}}
+
+    {{--$.ajax(settings).done(function (response) {--}}
+        {{--console.log(response);--}}
+    {{--});--}}
 </script>
+
 
 @yield('scripts')
 

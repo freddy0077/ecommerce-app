@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Feed;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\StoreRequest;
+use App\MpowerPayment;
 use App\Notifications\NewOrder;
 use App\Order;
 use App\OrderItem;
 use App\Package;
+use App\Payment;
 use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
@@ -29,6 +31,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Webpatser\Uuid\Uuid;
+use Webpatser\Uuid\UuidFacade;
 
 class StoreController extends Controller
 {
@@ -467,6 +470,8 @@ class StoreController extends Controller
                 'sub_category_id' => $request->sub_category,
                 'feature' => $request->feature == 'on'? true: false,
                 'publish' => $request->publish == 'on' ? true : false,
+                'sale'    => $request->sale == 'on' ? true : false,
+                'sale_price' => $request->sale_price
             ]);
 
         }else {
@@ -478,6 +483,8 @@ class StoreController extends Controller
                 'sub_category_id' => $request->sub_category,
                 'feature' => $request->feature == 'on'? true: false,
                 'publish' => $request->publish == 'on' ? true : false,
+                'sale'    => $request->sale == 'on' ? true : false,
+                'sale_price' => $request->sale_price
             ]);
 
         }
@@ -724,7 +731,28 @@ class StoreController extends Controller
         }
     }
 
-    public function checkStoreDetails(){
+    public function getPackages(){
+        $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->get();
+        return view('store.packages',compact('packages'));
+    }
+    public function postMpowerDirectPay($name,$phone_number,$email,$amount)
+    {
+        $mpowerpayment = new MpowerPayment();
+//        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
+        $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
+        Payment::create([
+            'id' =>Uuid::generate(),
+            'response_code' => $results['response_code'],
+            'response_text' => $results['response_text'],
+            'description' =>   $results['description'],
+            'transaction_id' => $results['transaction_id'],
+            'token'         => $results['token'],
+            'mobile_invoice_no' => $results['mobile_invoice_no'],
+            'user_id'           => Auth::user()->id,
+            'amount'            => $amount
+        ]);
+
+        return $results;
 
     }
 

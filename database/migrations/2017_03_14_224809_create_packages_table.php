@@ -20,7 +20,8 @@ class CreatePackagesTable extends Migration
             $table->text('description');
             $table->integer('number_of_products');
             $table->integer('duration');
-            $table->text('payment_link');
+            $table->text('payment_link')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

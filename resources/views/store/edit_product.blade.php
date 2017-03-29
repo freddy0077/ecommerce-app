@@ -54,6 +54,39 @@
             $('#upload').show();
         })
 
+
+
+        var sale_price = $('#sale_price')
+
+//        if($('#sale:checked').val() == 'on') {
+//            sale_price.show();
+//        }
+
+        sale_price.hide();
+
+        $('#sale').on('click',function(){
+//       alert($('#store:checked').val())
+            var sale = $('#sale');
+            if($('#sale:checked').val() == 'on'){
+                sale_price.show();
+                sale_price.attr('required',true);
+
+            }else {
+                sale_price.hide();
+                sale_price.removeAttr('required');
+            }
+        })
+
+        sale_price.on('change',function(){
+            if(sale_price.val() >= $('#price').val()){
+                $('.sale_price_error').text('sale price can not be equal or more than original')
+                $('#submit').attr('disabled',true)
+            }else{
+                $('.sale_price_error').text('')
+                $('#submit').removeAttr('disabled')
+
+            }
+        })
     </script>
 @endsection
 
@@ -145,17 +178,31 @@
                                                             </textarea>
 
                                                         </div>
-                                                        <div class="help-block"> </div>
+                                                        <div class="help-block text-danger"> </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Price</label>
                                                     <div class="col-md-4">
-                                                        <input type="number" class="form-control" name="price" value="{{$product->price}}">
-                                                        <span class="help-block">  </span>
+                                                        <input type="number" class="form-control" name="price" id="price" value="{{$product->price}}">
+                                                        <span class="help-block text-danger">  </span>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Sale</label>
+                                                    <div class="col-md-2">
+                                                        <input type="checkbox" class="form-control" name="sale" id="sale" {!! $product->sale == true ? 'checked':'' !!}>
+                                                        <span class="help-block">  </span>
+                                                        <br>
+                                                        <?php  ?>
+                                                        <input type="number" class="form-control" name="sale_price"id="sale_price" value="{{$product->sale_price}}" >
+                                                        <span class="help-block sale_price_error text-danger">  </span>
+
+                                                    </div>
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Image</label>
@@ -225,7 +272,6 @@
                                                         </div><!-- /.modal-dialog -->
                                                     </div><!-- /.modal -->
 
-
                                                 </div>
 
                                                 <div class="form-group">
@@ -267,6 +313,7 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="form-group last">
                                                 <label class="control-label col-md-3">Feature</label>
                                                 <div class="col-md-4">
@@ -278,7 +325,7 @@
                                             <div class="form-actions">
                                                 <div class="row">
                                                     <div class="col-md-offset-3 col-md-9">
-                                                        <button href="javascript:;" class="btn dark">
+                                                        <button href="javascript:;" class="btn dark" id="submit">
                                                             <i class="fa fa-check"></i> Submit</button>
                                                         <a href="javascript:;" class="btn btn-outline grey-salsa">Cancel</a>
                                                     </div>

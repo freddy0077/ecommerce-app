@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('gender')->nullable();
             $table->boolean('has_store')->default(false);
+            $table->boolean('admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

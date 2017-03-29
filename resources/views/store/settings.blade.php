@@ -352,14 +352,15 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Package</label>
+                                                    <div class="col-md-4">
+                                                        <p>You are currently on our  <i class="text-info">Free Plan</i></p>
+                                                        <a href="{{url('/store/packages')}}" class="btn btn-success">Change Package</a>
 
-                                                {{--<div class="form-group">--}}
-                                                    {{--<label class="control-label col-md-3">Image</label>--}}
-                                                    {{--<div class="col-md-4">--}}
-                                                        {{--<input type="file" class="form-control" name="image" id="image">--}}
-                                                        {{--<span class="help-block">  </span>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             <div class="form-actions">
