@@ -32,6 +32,7 @@ class ProductsTableSeeder extends Seeder
               'password' => bcrypt('topman88'),
               'phone_number' => "024012025$key",
               'has_store'    => true,
+              'admin'       => true
           ]);
       }
     }
@@ -94,11 +95,11 @@ class ProductsTableSeeder extends Seeder
         $store_id2 = \Webpatser\Uuid\Uuid::generate();
         \App\Store::create([
             'id' => $store_id,
-            'name' => 'Evergreen Store2',
+            'name' => 'Evergreen Store',
             'email' => 'evergreen@gmail.com',
             'phone_number' => '0240120250',
             'user_id'      => 1,
-            'domain' => 'evergreen-store2@shopaholicks.com'
+            'domain' => 'evergreen-store@shopaholicks.com'
         ]);
 
         \App\Store::create([
@@ -107,7 +108,7 @@ class ProductsTableSeeder extends Seeder
             'email' => 'evanacus@gmail.com',
             'phone_number' => '0240120250',
             'user_id'      => 2,
-            'domain' => 'evergreen-store2@shopaholicks.com'
+            'domain' => 'evanacus@shopaholicks.com'
         ]);
 
 //        \App\Package::create([
