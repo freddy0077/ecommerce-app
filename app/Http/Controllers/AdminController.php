@@ -7,6 +7,8 @@ use App\Package;
 use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Webpatser\Uuid\Uuid;
 
 class AdminController extends Controller
 {
@@ -21,10 +23,13 @@ class AdminController extends Controller
         return view('admin.payments');
     }
 
-    public function postMpowerDirectPay($name,$phone_number,$email,$amount)
+    public function postMpowerDirectPay(Request $request,$amount)
     {
         $mpowerpayment = new MpowerPayment();
 //        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
+        $name = $request->name;
+        $phone_number = $request->phone_number;
+        $email =        Auth::user()->email;
         $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
         Payment::create([
             'id' =>Uuid::generate(),
@@ -65,7 +70,20 @@ class AdminController extends Controller
     }
 
     public function getPackages(){
-        $packages = Package::all();
+        $packages = Package::paginate();
         return view('admin.packages',compact('packages'));
+    }
+
+    public function postAddNewPackage(Request $request){
+        Package::create([
+            'id' => Uuid::generate(),
+            'name' => $request->name,
+            'charge' => $request->charge,
+            'description' => $request->description,
+            'number_of_products' => $request->number_of_products,
+            'duration' => $request->duration,
+            'payment_link' => $request->payment_link,
+            'type'         => $request->type
+        ]);
     }
 }

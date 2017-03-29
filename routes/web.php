@@ -30,12 +30,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/packages','AdminController@getPackages');
 
-    Route::post('/confirm-token/{token}','AdminController@postConfirmToken');
+    Route::post('/add-new-package','AdminController@postAddNewPackage');
 
+    Route::post('/confirm-token/{token}','AdminController@postConfirmToken');
 
 });
 
-Route::post('/direct-pay/{name}/{phone_number}/{email}/{amount}','StoreController@postMpowerDirectPay');
+Route::post('/direct-pay/{amount}','StoreController@postMpowerDirectPay');
 
 
 

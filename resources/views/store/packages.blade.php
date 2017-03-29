@@ -9,53 +9,41 @@
 
     <script>
         $('.sign-up').on('click',function(){
-            alert($(this).data('charge'));
-            var name  = '{{\Illuminate\Support\Facades\Auth::user()->name}}';
-            var phone_number = '{{\Illuminate\Support\Facades\Auth::user()->phone_number}}';
-            var email = '{{\Illuminate\Support\Facades\Auth::user()->email}}';
+//            alert($(this).data('charge'));
             var charge = $(this).data('charge');
 
-            $.post('/direct-pay/'+name+'/'+phone_number+'/'+email+'/'+charge,function(data){
-                alert(data.description)
+            $('#signup-package-modal').modal();
 
-            })
-        })
+            $('#add-new-package-form').on('submit',function(e){
+                e.preventDefault();
 
+                $.post('/direct-pay/'+charge,$(this).serialize(),function(data){
+                    var token = data.token;
 
-        $("#settings-form").on('submit',(function(e) {
-            e.preventDefault();
+                    $('#signup-package-modal').hide();
 
-            $.ajax({
-                url: $(this).attr('action'), // Url to which the request is send
-                type: "POST",             // Type of request to be send, called as method
-                data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-                contentType: false,       // The content type used when sending data to the server.
-                cache: false,             // To unable request pages to be cached
-                processData:false,        // To send DOMDocument or non processed data file it is set to false
-            }).fail(function(data){
-                for (var field in data.responseJSON) {
-                    var el = $(':input[name="' + field + '"]');
-                    el.parent('.form-group').addClass('has-error');
-                    el.next('.help-block').text(data.responseJSON[field][0]);
-                    el.next('.validation_error').text(data.responseJSON[field][0]);
-                    swal("Error!", data.responseJSON[field][0], "error");
+                    swal({
+                                title: "Mobile Money Payment Request",
+                                text: data.description +'. click OK after approving it',
+                                type: "info",
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                            },
+                            function(){
+                                setTimeout(function(){
+                                    $.post('/admin/confirm-token/'+token,function(confirmData){
+                                        swal(confirmData.cancel_reason);
+                                    })
+                                }, 5000);
+                            });
+//                alert(data.description)
+                })
 
-                }
-            }).success(function(){
-                swal("Good job!", 'you have successfully saved settings reloading page ... !', "success");
-                setTimeout(function(){
-                    location.reload();
-                },2000)
 
             });
-        }));
-
-
-        $('#upload').hide();
-
-        $('#change-image').on('click',function(){
-            $('#upload').show();
         })
+
 
 
     </script>
@@ -164,5 +152,37 @@
         <!-- END CONTENT -->
     </div>
     <!-- END CONTAINER -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="signup-package-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Subscribe to this Package</h4>
+                </div>
+                <form action="{{url('admin/add-new-package')}}" id="add-new-package-form">
+
+                    <div class="modal-body">
+                        {{--<p>One fine body&hellip;</p>--}}
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="name" placeholder="Name" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="phone_number" placeholder="Phone number" required>
+                            </div>
+                        </div>
+                        <br>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Pay</button>
+                    </div>
+                </form>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 @endsection

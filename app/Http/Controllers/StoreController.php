@@ -735,10 +735,14 @@ class StoreController extends Controller
         $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->get();
         return view('store.packages',compact('packages'));
     }
-    public function postMpowerDirectPay($name,$phone_number,$email,$amount)
+
+    public function postMpowerDirectPay(Request $request,$amount)
     {
         $mpowerpayment = new MpowerPayment();
 //        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
+        $name = $request->name;
+        $phone_number = $request->phone_number;
+        $email =        Auth::user()->email;
         $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
         Payment::create([
             'id' =>Uuid::generate(),
