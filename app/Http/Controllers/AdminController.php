@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MpowerPayment;
+use App\Package;
 use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
@@ -61,5 +62,10 @@ class AdminController extends Controller
     public function getUsers(){
         $users = User::paginate();
         return view('admin.users',compact('users'));
+    }
+
+    public function getPackages(){
+        $packages = Package::all();
+        return view('admin.packages',compact('packages'));
     }
 }

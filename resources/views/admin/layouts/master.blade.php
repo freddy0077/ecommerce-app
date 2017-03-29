@@ -442,6 +442,12 @@
                         </a>
                     </li>
 
+                    <li class="menu-dropdown mega-menu-dropdown  ">
+                        <a href="{{url('admin/packages')}}"> Packages
+                            <span class="arrow"></span>
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
