@@ -28,6 +28,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/users','AdminController@getUsers');
 
+    Route::get('/packages','AdminController@getPackages');
+
     Route::post('/confirm-token/{token}','AdminController@postConfirmToken');
 
 
