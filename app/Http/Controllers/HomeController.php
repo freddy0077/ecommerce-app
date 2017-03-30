@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ChatMessageReceived;
 use App\Fancy;
 use App\Like;
+use App\MarketplaceSignup;
 use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
@@ -41,17 +42,34 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $builder =  Product::leftJoin('stores','stores.user_id','=','products.user_id')
-            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
-            ->orderBy('products.like_counts','desc');
+        $users = User::all();
+        $allProducts = collect();
 
-        $products = $builder->take(10)->get();
+        foreach($users as $user){
+             $signup = MarketplaceSignup::leftJoin('packages','packages.id','=','marketplace_signups.package_id')->where('user_id',$user->id)->first();
+            $number_of_products = $signup ? $signup->number_of_products : 50;
+             $products = Product::leftJoin('stores','stores.user_id','=','products.user_id')
+                 ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+                 ->where('products.user_id',$user->id)->take($number_of_products)->get();
+            $allProducts->push($products);
+        }
 
-        $second_set = $builder->skip(10)->take(10)->get();
+          $products = $allProducts->collapse()->shuffle(1)->all();
+          $second_set = $allProducts->collapse()->shuffle(2)->all();
 
-        $second_set = $builder->skip(10)->take(30)->paginate();
 
-        $nextpageurl = $second_set->nextpageurl();
+
+//        $builder =  Product::leftJoin('stores','stores.user_id','=','products.user_id')
+//            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+//            ->orderBy('products.like_counts','desc');
+//
+//        $products = $builder->take(10)->get();
+//
+//        $second_set = $builder->skip(10)->take(10)->get();
+//
+//        $second_set = $builder->skip(10)->take(30)->paginate();
+//
+//        $nextpageurl = $second_set->nextpageurl();
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
@@ -61,9 +79,9 @@ class HomeController extends Controller
             ->take(10)
             ->get();
 
-        if($request->ajax()){
-            return view('market.partials.more_popular_products',compact('second_set','nextpageurl'));
-        }
+//        if($request->ajax()){
+//            return view('market.partials.more_popular_products',compact('second_set','nextpageurl'));
+//        }
 
 //        return view('market.index',compact('products','nextpageurl'));
         return view('market.index_3',compact('products','categories','second_set','nextpageurl'));

@@ -37,11 +37,11 @@ class ProductsTableSeeder extends Seeder
       }
     }
 
-    private function saveProducts($id,$name,$price,$store_id,$sub_category_id){
+    private function saveProducts($user_id,$id,$name,$price,$store_id,$sub_category_id){
         \App\Product::create([
             'id' => $id,
             'name' => $name,
-            'user_id' => 1,
+            'user_id' => $user_id,
             'price' => $price,
             'description'=>"",
             'ad' => true,
@@ -114,7 +114,7 @@ class ProductsTableSeeder extends Seeder
         ]);
 
         \App\Store::create([
-            'id' => \Webpatser\Uuid\Uuid::generate(),
+            'id' => $store_id2,
             'name' => 'Evanacus',
             'email' => 'evanacus@gmail.com',
             'phone_number' => '0240120250',
@@ -153,8 +153,9 @@ class ProductsTableSeeder extends Seeder
                     case "Clothing":
                         $men_id = \Webpatser\Uuid\Uuid::generate();
                         $this->saveSubCategory($men_id,'Men',$id);
-                        for($i = 0; $i < 10; $i++){
-                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
+                        for($i = 0; $i < 20; $i++){
+                            $this->saveProducts(1,\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id,$men_id);
+                            $this->saveProducts(2,\Webpatser\Uuid\Uuid::generate(),"men$i",5*$i,$store_id2,$men_id);
                         }
 
 //                        for($i = 0; $i < 10; $i++){
@@ -165,15 +166,17 @@ class ProductsTableSeeder extends Seeder
 //
                         $this->saveSubCategory($women_id,'Women',$id);
 //
-                        for($i = 0; $i < 10; $i++){
-                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
+                        for($i = 0; $i < 20; $i++){
+                            $this->saveProducts(1,\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id,$women_id);
+                            $this->saveProducts(2,\Webpatser\Uuid\Uuid::generate(),"Women$i",5*$i,$store_id2,$women_id);
                         }
 //
                         $kidsbabies_id = \Webpatser\Uuid\Uuid::generate();
                         $this->saveSubCategory($kidsbabies_id,'Kids & Babies',$id);
 
-                        for($i = 0; $i < 10; $i++){
-                            $this->saveProducts(\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
+                        for($i = 0; $i < 20; $i++){
+                            $this->saveProducts(1,\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id,$kidsbabies_id);
+                            $this->saveProducts(2,\Webpatser\Uuid\Uuid::generate(),"Kids&Babies$i",7*$i,$store_id2,$kidsbabies_id);
                         }
 
                         break;

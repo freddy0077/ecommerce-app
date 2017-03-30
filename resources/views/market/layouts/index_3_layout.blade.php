@@ -372,17 +372,17 @@
                         <div class="module clearfix ">
                             <div class="modcontent">
                                 <div class="block-policy-top ">
-                                    <div class="policy policy1 col-sm-4 col-xs-12">
+                                    <div class="policy policy1 col-sm-7 col-xs-12">
                                         {{--<div class="policy-inner">--}}
                                             {{--<i class="ico-policy"></i>--}}
-                                            {{--<h4>30 days return</h4>--}}
-                                            {{--<span>Money back guarantee</span>--}}
+                                            {{--<h4>Advertise on this page ?</h4>--}}
+                                            {{--<span>email: info@shopaholicks.com</span>--}}
                                         {{--</div>--}}
                                     </div>
                                     <div class="policy policy2 col-sm-4 col-xs-12">
                                         {{--<div class="policy-inner">--}}
                                             {{--<i class="ico-policy"></i>--}}
-                                            {{--<h4>free shipping on $30</h4>--}}
+                                            {{--<h4> info@shopaholicks.com</h4>--}}
                                             {{--<span>on all orders over $99</span>--}}
                                         {{--</div>--}}
                                     </div>
@@ -412,11 +412,11 @@
                         <h3 class="modtitle">Follow Us</h3>
                         <div class="modcontent">
                             <div class="list-inline">
-                                <a title="Facebook" href="http://www.facebook.com/MagenTech" target="_blank">
+                                <a title="Facebook" href="http://www.facebook.com/shopaholicksofficial" target="_blank">
                                     <span class="fa fa-facebook icon-circled icon-color"></span>
                                 </a>
 
-                                <a title="Twitter" href="https://twitter.com/magentech" target="_blank">
+                                <a title="Twitter" href="https://twitter.com/shopaholicks" target="_blank">
                                     <span class="fa fa-twitter icon-circled icon-color"></span>
                                 </a>
 
@@ -425,13 +425,12 @@
                                 </a>
 
 
-                                <a title="Pinterest" href="#" target="_blank">
+                                <a title="Pinterest" href="https://www.instagram.com/shopaholicksgh" target="_blank">
                                     <span class="fa fa-instagram icon-circled icon-color"></span>
                                 </a>
 
 
                             </div>
-
                         </div>
                     </div>
                     <hr class="footer-lines ">
@@ -440,10 +439,10 @@
                             <h3 class="modtitle">Information</h3>
                             <div class="modcontent">
                                 <ul class="menu">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Order history</a></li>
-                                    <li><a href="#">Order information</a></li>
+                                    {{--<li><a href="#">About Us</a></li>--}}
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Terms of Use</a></li>
+                                    <li><a href="#">The team</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -456,8 +455,8 @@
                                 <ul class="menu">
                                     <li><a href="#">Contact Us</a></li>
                                     <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Site Map</a></li>
-                                    <li><a href="{{url('/feeds')}}">My Account</a></li>
+                                    {{--<li><a href="#">Site Map</a></li>--}}
+                                    {{--<li><a href="{{url('/feeds')}}">My Account</a></li>--}}
                                 </ul>
                             </div>
                         </div>
@@ -481,6 +480,8 @@
                     <div class="col-sm-6 col-md-3 collapsed-block ">
                         <div class="module clearfix">
                             <h3 class="modtitle">Contact Us	</h3>
+                            <h4>Want to Advertise on this page ?</h4>
+                            {{--<small>Email: info@shopaholicks.com</small>--}}
                             <div class="modcontent">
                                 <ul class="contact-address">
                                     <li><span class="fa fa-map-marker"></span> Shopaholicks Ltd.</li>

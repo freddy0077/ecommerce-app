@@ -19,10 +19,13 @@
                         {{--<a href="#"><img src="{{asset('frontend_2/image/demo/slider/home8/slide2-id12.jpg')}}" alt="slider2" class="img-responsive"></a>--}}
                     {{--</div>--}}
                     <div class="item">
-                        <a href="#"><img src="https://placehold.it/1170x570" alt="slider3" class="img-responsive"></a>
+                        <a href="#"><img src="{{asset('images/slider_1.jpg')}}" alt="slider3" class="img-responsive"></a>
                     </div>
                     <div class="item">
-                        <a href="#"><img src="https://placehold.it/1170x570" alt="slider3" class="img-responsive"></a>
+                        <a href="#"><img src="{{asset('images/slider_2.jpg')}}" alt="slider3" class="img-responsive"></a>
+                    </div>
+                    <div class="item">
+                        <a href="#"><img src="{{asset('images/slider_3.jpg')}}" alt="slider3" class="img-responsive"></a>
                     </div>
                 </div>
                 <div class="loadeding"></div>
@@ -97,10 +100,14 @@
                         <h3 class="modtitle">Products by Popularity</h3>
                         <div id="so_extraslider1" >
 
+                            <?php $i =0 ?>
+
+
                             <!-- Begin extraslider-inner -->
                             <div class="so-extraslider products-list grid"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
 
                                 @foreach($products as $product)
+                                        <?php $i++ ?>
                                         <!--Begin Items-->
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
@@ -109,9 +116,12 @@
                                                 <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />
                                                 <img src="{{asset("images/products/$product->image")}}"   alt="{{$product->name}}" class="img-responsive img_0" />
                                             </div>
-                                            <!--Sale Label-->
-                                            {{--<span class="label label-sale">Sale</span>--}}
-                                            <span class="label label-new">New</span>
+                                            @if($product->sale)
+                                            <span class="label label-sale">Sale</span>
+                                            @endif
+
+                                                    <!--Sale Label-->
+                                            {{--<span class="label label-new">New</span>--}}
 
                                             <!--full quick view block-->
                                             <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
@@ -134,14 +144,17 @@
                                                 </div>
 
                                                 <div class="price">
-                                                    @if($product->sale)
-                                                        <span class="price-new">GHS {{$product->sale_price}}</span>
+                                                    <div class="price">
+                                                        @if($product->sale)
+                                                            <span class="price-new">GH&#162; {{$product->sale_price}}</span>
 
-                                                        <span class="price-old">GHS {{$product->price}}</span>
-                                                    @else
-                                                        <span class="price-new">GHS {{$product->price}}</span>
+                                                            <span class="price-old">GH&#162; {{$product->price}}</span>
+                                                        @else
+                                                            <span class="price-new">GH&#162; {{$product->price}}</span>
 
-                                                    @endif
+                                                        @endif
+                                                    </div>
+
                                                 </div>
                                             </div>
 
@@ -182,10 +195,9 @@
                                                 <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />
                                                 <img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />
                                             </div>
-                                            <!--Sale Label-->
-                                            {{--<span class="label label-sale">Sale</span>--}}
-                                            <span class="label label-new">New</span>
-
+                                            @if($product->sale)
+                                                <span class="label label-sale">Sale</span>
+                                                @endif
                                             <!--full quick view block-->
                                             <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                             <!--end full quick view block-->
@@ -206,11 +218,11 @@
                                                 </div>
                                                 <div class="price">
                                                     @if($product->sale)
-                                                        <span class="price-new">GHS {{$product->sale_price}}</span>
+                                                        <span class="price-new">GH&#162; {{$product->sale_price}}</span>
 
-                                                        <span class="price-old">GHS {{$product->price}}</span>
+                                                        <span class="price-old">GH&#162; {{$product->price}}</span>
                                                     @else
-                                                        <span class="price-new">GHS {{$product->price}}</span>
+                                                        <span class="price-new">GH&#162; {{$product->price}}</span>
 
                                                     @endif
                                                 </div>
@@ -364,7 +376,7 @@
                         <div class="row">
 
                             <div class="module so-extraslider--new titleLine col-sm-6 col-xs-12">
-                                <h3 class="modtitle modtitle--small">Sale</h3>
+                                <h3 class="modtitle modtitle--small">Best Deals</h3>
                                 <div id="so_extraslider1__home8">
 
                                     <!-- Begin extraslider-inner -->
