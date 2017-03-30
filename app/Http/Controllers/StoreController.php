@@ -10,6 +10,7 @@ use App\Notifications\NewOrder;
 use App\Order;
 use App\OrderItem;
 use App\Package;
+use App\PackageSignup;
 use App\Payment;
 use App\Product;
 use App\ProductCategory;
@@ -35,7 +36,6 @@ use Webpatser\Uuid\UuidFacade;
 
 class StoreController extends Controller
 {
-    protected $threshold = 50;
     //
     public function __construct()
     {
@@ -202,7 +202,11 @@ class StoreController extends Controller
     }
 
     public function getStoreSettings(){
-        $store = Store::whereUserId(Auth::user()->id)->first();
+
+          $store = Store::leftJoin('package_signups','package_signups.store_id','=','stores.id')
+              ->leftJoin('packages','packages.id','=','package_signups.package_id')
+              ->selectRaw('stores.*,packages.name as package_name')
+            ->where('stores.user_id',Auth::user()->id)->first();
 
         return view('store.settings',compact('store'));
     }
@@ -331,8 +335,7 @@ class StoreController extends Controller
         $store_id = Store::where('user_id',Auth::user()->id)->first();
 
          $productCounts = Product::whereStoreId($store_id->id)->count();
-         $products_limit = $this->threshold-$productCounts;
-
+         $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         return view('store.add_product',compact('categories','products_limit'));
     }
@@ -354,9 +357,9 @@ class StoreController extends Controller
         $store_id = Store::where('user_id',Auth::user()->id)->first();;
 
         $productCounts = Product::whereStoreId($store_id->id)->count();
-        $products_limit = $this->threshold-$productCounts;
+        $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
-        if($products_limit == 0){
+        if($products_limit <= 0){
             return ['products_limit_reached' => true];
         }else{
 
@@ -733,12 +736,16 @@ class StoreController extends Controller
 
     public function getPackages(){
         $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->get();
-        return view('store.packages',compact('packages'));
+        $user = Auth::user();
+
+        return view('store.packages',compact('packages','user'));
     }
 
     public function postMpowerDirectPay(Request $request,$amount)
     {
         $mpowerpayment = new MpowerPayment();
+//        $mpowerpayment->MTN="AIRTEL";
+        $mpowerpayment->MTN=$request->mobile_money;
 //        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
         $name = $request->name;
         $phone_number = $request->phone_number;

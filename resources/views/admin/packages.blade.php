@@ -2,6 +2,12 @@
 
 @section('scripts')
 
+    <style>
+        .portlet{
+            margin-bottom: 200px;
+        }
+    </style>
+
     <script>
 
         $('.add-package').on('click',function(){

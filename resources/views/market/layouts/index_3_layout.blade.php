@@ -138,7 +138,7 @@
                 <div class="row">
                     <!-- Logo -->
                     <div class="navbar-logo col-md-3 col-sm-12 col-xs-12">
-                        <a href="index.html">
+                        <a href="#">
                             <img src="{{url('frontend_2/image/logo.png')}}" alt="SW Shoppy">
 
                             {{--                            <img src="{{asset('frontend_2/image/demo/logos/logo_8.png')}}" title="Your Store" alt="Your Store">--}}

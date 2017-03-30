@@ -215,7 +215,8 @@
                                                     <label class="control-label col-md-3">Logo</label>
                                                     <div class="col-md-4">
                                                         <img src="/images/stores/{{$store->image}}"  class="img-thumbnail"><br><br>
-                                                        <span><button type="button" id="change-image" class="btn btn-default">change</button></span>
+                                                        <span><button type="button" id="change-image" class="btn btn-default">change</button></span><br>
+                                                        <span><small><i>Recommended size: 200 x 50</i></small></span>
                                                     </div>
                                                 </div>
 
@@ -355,8 +356,14 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Package</label>
                                                     <div class="col-md-4">
-                                                        <p>You are currently on our  <i class="text-info">Free Plan</i></p>
-                                                        <a href="{{url('/store/packages')}}" class="btn btn-success">Change Package</a>
+                                                        @if($store->package_name)
+                                                            <p>You are currently on our  <i class="text-info">{{$store->package_name}} Plan</i></p>
+
+                                                        @else
+                                                            <p>You are currently on our  <i class="text-info">Free Plan</i></p>
+
+                                                        @endif
+                                                            <a href="{{url('/store/packages')}}" class="btn btn-success">Change Package</a>
 
                                                     </div>
                                                 </div>

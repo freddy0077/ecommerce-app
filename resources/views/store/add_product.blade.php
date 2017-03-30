@@ -41,10 +41,12 @@
 
         $('#category').on('change',function(){
             var category_value = $(this).val();
-//
             $( "#sub_category" ).load( "/store/sub-categories-partial/"+category_value );
+        });
 
-        })
+            var products_limit = '{{$products_limit}}';
+
+            alert(products_limit);
 
 //
     </script>

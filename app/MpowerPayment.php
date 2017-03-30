@@ -11,6 +11,12 @@ namespace App;
 
 class MpowerPayment
 {
+    public $MTN;
+
+    public function __construct()
+    {
+        $this->MTN = "MTN";
+    }
 
     public function MobilePayment($name,$phone_number,$email,$amount){
 
@@ -24,7 +30,7 @@ curl_setopt_array($curl, array(
     CURLOPT_TIMEOUT => 50,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{ \"customer_name\" : \"$name\", \"customer_phone\" : \"$phone_number\", \"customer_email\" : \"$email\", \"wallet_provider\" : \"MTN\", \"merchant_name\" : \"Shopaholicks\", \"amount\" : \"$amount\" }",
+    CURLOPT_POSTFIELDS => "{ \"customer_name\" : \"$name\", \"customer_phone\" : \"$phone_number\", \"customer_email\" : \"$email\", \"wallet_provider\" : \"$this->MTN\", \"merchant_name\" : \"Shopaholicks\", \"amount\" : \"$amount\" }",
     CURLOPT_HTTPHEADER => array(
         "cache-control: no-cache",
         "content-type: application/json",

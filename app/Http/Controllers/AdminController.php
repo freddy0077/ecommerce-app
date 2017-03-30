@@ -6,6 +6,7 @@ use App\MpowerPayment;
 use App\Package;
 use App\PackageSignup;
 use App\Payment;
+use App\Store;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,10 +67,19 @@ class AdminController extends Controller
         ]);
 
         if($complete = $builder->where('tx_status','complete')->first()){
+
+            $user = Auth::user();
+            if(Package::getUserPackage($user->id) != $complete->package_id){
+                Package::whereUserId($user->id)->first()->update([
+                    'package_id'  => $complete->package_id
+                ]);
+            }
+
             PackageSignup::create([
                 'id' => Uuid::generate(),
-                'user_id' => Auth::user()->id,
-                'package_id' => $complete->package_id
+                'user_id' => $user->id,
+                'package_id' => $complete->package_id,
+                'store_id'  => Store::whereUserId($user->id)->first()->id
             ]);
         }
 

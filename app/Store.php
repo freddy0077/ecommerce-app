@@ -25,6 +25,10 @@ class Store extends Model
         $this->belongsTo('App\User');
     }
 
+    public function packageSignups(){
+        return $this->hasMany(Store::class);
+    }
+
     public function sluggable()
     {
         return [

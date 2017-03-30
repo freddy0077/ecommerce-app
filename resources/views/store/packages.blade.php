@@ -35,6 +35,9 @@
                             function(){
                                 setTimeout(function(){
                                     $.post('/admin/confirm-token/'+token,function(confirmData){
+                                        if(confirmData.tx_status != undefined && confirmData.tx_status == 'complete'){
+                                            location.href="/store/store-settings";
+                                        }
                                         swal(confirmData.description);
                                     })
                                 }, 5000);
@@ -63,8 +66,8 @@
                 <div class="container">
                     <!-- BEGIN PAGE TITLE -->
                     <div class="page-title">
-                        <h1>Pricing Tables
-                            <small>pricing table samples</small>
+                        <h1>Packages
+                            {{--<small>pricing table samples</small>--}}
                         </h1>
                     </div>
                     <!-- END PAGE TITLE -->
@@ -77,16 +80,16 @@
                     <!-- BEGIN PAGE BREADCRUMBS -->
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="index-2.html">Home</a>
+                            <a href="{{url('/store/store-settings')}}">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <a href="#">Pages</a>
+                            <a href="#">Packages</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                        <li>
-                            <span>General</span>
-                        </li>
+                        {{--<li>--}}
+                            {{--<span>General</span>--}}
+                        {{--</li>--}}
                     </ul>
                     <!-- END PAGE BREADCRUMBS -->
                     <!-- BEGIN PAGE CONTENT INNER -->
@@ -95,7 +98,7 @@
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="icon-share font-green"></i>
-                                    <span class="caption-subject font-green bold uppercase">Pricing 1</span>
+                                    <span class="caption-subject font-green bold uppercase">Pricing</span>
                                 </div>
                                 <div class="actions">
                                     <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
@@ -135,7 +138,11 @@
                                                 </div>
                                                 <div class="arrow-down arrow-grey"></div>
                                                 <div class="price-table-footer">
-                                                    <button type="button" class="btn grey-salsa btn-outline sbold uppercase price-button sign-up" data-package="{{$package->id}}" data-charge="{{$package->charge}}">Sign Up</button>
+                                                    @if(\App\Package::getUserPackage($user->id) == $package->id)
+                                                       <button type="button" class="btn grey-salsa btn-outline sbold uppercase price-button">Subscribed</button>
+                                                        @else
+                                                        <button type="button" class="btn grey-salsa btn-outline sbold uppercase price-button sign-up" data-package="{{$package->id}}" data-charge="{{$package->charge}}">PAY FOR PACKAGE</button>
+                                                        @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -175,13 +182,27 @@
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" name="phone_number" placeholder="Phone number" required>
                             </div>
+
+                            <br>
+                            <br>
+
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-6">
+                                {{--<input type="text" class="form-control" name="mobile_money" placeholder="Mobile Money" required>--}}
+                                <select class="form-control" name="mobile_money">
+                                    <option>Choose MTN or AIRTEL</option>
+                                    <option value="MTN">MTN</option>
+                                    <option value="AIRTEL">AIRTEL</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2"></div>
+
                         </div>
-                        <br>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Pay with Mtn Mobile Money</button>
+                        <button type="submit" class="btn btn-primary">Pay with Mobile Money</button>
                     </div>
                 </form>
 

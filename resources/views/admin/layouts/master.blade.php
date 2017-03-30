@@ -10,7 +10,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | Tiles</title>
+    <title>{{Config('app.name')}}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -48,8 +48,8 @@
         <div class="container">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index-2.html">
-                    <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+                <a href="{{url('/')}}">
+                    <img src="{{url('frontend_2/image/logo.png')}}" alt="logo" class="logo-default" style="margin-top: -14px">
                 </a>
             </div>
             <!-- END LOGO -->

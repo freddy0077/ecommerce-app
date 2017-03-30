@@ -138,14 +138,21 @@
             <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
             <div class="hor-menu  ">
                     <ul class="nav navbar-nav">
+                        @if(\Illuminate\Support\Facades\Auth::user()->admin)
                         <li class="menu-dropdown classic-menu-dropdown ">
-                            <a href="{{url('/store/dashboard')}}"> Dashboard
+                            <a href="{{url('/admin/dashboard')}}"> Admin Dashboard
                                 <span class="arrow"></span>
                             </a>
-
-
                         </li>
-                        <li class="menu-dropdown mega-menu-dropdown  ">
+                        @endif
+                            <li class="menu-dropdown classic-menu-dropdown ">
+                                <a href="{{url('/store/dashboard')}}"> Dashboard
+                                    <span class="arrow"></span>
+                                </a>
+
+
+                            </li>
+                            <li class="menu-dropdown mega-menu-dropdown  ">
                             <a href="{{url('store/orders')}}"> Orders
                                 <span class="arrow"></span>
                             </a>
@@ -189,7 +196,6 @@
                         @if(Auth::check() && Auth::user()->has_store)
 
                             <li class="menu-dropdown classic-menu-dropdown ">
-
 
                                 <?php
                                 $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
