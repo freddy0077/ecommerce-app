@@ -16,6 +16,9 @@ class Package extends Model
     }
 
     public static function getUserPackage($user_id){
-        return PackageSignup::whereUserId($user_id)->first()->package_id;
+        $package = PackageSignup::whereUserId($user_id)->first();
+        if($package){
+            return PackageSignup::whereUserId($user_id)->first()->package_id;
+        }
     }
 }
