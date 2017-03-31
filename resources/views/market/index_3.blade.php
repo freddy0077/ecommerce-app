@@ -382,6 +382,7 @@
                                     <!-- Begin extraslider-inner -->
                                     <div class="so-extraslider products-list grid product-style__8"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="3" data-items_column1="2" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
                                         <!--Begin Items-->
+                                        @foreach($best_deals as $deal)
                                         <div class="ltabs-item product-layout">
                                             <div class="product-item-container">
                                                 <div class="left-block">
@@ -397,7 +398,7 @@
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="caption">
-                                                        <h4><a href="product.html">Qurem mazem numa dikam</a></h4>
+                                                        <h4><a href="#">{{$deal->name}}</a></h4>
                                                         <div class="ratings">
                                                             <div class="rating-box">
                                                                 <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
@@ -409,138 +410,25 @@
                                                         </div>
 
                                                         <div class="price">
-                                                            <span class="price-new">$50.00</span>
-                                                            <span class="price-old">$62.00</span>
+                                                            <span class="price-new">{{$deal->sale_price}}</span>
+                                                            <span class="price-old">{{$deal->price}}</span>
                                                         </div>
                                                     </div>
 
                                                     <div class="button-group">
-                                                        <button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                        <button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                        <button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
+                                                        <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$deal->id}}');"><i class="fa fa-heart"></i>  </button>
+                                                        <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
+                                                            <i id="like-toggle-{{$deal->id}}" class="fa fa-thumbs-up"></i>
+                                                            <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
+                                                        </button>
+                                                        <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
+
                                                     </div>
                                                 </div><!-- right block -->
                                             </div>
                                         </div>
-
-                                        <div class="ltabs-item product-layout">
-                                            <div class="product-item-container">
-                                                <div class="left-block">
-                                                    <div class="product-image-container  ">
-                                                        <img src="{{asset('frontend_2/image/demo/shop/product/home8/8_3.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />
-                                                    </div>
-                                                    <!--Sale Label-->
-                                                    <span class="label label-sale">Sale</span>
-                                                    <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>
-                                                    <!--end full quick view block-->
-                                                </div>
-                                                <div class="right-block">
-                                                    <div class="caption">
-                                                        <h4><a href="">Suma fuma direm mase</a></h4>
-                                                        <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="price">
-                                                            <span class="price-new">$150.00</span>
-                                                            <span class="price-old">$125.00</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="button-group">
-                                                        <button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                        <button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                        <button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
-                                                    </div>
-                                                </div><!-- right block -->
-                                            </div>
-                                        </div>
-                                        <div class="ltabs-item product-layout">
-                                            <div class="product-item-container">
-                                                <div class="left-block">
-                                                    <div class="product-image-container second_img ">
-                                                        <img src="{{asset('frontend_2/image/demo/shop/product/home8/7_7.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />
-                                                    </div>
-                                                    <!--Sale Label-->
-                                                    <span class="label label-sale">Sale</span>
-                                                    <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>
-                                                    <!--end full quick view block-->
-                                                </div>
-                                                <div class="right-block">
-                                                    <div class="caption">
-                                                        <h4><a href="product.html">Pumasi dema nones mame</a></h4>
-                                                        <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="price">
-                                                            <span class="price-new">$120.00</span>
-                                                            <span class="price-old">$115.00</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="button-group">
-                                                        <button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                        <button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                        <button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
-                                                    </div>
-                                                </div><!-- right block -->
-                                            </div>
-                                        </div>
-
-                                        <div class="ltabs-item product-layout">
-                                            <div class="product-item-container">
-                                                <div class="left-block">
-                                                    <div class="product-image-container ">
-                                                        <img src="{{asset('frontend_2/image/demo/shop/product/home8/5_2_9.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />
-                                                    </div>
-                                                    <!--Sale Label-->
-                                                    <span class="label label-sale">Sale</span>
-                                                    <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>
-                                                    <!--end full quick view block-->
-                                                </div>
-                                                <div class="right-block">
-                                                    <div class="caption">
-                                                        <h4><a href="product.html">Taetem hasem razem pokam </a></h4>
-                                                        <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="price">
-                                                            <span class="price-new">$120.00</span>
-                                                            <span class="price-old">$162.00</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="button-group">
-                                                        <button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                        <button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>
-                                                        <button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>
-                                                    </div>
-                                                </div><!-- right block -->
-                                            </div>
-                                        </div>
+                                        @endforeach
 
                                         <!--End Items-->
 

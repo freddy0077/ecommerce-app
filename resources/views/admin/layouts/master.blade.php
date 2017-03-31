@@ -35,6 +35,14 @@
     <link href="{{asset('backend/assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('backend/assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
     <link href="{{asset('backend/assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .page-header .page-header-menu {
+            /*background: #444d58;*/
+            background: #226D88;
+            color: #fff !important;
+        }
+    </style>
     <!-- END THEME LAYOUT STYLES -->
     {{--<link rel="shortcut icon" href="favicon.ico" /> --}}
 </head>

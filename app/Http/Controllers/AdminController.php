@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\MpowerPayment;
+use App\Order;
 use App\Package;
 use App\PackageSignup;
 use App\Payment;
@@ -17,12 +18,31 @@ class AdminController extends Controller
     //
 
     public function getDashboard(){
-        return view('admin.admin_dashboard');
+        $orders = Order::count();
+        $users  = User::count();
+        return view('admin.admin_dashboard',compact('orders','users'));
     }
 
     public function getPaymentsData(){
 
         return view('admin.payments');
+    }
+
+    public function getAllOrders(){
+        $orders = Order::leftJoin('users','users.id','=','orders.user_id')
+            ->selectRaw('orders.*,users.name')
+            ->paginate();
+
+        return view('admin.orders',compact('orders'));
+    }
+
+    public function getOrderItems($order_id){
+        $order = Order::with(['items','user' =>function($query){}])
+            ->whereId($order_id)
+            ->first();
+//        return OrderItem::with('order','product')->get();
+
+        return view('admin.order-items',compact('order'));
     }
 
     public function postMpowerDirectPay(Request $request,$amount)

@@ -42,8 +42,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::where('has_store',true)->get();
         $allProducts = collect();
+
+
 
         foreach($users as $user){
              $signup = MarketplaceSignup::leftJoin('packages','packages.id','=','marketplace_signups.package_id')->where('user_id',$user->id)->first();
@@ -54,22 +56,30 @@ class HomeController extends Controller
             $allProducts->push($products);
         }
 
+//        $best_deal_products = $allProducts;
+
           $products = $allProducts->collapse()->shuffle(1)->all();
-          $second_set = $allProducts->collapse()->shuffle(2)->all();
+          $second_set = $allProducts->collapse()->shuffle(7)->all();
+
+//        return collect($products)->all();
+
+        $best_deals = $allProducts->collapse()->map(function($item,$key){
+            if($item->sale == true){
+                return [$key => $item];
+            }else {
+              return '';
+            }
+
+        });
+
+         $best_deals =$best_deals->collapse()->all();
 
 
+//        $multiplied = $collection->map(function ($item, $key) {
+//            return $item * 2;
+//        });
 
-//        $builder =  Product::leftJoin('stores','stores.user_id','=','products.user_id')
-//            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
-//            ->orderBy('products.like_counts','desc');
-//
-//        $products = $builder->take(10)->get();
-//
-//        $second_set = $builder->skip(10)->take(10)->get();
-//
-//        $second_set = $builder->skip(10)->take(30)->paginate();
-//
-//        $nextpageurl = $second_set->nextpageurl();
+
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
@@ -84,7 +94,7 @@ class HomeController extends Controller
 //        }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index_3',compact('products','categories','second_set','nextpageurl'));
+        return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals'));
     }
 
     public function getProfile(){
@@ -250,10 +260,10 @@ class HomeController extends Controller
 
             return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
-        } elseif (Auth::check() && $store == $store_id) {
+        } elseif (Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id  == $store_id) {
             return ['status' => 403, 'message' => 'You can not follow your shop'];
 
-        } elseif (Auth::check() && $watchedshop) {
+        } elseif (Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()) {
             return ['status' => 404, 'message' => 'You are already following this shop !'];
         } else {
             return ['status' => 401, 'message' => 'Log in to watch a shop'];

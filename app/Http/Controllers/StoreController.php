@@ -48,8 +48,8 @@ class StoreController extends Controller
 
     public function getStore($slug,$user_id){
 
-        $products = Product::inRandomOrder()->whereUserId($user_id)->paginate(14);
-        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
+        $products = Product::inRandomOrder()->whereUserId($user_id)->paginate(12);
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
         $sub_categories = SubCategory::inRandomOrder()->get();
@@ -64,8 +64,8 @@ class StoreController extends Controller
          ->where('product_categories.id',$category_id)
          ->where('products.user_id',$user_id)
          ->selectRaw('products.*')
-            ->paginate();
-        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
+            ->paginate(12);
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
 
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
@@ -77,10 +77,10 @@ class StoreController extends Controller
 
     public function getStoreSubCategory($slug,$user_id,$category_id){
 
-        $products = Product::paginate();
+        $products = Product::paginate(12);
         $categories = ProductCategory::whereUserId($user_id)->get();
         $store = Store::whereUserId($user_id)->first();
-        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(7)->get();
+        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
 
         return view('store.index',compact('products','categories','slug','user_id','store','latest_products'));
 
@@ -526,31 +526,44 @@ class StoreController extends Controller
         $sub_categories = $request->get('sub_category');
         $images = $request->file('image');
 
-        foreach($names as $key=>$name){
-            $product_id = Uuid::generate();
+        $user_id = Auth::user()->id;
 
-            $rules = array('image' => 'dimensions:min_width=300,min_height=300'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
-            $validator = Validator::make(array('image'=> $images[$key]), $rules);
-            if($validator->passes()){
-                $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
-                Product::processImage($images[$key],$input['imagename']);
+        $productCounts = Product::whereStoreId($user_id)->count();
+        $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
-                Product::create([
-                    'id' => $product_id,
-                    'name' => $name,
-                    'user_id' => Auth::user()->id,
-                    'price' => $prices[$key],
-                    'description' =>'',
-                    'image' =>  $input['imagename'],
-                    'sub_category_id' => $sub_categories[$key],
-                    'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
+        if($products_limit <= 0){
 
-                ]);
+            return ['limit'=>$products_limit,'status'=>401];
+
+        }else{
+
+            foreach($names as $key=>$name){
+                $product_id = Uuid::generate();
+
+                $rules = array('image' => 'dimensions:min_width=300,min_height=300'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+                $validator = Validator::make(array('image'=> $images[$key]), $rules);
+                if($validator->passes()){
+                    $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
+                    Product::processImage($images[$key],$input['imagename']);
+
+                    Product::create([
+                        'id' => $product_id,
+                        'name' => $name,
+                        'user_id' =>$user_id ,
+                        'price' => $prices[$key],
+                        'description' =>'',
+                        'image' =>  $input['imagename'],
+                        'sub_category_id' => $sub_categories[$key],
+                        'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
+
+                    ]);
+                }
+
             }
 
+            return ['message'=>'successful saved '.count($names).' product(s)','status'=>200];
         }
 
-        return ['message'=>'successful saved '.count($names).' product(s)','status'=>200];
 
     }
 

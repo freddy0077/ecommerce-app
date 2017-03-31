@@ -28,6 +28,10 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/users','AdminController@getUsers');
 
+    Route::get('/orders','AdminController@getAllOrders');
+
+    Route::get('/order-items/{order_id}','AdminController@getOrderItems');
+
     Route::get('/packages','AdminController@getPackages');
 
     Route::post('/add-new-package','AdminController@postAddNewPackage');

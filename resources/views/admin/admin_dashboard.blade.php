@@ -68,7 +68,7 @@
                     </div>
                     <div class="tile-object">
                         <div class="name"> Members </div>
-                        <div class="number"> 452 </div>
+                        <div class="number"> {{$users}} </div>
                     </div>
                 </div>
                 <div class="tile double bg-blue-madison">
@@ -88,7 +88,7 @@
                     </div>
                     <div class="tile-object">
                         <div class="name"> Orders </div>
-                        <div class="number"> 121 </div>
+                        <div class="number"> {{$orders}} </div>
                     </div>
                 </div>
                 <div class="tile image selected">

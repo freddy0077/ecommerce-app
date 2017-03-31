@@ -28,6 +28,17 @@
 
                 </div>
             </div>
+            <div class="module hidden-xs">
+                <div class="modcontent clearfix">
+                    <div class="banners">
+                        <div>
+                            <a href="#"><img src="{{asset('frontend_2/image/demo/cms/left-image-static.png')}}" alt="left-image"></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="module latest-product titleLine hidden-xs">
                 <h3 class="modtitle">Latest Products</h3>
                 <div class="modcontent ">
@@ -47,20 +58,10 @@
 
                                         <div class="button-group">
 
-                                            <button class=" addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
+                                            <button class="addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
 
                                         </div>
 
-
-                                        {{--<div class="ratings">--}}
-                                            {{--<div class="rating-box">--}}
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
                                     </div>
 
                                 </div>
@@ -72,16 +73,7 @@
                 </div>
 
             </div>
-            <div class="module hidden-xs">
-                <div class="modcontent clearfix">
-                    <div class="banners">
-                        <div>
-                            <a href="#"><img src="{{asset('frontend_2/image/demo/cms/left-image-static.png')}}" alt="left-image"></a>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
         </aside>
         <!--Left Part End -->
 
@@ -102,21 +94,21 @@
                                     <br>
                                     <br>
 
-                                    <form enctype="multipart/form-data" id="banner_image_form">
+                                    {{--<form enctype="multipart/form-data" id="banner_image_form">--}}
 
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <input type="file" class="form-control" id="fileUpload" name="image" />
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-md-3">--}}
+                                            {{--<input type="file" class="form-control" id="fileUpload" name="image" />--}}
 
-                                        </div>
-                                        <div class="col-md-3">
+                                        {{--</div>--}}
+                                        {{--<div class="col-md-3">--}}
                                             {{--<button type="button" class="btn btn-default" value="Upload" onclick="return Upload()">Edit Image</button>--}}
-                                            <button type="submit" class="btn btn-default" value="Upload">Edit Image</button>
-                                        </div>
+                                            {{--<button type="submit" class="btn btn-default" value="Upload">Edit Image</button>--}}
+                                        {{--</div>--}}
 
-                                    </div>
+                                    {{--</div>--}}
 
-                                    </form>
+                                    {{--</form>--}}
 
                                     {{--<input type="button" value="Upload" onclick="return Upload()" />--}}
 
