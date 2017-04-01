@@ -20,6 +20,7 @@ class CreateProductCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('enable')->default(false);
             $table->timestamps();
         });
     }

@@ -313,13 +313,13 @@ class StoreController extends Controller
 
     public function getMarketPlaceSignUp(){
 
-        $packages = Package::all();
+        $packages = Package::whereType('marketplace_upgrade')->get();
         return view('store.marketplace-signup',compact('packages'));
     }
 
     public function getMarketPlacePackages($package_id){
 
-        return Package::find($package_id);
+        return Package::whereType('marketplace_upgrade')->find($package_id);
 
     }
 

@@ -44,48 +44,53 @@
                 <div class="container-full home8--banner1">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-4 col-xs-12 banner-item">
+                            @foreach($featured_stores as $store)
+                            {{--<div class="col-sm-4 col-xs-12 banner-item">--}}
 
-                                <div class="banners banner__img">
-                                    <div>
-                                        <a title="Static Image" href="#"><img src="{{asset('frontend_2/image/demo/cms/home8/cat1-id12.jpg')}}" alt="Static Image"></a>
-                                    </div>
-                                </div>
-                                <div class="banner__info">
-                                    <h2>Men's Shoes</h2>
-                                    <p>ON YOUR MARK, GET SET, GO</p>
-                                    <a title="Shop Now" href="#">Shop Now &gt;&gt;</a>
-                                </div>
+                                {{--<div class="banners banner__img">--}}
+                                    {{--<div>--}}
+                                        {{--<a title="Static Image" href="#">--}}
+                                            {{--<img src='{{asset("images/stores/$store->store_image")}}' alt="Static Image"></a>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="banner__info">--}}
+                                    {{--<h2>{{$store->store_name}}</h2>--}}
+                                    {{--<p>ON YOUR MARK, GET SET, GO</p>--}}
+                                    {{--<a title="Shop Now" href="#">Shop Now &gt;&gt;</a>--}}
+                                {{--</div>--}}
 
-                            </div>
+                            {{--</div>--}}
 
-                            <div class="col-sm-4 col-xs-12 banner-item hidden-xs">
-                                <div class="banners banner__img">
-                                    <div>
-                                        <a title="Static Image" href="#"><img src="{{asset('frontend_2/image/demo/cms/home8/cat2-id12.jpg')}}" alt="Static Image"></a>
-                                    </div>
-                                </div>
-                                <div class="banner__info">
-                                    <h2>Women's Shoes</h2>
-                                    <p>ON YOUR MARK, GET SET, GO</p>
-                                    <a title="Shop Now" href="#">Shop Now &gt;&gt;</a>
-                                </div>
+                            @endforeach
 
-                            </div>
+                            {{--<div class="col-sm-4 col-xs-12 banner-item hidden-xs">--}}
+                                {{--<div class="banners banner__img">--}}
+                                    {{--<div>--}}
+                                        {{--<a title="Static Image" href="#">--}}
+                                            {{--<img src="{{asset('frontend_2/image/demo/cms/home8/cat2-id12.jpg')}}" alt="Static Image"></a>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="banner__info">--}}
+                                    {{--<h2>Women's Shoes</h2>--}}
+                                    {{--<p>ON YOUR MARK, GET SET, GO</p>--}}
+                                    {{--<a title="Shop Now" href="#">Shop Now &gt;&gt;</a>--}}
+                                {{--</div>--}}
 
-                            <div class="col-sm-4 col-xs-12 banner-item hidden-xs">
-                                <div class="banners banner__img">
-                                    <div>
-                                        <a title="Static Image" href="#"><img src="{{asset('frontend_2/image/demo/cms/home8/cat3-id12.jpg')}}" alt="Static Image"></a>
-                                    </div>
-                                </div>
-                                <div class="banner__info">
-                                    <h2>Kid's Shoes</h2>
-                                    <p>ON YOUR MARK, GET SET, GO</p>
-                                    <a title="Shop Now" href="#">Shop Now &gt;&gt;</a>
-                                </div>
+                            {{--</div>--}}
 
-                            </div>
+                            {{--<div class="col-sm-4 col-xs-12 banner-item hidden-xs">--}}
+                                {{--<div class="banners banner__img">--}}
+                                    {{--<div>--}}
+                                        {{--<a title="Static Image" href="#"><img src="{{asset('frontend_2/image/demo/cms/home8/cat3-id12.jpg')}}" alt="Static Image"></a>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="banner__info">--}}
+                                    {{--<h2>Kid's Shoes</h2>--}}
+                                    {{--<p>ON YOUR MARK, GET SET, GO</p>--}}
+                                    {{--<a title="Shop Now" href="#">Shop Now &gt;&gt;</a>--}}
+                                {{--</div>--}}
+
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -160,10 +165,35 @@
 
 
                                             <div class="button-group">
-                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                    <i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
+
+                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                                                        <i class="fa fa-eye-slash"></i> <span class="button-group__text"></span>
+                                                    </button>
+                                                    @else
+                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                                                        <i class="fa fa-eye"></i> <span class="button-group__text"></span>
+                                                    </button>
+
+                                                @endif
+
+
                                                 <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
-                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
+
+                                                @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
+                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                                                        <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                    </button>
+                                                @else
+                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
+                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                    </button>
+
+                                                @endif
+
+
                                                 <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
 
 
@@ -232,10 +262,29 @@
                                             <div class="button-group">
                                                 <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
                                                 <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
-                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                    <i id="like-toggle-{{$product->id}}" class="fa fa-thumbs-up"></i>
-                                                    <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
-                                                </button>
+
+                                                @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
+                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                                                        <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                    </button>
+                                                    @else
+                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
+                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                    </button>
+
+                                                @endif
+
+                                                {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">--}}
+                                                    {{--<i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>--}}
+                                                    {{--<i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>--}}
+                                                {{--</button>--}}
+
+                                                {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">--}}
+                                                    {{--<i id="like-toggle-{{$product->id}}" class="fa fa-thumbs-up"></i>--}}
+                                                    {{--<i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>--}}
+                                                {{--</button>--}}
                                                 <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
 
                                             </div>
@@ -387,13 +436,13 @@
                                             <div class="product-item-container">
                                                 <div class="left-block">
                                                     <div class="product-image-container">
-                                                        <img src="{{asset('frontend_2/image/demo/shop/product/home8/10_7.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                                        <img src='{{asset("images/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
                                                     </div>
                                                     <!--Sale Label-->
                                                     <span class="label label-sale">Sale</span>
 
                                                     <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>
+                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$deal->id)}}">>  Quickview</a>
                                                     <!--end full quick view block-->
                                                 </div>
                                                 <div class="right-block">
@@ -416,12 +465,31 @@
                                                     </div>
 
                                                     <div class="button-group">
-                                                        <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
-                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$deal->id}}');"><i class="fa fa-heart"></i>  </button>
-                                                        <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
-                                                            <i id="like-toggle-{{$deal->id}}" class="fa fa-thumbs-up"></i>
-                                                            <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
+                                                        <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}');">
+                                                            <i class="fa fa-eye"></i> <span class="button-group__text"></span>
                                                         </button>
+                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$deal->id}}');"><i class="fa fa-heart"></i>  </button>
+
+                                                        @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($deal->id)->first())
+                                                            <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
+                                                                <i class="fa fa-thumbs-down like-toggle-{{$deal->id}}"></i>
+                                                                <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
+                                                            </button>
+                                                        @else
+                                                            <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
+                                                                <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}"></i>
+                                                                <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
+                                                            </button>
+
+                                                        @endif
+
+
+                                                        {{--<button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">--}}
+                                                            {{--<i id="like-toggle-{{$deal->id}}" class="fa fa-thumbs-up"></i>--}}
+                                                            {{--<i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>--}}
+                                                        {{--</button>--}}
+                                                        {{----}}
+
                                                         <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
 
                                                     </div>

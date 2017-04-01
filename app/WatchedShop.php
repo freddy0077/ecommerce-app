@@ -10,4 +10,9 @@ class WatchedShop extends Model
     protected $fillable = ['id','user_id','action','store_id'];
 
     protected $casts = ['id' =>'string'];
+
+    public static function getProductLikeStatus($product_id){
+
+
+    }
 }

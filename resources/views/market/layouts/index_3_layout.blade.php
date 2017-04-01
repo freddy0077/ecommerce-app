@@ -434,7 +434,7 @@
                         </div>
                     </div>
                     <hr class="footer-lines ">
-                    <div class="col-sm-6 col-md-3 box-information">
+                    <div class="col-sm-6 col-md-4 box-information">
                         <div class="module clearfix">
                             <h3 class="modtitle">Information</h3>
                             <div class="modcontent">
@@ -448,7 +448,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-3 box-service">
+                    <div class="col-sm-6 col-md-4 box-service">
                         <div class="module clearfix">
                             <h3 class="modtitle">Customer Service</h3>
                             <div class="modcontent">
@@ -462,22 +462,22 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-6 col-md-3 box-account">
-                        <div class="module clearfix">
-                            <h3 class="modtitle">My Account</h3>
-                            <div class="modcontent">
-                                <ul class="menu">
+                    {{--<div class="col-sm-6 col-md-3 box-account">--}}
+                        {{--<div class="module clearfix">--}}
+                            {{--<h3 class="modtitle">My Account</h3>--}}
+                            {{--<div class="modcontent">--}}
+                                {{--<ul class="menu">--}}
                                     {{--<li><a href="#">Brands</a></li>--}}
-                                    <li><a href="gift-voucher.html">Gift Vouchers</a></li>
-                                    <li><a href="#">Affiliates</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="#" target="_blank">Our Blog</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                                    {{--<li><a href="gift-voucher.html">Gift Vouchers</a></li>--}}
+                                    {{--<li><a href="#">Affiliates</a></li>--}}
+                                    {{--<li><a href="#">Specials</a></li>--}}
+                                    {{--<li><a href="#" target="_blank">Our Blog</a></li>--}}
+                                {{--</ul>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="col-sm-6 col-md-3 collapsed-block ">
+                    <div class="col-sm-6 col-md-4 collapsed-block ">
                         <div class="module clearfix">
                             <h3 class="modtitle">Contact Us	</h3>
                             <h4>Want to Advertise on this page ?</h4>

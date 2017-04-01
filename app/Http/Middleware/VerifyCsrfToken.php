@@ -39,6 +39,9 @@ class VerifyCsrfToken extends BaseVerifier
         '/store/add-store-banner',
         '/direct-pay/*',
         'admin/confirm-token/*',
-        'admin/add-new-package'
+        'admin/add-new-package',
+        'admin/add-new-category',
+        'admin/add-new-subcategory',
+        'admin/update-category'
     ];
 }

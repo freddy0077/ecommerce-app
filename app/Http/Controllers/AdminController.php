@@ -7,7 +7,9 @@ use App\Order;
 use App\Package;
 use App\PackageSignup;
 use App\Payment;
+use App\ProductCategory;
 use App\Store;
+use App\SubCategory;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -116,6 +118,7 @@ class AdminController extends Controller
         return view('admin.packages',compact('packages'));
     }
 
+
     public function postAddNewPackage(Request $request){
         Package::create([
             'id' => Uuid::generate(),
@@ -127,5 +130,39 @@ class AdminController extends Controller
             'payment_link' => $request->payment_link,
             'type'         => $request->type
         ]);
+    }
+
+    public function getProductCategories(){
+        $categories = ProductCategory::with('subcategories')->paginate();
+        return view('admin.product_categories',compact('categories'));
+    }
+
+    public function postAddNewProductCategory(Request $request){
+        ProductCategory::create([
+            'id' => Uuid::generate(),
+            'name' => $request->name,
+            'user_id' =>Auth::user()->id
+        ]);
+    }
+
+    public function postUpdateCategory(Request $request){
+        ProductCategory::find($request->edit_category_id)->update([
+            'name' => $request->edit_category_name
+        ]);
+    }
+
+
+    public function postAddSubCategories(Request $request){
+//        return $request;
+        $names = $request->get('name');
+        $category = $request->category;
+
+        foreach($names as $name){
+            SubCategory::create([
+                'id' => Uuid::generate(),
+                'name' => $name,
+                'product_category_id' => $category
+            ]);
+        }
     }
 }

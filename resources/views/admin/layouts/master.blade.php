@@ -15,6 +15,8 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
     <link href="{{asset('backend/assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css" />
@@ -57,7 +59,7 @@
             <!-- BEGIN LOGO -->
             <div class="page-logo">
                 <a href="{{url('/')}}">
-                    <img src="{{url('frontend_2/image/logo.png')}}" alt="logo" class="logo-default" style="margin-top: -14px">
+                    <img src="{{url('frontend_2/image/logo.png')}}" alt="logo" class="logo-default" style="margin-top: -5px">
                 </a>
             </div>
             <!-- END LOGO -->
@@ -409,16 +411,16 @@
     <div class="page-header-menu">
         <div class="container">
             <!-- BEGIN HEADER SEARCH BOX -->
-            <form class="search-form" action="http://www.keenthemes.com/preview/metronic/theme/admin_3_rounded/page_general_search.html" method="GET">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="query">
-                            <span class="input-group-btn">
-                                <a href="javascript:;" class="btn submit">
-                                    <i class="icon-magnifier"></i>
-                                </a>
-                            </span>
-                </div>
-            </form>
+            {{--<form class="search-form" action="http://www.keenthemes.com/preview/metronic/theme/admin_3_rounded/page_general_search.html" method="GET">--}}
+                {{--<div class="input-group">--}}
+                    {{--<input type="text" class="form-control" placeholder="Search" name="query">--}}
+                            {{--<span class="input-group-btn">--}}
+                                {{--<a href="javascript:;" class="btn submit">--}}
+                                    {{--<i class="icon-magnifier"></i>--}}
+                                {{--</a>--}}
+                            {{--</span>--}}
+                {{--</div>--}}
+            {{--</form>--}}
             <!-- END HEADER SEARCH BOX -->
             <!-- BEGIN MEGA MENU -->
             <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
@@ -433,7 +435,7 @@
 
                     </li>
                     <li class="menu-dropdown mega-menu-dropdown  ">
-                        <a href="{{url('store/orders')}}">All Orders
+                        <a href="{{url('admin/orders')}}">All Orders
                             <span class="arrow"></span>
                         </a>
                     </li>
@@ -455,6 +457,32 @@
                             <span class="arrow"></span>
                         </a>
                     </li>
+
+                    <li class="menu-dropdown classic-menu-dropdown ">
+                        <a href="#"> Market Place Settings
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-left">
+                            <li class=" ">
+                                <a href="{{url('/admin/product-categories')}}" class="nav-link  ">
+                                    Product Categories
+                                    {{--<span class="badge badge-success"></span>--}}
+                                </a>
+                            </li>
+                            <li class=" ">
+                                <a href="{{url('/store/add-product')}}" class="nav-link  ">
+                                    Add Product </a>
+                            </li>
+                            <li class=" ">
+                                <a href="{{url('/store/quick-add-products')}}" class="nav-link  ">
+                                     Quick add products
+                                    {{--<span class="badge badge-danger">3</span>--}}
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
 
                 </ul>
 

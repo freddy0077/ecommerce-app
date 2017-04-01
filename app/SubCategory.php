@@ -16,6 +16,10 @@ class SubCategory extends Model
 
     protected $fillable = ['id','name','product_category_id','slug'];
 
+    public function subCategory(){
+        return $this->belongsTo(ProductCategory::class);
+    }
+
     public function sluggable()
     {
         return [

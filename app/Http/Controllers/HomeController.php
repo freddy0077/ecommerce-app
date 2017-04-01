@@ -51,7 +51,7 @@ class HomeController extends Controller
              $signup = MarketplaceSignup::leftJoin('packages','packages.id','=','marketplace_signups.package_id')->where('user_id',$user->id)->first();
             $number_of_products = $signup ? $signup->number_of_products : 50;
              $products = Product::leftJoin('stores','stores.user_id','=','products.user_id')
-                 ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+                 ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image')
                  ->where('products.user_id',$user->id)->take($number_of_products)->get();
             $allProducts->push($products);
         }
@@ -74,12 +74,9 @@ class HomeController extends Controller
 
          $best_deals =$best_deals->collapse()->all();
 
-
-//        $multiplied = $collection->map(function ($item, $key) {
-//            return $item * 2;
-//        });
-
-
+         $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
+             ->take(3)
+             ->get();
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
@@ -94,7 +91,7 @@ class HomeController extends Controller
 //        }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals'));
+        return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores'));
     }
 
     public function getProfile(){
@@ -103,20 +100,25 @@ class HomeController extends Controller
 
     public function getFeeds(Request $request){
 
-        $user = Auth::user();
+         $user = Auth::user();
+        $store = Store::whereUserId($user->id)->first();
 
-        $stream = new StreamFeed($user->id);
+        $builder = DB::table('watched_shops');
+        $feeds = $builder->whereStoreId($store->id)->get();
+        $following = $builder->where('user_id',$user->id)->get();
+
+//        $stream = new StreamFeed($user->id);
 //        $stream->deleteFeed();
-         $activities = $stream->getActivities()['results'];
-         $following   = $stream->getFollowing()['results'];
-         $followers   = $stream->getFollowers()['results'];
+//         $activities = $stream->getActivities()['results'];
+//         $following   = $stream->getFollowing()['results'];
+//         $followers   = $stream->getFollowers()['results'];
 
 
         if($request->ajax()){
             return view('partials.feed_partials',compact('activities','following','followers'));
         }
 
-        return view('feeds',compact('activities','user','following','followers'));
+        return view('feeds',compact('feeds','following','user'));
     }
 
     public function getFetchFeeds(){
@@ -212,7 +214,19 @@ class HomeController extends Controller
 
             }else{
 
-            return ['message' => "You have already liked this product",'status' => 401];
+            $like_exists_for_product = Like::whereUserId(Auth::user()->id)->whereProductId($product_id)->first();
+
+            $product = Product::find($product_id);
+            if($like_exists_for_product){
+                $like_exists_for_product->delete();
+
+                $product->update([
+                    'like_counts' => $product->like_counts - 1
+                ]);
+            }
+
+
+            return ['message' => "You just unliked a product",'status' => 401,'likes'=>$product->like_counts];
         }
     }
 
@@ -249,12 +263,11 @@ class HomeController extends Controller
             $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
 
-            $stream = new StreamFeed($user->id);
+//            $stream = new StreamFeed($user->id);
 //            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
-            $stream->followFeed("flat",$user_id);
+//            $stream->followFeed("flat",$user_id);
 
-            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
-
+//            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
 
             event(new ChatMessageReceived("you just followed $store_builder->name", $user));
 

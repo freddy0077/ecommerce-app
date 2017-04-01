@@ -7,9 +7,9 @@
 
     <!-- Basic page needs
    ============================================ -->
-    <title>Market - Premium Multipurpose HTML5/CSS3 Theme</title>
+    <title>{{Config('app.name')}}</title>
     <meta charset="utf-8" />
-    <meta name="keywords" content="boostrap, responsive, html5, css3, jquery, theme, multicolor, parallax, retina, business" />
+    <meta name="keywords" content="" />
     <meta name="author" content="Magentech" />
     <meta name="robots" content="index, follow" />
 
@@ -77,6 +77,10 @@
                                     </a>
                                     @endforeach
 
+                                        <a data-index="0" class="img thumbnail " data-image="{{asset("images/products/$product->image")}}" title="Bint Beef">
+                                            <img src="{{asset("images/products/$product->image")}}" title="{{$product->name}}" alt="{{$product->name}}" />
+                                        </a>
+
                                 </div>
 
                             </div>
@@ -96,15 +100,23 @@
                                             <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
                                         </div>
                                     </div>
-                                    <a class="reviews_button" href="quickview.php.html" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews </a>
+                                    {{--<a class="reviews_button" href="quickview.php.html" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews </a>--}}
                                 </div>
 
                                 <div class="product-label form-group">
-                                    <div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
-                                        <span class="price-new" itemprop="price">GHS {{$product->price}} </span>
-                                        <span class="price-old">GHS {{$product->price}} </span>
+                                    <div class="product_page_price price">
+                                        @if($product->sale)
+                                            <span class="price-new">GH&#162; {{$product->sale_price}}</span>
+                                            <span class="price-old">GH&#162; {{$product->price}}</span>
+                                        @else
+                                            <span class="price-new">GH&#162; {{$product->price}}</span>
+                                        @endif
                                     </div>
-                                    <div class="stock"><span>Availability: </span>  <span class="status-stock">In Stock </span></div>
+                                    {{--<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">--}}
+                                        {{--<span class="price-new" itemprop="price">GHS {{$product->price}} </span>--}}
+                                        {{--<span class="price-old">GHS {{$product->price}} </span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="stock"><span>Availability: </span>  <span class="status-stock">In Stock </span></div>--}}
                                 </div>
 
                                 <div class="product-box-desc">
@@ -126,24 +138,145 @@
                 </div>
 
                 <script type="text/javascript">
-                    // Cart add remove functions
-                    var cart = {
-                        'add': function(product_id, quantity) {
-                            parent.addProductNotice('Product added to Cart', '<img src="image/demo/shop/product/e11.jpg" alt="">', '<h3><a href="#">Apple Cinema 30"</a> added to <a href="#">shopping cart</a>!</h3>', 'success');
+                    var watch = {
+
+                        'add': function(product_id, store_id,user_id) {
+
+                            $.post('/watch-shop/'+product_id+'/'+store_id+'/'+user_id,function(data){
+                                var image_url = data.image_url;
+                                if(data.status == 401) {
+                                    addProductNotice('Sorry !', '', '<h3><a href="#">You have to Log in first to follow a shop !</h3>', 'error');
+                                }
+                                else if(data.status == 404) {
+                                    addProductNotice('Sorry !', '', '<h3><a href="#">'+data.message+ '!</h3>', 'error');
+                                }
+
+                                else if(data.status == 403){
+                                    addProductNotice('Sorry !', '', '<h3><a href="#">You can not follow your own shop !</h3>', 'error');
+
+                                }else {
+                                    addProductNotice('Shop added to your feeds',
+                                            '<img src='+image_url+'>',
+                                            '<h3><a href="#">You are now watching </a>'+ data.store +'<a href="#"></a>!</h3>',
+                                            'success');
+                                }
+
+
+                            })
                         }
                     }
 
-                    var wishlist = {
+                    var likes = {
+
                         'add': function(product_id) {
-                            parent.addProductNotice('Product added to Wishlist', '<img src="image/demo/shop/product/e11.jpg" alt="">', '<h3>You must <a href="#">login</a>  to save <a href="#">Apple Cinema 30"</a> to your <a href="#">wish list</a>!</h3>', 'success');
+
+                            $.post('/like-it/'+product_id,function(data){
+                                addProductNotice('',
+                                        '',
+                                        //'<img src="images/products/"'+product_id+' alt="">',
+                                        //'<h3><a href="#">Apple Cinema 30"</a> added to <a href="#">shopping cart</a>!</h3>',
+                                        '<h3><a href="#">'+data.message+'!</h3>',
+                                        'success');
+                                $('.like-counts-'+product_id).text(data.likes)
+                                $('#like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
+
+                            });
+
+
+                        }
+                    }
+
+                    var cart = {
+
+                        'add': function (product_id, name, quantity, price,user_id) {
+                            $.post('/store/add-to-cart/' + product_id + '/' + name + '/' + quantity + '/' + price+'/'+user_id, function (data) {
+
+                                $('#shopping-cart').html(data);
+
+                                addProductNotice('Product added to Cart',
+                                        //'<img src="images/products/"'+product_id+'.jpg' alt="">',
+                                        '',
+                                        '<h3><a href="#">' + name + '</a> added to <a hcref="#"> cart</a>!</h3>',
+                                        'success');
+
+                            })
+
+                        },
+
+                        'remove': function (product_id,user_id) {
+                            $.post('/store/remove-from-cart/' + product_id+'/'+user_id, function (data) {
+
+                                $('#shopping-cart').html(data);
+
+                                addProductNotice('Product removed from cart',
+                                        //'<img src="images/products/"'+product_id+'.jpg' alt="">',
+                                        '',
+                                        //'<h3><a href="#">'+name+'</a> added to <a href="#"> cart</a>!</h3>',
+                                        '<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>',
+                                        'success');
+
+                            })
+
+                        },
+
+                        'confirmOrder': function (user_id) {
+                            var delivery = $('#delivery:checked').val() == undefined ? false: true;
+                            $.post('/store/check-out/'+user_id,function(data){
+                                if(data.status == 401){
+                                    addProductNotice('Error', '','<h3><a href="#"></a> You need to login to continue ! </a></h3>','success');
+                                    setTimeout(function(){
+                                        alert('reached');
+                                        $('#login-modal').modal();
+                                    },3000)
+                                }else {
+                                    addProductNotice('Successful', '','<h3><a href="#"></a> Ordered successfully !<a href="#"> </a> redirecting...</h3>','success');
+                                    setTimeout(function(){
+                                        //location.href="/"
+                                        $('.main-container').html(data)
+                                    },3000)
+                                }
+
+                            })
+
+                        },
+
+                        'checkoutRemove': function (product_id,user_id) {
+
+                            $.post('/store/checkout-remove-from-cart/'+product_id,function(data){
+                                $('#checkout-shopping-cart').html(data);
+                                $('#shopping-cart').load('/store/cart-view/'+user_id);
+
+                                addProductNotice('Product removed from cart',
+                                        '', '<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>','success');
+                                //alert('removed an item from cart');
+                            });
+
+                        },
+
+
+
+                    }
+
+
+
+                    var fancy = {
+                        'add': function(product_id) {
+                            $.post('/fancy-it/'+product_id,function(data) {
+                                addProductNotice('Fancied !',
+                                        '',
+                                        '<h3>'+data.message+'!</h3>',
+                                        'success');
+
+                            });
                         }
                     }
                     var compare = {
                         'add': function(product_id) {
-                            parent.addProductNotice('Product added to compare', '<img src="image/demo/shop/product/e11.jpg" alt="">', '<h3>Success: You have added <a href="#">Apple Cinema 30"</a> to your <a href="#">product comparison</a>!</h3>', 'success');
+                            addProductNotice('Product added to compare',
+                                    '<img src="image/demo/shop/product/e11.jpg" alt="">',
+                                    '<h3>Success: You have added <a href="#">Apple Cinema 30"</a> to your <a href="#">product comparison</a>!</h3>', 'success');
                         }
                     }
-
 
                 </script>
 

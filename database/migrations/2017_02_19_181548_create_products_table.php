@@ -32,6 +32,7 @@ class CreateProductsTable extends Migration
             $table->boolean('ad')->default(false);
             $table->boolean('sale')->default(false);
             $table->decimal('sale_price')->nullable();
+            $table->boolean('enable')->default(false);
             $table->integer('like_counts')->default(0);
             $table->timestamps();
 

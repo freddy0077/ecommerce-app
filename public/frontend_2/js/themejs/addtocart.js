@@ -16,7 +16,7 @@
 			$.post('/watch-shop/'+product_id+'/'+store_id+'/'+user_id,function(data){
 				var image_url = data.image_url;
 				if(data.status == 401) {
-					addProductNotice('Sorry !', '', '<h3><a href="#">You have to Log in first to follow a shop !</h3>', 'error');
+					addProductNotice('Sorry !', '', '<h3><a href="#">Log in first to follow a shop !</h3>', 'error');
 				}
 				else if(data.status == 404) {
 					addProductNotice('Sorry !', '', '<h3><a href="#">'+data.message+ '!</h3>', 'error');
@@ -48,9 +48,16 @@
                     //'<h3><a href="#">Apple Cinema 30"</a> added to <a href="#">shopping cart</a>!</h3>',
                     '<h3><a href="#">'+data.message+'!</h3>',
                     'success');
-                $('.like-counts-'+product_id).text(data.likes)
-                $('#like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
+                $('.like-counts-'+product_id).text(data.likes);
+                if(data.status == 200){
+                    $('.like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
+                    $('.like-toggle-'+product_id).addClass('fa fa-thumbs-down')
+                }else if(data.status == 401){
+                    $('.like-toggle-'+product_id).removeClass('fa fa-thumbs-down')
+                    $('.like-toggle-'+product_id).addClass('fa fa-thumbs-up')
+                    $('.like-counts-'+product_id).text(data.likes);
 
+                }
             });
 
 
@@ -141,6 +148,7 @@
             });
 		}
 	}
+
 	var compare = {
 		'add': function(product_id) {
 			addProductNotice('Product added to compare',

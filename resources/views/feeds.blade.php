@@ -294,7 +294,7 @@
                                                             <div class="portlet-body">
                                                                 <ul class="feeds" id="feeds">
 
-                                                                    @foreach($activities as $activity)
+                                                                    @foreach($feeds as $feed)
                                                                         <li>
                                                                             <div class="col1">
                                                                                 <div class="cont">
@@ -304,12 +304,22 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}
+                                                                                        {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
+                                                                                            {{--<span class="label label-danger label-sm">--}}
+                                                                                                {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
+                                                                                                    {{--Take action--}}
+                                                                                                {{--</a>--}}
+                                                                                                     {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
+                                                                                                {{--</span>--}}
+                                                                                        {{--</div>--}}
+                                                                                    {{--</div>--}}
+                                                                                        <div class="desc"> {{$feed->action}}
                                                                                             <span class="label label-danger label-sm">
                                                                                                 {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
-                                                                                                    Take action
+                                                                                                Take action
                                                                                                 {{--</a>--}}
-                                                                                                     <a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>
+                                                                                                {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
+                                                                                                {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
                                                                                                 </span>
                                                                                         </div>
                                                                                     </div>
@@ -345,7 +355,13 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="cont-col2">
-                                                                                        <div class="desc"> {{" ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}
+                                                                                        {{--<div class="desc"> {{" ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}--}}
+                                                                                                {{--<span class="label label-danger label-sm"> Take action--}}
+                                                                                                    {{--<a href="{{url('/')}}"><i class="fa fa-eye"></i></a>--}}
+                                                                                                {{--</span>--}}
+                                                                                        {{--</div> --}}
+
+                                                                                        <div class="desc"> {{$fol->store_id }}
                                                                                                 <span class="label label-danger label-sm"> Take action
                                                                                                     <a href="{{url('/')}}"><i class="fa fa-eye"></i></a>
                                                                                                 </span>
@@ -354,7 +370,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col2">
-                                                                                <div class="date"> {{\Carbon\Carbon::parse($fol['created_at'])->diffForHumans()}} </div>
+                                                                                <div class="date"> {{\Carbon\Carbon::parse($fol->created_at)->diffForHumans()}} </div>
 {{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d T H:i:s',$fol['created_at'])->diffForHumans()}} </div>--}}
                                                                             </div>
                                                                         </li>

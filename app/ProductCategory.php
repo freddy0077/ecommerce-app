@@ -14,11 +14,15 @@ class ProductCategory extends Model
         'id' => 'string'
     ];
 
-    protected $fillable = [ 'id', 'user_id', 'name','image','slug'];
+    protected $fillable = [ 'id', 'user_id', 'name','image','slug','enable'];
 
     public function products()
     {
         return $this->hasMany('App\Product');
+    }
+
+    public function subcategories(){
+        return $this->hasMany(SubCategory::class);
     }
 
     /**

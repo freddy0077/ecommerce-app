@@ -36,6 +36,14 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('/add-new-package','AdminController@postAddNewPackage');
 
+    Route::get('/product-categories','AdminController@getProductCategories');
+
+    Route::post('/add-new-category','AdminController@postAddNewProductCategory');
+
+    Route::post('/update-category','AdminController@postUpdateCategory');
+
+    Route::post('add-new-subcategory','AdminController@postAddSubCategories');
+
     Route::post('/confirm-token/{token}','AdminController@postConfirmToken');
 
 });
