@@ -56,9 +56,14 @@
 
 
         $('#upload').hide();
+        $('#upload-banner').hide();
 
         $('#change-image').on('click',function(){
             $('#upload').show();
+        })
+
+        $('#change-banner').on('click',function(){
+            $('#upload-banner').show();
         })
 
 
@@ -282,6 +287,82 @@
 
 
                                                 </div>
+
+
+                                                <!-- banner -->
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Banner </label>
+                                                    <div class="col-md-4">
+                                                        <img src="/images/stores/{{$store->store_banner}}"  class="img-thumbnail"><br><br>
+                                                        <span><button type="button" id="change-banner" class="btn btn-default">change banner</button></span><br>
+                                                        <span><small><i>Recommended size: 870 x 260</i></small></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group" id="upload-banner">
+                                                    <label class="control-label col-md-3">Banner image Upload</label>
+                                                    <div class="col-md-9">
+                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                                            <div>
+                                                                    <span class="btn red btn-outline btn-file">
+                                                                        <span class="fileinput-new"> Select image </span>
+                                                                        <span class="fileinput-exists"> Change </span>
+
+                                                                        <input type="file" name="banner-image" id="image"> </span>
+
+                                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                                {{--<a href="javascript:;" class="btn green fileinput-exists" id="crop-image"> Edit </a>--}}
+                                                                <span class="help-block">  </span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix margin-top-10">
+                                                            {{--<span class="label label-success">NOTE!</span> Image preview only works in IE10+, FF3.6+, Safari6.0+, Chrome6.0+ and Opera11.1+. In older browsers the filename is shown instead. </div>--}}
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="modal fade" tabindex="-1" role="dialog" id="crop-image-modal">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                                    <h4 class="modal-title">Modal title</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{--</div>--}}
+
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-7">
+                                                                                <!-- This is the image we're attaching Jcrop to -->
+                                                                                <img  id="demo8" alt="Jcrop Example" class="img-responsive"/>
+                                                                            </div>
+                                                                            {{--<img width="500" id="demo8" alt="Jcrop Example" /> </div>--}}
+                                                                            <div class="col-sm-5">
+                                                                                <input type="hidden" id="crop_x" name="x" />
+                                                                                <input type="hidden" id="crop_y" name="y" />
+                                                                                <input type="hidden" id="crop_w" name="w" />
+                                                                                <input type="hidden" id="crop_h" name="h" />
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Phone Number </label>

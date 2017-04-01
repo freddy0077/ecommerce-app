@@ -202,13 +202,13 @@
                                 $user_id = Auth::user()->id;
 
                                 ?>
-                                {{--<a href='{{url("stores/$store/$user_id")}}'> My Shop--}}
-                                {{--<span class="arrow"></span>--}}
-                                {{--</a>--}}
-
-                                <a href="https://{{$store}}.shopaholicks.com/shop"> My Shop
-                                    <span class="arrow"></span>
+                                <a href='{{url("stores/$store/$user_id")}}'> My Shop
+                                <span class="arrow"></span>
                                 </a>
+
+                                {{--<a href="https://{{$store}}.shopaholicks.com/shop"> My Shop--}}
+                                    {{--<span class="arrow"></span>--}}
+                                {{--</a>--}}
 
 
 

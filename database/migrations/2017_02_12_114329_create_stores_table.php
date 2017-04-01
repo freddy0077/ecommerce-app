@@ -29,6 +29,7 @@ class CreateStoresTable extends Migration
             $table->text('about')->nullable();
             $table->boolean('enabled')->default(false);
             $table->string('colour')->nullable();
+            $table->string('store_banner')->nullable();
             $table->timestamps();
         });
     }

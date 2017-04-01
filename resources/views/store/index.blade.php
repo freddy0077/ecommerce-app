@@ -58,7 +58,7 @@
 
                                         <div class="button-group">
 
-                                            <button class="addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
+                                            <button class="addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
 
                                         </div>
 
@@ -85,10 +85,10 @@
                         <div class="col-sm-12">
                             <div class="banners">
                                 <div>
-                                    {{--                                        <a  href="#"><img src="{{asset('frontend_2/image/demo/shop/category/electronic-cat.png')}}" alt="Apple Cinema 30&quot;"><br></a>--}}
+                                    {{--                                        <a  href="#"><img src="{{asset('frontend_2/image/demo/shop/category/electronic-cat.png')}}" alt=" 30&quot;"><br></a>--}}
                                     <a  href="#">
-                                        {{--<img src="https://placehold.it/870x260" alt="Apple Cinema 30&quot;">--}}
-                                        <img src="/images/stores/Perfume-AD-Slim-Banner.jpg" alt="Apple Cinema 30&quot;">
+                                        {{--<img src="https://placehold.it/870x260" alt=" 30&quot;">--}}
+                                        <img src="/images/stores/{{$store->store_banner}}" alt=" 30&quot;">
                                         <br>
                                     </a>
                                     <br>
@@ -171,7 +171,7 @@
                 @if(!count($products))
                     <div class="alert alert-block alert-info fade in">
                         <button type="button" class="close" data-dismiss="alert"></button>
-                        <h4 class="alert-heading">NO PRODUCTS IN THIS STORE</h4>
+                        <h4 class="alert-heading">NO PRODUCTS IN THIS CATEGORY</h4>
                         {{--<p> You have currently not stored any product yet !</p>--}}
                         <p>
                             {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
@@ -186,8 +186,8 @@
                                 <div class="product-item-container">
                                     <div class="left-block">
                                         <div class="product-image-container lazy second_img ">
-                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img-responsive" />
-                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt="Apple Cinema 30&quot;" class="img_0 img-responsive" />
+                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img-responsive" />
+                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img_0 img-responsive" />
                                         </div>
                                         <!--Sale Label-->
                                         <span class="label label-sale">Sale</span>
@@ -221,9 +221,16 @@
                                             </div>
 
                                             <div class="price">
-                                                <span class="price-new">GHS {{$product->price}}</span>
-                                                <span class="price-old">GHS {{$product->price}}</span>
-                                                <span class="label label-percent">-40%</span>
+                                                @if($product->sale)
+                                                    <span class="price-new">GH&#162; {{$product->sale_price}}</span>
+
+                                                    <span class="price-old">GH&#162; {{$product->price}}</span>
+                                                    <span class="label label-percent">-40%</span>
+
+                                                @else
+                                                    <span class="price-new">GH&#162; {{$product->price}}</span>
+
+                                                @endif
                                             </div>
                                             <div class="description item-desc hidden">
                                                 <p>
@@ -233,9 +240,31 @@
                                         </div>
 
                                         <div class="button-group">
-                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs">Add to Cart</span></button>
-                                            <button class="wishlist" type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('42');"><i class="fa fa-heart"></i></button>
-                                            <button class="compare" type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('42');"><i class="fa fa-exchange"></i></button>
+                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
+
+                                            <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');" data-toggle="tooltip" title="Add to fancies">
+                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
+                                                    <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
+                                                @else
+                                                    <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
+                                                @endif
+                                            </button>
+
+                                            @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
+                                                <button class="compare" type="button" data-toggle="tooltip" title="unlike {{$product->name}}"  onclick="likes.add('{{$product->id}}');">
+                                                    <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                    <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                </button>
+                                            @else
+                                                <button class="compare" type="button" data-toggle="tooltip" title="like {{$product->name}}"  onclick="likes.add('{{$product->id}}');">
+                                                    <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
+                                                    <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                                                </button>
+
+                                            @endif
+
+                                            {{--<button class="wishlist" type="button" data-toggle="tooltip" title="Add to Wish List" onclick="wishlist.add('42');"><i class="fa fa-heart"></i></button>--}}
+                                            {{--<button class="compare" type="button" data-toggle="tooltip" title="Compare this Product" onclick="compare.add('42');"><i class="fa fa-exchange"></i></button>--}}
                                         </div>
                                     </div><!-- right block -->
 
