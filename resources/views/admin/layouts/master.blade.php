@@ -360,46 +360,46 @@
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img alt="" class="img-circle" src="../assets/layouts/layout3/img/avatar9.jpg">
-                            <span class="username username-hide-mobile">Nick</span>
+                            <span class="username username-hide-mobile">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
+                            {{--<li>--}}
+                                {{--<a href="page_user_profile_1.html">--}}
+                                    {{--<i class="icon-user"></i> My Profile </a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="app_calendar.html">--}}
+                                    {{--<i class="icon-calendar"></i> My Calendar </a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="app_inbox.html">--}}
+                                    {{--<i class="icon-envelope-open"></i> My Inbox--}}
+                                    {{--<span class="badge badge-danger"> 3 </span>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="app_todo_2.html">--}}
+                                    {{--<i class="icon-rocket"></i> My Tasks--}}
+                                    {{--<span class="badge badge-success"> 7 </span>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                            {{--<li class="divider"> </li>--}}
+                            {{--<li>--}}
+                                {{--<a href="page_user_lock_1.html">--}}
+                                    {{--<i class="icon-lock"></i> Lock Screen </a>--}}
+                            {{--</li>--}}
                             <li>
-                                <a href="page_user_profile_1.html">
-                                    <i class="icon-user"></i> My Profile </a>
-                            </li>
-                            <li>
-                                <a href="app_calendar.html">
-                                    <i class="icon-calendar"></i> My Calendar </a>
-                            </li>
-                            <li>
-                                <a href="app_inbox.html">
-                                    <i class="icon-envelope-open"></i> My Inbox
-                                    <span class="badge badge-danger"> 3 </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="app_todo_2.html">
-                                    <i class="icon-rocket"></i> My Tasks
-                                    <span class="badge badge-success"> 7 </span>
-                                </a>
-                            </li>
-                            <li class="divider"> </li>
-                            <li>
-                                <a href="page_user_lock_1.html">
-                                    <i class="icon-lock"></i> Lock Screen </a>
-                            </li>
-                            <li>
-                                <a href="page_user_login_1.html">
+                                <a href="{{url('/logout')}}">
                                     <i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->
                     <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                    <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                        <span class="sr-only">Toggle Quick Sidebar</span>
-                        <i class="icon-logout"></i>
-                    </li>
+                    {{--<li class="dropdown dropdown-extended quick-sidebar-toggler">--}}
+                        {{--<span class="sr-only">Toggle Quick Sidebar</span>--}}
+                        {{--<i class="icon-logout"></i>--}}
+                    {{--</li>--}}
                     <!-- END QUICK SIDEBAR TOGGLER -->
                 </ul>
             </div>
@@ -427,6 +427,15 @@
             <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
             <div class="hor-menu  ">
                 <ul class="nav navbar-nav">
+
+                    <li class="menu-dropdown classic-menu-dropdown ">
+                        <a href="{{url('/store/store-settings')}}"> Store Dashboard
+                            <span class="arrow"></span>
+                        </a>
+
+
+                    </li>
+
                     <li class="menu-dropdown classic-menu-dropdown ">
                         <a href="{{url('/admin/dashboard')}}"> Dashboard
                             <span class="arrow"></span>
@@ -469,16 +478,16 @@
                                     {{--<span class="badge badge-success"></span>--}}
                                 </a>
                             </li>
-                            <li class=" ">
-                                <a href="{{url('/store/add-product')}}" class="nav-link  ">
-                                    Add Product </a>
-                            </li>
-                            <li class=" ">
-                                <a href="{{url('/store/quick-add-products')}}" class="nav-link  ">
-                                     Quick add products
+                            {{--<li class=" ">--}}
+                                {{--<a href="{{url('/store/add-product')}}" class="nav-link  ">--}}
+                                    {{--Add Product </a>--}}
+                            {{--</li>--}}
+                            {{--<li class=" ">--}}
+                                {{--<a href="{{url('/store/quick-add-products')}}" class="nav-link  ">--}}
+                                     {{--Quick add products--}}
                                     {{--<span class="badge badge-danger">3</span>--}}
-                                </a>
-                            </li>
+                                {{--</a>--}}
+                            {{--</li>--}}
                         </ul>
 
                     </li>

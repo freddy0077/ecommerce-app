@@ -45,21 +45,21 @@
                     <div class="container">
                         <div class="row">
                             @foreach($featured_stores as $store)
-                            {{--<div class="col-sm-4 col-xs-12 banner-item">--}}
+                            <div class="col-sm-4 col-xs-12 banner-item">
 
-                                {{--<div class="banners banner__img">--}}
-                                    {{--<div>--}}
-                                        {{--<a title="Static Image" href="#">--}}
-                                            {{--<img src='{{asset("images/stores/$store->store_image")}}' alt="Static Image"></a>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="banner__info">--}}
-                                    {{--<h2>{{$store->store_name}}</h2>--}}
-                                    {{--<p>ON YOUR MARK, GET SET, GO</p>--}}
-                                    {{--<a title="Shop Now" href="#">Shop Now &gt;&gt;</a>--}}
-                                {{--</div>--}}
+                                <div class="banners banner__img">
+                                    <div>
+                                        <a title="Static Image" href="#">
+                                            <img src='{{asset("images/stores/$store->store_image")}}' alt="Static Image"></a>
+                                    </div>
+                                </div>
+                                <div class="banner__info">
+                                    <h2>{{$store->store_name}}</h2>
+                                    <p>ON YOUR MARK, GET SET, GO</p>
+                                    <a title="Shop Now" href="#">Shop Now &gt;&gt;</a>
+                                </div>
 
-                            {{--</div>--}}
+                            </div>
 
                             @endforeach
 

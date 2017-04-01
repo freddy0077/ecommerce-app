@@ -4,16 +4,16 @@
         <!-- BEGIN PAGE BREADCRUMBS -->
 <ul class="page-breadcrumb breadcrumb">
     <li>
-        <a href="index-2.html">Home</a>
+        <a href="#">Dashboard</a>
         <i class="fa fa-circle"></i>
     </li>
-    <li>
-        <a href="#">UI Features</a>
-        <i class="fa fa-circle"></i>
-    </li>
-    <li>
-        <span>Tiles</span>
-    </li>
+    {{--<li>--}}
+        {{--<a href="#">UI Features</a>--}}
+        {{--<i class="fa fa-circle"></i>--}}
+    {{--</li>--}}
+    {{--<li>--}}
+        {{--<span>Tiles</span>--}}
+    {{--</li>--}}
 </ul>
 <!-- END PAGE BREADCRUMBS -->
         <!-- BEGIN PAGE CONTENT INNER -->
@@ -21,8 +21,8 @@
     <div class="portlet light ">
         <div class="portlet-title">
             <div class="caption">
-                <i class="icon-bubble font-green-sharp"></i>
-                <span class="caption-subject font-green-sharp sbold">Extended Modals Example</span>
+                <i class=" font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp sbold">Main Admin Dashboard</span>
             </div>
 
         </div>
@@ -66,10 +66,13 @@
                     <div class="tile-body">
                         <i class="fa fa-user"></i>
                     </div>
-                    <div class="tile-object">
-                        <div class="name"> Members </div>
-                        <div class="number"> {{$users}} </div>
-                    </div>
+                    <a href="{{url('admin/users')}}">
+                        <div class="tile-object">
+                            <div class="name"> Members </div>
+                            <div class="number"> {{$users}} </div>
+                        </div>
+                    </a>
+
                 </div>
                 <div class="tile double bg-blue-madison">
                     <div class="tile-body">

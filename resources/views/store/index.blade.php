@@ -186,11 +186,13 @@
                                 <div class="product-item-container">
                                     <div class="left-block">
                                         <div class="product-image-container lazy second_img ">
-                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img-responsive" />
-                                            <img data-src='{{asset("images/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img_0 img-responsive" />
+                                            <img data-src='{{asset("images/products/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img-responsive" />
+                                            <img data-src='{{asset("images/products/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img_0 img-responsive" />
                                         </div>
                                         <!--Sale Label-->
+                                        @if($product->sale)
                                         <span class="label label-sale">Sale</span>
+                                        @endif
                                         <!--countdown box-->
                                         {{--<div class="countdown_box">--}}
                                         {{--<div class="countdown_inner">--}}
