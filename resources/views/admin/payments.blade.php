@@ -88,7 +88,7 @@
             <tbody>
             @foreach(\App\Payment::all() as $payment)
             <tr>
-                <td> {{User::whereUserId($payment->user_id)->first()->name}} </td>
+                <td> {{\App\User::whereUserId($payment->user_id)->first()->name}} </td>
                 <td> {{$payment->amount}} </td>
                 <td> {{$payment->tx_status}} </td>
                 <td> {{$payment->transaction_id}} </td>
