@@ -51,7 +51,7 @@ class HomeController extends Controller
              $signup = MarketplaceSignup::leftJoin('packages','packages.id','=','marketplace_signups.package_id')->where('user_id',$user->id)->first();
             $number_of_products = $signup ? $signup->number_of_products : 50;
              $products = Product::leftJoin('stores','stores.user_id','=','products.user_id')
-                 ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image')
+                 ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image,stores.user_id')
                  ->where('products.user_id',$user->id)->take($number_of_products)->get();
             $allProducts->push($products);
         }
@@ -277,8 +277,19 @@ class HomeController extends Controller
             return ['status' => 403, 'message' => 'You can not follow your shop'];
 
         } elseif (Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()) {
-            return ['status' => 404, 'message' => 'You are already following this shop !'];
+
+            $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
+
+//            $product = Product::find($product_id);
+            if($watchedshop_exists){
+                $watchedshop_exists->delete();
+            }
+
+            return ['message' => "You just unfollwed a shop",'status' => 404];
+
+//            return ['status' => 404, 'message' => 'You are already following this shop !'];
         } else {
+
             return ['status' => 401, 'message' => 'Log in to watch a shop'];
         }
     }

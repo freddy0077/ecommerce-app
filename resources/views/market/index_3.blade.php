@@ -168,11 +168,11 @@
                                                 @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
 
                                                     <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye-slash"></i> <span class="button-group__text"></span>
+                                                        <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
                                                     </button>
                                                     @else
                                                     <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye"></i> <span class="button-group__text"></span>
+                                                        <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
                                                     </button>
 
                                                 @endif
@@ -260,7 +260,18 @@
                                             </div>
 
                                             <div class="button-group">
-                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
+                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
+
+                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                                                        <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                                                    </button>
+                                                @else
+                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                                                        <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                                                    </button>
+
+                                                @endif
+
                                                 <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
 
                                                 @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
@@ -268,7 +279,7 @@
                                                         <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
                                                         <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
                                                     </button>
-                                                    @else
+                                                @else
                                                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
                                                         <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
                                                         <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
@@ -276,18 +287,14 @@
 
                                                 @endif
 
-                                                {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">--}}
-                                                    {{--<i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>--}}
-                                                    {{--<i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>--}}
-                                                {{--</button>--}}
 
-                                                {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">--}}
-                                                    {{--<i id="like-toggle-{{$product->id}}" class="fa fa-thumbs-up"></i>--}}
-                                                    {{--<i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>--}}
-                                                {{--</button>--}}
-                                                <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
+                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
+
+
+                                                {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
 
                                             </div>
+
                                         </div><!-- right block -->
                                     </div>
                                 </div>

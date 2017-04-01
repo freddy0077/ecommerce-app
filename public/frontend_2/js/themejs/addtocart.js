@@ -19,6 +19,10 @@
 					addProductNotice('Sorry !', '', '<h3><a href="#">Log in first to follow a shop !</h3>', 'error');
 				}
 				else if(data.status == 404) {
+
+                    $('.watch-toggle-'+user_id).addClass('fa fa-eye')
+                    $('.watch-toggle-'+user_id).removeClass('fa fa-eye-slash');
+
 					addProductNotice('Sorry !', '', '<h3><a href="#">'+data.message+ '!</h3>', 'error');
 				}
 
@@ -28,8 +32,11 @@
 				}else {
 					addProductNotice('Shop added to your feeds',
 							'<img src='+image_url+'>',
-							'<h3><a href="#">You are now watching </a>'+ data.store +'<a href="#"></a>!</h3>',
-							'success');
+							'<h3><a href="#">You are now watching </a>'+ data.store +'<a href="#"></a>!</h3>', 'success');
+
+                    $('.watch-toggle-'+user_id).removeClass('fa fa-eye')
+                    $('.watch-toggle-'+user_id).addClass('fa fa-eye-slash');
+
 				}
 
 
@@ -56,7 +63,6 @@
                     $('.like-toggle-'+product_id).removeClass('fa fa-thumbs-down')
                     $('.like-toggle-'+product_id).addClass('fa fa-thumbs-up')
                     $('.like-counts-'+product_id).text(data.likes);
-
                 }
             });
 
