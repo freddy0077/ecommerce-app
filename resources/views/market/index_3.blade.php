@@ -178,7 +178,14 @@
                                                 @endif
 
 
-                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
+
+                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
+                                                    @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
+                                                        <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
+                                                    @else
+                                                        <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
+                                                    @endif
+                                                </button>
 
                                                 @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
                                                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
@@ -272,7 +279,13 @@
 
                                                 @endif
 
-                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
+                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
+                                                    @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
+                                                        <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
+                                                    @else
+                                                        <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
+                                                    @endif
+                                                </button>
 
                                                 @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
                                                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">

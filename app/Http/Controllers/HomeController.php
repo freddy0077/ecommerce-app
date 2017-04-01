@@ -181,7 +181,11 @@ class HomeController extends Controller
             return ['message' => 'You need to login to add to fancies !','status' => 401];
 
         }else{
-            return ['message' => 'You have this product in your fancies!','status' => 401];
+            $fancy_exists = Fancy::whereUserId(Auth::user()->id)->whereProductId($product_id)->first();
+            if($fancy_exists){
+                $fancy_exists->delete();
+            }
+            return ['message' => "You have unfancy'd this product!",'status' => 401];
         }
     }
 

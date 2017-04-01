@@ -136,9 +136,6 @@
 			});
 
 		},
-
-
-
 	}
 
 
@@ -146,10 +143,18 @@
 	var fancy = {
 		'add': function(product_id) {
             $.post('/fancy-it/'+product_id,function(data) {
-                addProductNotice('Fancied !',
-                    '',
-                    '<h3>'+data.message+'!</h3>',
-                    'success');
+                addProductNotice("Fancy'd!", '','<h3>'+data.message+'!</h3>','success');
+
+                if(data.status == 401){
+
+                    $('.fancy-toggle-'+product_id).removeClass('fa fa-heart')
+                    $('.fancy-toggle-'+product_id).addClass('fa fa-heart-o')
+
+                }else if(data.status == 200){
+                    $('.fancy-toggle-'+product_id).removeClass('fa fa-heart-o')
+                    $('.fancy-toggle-'+product_id).addClass('fa fa-heart')
+
+                }
 
             });
 		}
