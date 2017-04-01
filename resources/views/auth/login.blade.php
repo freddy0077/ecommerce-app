@@ -568,6 +568,7 @@
                             <form action="{{url('/login')}}" method="post" id="login-form">
                                 <input type="text" name="email" placeholder="Email" required=""/>
                                 <input type="Password" name="password" placeholder="Password" required=""/>
+                                <span class="help-block"></span>
                                 <input type="submit" class="btn" value="Log in">
                             </form>
                         </div>
@@ -645,7 +646,7 @@
                 el.parent('.form-group').addClass('has-error');
                 el.next('.help-block').text(data.responseJSON[field][0]);
                 el.next('.validation_error').text(data.responseJSON[field][0]);
-                swal("Error!",data.responseJSON[field][0] , "error");
+                $('.help-block').text(data.responseJSON[field][0]);
             }
         })
     })
