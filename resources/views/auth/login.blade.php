@@ -661,7 +661,7 @@
                 el.parent('.form-group').addClass('has-error');
                 el.next('.help-block').text(data.responseJSON[field][0]);
                 el.next('.validation_error').text(data.responseJSON[field][0]);
-                swal("Error!",data.responseJSON[field][0] , "error");
+//                swal("Error!",data.responseJSON[field][0] , "error");
             }
         }).success(function(data){
             location.href="/home";
