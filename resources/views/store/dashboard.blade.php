@@ -204,71 +204,12 @@
                                                         </thead>
                                                         <tbody>
                                                         <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Metronic - Responsive Admin + Frontend Theme </a>
-                                                            </td>
-                                                            <td> $20.00 </td>
-                                                            <td> 11190 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
+                                                          <td></td>
+                                                          <td></td>
+                                                          <td></td>
+                                                          <td></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Regatta Luca 3 in 1 Jacket </a>
-                                                            </td>
-                                                            <td> $25.50 </td>
-                                                            <td> 1245 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                            </td>
-                                                            <td> $878.50 </td>
-                                                            <td> 784 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Apple iPhone 4s - 16GB - Black </a>
-                                                            </td>
-                                                            <td> $625.50 </td>
-                                                            <td> 809 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Samsung Galaxy S III SGH-I747 - 16GB </a>
-                                                            </td>
-                                                            <td> $915.50 </td>
-                                                            <td> 6709 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Motorola Droid 4 XT894 - 16GB - Black </a>
-                                                            </td>
-                                                            <td> $878.50 </td>
-                                                            <td> 784 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -287,65 +228,10 @@
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <a href="javascript:;"> David Wilson </a>
+
                                                             </td>
-                                                            <td> 3 </td>
-                                                            <td> $625.50 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Amanda Nilson </a>
-                                                            </td>
-                                                            <td> 4 </td>
-                                                            <td> $12625.50 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Paul Strong </a>
-                                                            </td>
-                                                            <td> 1 </td>
-                                                            <td> $890.85 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Jhon Doe </a>
-                                                            </td>
-                                                            <td> 2 </td>
-                                                            <td> $125.00 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Bill Chang </a>
-                                                            </td>
-                                                            <td> 45 </td>
-                                                            <td> $12,125.70 </td>
-                                                            <td>
-                                                                <a href="javascript:;" class="btn btn-sm btn-default">
-                                                                    <i class="fa fa-search"></i> View </a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="javascript:;"> Paul Strong </a>
-                                                            </td>
-                                                            <td> 1 </td>
-                                                            <td> $890.85 </td>
+                                                            <td></td>
+                                                            <td>  </td>
                                                             <td>
                                                                 <a href="javascript:;" class="btn btn-sm btn-default">
                                                                     <i class="fa fa-search"></i> View </a>
