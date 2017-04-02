@@ -138,10 +138,6 @@ class HomeController extends Controller
           $second_set = $builder->skip(10)->paginate(8);
 
 
-        if($builder->first()){
-            $builder->first()->category_name;
-        }
-
          $nextpageurl = $second_set->nextpageurl();
 
         $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
@@ -150,6 +146,10 @@ class HomeController extends Controller
 
         if($request->ajax()){
             return view('market.partials.more_popular_products',compact('products','second_set','nextpageurl'));
+        }
+
+        if($builder->first()){
+            $category_name = $builder->first()->category_name;
         }
 
         return view('market.category',compact('products','categories','category_id','second_set','nextpageurl','category_name','featured_stores'));
