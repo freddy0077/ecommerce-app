@@ -636,7 +636,7 @@
                             swal("Great!", " redirecting to the login page", "success");
 
                             setTimeout(function(){
-//                                location.reload();
+                                location.reload();
                             },2000)
                         });
             }
@@ -646,7 +646,8 @@
                 el.parent('.form-group').addClass('has-error');
                 el.next('.help-block').text(data.responseJSON[field][0]);
                 el.next('.validation_error').text(data.responseJSON[field][0]);
-                $('.help-block').text(data.responseJSON[field][0]);
+                swal("Error!", data.responseJSON[field][0], "error");
+
             }
         })
     })
@@ -662,6 +663,7 @@
                 el.next('.help-block').text(data.responseJSON[field][0]);
                 el.next('.validation_error').text(data.responseJSON[field][0]);
 //                swal("Error!",data.responseJSON[field][0] , "error");
+                $('.help-block').text(data.responseJSON[field][0]);
             }
         }).success(function(data){
             location.href="/home";
