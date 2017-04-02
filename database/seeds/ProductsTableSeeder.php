@@ -53,19 +53,38 @@ class ProductsTableSeeder extends Seeder
 
     }
 
-//    private function saveMainCategories(){
-//
-//
-//        $id = Webpatser\Uuid\Uuid::generate();
-//        $categoryObject = new \App\ProductCategory();
-//        $categoryObject->id = $id;
-//        $categoryObject->user_id = 1;
-//        $categoryObject->name = $category;
-//        $categoryObject->image = 'carousel-07.jpg';
-//        $categoryObject->save();
-//        echo  " $category product category saved \n";
-//    }
+    private function saveShops($id,$name,$user_id){
 
+        \App\Store::create([
+            'id' => $id,
+            'name' => $name,
+            'email' => "$name@gmail.com",
+            'phone_number' => '0240120250',
+            'user_id'      => $user_id,
+            'domain' => "$name@shopaholicks.com",
+            'image'  => 'shop4.jpg',
+            'store_banner' => 'Perfume-AD-Slim-Banner.jpg'
+        ]);
+
+        echo "$name saved" ;
+    }
+
+    private function savePackages($id,$name,$charge,$desc,$type){
+
+        \App\Package::create([
+            'id' => $id,
+            'name' => $name,
+            'charge' => $charge,
+            'description' => $desc,
+            'number_of_products' => 50,
+            'duration' => 30,
+            'payment_link' => '',
+            'type' => $type
+        ]);
+
+        echo "$name saved";
+
+    }
 
     public function run()
     {
@@ -88,17 +107,6 @@ class ProductsTableSeeder extends Seeder
 //        \App\User::truncate();
 
 
-//        \App\Package::create([
-//            'id' => \Webpatser\Uuid\Uuid::generate(),
-//            'name' => 'Free Package',
-//            'charge' => 50,
-//            'description' => 'Free Package ',
-//            'number_of_products' => 50,
-//            'duration' => 90,
-//            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/5f59dbe3ee305b1cf425f921',
-//            'type' => 'upgrade_package'
-//        ]);
-
         $this->saveUsers();
 
 
@@ -110,7 +118,10 @@ class ProductsTableSeeder extends Seeder
             'email' => 'evergreen@gmail.com',
             'phone_number' => '0240120250',
             'user_id'      => 1,
-            'domain' => 'evergreen-store@shopaholicks.com'
+            'domain' => 'evergreen-store@shopaholicks.com',
+            'image'  => 'shop3.jpg',
+            'store_banner' => 'Perfume-AD-Slim-Banner.jpg'
+
         ]);
 
         \App\Store::create([
@@ -119,22 +130,42 @@ class ProductsTableSeeder extends Seeder
             'email' => 'evanacus@gmail.com',
             'phone_number' => '0240120250',
             'user_id'      => 2,
-            'domain' => 'evanacus@shopaholicks.com'
+            'domain' => 'evanacus@shopaholicks.com',
+            'store_banner' => 'Perfume-AD-Slim-Banner.jpg'
+
         ]);
 
-//        \App\Package::create([
-//            'id' => \Webpatser\Uuid\Uuid::generate(),
-//            'name' => 'Basic Subscription',
-//            'charge' => 25,
-//            'description' => 'Basic subscription (50 products ) for 30 days',
-//            'number_of_products' => 50,
-//            'duration' => 30,
-//            'payment_link' => 'https://app.mpowerpayments.com/click2pay-redirect/73b1fec15e149ed17391af7b'
-//        ]);
-//
 
 
-//
+        \App\User::create([
+            'name' => 'Kojo',
+            'email' => "kojo@shopaholicks.com",
+            'password' => bcrypt('password'),
+            'phone_number' => "0000000000",
+            'has_store'    => true,
+            'admin'       => true
+        ]);
+        echo "Kojo's account created  \n";
+
+        for($i = 0; $i < 10; $i++){
+            $shop_id = \Webpatser\Uuid\Uuid::generate();
+            $package_id = \Webpatser\Uuid\Uuid::generate();
+            $this->saveShops($shop_id,"Shop$i",6);
+            if($i > 5){
+                $this->savePackages($package_id,"Package$i",50,"Package$i description","upgrade_package");
+            }else{
+                $this->savePackages($package_id,"Package$i",50,"Package$i description","marketplace_upgrade");
+            }
+
+            \App\MarketplaceSignup::create([
+                'id' => \Webpatser\Uuid\Uuid::generate(),
+                'user_id' => 6 ,
+                'store_id' => $shop_id,
+                'package_id' => $package_id
+            ]);
+            echo "Market place signup for  $shop_id created \n" ;
+        }
+
         foreach($this->mainCategories as $key=>$category) {
 
             $id = Webpatser\Uuid\Uuid::generate();
@@ -142,13 +173,22 @@ class ProductsTableSeeder extends Seeder
             $categoryObject->id = $id;
             $categoryObject->user_id = 1;
             $categoryObject->name = $category;
-            $categoryObject->image = 'carousel-07.jpg';
+            switch($category){
+                case"Appliances":
+                    $categoryObject->image = 'appliances.jpg';
+                    break;
+                case"Electronics":
+                    $categoryObject->image = 'electronics.jpeg';
+                    break;
+                case "Agric & Food":
+                    $categoryObject->image = 'agric&food.jpeg';
+                    break;
+                default:
+                    $categoryObject->image = '';
+            }
             $categoryObject->save();
             echo " $category product category saved \n";
 
-
-
-//
                 switch($category){
                     case "Clothing":
                         $men_id = \Webpatser\Uuid\Uuid::generate();

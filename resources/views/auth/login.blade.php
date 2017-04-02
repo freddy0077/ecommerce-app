@@ -577,7 +577,7 @@
                 <div class="form-item sign-up"><!-- sign-up form-->
                     <div class="w3table w3-agileits">
                         <div class="w3table-cell">
-                            <form action="{{url('/register')}}" method="post" id="register-form">
+                            <form action="{{url('/register-new-user')}}" method="post" id="register-form">
                                 {{--<p>Create an account on Shopaholicks.</p>--}}
                                 <input type="text" name="name" placeholder="Full Name" required/>
                                 {{--<i class="help-block">one</i>--}}
@@ -619,7 +619,7 @@
 
     $('#register-form').on('submit',function(e){
         e.preventDefault();
-        $.post('/register',$(this).serialize(),function(data){
+        $.post($(this).attr('action'),$(this).serialize(),function(data){
         }).success(function(data){
             if (data.status == 301) {
                 swal({
@@ -636,7 +636,7 @@
                             swal("Great!", " redirecting to the login page", "success");
 
                             setTimeout(function(){
-                                location.reload();
+//                                location.reload();
                             },2000)
                         });
             }

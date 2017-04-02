@@ -2,6 +2,14 @@
 
 @section('scripts')
 
+    <style>
+
+        /*.page-content-inner{*/
+            /*margin-bottom: 100px;;*/
+        /*}*/
+
+    </style>
+
     <script>
         $('.confirm-token').on('click',function(){
 //            alert($(this).data('token'));

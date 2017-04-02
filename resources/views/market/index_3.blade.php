@@ -44,19 +44,20 @@
                 <div class="container-full home8--banner1">
                     <div class="container">
                         <div class="row">
-                            @foreach($featured_stores as $store)
-                            <div class="col-sm-4 col-xs-12 banner-item">
+{{--                            <h4 class="">{{strtoupper($store->name)}}</h4>--}}
 
+                        @foreach($featured_stores as $store)
+                            <div class="col-sm-4 col-xs-12 banner-item">
                                 <div class="banners banner__img">
                                     <div>
                                         <a title="Static Image" href="#">
-                                            <img src='{{asset("images/stores/$store->store_image")}}' alt="Static Image"></a>
+                                            <img src='{{asset("images/stores/$store->image")}}' alt="Static Image"></a>
                                     </div>
                                 </div>
                                 <div class="banner__info">
                                     <h2>{{$store->store_name}}</h2>
-                                    <p>ON YOUR MARK, GET SET, GO</p>
-                                    <a title="Shop Now" href="#">Shop Now &gt;&gt;</a>
+                                    <p>{{$store->name}}</p>
+                                    <a title="Shop Now" href='{{url("stores/$store->slug/$store->user_id")}}'>Shop Now &gt;&gt;</a>
                                 </div>
 
                             </div>
@@ -331,11 +332,13 @@
                                         <!--Begin Items-->
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
-                                        <h4><a href="{{url('/category',$category->id)}}">{{$category->name}} </a></h4>
+                                        <h4 class="text-center text-dark"><a href="{{url('/category',$category->id)}}">{{$category->name}} </a></h4>
 
                                         <div class="left-block">
                                             <div class="product-image-container second_img">
-                                                <img src="https://placehold.it/180x200"  alt="" class="img-responsive" />
+                                                <img src='{{asset("images/categories/$category->image")}}' style="width: 180px!important; height: 150px!important;" width="180" height="200"  alt="" class="img-rounded img-responsive" />
+
+                                                {{--<img src="https://placehold.it/180x200"  alt="" class="img-responsive" />--}}
                                                 {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/8_3.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive img_0" />--}}
                                             </div>
                                             <!--Sale Label-->

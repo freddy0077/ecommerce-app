@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
         //
         '/',
         '/register-user',
+        '/register-new-user',
         '/register',
         '/fancy-it/*',
         '/like-it/*',

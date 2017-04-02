@@ -34,6 +34,7 @@ class CreateProductsTable extends Migration
             $table->decimal('sale_price')->nullable();
             $table->boolean('enable')->default(false);
             $table->integer('like_counts')->default(0);
+            $table->integer('view_counts')->default(0);
             $table->timestamps();
 
         });

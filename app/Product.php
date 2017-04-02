@@ -16,7 +16,7 @@ class Product extends Model
     use Sluggable;
 //        ActivityTrait
 
- protected $fillable = ['id','store_id','name', 'product','slug','description','price','image','user_id',
+ protected $fillable = ['id','store_id','name', 'product','slug','description','price','image','user_id','view_counts',
                        'sub_category_id','feature','published', 'show_buy_button', 'ad', 'like_counts','sale','sale_price'];
 
     protected $casts = [

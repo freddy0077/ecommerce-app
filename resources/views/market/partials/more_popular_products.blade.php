@@ -35,29 +35,72 @@
             <div class="right-block">
                 <div class="caption">
                     <h4><a href="">{{$product->name}} </a></h4>
+                    <span>Listed in <a href='{{url("stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a></span>
                     <div class="ratings">
-                        <div class="rating-box">
-                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                        </div>
+                        {{--<div class="rating-box">--}}
+                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                            {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                        {{--</div>--}}
                     </div>
 
                     <div class="price">
-                        <span class="price-new">GHS {{$product->price}}</span>
-                        <span class="price-old">GHS {{$product->price}}</span>
+                        @if($product->sale)
+                            <span class="price-new">GH&#162; {{$product->sale_price}}</span>
+
+                            <span class="price-old">GH&#162; {{$product->price}}</span>
+                        @else
+                            <span class="price-new">GH&#162; {{$product->price}}</span>
+
+                        @endif
                     </div>
                 </div>
 
                 <div class="button-group">
-                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');"><i class="fa fa-eye"></i> <span class="button-group__text">Add to Cart</span></button>
-                    <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');"><i class="fa fa-heart"></i>  </button>
-                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i class="fa fa-thumbs-up"></i><i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i> </button>
-                    <button class="compare" type="button"  onclick=""><i class="fa fa-share"></i>  </button>
+                    @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
+
+                        <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                            <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                        </button>
+                    @else
+                        <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
+                            <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                        </button>
+
+                    @endif
+
+                    <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
+                        @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
+                            <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
+                        @else
+                            <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
+                        @endif
+                    </button>
+
+                    @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
+                        <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                            <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                            <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                        </button>
+                    @else
+                        <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
+                            <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
+                            <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
+                        </button>
+
+                    @endif
+
+
+                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
+
+
+                    {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
 
                 </div>
+
+
             </div><!-- right block -->
         </div>
     </div>

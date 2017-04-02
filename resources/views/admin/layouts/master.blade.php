@@ -37,7 +37,13 @@
     <link href="{{asset('backend/assets/layouts/layout3/css/layout.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('backend/assets/layouts/layout3/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" id="style_color" />
     <link href="{{asset('backend/assets/layouts/layout3/css/custom.min.css')}}" rel="stylesheet" type="text/css" />
+    <style>
 
+        .page-content-inner{
+            margin-bottom: 200px;;
+        }
+
+    </style>
     <style>
         .page-header .page-header-menu {
             /*background: #444d58;*/

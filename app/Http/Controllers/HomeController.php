@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChatMessageReceived;
 use App\Fancy;
+use App\Http\Requests\UserRequest;
 use App\Like;
 use App\MarketplaceSignup;
 use App\Product;
@@ -46,7 +47,6 @@ class HomeController extends Controller
         $allProducts = collect();
 
 
-
         foreach($users as $user){
              $signup = MarketplaceSignup::leftJoin('packages','packages.id','=','marketplace_signups.package_id')->where('user_id',$user->id)->first();
             $number_of_products = $signup ? $signup->number_of_products : 50;
@@ -55,8 +55,6 @@ class HomeController extends Controller
                  ->where('products.user_id',$user->id)->take($number_of_products)->get();
             $allProducts->push($products);
         }
-
-//        $best_deal_products = $allProducts;
 
           $products = $allProducts->collapse()->shuffle(1)->all();
           $second_set = $allProducts->collapse()->shuffle(7)->all();
@@ -104,7 +102,8 @@ class HomeController extends Controller
         $store = Store::whereUserId($user->id)->first();
 
         $builder = DB::table('watched_shops');
-        $feeds = $builder->whereStoreId($store->id)->get();
+//        $feeds = $builder->whereStoreId($store->id)->get();
+        $feeds = $builder->get();
         $following = $builder->where('user_id',$user->id)->get();
 
 //        $stream = new StreamFeed($user->id);
@@ -131,21 +130,26 @@ class HomeController extends Controller
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
             ->where('product_categories.id',$category_id)
-            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug')
+            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,product_categories.name as category_name')
             ->orderBy('products.like_counts','desc');
 
         $products = $builder->take(10)->get();
 
-          $second_set = $builder->skip(10)->take(10)->paginate();
+          $second_set = $builder->skip(10)->paginate(8);
+
+        $category_name = $builder->first()->category_name;
 
          $nextpageurl = $second_set->nextpageurl();
+
+        $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
+            ->take(3)
+            ->get();
 
         if($request->ajax()){
             return view('market.partials.more_popular_products',compact('products','second_set','nextpageurl'));
         }
 
-
-        return view('market.category',compact('products','categories','category_id','second_set','nextpageurl'));
+        return view('market.category',compact('products','categories','category_id','second_set','nextpageurl','category_name','featured_stores'));
     }
 
     public function getSubCategory(Request $request,$id){
@@ -304,4 +308,27 @@ class HomeController extends Controller
             $stream->followFeed("flat",$id);
         }
 
+
+    public function postRegisterNewUser(UserRequest $request){
+              User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'phone_number' => $request->phone_number,
+                'gender'    => $request->gender,
+                'has_store' => $request->store == "on"? true: false
+            ]);
+
+        if($request->store == "on"){
+
+            $user_id = User::where('email',$request->email)->first()->id;
+
+            Store::create([
+                'id' => Uuid::generate(),
+                'user_id' => $user_id,
+                'name' => $request->store_name
+            ]);
+        }
+
+    }
 }

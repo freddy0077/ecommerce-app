@@ -210,6 +210,7 @@ Route::get('logout',function(){
     return redirect()->back();
 });
 
+Route::post('/register-new-user','HomeController@postRegisterNewUser');
 Route::get('/home', 'HomeController@index');
 
 

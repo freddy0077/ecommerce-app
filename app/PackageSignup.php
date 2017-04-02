@@ -27,6 +27,8 @@ class PackageSignup extends Model
     public static function getUserPackageThreshold(){
         $user_id = Auth::user()->id;
 
+
+
        return PackageSignup::leftJoin('packages','packages.id','=','package_signups.package_id')
             ->whereUserId($user_id)
             ->first()
