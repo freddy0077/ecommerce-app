@@ -137,7 +137,10 @@ class HomeController extends Controller
 
           $second_set = $builder->skip(10)->paginate(8);
 
-        $category_name = $builder->first()->category_name;
+
+        if($builder->first()){
+            $builder->category_name;
+        }
 
          $nextpageurl = $second_set->nextpageurl();
 
