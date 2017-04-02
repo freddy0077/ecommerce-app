@@ -139,7 +139,7 @@ class HomeController extends Controller
 
 
         if($builder->first()){
-            $builder->category_name;
+            $builder->first()->category_name;
         }
 
          $nextpageurl = $second_set->nextpageurl();
