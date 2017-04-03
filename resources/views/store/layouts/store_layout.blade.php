@@ -421,8 +421,66 @@
         })
     });
 
+    $('.checkout-login').hide();
+    $('.checkout-register').hide()
 
-//    function Upload() {
+    $('.account').on('change',function(){
+//        alert($(this).val());
+
+        if($(this).val() == "register"){
+            $('.checkout-login').hide();
+
+            $('.checkout-register').show()
+
+        }else if($(this).val() == "returning"){
+
+            $('.checkout-login').show();
+
+            $('.checkout-register').hide()
+        }
+    })
+
+    $('#checkout-login-form').on('submit',function(e){
+        e.preventDefault();
+        $.post('/login',$(this).serialize(),function(data){
+
+        }).fail(function(data){
+            for (var field in data.responseJSON) {
+                var el = $(':input[name="' + field + '"]');
+                el.parent('.form-group').addClass('has-error');
+                el.next('.help-block').text(data.responseJSON[field][0]);
+                el.next('.validation_error').text(data.responseJSON[field][0]);
+//                swal("Error!",data.responseJSON[field][0] , "error");
+                $('.help-block').text(data.responseJSON[field][0]);
+            }
+        }).success(function(data){
+            $('.btn-login').val('please wait !').attr('disabled',true)
+            location.reload();
+        })
+    })
+
+    $('#checkout-register-form').on('submit',function(e){
+        e.preventDefault();
+        $.post($(this).attr('action'),$(this).serialize(),function(data){
+        }).success(function(data){
+            location.reload();
+
+        }).fail(function(data){
+            for (var field in data.responseJSON) {
+                var el = $(':input[name="' + field + '"]');
+                el.parent('.form-group').addClass('has-error');
+                el.next('.help-block').text(data.responseJSON[field][0]);
+                el.next('.validation_error').text(data.responseJSON[field][0]);
+
+//                swal("Error!", data.responseJSON[field][0], "error");
+
+            }
+        })
+    })
+
+
+
+    //    function Upload() {
      $('#banner_image_form').on('submit',function(e){
          e.preventDefault();
          //Get reference of FileUpload.
@@ -483,25 +541,23 @@
 
 </script>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="login-modal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+{{--<div class="modal fade" tabindex="-1" role="dialog" id="login-modal">--}}
+    {{--<div class="modal-dialog" role="document">--}}
+        {{--<div class="modal-content">--}}
+            {{--<div class="modal-header">--}}
+                {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
+                {{--<h4 class="modal-title">Error</h4>--}}
+            {{--</div>--}}
+            {{--<div class="modal-body">--}}
+                {{--<h4>You need to login or register first </h4>--}}
+            {{--</div>--}}
+            {{--<div class="modal-footer">--}}
+                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+            {{--</div>--}}
+        {{--</div><!-- /.modal-content -->--}}
+    {{--</div><!-- /.modal-dialog -->--}}
+{{--</div><!-- /.modal -->--}}
 
 </body>
 

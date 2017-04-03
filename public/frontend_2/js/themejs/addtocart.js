@@ -108,10 +108,10 @@
 			$.post('/store/check-out/'+user_id,function(data){
 				if(data.status == 401){
 					addProductNotice('Error', '','<h3><a href="#"></a> You need to login to continue ! </a></h3>','success');
-					setTimeout(function(){
-                     alert('reached');
-						$('#login-modal').modal();
-					},3000)
+					//setTimeout(function(){
+                     //alert('reached');
+						//$('#login-modal').modal();
+					//},3000)
 				}else {
 					addProductNotice('Successful', '','<h3><a href="#"></a> Ordered successfully !<a href="#"> </a> redirecting...</h3>','success');
 					setTimeout(function(){

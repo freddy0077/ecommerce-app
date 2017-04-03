@@ -359,6 +359,8 @@ class HomeController extends Controller
                 'has_store' => $request->store == "on"? true: false
             ]);
 
+
+
         if($request->store == "on"){
 
             $user_id = User::where('email',$request->email)->first()->id;
@@ -369,6 +371,12 @@ class HomeController extends Controller
                 'name' => $request->store_name
             ]);
         }
+
+        $user_id= User::whereEmail($request->email)->first();
+
+        $user = User::find($user_id->id);
+
+        Auth::login($user_id);
 
     }
 }

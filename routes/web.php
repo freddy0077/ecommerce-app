@@ -15,17 +15,9 @@
 //    return view('welcome');
 //}
 
-Route::get('/password',function(){
-
-//  \Illuminate\Support\Facades\Auth::user()->getAuthPassword();
-
-    if (\Illuminate\Support\Facades\Hash::check('topman88', \Illuminate\Support\Facades\Auth::user()->getAuthPassword())) {
-        // The passwords match...
-         var_dump(true);
-    } else{
-        var_dump(false);
-
-    }
+Route::get('/sms',function(){
+    $sms = new \App\KodeSms();
+    var_dump( $sms->SendSms("Hello Ghana",'233577690501'));
 });
 
 

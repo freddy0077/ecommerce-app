@@ -121,11 +121,17 @@
 
                                 <div class="product-box-desc">
                                     <div class="inner-box-desc">
-                                        <div class="price-tax"><span>Ex Tax: </span> $60.00 </div>
-                                        <div class="reward"><span>Price in reward points: </span> 400 </div>
-                                        <div class="brand"><span>Brand: </span><a href="#">Apple </a>		 </div>
-                                        <div class="model"><span>Product Code: </span> Product 15 </div>
-                                        <div class="reward"><span>Reward Points: </span> 100 </div>
+                                        @if($product->description =="")
+                                        <h4>Description</h4>
+                                        <p>
+                                            {{$product->decription}}
+                                        </p>
+                                        @endif
+                                        {{--<div class="price-tax"><span>Ex Tax: </span> $60.00 </div>--}}
+                                        {{--<div class="reward"><span>Price in reward points: </span> 400 </div>--}}
+                                        {{--<div class="brand"><span>Brand: </span><a href="#">Apple </a>		 </div>--}}
+                                        {{--<div class="model"><span>Product Code: </span> Product 15 </div>--}}
+                                        {{--<div class="reward"><span>Reward Points: </span> 100 </div>--}}
                                     </div>
                                 </div>
                                 <!-- end box info product -->
