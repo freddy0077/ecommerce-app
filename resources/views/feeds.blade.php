@@ -193,15 +193,15 @@
                     <!-- BEGIN PAGE BREADCRUMBS -->
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="{{url('/')}}">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
+                        {{--<li>--}}
+                            {{--<a href="#">Pages</a>--}}
+                            {{--<i class="fa fa-circle"></i>--}}
+                        {{--</li>--}}
                         <li>
-                            <a href="#">Pages</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <span>User</span>
+                            <span>Profile</span>
                         </li>
                     </ul>
                     <!-- END PAGE BREADCRUMBS -->
