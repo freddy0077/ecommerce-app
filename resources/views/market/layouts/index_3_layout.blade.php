@@ -114,11 +114,13 @@
                                         <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>Store Settings </a>
                                     </li>
                                 @endif
-                                <li class="checkout"><a href="{{url('/store/checkout')}}" class="top-link-checkout" title="Checkout"><i class="fa fa-check-square-o" ></i> Checkout</a></li>
+                                {{--<li class="checkout"><a href='{{url("/checkout")}}' class="top-link-checkout" title="Checkout"><i class="fa fa-check-square-o" ></i> Checkout</a></li>--}}
                                 @if(Auth::check())
                                     {{--<li class="wishlist"><a href="{{url('/fancies')}}" class="top-link-wishlist" title="wishlist"><i class="fa fa-heart" ></i> My Fancies</a></li>--}}
 
                                     <li class="signin"><a href="{{url('/feeds')}}" class="top-link-checkout" title="profile"><i class="fa fa-user" ></i> Profile</a></li>
+
+                                    <li class="signin"><a href="{{url('/logout')}}" class="top-link-checkout" title="sign out"><i class="fa fa-sign-out" ></i> Sign out</a></li>
 
                                 @else
                                     <li class="signin"><a href="{{url('/login')}}" class="top-link-checkout" title="login"><i class="fa fa-lock" ></i> Sign In</a></li>
@@ -172,7 +174,7 @@
                     <!-- Main Menu -->
                     <div class="phone-contact col-md-2  hidden-md hidden-sm hidden-xs">
                         <div class="inner-info">
-                            <strong>Call us Now:</strong><br>
+                            {{--<strong>Call us Now:</strong><br>--}}
                             {{--<span>Toll free:  0123-456-789</span>--}}
                         </div>
                     </div>

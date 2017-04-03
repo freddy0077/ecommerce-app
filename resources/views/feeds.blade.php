@@ -23,6 +23,7 @@
                 if(data.status == 401){
                     swal('Error','Password typed does not match your current password!','error');
                 }else {
+                    location.reload()
                     swal('Success','You have successfully changed your password !','success');
 
                 }
