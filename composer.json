@@ -9,6 +9,7 @@
         "ext-gd": "*",
         "cviebrock/eloquent-sluggable": "^4.1",
         "davejamesmiller/laravel-breadcrumbs": "^3.0.2",
+        "get-stream/stream": "^2.2",
         "get-stream/stream-laravel": "~2.2.6",
         "gloudemans/shoppingcart": "^2.3",
         "intervention/image": "^2.3",
@@ -16,11 +17,11 @@
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "lavary/laravel-menu": "^1.6",
         "leantony/laravel_modal": "dev-master",
         "pusher/pusher-php-server": "^2.6",
         "watson/bootstrap-form": "^1.1",
-        "webpatser/laravel-uuid": "^2.0",
-        "get-stream/stream": "^2.2"
+        "webpatser/laravel-uuid": "^2.0"
     },
 
 

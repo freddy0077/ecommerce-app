@@ -281,41 +281,43 @@
                                         <span id="remove-megamenu" class="fa fa-times"></span>
                                         <div class="megamenu-pattern">
                                             <div class="container">
-                                                <ul class="megamenu " data-transition="slide" data-animationtime="250">
-                                                    <li>
-                                                        <a href="{{url('/')}}">Home</a>
 
-                                                    </li>
+                                                {{--<ul class="megamenu " data-transition="slide" data-animationtime="250">--}}
+                                                    {!! $MyNavBar->asUl( array('class'=>"megamenu", 'data-transition'=>"slide", 'data-animationtime'=>"250")) !!}
+                                                    {{--<li>--}}
+                                                        {{--<a href="{{url('/')}}">Home</a>--}}
 
-                                                    <li class="">
-                                                        <p class="close-menu"></p>
-                                                        <a href="{{url('/category')}}" class="clearfix">
-                                                            <strong>ALL SHOPS</strong>
-                                                            <span class="label"></span>
-                                                        </a>
-                                                    </li>
+                                                    {{--</li>--}}
 
-                                                    @foreach(\App\ProductCategory::all('id','name') as $category)
+                                                    {{--<li class="">--}}
+                                                        {{--<p class="close-menu"></p>--}}
+                                                        {{--<a href="{{url('/')}}" class="clearfix">--}}
+                                                            {{--<strong>ALL SHOPS</strong>--}}
+                                                            {{--<span class="label"></span>--}}
+                                                        {{--</a>--}}
+                                                    {{--</li>--}}
 
-                                                        <li class="mainNav">
-                                                            <p class="close-menu"></p>
-                                                            <a href="{{url('/category',$category->id)}}" class="clearfix">
-                                                                <strong>{{$category->name}}</strong>
-                                                                <span class="label"></span>
-                                                            </a>
-                                                        </li>
+                                                    {{--@foreach(\App\ProductCategory::all('id','name') as $category)--}}
+
+                                                        {{--<li class="mainNav">--}}
+                                                            {{--<p class="close-menu"></p>--}}
+                                                            {{--<a href="{{url('/category',$category->id)}}" class="clearfix">--}}
+                                                                {{--<strong>{{$category->name}}</strong>--}}
+                                                                {{--<span class="label"></span>--}}
+                                                            {{--</a>--}}
+                                                        {{--</li>--}}
 
 
-                                                    @endforeach
+                                                    {{--@endforeach--}}
 
 
-                                                    <li class="">
-                                                        <p class="close-menu"></p>
-                                                        <a href="{{url('/category')}}" class="clearfix">
-                                                            <strong>BLOG</strong>
-                                                            <span class="label"></span>
-                                                        </a>
-                                                    </li>
+                                                    {{--<li class="">--}}
+                                                        {{--<p class="close-menu"></p>--}}
+                                                        {{--<a href="{{url('/category')}}" class="clearfix">--}}
+                                                            {{--<strong>BLOG</strong>--}}
+                                                            {{--<span class="label"></span>--}}
+                                                        {{--</a>--}}
+                                                    {{--</li>--}}
                                                     {{--<li class="">--}}
                                                     {{--<p class="close-menu"></p>--}}
                                                     {{--<a href="" class="clearfix">--}}
@@ -332,9 +334,9 @@
 
                                                     {{--</a>--}}
                                                     {{--</li>--}}
-                                                </ul>
+                                                {{--</ul>--}}
 
-                                            </div>
+                                            {{--</div>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -564,6 +566,8 @@
     $('.mainNav').on('click',function(){
         $(this).addClass('home');
     })
+
+    $('#header > div.header-bottom > div > div > div > div > nav > div > div.megamenu-wrapper > div > div > ul li').css('font-weight','bolder')
 
 </script>
 

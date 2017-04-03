@@ -22,6 +22,7 @@ use GetStream\StreamLaravel\Facades\FeedManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Lavary\Menu\Menu;
 use Webpatser\Uuid\Uuid;
 
 class HomeController extends Controller
@@ -43,6 +44,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
         $users = User::where('has_store',true)->get();
         $allProducts = collect();
 
@@ -102,8 +104,8 @@ class HomeController extends Controller
         $store = Store::whereUserId($user->id)->first();
 
         $builder = DB::table('watched_shops');
-//        $feeds = $builder->whereStoreId($store->id)->get();
-        $feeds = $builder->get();
+        $feeds = $builder->whereStoreId($store->id)->get();
+//        $feeds = $builder->get();
         $following = $builder->where('user_id',$user->id)->get();
 
 //        $stream = new StreamFeed($user->id);
@@ -118,6 +120,16 @@ class HomeController extends Controller
         }
 
         return view('feeds',compact('feeds','following','user'));
+    }
+
+    public function postSaveProfile(Request $request){
+        $user = Auth::user();
+        User::find($user->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number
+        ]);
+
     }
 
     public function getFetchFeeds(){

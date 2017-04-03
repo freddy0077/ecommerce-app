@@ -171,6 +171,7 @@ return [
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         GetStream\StreamLaravel\StreamLaravelServiceProvider::class,
+        Lavary\Menu\ServiceProvider::class,
 //        Vinkla\Pusher\PusherServiceProvider::class,
         /*
          * Package Service Providers...
@@ -243,6 +244,7 @@ return [
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'FeedManager'  => GetStream\StreamLaravel\Facades\FeedManager::class,
+        'Menu'       => Lavary\Menu\Facade::class,
 
     ],
 

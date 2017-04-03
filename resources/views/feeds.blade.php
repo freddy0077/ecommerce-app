@@ -5,6 +5,15 @@
 
 
     <script>
+
+        $('#profile-form').on('submit',function(e){
+            e.preventDefault();
+            $.post($(this).attr('action'),$(this).serialize(),function(){
+
+            }).success(function(){
+                swal('Success','You have successfully saved the settings !','success');
+            })
+        })
         Pusher.logToConsole = true;
 
 //        var pusher = new Pusher('b0fb81b15a4dfff2c4f4', {
@@ -12,33 +21,36 @@
 //            encrypted: true
 //        });
 
-        var pusher = new Pusher('d7c6fc127150c78d0f33', {
-            cluster: 'eu',
-            encrypted: true
-        });
+        {{--@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id == $user->id)--}}
+        {{--var pusher = new Pusher('d7c6fc127150c78d0f33', {--}}
+            {{--cluster: 'eu',--}}
+            {{--encrypted: true--}}
+        {{--});--}}
 
-        var channel = pusher.subscribe('chat-room.1');
-        channel.bind('App\\Events\\ChatMessageReceived', function(data) {
-//            alert(data.chatMessage.message);
-            setTimeout(function(){
-                alert('event reached');
-                $.get('/feeds',function(data){
-                    $('#feeds').html(data)
-                }).fail(function(){
-                    alert('error')
-                })
-            },5000);
+        {{--var channel = pusher.subscribe('chat-room.1');--}}
+        {{--channel.bind('App\\Events\\ChatMessageReceived', function(data) {--}}
+{{--//            alert(data.chatMessage.message);--}}
+            {{--setTimeout(function(){--}}
+                {{--alert('event reached');--}}
+                {{--$.get('/feeds',function(data){--}}
+                    {{--$('#feeds').html(data)--}}
+                {{--}).fail(function(){--}}
+                    {{--alert('error')--}}
+                {{--})--}}
+            {{--},5000);--}}
 
-            if(window.Notification && Notification.permission !== "denied") {
-                alert(data.chatMessage.message);
-                Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
-                    var n = new Notification('Shopaholicks', {
-                        body: data.chatMessage,
-                        icon: '{{url('frontend_2/image/logo.png')}}' // optional
-                    });
-                });
-            }
-        });
+            {{--if(window.Notification && Notification.permission !== "denied") {--}}
+                {{--alert(data.chatMessage.message);--}}
+                {{--Notification.requestPermission(function(status) {  // status is "granted", if accepted by user--}}
+                    {{--var n = new Notification('Shopaholicks', {--}}
+                        {{--body: data.chatMessage,--}}
+                        {{--icon: '{{url('frontend_2/image/logo.png')}}' // optional--}}
+                    {{--});--}}
+                {{--});--}}
+            {{--}--}}
+        {{--});--}}
+
+        {{--@endif--}}
 
 
     </script>
@@ -452,34 +464,36 @@
                                             <div class="col-md-9">
                                                 <div class="tab-content">
                                                     <div id="tab_1-1" class="tab-pane active">
-                                                        <form role="form" action="#">
+                                                        <form role="form" id="profile-form" action="{{url('save-profile')}}" method="post">
                                                             <div class="form-group">
                                                                 <label class="control-label">Name</label>
-                                                                <input type="text" placeholder="John" class="form-control" value="{{$user->name}}" /> </div>
+                                                                <input type="text" placeholder="John" class="form-control" name="name" value="{{$user->name}}" /> </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Email</label>
-                                                                <input type="text" placeholder="Doe" class="form-control" value="{{$user->email}}" /> </div>
+                                                                <input type="text" placeholder="Doe" class="form-control" name="email" value="{{$user->email}}" /> </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">Mobile Number</label>
-                                                                <input type="text" placeholder="Your phone number" class="form-control" value="{{$user->phone_number}}"/> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Gender</label>
-                                                                <input type="text" placeholder="gender" class="form-control" value="{{$user->gender}}" />
-                                                            </div>
+                                                                <input type="text" placeholder="Your phone number" class="form-control" name="phone_number" value="{{$user->phone_number}}"/> </div>
+                                                            {{--<div class="form-group">--}}
+                                                                {{--<label class="control-label">Gender</label>--}}
+                                                                {{--<input type="text" placeholder="gender" class="form-control" value="{{$user->gender}}" />--}}
+                                                            {{--</div>--}}
 
                                                             <div class="form-group">
                                                                 <label class="control-label">Registered</label>
                                                                 <input type="text" class="form-control" value="{{$user->created_at}}" readonly  />
                                                             </div>
+
                                                             <div class="margiv-top-10">
-                                                                <a href="javascript:;" class="btn green"> Save Changes </a>
+                                                                <button type="submit" href="javascript:;" class="btn green"> Save Changes </button>
                                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                                             </div>
                                                         </form>
                                                     </div>
                                                     <div id="tab_2-2" class="tab-pane">
-                                                        <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                                            eiusmod. </p>
+                                                        {{--<p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum--}}
+                                                            {{--eiusmod.--}}
+                                                        {{--</p>--}}
                                                         <form action="#" role="form">
                                                             <div class="form-group">
                                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -490,7 +504,7 @@
                                                                             <span class="btn default btn-file">
                                                                                 <span class="fileinput-new"> Select image </span>
                                                                                 <span class="fileinput-exists"> Change </span>
-                                                                                <input type="file" name="..."> </span>
+                                                                                <input type="file" name="image"> </span>
                                                                         <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
                                                                     </div>
                                                                 </div>

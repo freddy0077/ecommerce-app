@@ -13,7 +13,18 @@
 
 //Route::get('/', function () {
 //    return view('welcome');
-//});
+//}
+
+$menu = new \Lavary\Menu\Menu();
+
+$menu->make('MyNavBar', function($menu){
+    $menu->add('Home',array('url'=>''));
+
+    foreach(\App\ProductCategory::all('id','name') as $category){
+            $menu->add($category->name,array('url' => "category/$category->id"));
+    }
+        $menu->add('Blog',array('url'=>''));
+});
 
 Route::get('/try',function(){
     return \Webpatser\Uuid\Uuid::generate();
@@ -71,7 +82,6 @@ Route::get('/quick-view-product/{id}','HomeController@getQuickView');
 
 Route::get('/profile','HomeController@getProfile');
 
-Route::get('/feeds','HomeController@getFeeds');
 
 Route::get('/follow-user/{id}','HomeController@getFollowUser');
 
@@ -113,6 +123,13 @@ Route::group(['prefix' => 'stores'], function () {
     Route::get('/category/{slug}/{user_id}/{category_id}','StoreController@getStoreCategory');
 
     Route::get('/sub-category/{slug}/{user_id}/{category_id}','StoreController@getStoreSubCategory');
+
+});
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/feeds','HomeController@getFeeds');
+    Route::post('save-profile','HomeController@postSaveProfile');
 
 });
 
