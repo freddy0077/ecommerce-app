@@ -75,10 +75,10 @@
                     <!-- BEGIN PAGE TOOLBAR -->
                     <div class="page-toolbar">
                         <!-- BEGIN THEME PANEL -->
-                        <div class="btn-group btn-theme-panel">
-                            <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-settings"></i>
-                            </a>
+                        {{--<div class="btn-group btn-theme-panel">--}}
+                            {{--<a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">--}}
+                                {{--<i class="icon-settings"></i>--}}
+                            {{--</a>--}}
                             {{--<div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">--}}
                                 {{--<div class="row">--}}
                                     {{--<div class="col-md-6 col-sm-6 col-xs-12">--}}
@@ -481,8 +481,11 @@
 
                                                                 @if($user->gender == "male")
                                                                         <option value="female">female</option>
-                                                                        @else
+                                                                        @elseif($user->gender == "female")
                                                                         <option value="male">male</option>
+                                                                    @else
+                                                                        <option value="female">female</option>
+                                                                            <option value="male">male</option>
                                                                     @endif
                                                                 </select>
                                                                 {{--<input type="text" placeholder="gender" class="form-control" value="{{$user->gender}}" />--}}
