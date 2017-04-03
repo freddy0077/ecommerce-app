@@ -474,10 +474,17 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Mobile Number</label>
                                                                 <input type="text" placeholder="Your phone number" class="form-control" name="phone_number" value="{{$user->phone_number}}"/> </div>
-                                                            {{--<div class="form-group">--}}
-                                                                {{--<label class="control-label">Gender</label>--}}
+                                                            <div class="form-group">
+                                                                <label class="control-label">Gender</label>
+                                                                <select class="form-control" name="gender">
+                                                                    @if($user->gender == "male")
+                                                                        <option value="female">female</option>
+                                                                        @else
+                                                                        <option value="male">male</option>
+                                                                    @endif
+                                                                </select>
                                                                 {{--<input type="text" placeholder="gender" class="form-control" value="{{$user->gender}}" />--}}
-                                                            {{--</div>--}}
+                                                            </div>
 
                                                             <div class="form-group">
                                                                 <label class="control-label">Registered</label>

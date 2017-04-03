@@ -100,11 +100,16 @@ class HomeController extends Controller
 
     public function getFeeds(Request $request){
 
-         $user = Auth::user();
-        $store = Store::whereUserId($user->id)->first();
-
         $builder = DB::table('watched_shops');
-        $feeds = $builder->whereStoreId($store->id)->get();
+
+         $user = Auth::user();
+        if($user->has_store){
+            $store = Store::whereUserId($user->id)->first();
+            $feeds = $builder->whereStoreId($store->id)->get();
+        }else {
+            $feeds = collect();
+        }
+
 //        $feeds = $builder->get();
         $following = $builder->where('user_id',$user->id)->get();
 

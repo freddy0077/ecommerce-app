@@ -137,22 +137,35 @@
             <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
             <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
             <div class="hor-menu  ">
+                @if(!\Illuminate\Support\Facades\Auth::user()->has_store)
+                    <ul class="nav navbar-nav">
+
+                    <li class="menu-dropdown classic-menu-dropdown ">
+                        <a href="{{url('/')}}">Back Home
+                            <span class="arrow fa fa-arrow"></span>
+                        </a>
+                    </li>
+
+
+                    </ul>
+                    @else
+
                     <ul class="nav navbar-nav">
                         @if(\Illuminate\Support\Facades\Auth::user()->admin)
-                        <li class="menu-dropdown classic-menu-dropdown ">
-                            <a href="{{url('/admin/dashboard')}}"> Admin Dashboard
-                                <span class="arrow"></span>
-                            </a>
-                        </li>
-                        @endif
                             <li class="menu-dropdown classic-menu-dropdown ">
-                                <a href="{{url('/store/dashboard')}}"> Dashboard
+                                <a href="{{url('/admin/dashboard')}}"> Admin Dashboard
                                     <span class="arrow"></span>
                                 </a>
-
-
                             </li>
-                            <li class="menu-dropdown mega-menu-dropdown  ">
+                        @endif
+                        <li class="menu-dropdown classic-menu-dropdown ">
+                            <a href="{{url('/store/dashboard')}}"> Dashboard
+                                <span class="arrow"></span>
+                            </a>
+
+
+                        </li>
+                        <li class="menu-dropdown mega-menu-dropdown  ">
                             <a href="{{url('store/orders')}}"> Orders
                                 <span class="arrow"></span>
                             </a>
@@ -203,11 +216,11 @@
 
                                 ?>
                                 <a href='{{url("stores/$store/$user_id")}}'> My Shop
-                                <span class="arrow"></span>
+                                    <span class="arrow"></span>
                                 </a>
 
                                 {{--<a href="https://{{$store}}.shopaholicks.com/shop"> My Shop--}}
-                                    {{--<span class="arrow"></span>--}}
+                                {{--<span class="arrow"></span>--}}
                                 {{--</a>--}}
 
 
@@ -222,7 +235,7 @@
                         {{--</a>--}}
                         {{--</li>--}}
                     </ul>
-
+                @endif
 
             </div>
             <!-- END MEGA MENU -->
