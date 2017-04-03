@@ -132,6 +132,7 @@ class HomeController extends Controller
         User::find($user->id)->update([
             'name' => $request->name,
             'email' => $request->email,
+            'gender' => $request->gender,
             'phone_number' => $request->phone_number
         ]);
 

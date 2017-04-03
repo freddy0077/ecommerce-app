@@ -477,7 +477,9 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Gender</label>
                                                                 <select class="form-control" name="gender">
-                                                                    @if($user->gender == "male")
+                                                                    <option value="{{$user->gender}}">{{$user->gender}}</option>
+
+                                                                @if($user->gender == "male")
                                                                         <option value="female">female</option>
                                                                         @else
                                                                         <option value="male">male</option>
