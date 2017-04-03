@@ -22,6 +22,7 @@ use GetStream\StreamLaravel\Facades\FeedManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Lavary\Menu\Menu;
 use Webpatser\Uuid\Uuid;
 
@@ -135,6 +136,24 @@ class HomeController extends Controller
             'gender' => $request->gender,
             'phone_number' => $request->phone_number
         ]);
+    }
+
+    public function postChangePassword(Request $request)
+    {
+        if (Hash::check($request->password, Auth::user()->getAuthPassword())) {
+            // The passwords match...
+            $request->user()->fill([
+            'password' => Hash::make($request->new_password)
+        ])->save();
+
+            return ['status' => 200,'message' => 'success'];
+
+        } else{
+            return ['status' => 401,'message' => 'fail'];
+
+
+        }
+//
 
     }
 

@@ -13,6 +13,20 @@
             }).success(function(){
                 swal('Success','You have successfully saved the settings !','success');
             })
+        });
+
+        $('#change-password-form').on('submit',function(e){
+            e.preventDefault();
+            $.post($(this).attr('action'),$(this).serialize(),function(data){
+
+            }).success(function(data){
+                if(data.status == 401){
+                    swal('Error','Password typed does not match your current password!','error');
+                }else {
+                    swal('Success','You have successfully changed your password !','success');
+
+                }
+            })
         })
         Pusher.logToConsole = true;
 
@@ -447,10 +461,10 @@
                                                             <i class="fa fa-cog"></i> Personal info </a>
                                                         <span class="after"> </span>
                                                     </li>
-                                                    <li>
-                                                        <a data-toggle="tab" href="#tab_2-2">
-                                                            <i class="fa fa-picture-o"></i> Change Avatar </a>
-                                                    </li>
+                                                    {{--<li>--}}
+                                                        {{--<a data-toggle="tab" href="#tab_2-2">--}}
+                                                            {{--<i class="fa fa-picture-o"></i> Change Avatar </a>--}}
+                                                    {{--</li>--}}
                                                     <li>
                                                         <a data-toggle="tab" href="#tab_3-3">
                                                             <i class="fa fa-lock"></i> Change Password </a>
@@ -532,18 +546,19 @@
                                                         </form>
                                                     </div>
                                                     <div id="tab_3-3" class="tab-pane">
-                                                        <form action="#">
+                                                        <form action="{{url('/change-password')}}" id="change-password-form">
                                                             <div class="form-group">
                                                                 <label class="control-label">Current Password</label>
-                                                                <input type="password" class="form-control" /> </div>
+                                                                <input type="password" class="form-control" name="password" required /> </div>
                                                             <div class="form-group">
                                                                 <label class="control-label">New Password</label>
-                                                                <input type="password" class="form-control" /> </div>
-                                                            <div class="form-group">
-                                                                <label class="control-label">Re-type New Password</label>
-                                                                <input type="password" class="form-control" /> </div>
+                                                                <input type="password" class="form-control" name="new_password" required /> </div>
+                                                            {{--<div class="form-group">--}}
+                                                                {{--<label class="control-label">Re-type New Password</label>--}}
+                                                                {{--<input type="password" class="form-control" />--}}
+                                                            {{--</div>--}}
                                                             <div class="margin-top-10">
-                                                                <a href="javascript:;" class="btn green"> Change Password </a>
+                                                                <button type="submit" class="btn green"> Change Password </button>
                                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                                             </div>
                                                         </form>

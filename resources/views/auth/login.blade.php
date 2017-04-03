@@ -569,7 +569,7 @@
                                 <input type="text" name="email" placeholder="Email" required=""/>
                                 <input type="Password" name="password" placeholder="Password" required=""/>
                                 <span class="help-block"></span>
-                                <input type="submit" class="btn" value="Log in">
+                                <input type="submit" class="btn btn-login" value="Log in">
                             </form>
                         </div>
                     </div>
@@ -666,9 +666,11 @@
                 $('.help-block').text(data.responseJSON[field][0]);
             }
         }).success(function(data){
+            $('.btn-login').val('please wait !').attr('disabled',true)
             location.href="/home";
         })
     })
+
 
    $('#store').on('click',function(){
 //       alert($('#store:checked').val())

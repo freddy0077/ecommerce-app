@@ -15,6 +15,20 @@
 //    return view('welcome');
 //}
 
+Route::get('/password',function(){
+
+//  \Illuminate\Support\Facades\Auth::user()->getAuthPassword();
+
+    if (\Illuminate\Support\Facades\Hash::check('topman88', \Illuminate\Support\Facades\Auth::user()->getAuthPassword())) {
+        // The passwords match...
+         var_dump(true);
+    } else{
+        var_dump(false);
+
+    }
+});
+
+
 $menu = new \Lavary\Menu\Menu();
 
 $menu->make('MyNavBar', function($menu){
@@ -130,6 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/feeds','HomeController@getFeeds');
     Route::post('save-profile','HomeController@postSaveProfile');
+    Route::post('change-password','HomeController@postChangePassword');
 
 });
 
