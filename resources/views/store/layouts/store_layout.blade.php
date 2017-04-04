@@ -114,20 +114,28 @@
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 <li class="account" id="my_account">
-                                    @if(\Illuminate\Support\Facades\Auth::check() &&  \App\User::find($user_id)->has_store)
+
+                                    @if(\Illuminate\Support\Facades\Auth::check() && $myStore = \App\Store::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->first())
+                                        @if($myStore->id == $store->id )
                                     <a href="{{url('/store/dashboard')}}" title="My Dashboard" class="btn btn-xs ">
                                         <span>My Dashboard</span> <span class="fa fa-angle-down"></span></a>
+                                            @else
+                                            <a href="{{url('/store/dashboard')}}" title="My Profile" class="btn btn-xs ">
+                                                <span>My Profile</span> <span class="fa fa-angle-down"></span></a>
+                                            @endif
                                         @else
-                                        <a href="#" title="My Account" class="btn btn-xs dropdown-toggle" data-toggle="dropdown">
-                                            <span>My Account</span> <span class="fa fa-angle-down"></span></a>
+                                        <a href="{{url('/feeds')}}" title="My Profile" class="btn btn-xs ">
+                                            <span>My Profile</span> <span class="fa fa-angle-down"></span></a>
 
                                     @endif
+
                                     {{--<ul class="dropdown-menu ">--}}
                                     {{--<li><a href="register.html"><i class="fa fa-user"></i> Register</a></li>--}}
                                     {{--<li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>--}}
                                     {{--</ul>--}}
                                 </li>
-                                <li class="wishlist"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Wish List (2)"><span>Wish List (2)</span></a></li>
+                                <li class="wishlist"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Fancies"><span>Fancies</span></a></li>
+                                
                                 <li class="checkout"><a href="{{url('/store/checkout',$user_id)}}" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
                                 <li class="login"><a href="{{url('/store/checkout',$user_id)}}" title="Shopping Cart"><span >Shopping Cart</span></a></li>
                             </ul>
