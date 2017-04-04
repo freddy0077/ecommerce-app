@@ -231,17 +231,19 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p class="text-right hidden-sm hidden-xs">
+                                        <p class="text-right">
                                             <a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}">
                                                 <i class="fa fa-shopping-cart"></i>View Cart
                                             </a>&nbsp;&nbsp;&nbsp;
-                                            <a class="btn  checkout-cart" href="{{url('store/checkout',$user_id)}}"><i class="fa fa-share"></i>
+                                            <a class="btn  checkout-cart" id="check-out-redirect" data-checkout-id="{{$user_id}}"
+                                               {{--href="{{url('store/checkout',$user_id)}}"--}}
+                                            ><i class="fa fa-share"></i>
                                                 Checkout
                                             </a>
                                         </p>
 
-                                        <p class="text-right hidden-md hidden-lg">
-                                            <a href="{{url('')}}">View Checkout <i class="fa fa-shopping-cart"></i></a>
+                                        {{--<p class="text-right hidden-md hidden-lg">--}}
+                                            {{--<a href="{{url('')}}">View Checkout <i class="fa fa-shopping-cart"></i></a>--}}
                                             {{--<a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}">--}}
                                                 {{--<i class="fa fa-shopping-cart"></i>--}}
                                                 {{--View Cart--}}
@@ -250,7 +252,7 @@
                                                 {{--<i class="fa fa-share"></i>--}}
                                                 {{--Checkout--}}
                                             {{--</a>--}}
-                                        </p>
+                                        {{--</p>--}}
                                     </div>
                                 </li>
                             </ul>
@@ -417,6 +419,9 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/application.js')}}"></script>
 <script type="text/javascript">
 
+    $('#check-out-redirect').on('click',function(){
+        location.reload();
+    })
     $('.qty').on('change',function(){
         alert($(this).val())
 
