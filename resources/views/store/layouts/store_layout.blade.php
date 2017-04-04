@@ -174,7 +174,7 @@
                             <a data-loading-text="Loading..." class="top_cart dropdown-toggle" data-toggle="dropdown">
                                 <div class="shopcart">
                                     <span class="handle pull-left"></span>
-                                    <span class="title">My cart</span>
+                                    <span class="title"><a href="{{url('store/checkout',$user_id)}}">My cart</a></span>
                                     <p class="text-shopping-cart cart-total-full">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}} item(s) - GHS {{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}} </p>
                                 </div>
                             </a>
@@ -236,8 +236,8 @@
                                                 <i class="fa fa-shopping-cart"></i>View Cart
                                             </a>&nbsp;&nbsp;&nbsp;
                                             <a class="btn  checkout-cart" id="check-out-redirect" data-checkout-id="{{$user_id}}"
-                                               href="{{url('store/checkout',$user_id)}}"
-                                            ><i class="fa fa-share"></i>
+                                               href="{{url('store/checkout',$user_id)}}">
+                                                <i class="fa fa-share"></i>
                                                 Checkout
                                             </a>
                                         </p>
