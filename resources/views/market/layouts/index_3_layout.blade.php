@@ -110,9 +110,19 @@
                                         {{--<a href="{{url('store/dashboard')}}" title="My Account" class="btn btn-xs dropdown-toggle" > <i class="fa fa-user" ></i> My Account </a>--}}
                                     {{--</li>--}}
 
+
                                     <li class="account" id="my_account">
                                         <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>Store Settings </a>
                                     </li>
+
+                                @else
+
+
+                                    <li class="account" id="my_account">
+                                        <a  title="store settings" class="btn btn-xs dropdown-toggle" data-toggle="modal" id="create-shop" ><i class="fa fa-shopping-cart" aria-hidden="true"></i>Create a shop </a>
+                                    </li>
+
+
                                 @endif
                                 {{--<li class="checkout"><a href='{{url("/checkout")}}' class="top-link-checkout" title="Checkout"><i class="fa fa-check-square-o" ></i> Checkout</a></li>--}}
                                 @if(Auth::check())
@@ -123,7 +133,7 @@
                                     <li class="signin"><a href="{{url('/logout')}}" class="top-link-checkout" title="sign out"><i class="fa fa-sign-out" ></i> Sign out</a></li>
 
                                 @else
-                                    <li class="signin"><a href="{{url('/login')}}" class="top-link-checkout" title="login"><i class="fa fa-lock" ></i> Sign In</a></li>
+                                    <li class="signin"><a href="{{url('/login')}}" class="top-link-checkout" title="login"><i class="fa fa-lock" ></i> Sign In or Register</a></li>
                                 @endif
 
                             </ul>
@@ -526,6 +536,94 @@
 
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="create-shop-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create New Shop</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="{{url('add-new-shop')}}" method="post" id="add-new-shop">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name of shop">
+                            <span class="help-block text-danger"></span>
+                            <span class="validation-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number" class="col-sm-3 control-label">Domain</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="domain" name="domain" placeholder="Domain" readonly>
+                            <span class="help-block text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number" class="col-sm-3 control-label">Phone Number</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number" required>
+                            <span class="help-block text-danger"></span>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone_number" class="col-sm-3 control-label">City</label>
+                        <div class="col-sm-9">
+                           <select class="form-control" name="city" required>
+                               <option>Select city</option>
+                               <option>Accra</option>
+                               <option>Kumasi</option>
+                               <option>Koforidua</option>
+                               <option>Takoradi</option>
+                               <option>Capecoast</option>
+                               <option>Ho</option>
+                               <option>Sunyani</option>
+                               <option>Tamale</option>
+                               <option>Wa</option>
+                               <option>Bolgatanga</option>
+                           </select>
+                        </div>
+                        <span class="help-block"></span>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                            <span class="help-block text-danger"></span>
+
+
+                        </div>
+                    </div>
+                    {{--<div class="form-group">--}}
+                        {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                            {{--<div class="checkbox">--}}
+                                {{--<label>--}}
+                                    {{--<input type="checkbox"> Remember me--}}
+                                {{--</label>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Create shop</button>
+                    </div>
+
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <link rel='stylesheet' property='stylesheet'  href='{{asset('frontend_2/css/themecss/cpanel.css')}}' type='text/css' media='all' />
 <!-- Include Libs & Plugins
@@ -569,7 +667,41 @@
         $(this).addClass('home');
     })
 
+    $('#create-shop').on('click',function(){
+        $('#create-shop-modal').modal()
+    })
+
     $('#header > div.header-bottom > div > div > div > div > nav > div > div.megamenu-wrapper > div > div > ul li').css('font-weight','bolder')
+
+    $('#name').on('change',function(){
+        var str = $(this).val();
+        str = str.replace(/\s+/g, '-').toLowerCase();
+        $('#domain').val(str+'.shopaholicks.com/shop')
+    })
+
+
+    $('#add-new-shop').on('submit',function(e){
+        e.preventDefault();
+
+        $.post($(this).attr('action'),$(this).serialize(),function(){
+
+        }).success(function(){
+            location.href="/store/store-settings";
+
+        }).fail(function(data){
+            for (var field in data.responseJSON) {
+                var el = $(':input[name="' + field + '"]');
+                el.parent('.form-group').addClass('has-error');
+                el.next('.help-block').text(data.responseJSON[field][0]);
+                el.next('.validation_error').text(data.responseJSON[field][0]);
+//                swal("Error!", data.responseJSON[field][0], "error");
+
+            }
+        })
+
+
+    })
+
 
 </script>
 

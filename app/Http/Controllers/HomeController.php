@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChatMessageReceived;
 use App\Fancy;
+use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UserRequest;
 use App\Like;
 use App\MarketplaceSignup;
@@ -377,6 +378,31 @@ class HomeController extends Controller
         $user = User::find($user_id->id);
 
         Auth::login($user_id);
+
+    }
+
+    public function getCheckName(StoreRequest $request){
+        return $request;
+
+
+    }
+
+    public function postAddNewShop(StoreRequest $request){
+        $user_id = Auth::user()->id;
+        Store::create([
+            'id' => Uuid::generate(),
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+            'email'  => $request->email,
+            'domain' => $request->domain,
+            'city'   => $request->city,
+            'user_id' => $user_id
+        ]);
+
+
+        User::find($user_id)->update([
+            'has_store' => true
+        ]);
 
     }
 }

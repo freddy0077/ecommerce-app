@@ -22,6 +22,7 @@ class VerifyCsrfToken extends BaseVerifier
         'save-profile',
         '/login',
         'change-password',
+        'add-new-shop',
         '/watch-shop/*/*',
         'store/add-store',
         '/store/store-settings',

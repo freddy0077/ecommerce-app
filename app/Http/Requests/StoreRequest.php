@@ -25,8 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name'=> 'required|unique:stores',
-            'address' => 'required',
-            'domain' => 'required',
+            'domain' => 'required|unique:stores',
             'city' => 'required'
             //
         ];

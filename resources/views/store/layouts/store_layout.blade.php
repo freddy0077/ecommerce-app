@@ -62,6 +62,9 @@
             min-height: 45px;
             margin-bottom: 15px;
         }
+        ul.megamenu > li:first-child{
+            margin-left: 100px;
+        }
         @media (max-width: 991px){
             ul.megamenu > li > a {
                 display: block;
@@ -135,7 +138,7 @@
                                     {{--</ul>--}}
                                 </li>
                                 <li class="wishlist"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Fancies"><span>Fancies</span></a></li>
-                                
+
                                 <li class="checkout"><a href="{{url('/store/checkout',$user_id)}}" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
                                 <li class="login"><a href="{{url('/store/checkout',$user_id)}}" title="Shopping Cart"><span >Shopping Cart</span></a></li>
                             </ul>
@@ -230,10 +233,13 @@
                                         </tbody>
                                     </table>
                                 </li>
+                                @if(\Gloudemans\Shoppingcart\Facades\Cart::count() == 0)
+                                    @else
                                 <li>
                                     <div>
                                         <table class="table table-bordered">
                                             <tbody>
+
                                             <tr>
                                                 <td class="text-left"><strong>Sub-Total</strong>
                                                 </td>
@@ -276,6 +282,7 @@
                                         {{--</p>--}}
                                     </div>
                                 </li>
+                                    @endif
                             </ul>
                         </div>
                         <!--//cart-->

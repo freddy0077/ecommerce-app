@@ -13,8 +13,11 @@
             $('#name').on('change',function(){
                 var str = $(this).val();
                 str = str.replace(/\s+/g, '-').toLowerCase();
-                $('#domain').val(str+'.shopaholicks.com')
-            })
+                $('#domain').val(str+'.shopaholicks.com/shop')
+            });
+
+
+
 //        })
 
 

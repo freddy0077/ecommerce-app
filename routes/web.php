@@ -138,6 +138,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('save-profile','HomeController@postSaveProfile');
     Route::post('change-password','HomeController@postChangePassword');
 
+    Route::post('/add-new-shop','HomeController@postAddNewShop');
+
+    Route::get('/check-name','HomeController@getCheckName');
+
 });
 
 Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
