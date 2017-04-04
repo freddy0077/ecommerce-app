@@ -62,17 +62,19 @@
             min-height: 45px;
             margin-bottom: 15px;
         }
-
-        ul.megamenu > li > a {
-            display: block;
-            position: relative;
-            /* color: #fff; */
-            font-size: 14px;
-            padding: 15px 18px;
-            color: black !important;
+        @media (max-width: 991px){
+            ul.megamenu > li > a {
+                display: block;
+                position: relative;
+                /* color: #fff; */
+                font-size: 14px;
+                padding: 15px 18px;
+                color: black !important;
+            }
         }
+
     </style>
-    
+
 </head>
 
 <body class="res layout-subpage banners-effect-6">
