@@ -236,7 +236,7 @@
                                                 <i class="fa fa-shopping-cart"></i>View Cart
                                             </a>&nbsp;&nbsp;&nbsp;
                                             <a class="btn  checkout-cart" id="check-out-redirect" data-checkout-id="{{$user_id}}"
-                                               {{--href="{{url('store/checkout',$user_id)}}"--}}
+                                               href="{{url('store/checkout',$user_id)}}"
                                             ><i class="fa fa-share"></i>
                                                 Checkout
                                             </a>
@@ -418,6 +418,12 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/addtocart.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend_2/js/themejs/application.js')}}"></script>
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#check-out-redirect").on("touchstart", function(event) {
+            window.location.href = $(event.target).attr('href');
+        });
+    })
 
     $('#check-out-redirect').on('click',function(){
         location.reload();
