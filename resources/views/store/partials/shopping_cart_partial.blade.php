@@ -69,7 +69,11 @@
         <div class="shopcart">
             <span class="handle pull-left"></span>
             <span class="title"><a href="{{url('store/checkout',$user_id)}}">My cart</a></span>
-            <p class="text-shopping-cart cart-total-full">{{\Gloudemans\Shoppingcart\Facades\Cart::count()}} item(s) - GHS {{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}} </p>
+            <p class="text-shopping-cart cart-total-full">
+                <a href="{{url('store/checkout',$user_id)}}">
+                    {{\Gloudemans\Shoppingcart\Facades\Cart::count()}} item(s) - GHS {{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}
+                </a>
+            </p>
         </div>
     </a>
 
@@ -151,6 +155,7 @@
         </li>
     </ul>
 </div>
+
 <!--//cart-->
 
 <div id="cart" class=" btn-group btn-shopping-cart hidden-sm hidden-xs">
