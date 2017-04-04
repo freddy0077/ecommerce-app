@@ -115,8 +115,7 @@
                                         <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>Store Settings </a>
                                     </li>
 
-                                @else
-
+                                @elseif(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->has_store == false)
 
                                     <li class="account" id="my_account">
                                         <a  title="store settings" class="btn btn-xs dropdown-toggle" data-toggle="modal" id="create-shop" ><i class="fa fa-shopping-cart" aria-hidden="true"></i>Create a shop </a>
