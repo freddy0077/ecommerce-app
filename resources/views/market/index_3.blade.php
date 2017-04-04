@@ -164,21 +164,18 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="button-group">
                                                 @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
 
                                                     <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
                                                         <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
                                                     </button>
-                                                    @else
+                                                @else
                                                     <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
                                                         <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
                                                     </button>
 
                                                 @endif
-
-
 
                                                 <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
                                                     @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
@@ -190,7 +187,7 @@
 
                                                 @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
                                                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}" style="color: green;"></i>
                                                         <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
                                                     </button>
                                                 @else
@@ -208,6 +205,7 @@
                                                 {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
 
                                             </div>
+
                                         </div><!-- right block -->
                                     </div>
                                 </div>
@@ -246,13 +244,13 @@
                                                 <div class="ratings">
                                                     <span>Listed in <a href='{{url("stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a></span>
 
-                                                    <div class="rating-box">
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                    </div>
+                                                    {{--<div class="rating-box">--}}
+                                                        {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                        {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                        {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                        {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                        {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                    {{--</div>--}}
                                                 </div>
                                                 <div class="price">
                                                     @if($product->sale)
@@ -290,7 +288,7 @@
 
                                                 @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
                                                     <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}" style="color: green;"></i>
                                                         <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
                                                     </button>
                                                 @else

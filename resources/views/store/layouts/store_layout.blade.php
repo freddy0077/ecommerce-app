@@ -62,10 +62,17 @@
             min-height: 45px;
             margin-bottom: 15px;
         }
+
+        ul.megamenu > li > a {
+            display: block;
+            position: relative;
+            /* color: #fff; */
+            font-size: 14px;
+            padding: 15px 18px;
+            color: black !important;
+        }
     </style>
-
-
-
+    
 </head>
 
 <body class="res layout-subpage banners-effect-6">
@@ -146,7 +153,7 @@
 
                     <!-- Search -->
                     <div id="sosearchpro" class="col-sm-7 search-pro">
-                        <form method="GET" action="http://demo.smartaddons.com/templates/html/market/index.html">
+                        <form method="GET" action="#">
                             <div id="search0" class="search input-group">
                                 <div class="select_category filter_type icon-select">
                                     <select class="no-border" name="category_id">
@@ -364,41 +371,41 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="sidebar-menu col-md-3 col-sm-6 col-xs-12 ">
-                        <div class="responsive so-megamenu ">
-                            <div class="so-vertical-menu no-gutter compact-hidden">
-                                <nav class="navbar-default">
+                    {{--<div class="sidebar-menu col-md-3 col-sm-6 col-xs-12 ">--}}
+                        {{--<div class="responsive so-megamenu ">--}}
+                            {{--<div class="so-vertical-menu no-gutter compact-hidden">--}}
+                                {{--<nav class="navbar-default">--}}
 
-                                    <div class="container-megamenu vertical  ">
+                                    {{--<div class="container-megamenu vertical  ">--}}
 
-                                        <div id="menuHeading">
-                                            <div class="megamenuToogle-wrapper">
-                                                <div class="megamenuToogle-pattern">
-                                                    <div class="container">
-                                                        <div>
-                                                            <span></span>
-                                                            <span></span>
-                                                            <span></span>
-                                                        </div>
-                                                        MarketPlace
-                                                        <i class="fa pull-right arrow-circle fa-chevron-circle-up"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="navbar-header">
-                                            <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle fa fa-list-alt">
+                                        {{--<div id="menuHeading">--}}
+                                            {{--<div class="megamenuToogle-wrapper">--}}
+                                                {{--<div class="megamenuToogle-pattern">--}}
+                                                    {{--<div class="container">--}}
+                                                        {{--<div>--}}
+                                                            {{--<span></span>--}}
+                                                            {{--<span></span>--}}
+                                                            {{--<span></span>--}}
+                                                        {{--</div>--}}
+                                                        {{--MarketPlace--}}
+                                                        {{--<i class="fa pull-right arrow-circle fa-chevron-circle-up"></i>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="navbar-header">--}}
+                                            {{--<button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle fa fa-list-alt">--}}
 
 
-                                        </div>
-                                </nav>
-                            </div>
-                        </div>
+                                        {{--</div>--}}
+                                {{--</nav>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                    </div>
+                    {{--</div>--}}
 
                     <!-- Main menu -->
-                    <div class="megamenu-hori header-bottom-right  col-md-9 col-sm-6 col-xs-12 ">
+                    <div class="megamenu-hori header-bottom-right  col-md-10 col-sm-6 col-xs-12">
                         <div class="responsive so-megamenu ">
                             <nav class="navbar-default">
                                 <div class=" container-megamenu  horizontal">
@@ -416,7 +423,7 @@
                                         <span id="remove-megamenu" class="fa fa-times"></span>
                                         <div class="megamenu-pattern">
                                             <div class="container">
-                                                <ul class="megamenu " data-transition="slide" data-animationtime="250">
+                                                <ul class="megamenu hidden-sm hidden-xs" data-transition="slide" data-animationtime="250">
                                                     <li class="home">
 
                                                         <a href='{{url("stores/$slug/$user_id")}}'>Home</a>
@@ -424,7 +431,22 @@
 
                                                     @foreach($categories as $category)
                                                         <li class="{{$category->name}}">
-                                                            <a href='#'>{{$category->name}} </a>
+                                                            <a href='{{url("stores/category/$slug/$user_id/$category->id")}}'>{{$category->name}} </a>
+                                                        </li>
+
+                                                    @endforeach
+
+                                                </ul>
+
+                                                <ul class="megamenu hidden-md hidden-lg" data-transition="slide" data-animationtime="250">
+                                                    <li class="home">
+
+                                                        <a href='{{url("stores/$slug/$user_id")}}'>Home</a>
+                                                    </li>
+
+                                                    @foreach($categories as $category)
+                                                        <li class="{{$category->name}}">
+                                                            <a href='{{url("stores/category/$slug/$user_id/$category->id")}}'>{{$category->name}} </a>
                                                         </li>
 
                                                     @endforeach

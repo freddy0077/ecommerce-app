@@ -252,7 +252,7 @@ class HomeController extends Controller
 
             $user = Auth::user();
 
-            event(new ChatMessageReceived("$user->name just liked a product",$user));
+//            event(new ChatMessageReceived("$user->name just liked a product",$user));
 
             return ['message' => 'You just liked a product', 'status' => 200, 'likes' => $product->like_counts];
         }
@@ -298,18 +298,18 @@ class HomeController extends Controller
 
     public function postWatchShop($product_id,$store_id,$user_id)
     {
-        if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
-            $user = Auth::user();
+            if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
+                $user = Auth::user();
 
-            WatchedShop::create([
-                'id' => Uuid::generate(),
-                'product_id' => $product_id,
-                'store_id' => $store_id,
-                'user_id' => $user->id,
-                'action' => "$user->name just followed your shop"
-            ]);
-            $store_builder = Store::find($store_id);
-            $builder = Product::find($product_id);
+                WatchedShop::create([
+                    'id' => Uuid::generate(),
+                    'product_id' => $product_id,
+                    'store_id' => $store_id,
+                    'user_id' => $user->id,
+                    'action' => "$user->name just followed your shop"
+                ]);
+                $store_builder = Store::find($store_id);
+                $builder = Product::find($product_id);
 
 //            $stream = new StreamFeed($user->id);
 //            $stream->addActivity('You', 'just followed', $store_builder->name,$user->id);
@@ -317,29 +317,29 @@ class HomeController extends Controller
 
 //            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
 
-            event(new ChatMessageReceived("you just followed $store_builder->name", $user));
+//            event(new ChatMessageReceived("you just followed $store_builder->name", $user));
 
-            return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
+                return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
-        } elseif (Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id  == $store_id) {
-            return ['status' => 403, 'message' => 'You can not follow your shop'];
+            } elseif (Auth::check() && Store::whereUserId(Auth::user()->id)->first()->id == $store_id) {
+                return ['status' => 403, 'message' => 'You can not follow your shop'];
 
-        } elseif (Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()) {
+            } elseif (Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->first()) {
 
-            $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
+                $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
 
 //            $product = Product::find($product_id);
-            if($watchedshop_exists){
-                $watchedshop_exists->delete();
-            }
+                if ($watchedshop_exists) {
+                    $watchedshop_exists->delete();
+                }
 
-            return ['message' => "You just unfollwed a shop",'status' => 404];
+                return ['message' => "You just unfollowed a shop", 'status' => 404];
 
 //            return ['status' => 404, 'message' => 'You are already following this shop !'];
-        } else {
+            } else {
 
-            return ['status' => 401, 'message' => 'Log in to watch a shop'];
-        }
+                return ['status' => 401, 'message' => 'Log in to watch a shop'];
+            }
     }
 
         public function getFollowUser($id){

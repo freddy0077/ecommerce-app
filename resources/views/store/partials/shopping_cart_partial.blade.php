@@ -69,11 +69,11 @@
         <div class="shopcart">
             <span class="handle pull-left"></span>
             <span class="title"><a href="{{url('store/checkout',$user_id)}}">My cart</a></span>
+            <a href="{{url('store/checkout',$user_id)}}">
             <p class="text-shopping-cart cart-total-full">
-                <a href="{{url('store/checkout',$user_id)}}">
                     {{\Gloudemans\Shoppingcart\Facades\Cart::count()}} item(s) - GHS {{\Gloudemans\Shoppingcart\Facades\Cart::subtotal()}}
-                </a>
             </p>
+            </a>
         </div>
     </a>
 
