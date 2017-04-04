@@ -57,11 +57,12 @@
                     'success');
                 $('.like-counts-'+product_id).text(data.likes);
                 if(data.status == 200){
-                    $('.like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
-                    $('.like-toggle-'+product_id).addClass('fa fa-thumbs-down')
+                    //$('.like-toggle-'+product_id).removeClass('fa fa-thumbs-up')
+                    //$('.like-toggle-'+product_id).addClass('fa fa-thumbs-down')
+                    $('.like-toggle-'+product_id).css('color','green')
                 }else if(data.status == 401){
-                    $('.like-toggle-'+product_id).removeClass('fa fa-thumbs-down')
-                    $('.like-toggle-'+product_id).addClass('fa fa-thumbs-up')
+                    $('.like-toggle-'+product_id).css('color','')
+                    //$('.like-toggle-'+product_id).addClass('fa fa-thumbs-up')
                     $('.like-counts-'+product_id).text(data.likes);
                 }
             });
