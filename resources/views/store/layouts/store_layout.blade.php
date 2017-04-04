@@ -150,17 +150,10 @@
                             <div id="search0" class="search input-group">
                                 <div class="select_category filter_type icon-select">
                                     <select class="no-border" name="category_id">
-                                        <option value="0">All Categories</option>
-                                        <option value="78">Apparel</option>
-                                        <option value="77">Cables &amp; Connectors</option>
-                                        <option value="82">Cameras &amp; Photo</option>
-                                        <option value="80">Flashlights &amp; Lamps</option>
-                                        <option value="81">Mobile Accessories</option>
-                                        <option value="79">Video Games</option>
-                                        <option value="20">Jewelry &amp; Watches</option>
-                                        <option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earings</option>
-                                        <option value="26">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wedding Rings</option>
-                                        <option value="27">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Men Watches</option>
+                                        <option>Select category</option>
+                                        @foreach($categories as $category)
+                                                <option value="{{$category->name}}">{{$category->name}} </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -238,8 +231,25 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <p class="text-right"> <a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp;
-                                            <a class="btn  checkout-cart" href="{{url('store/checkout',$user_id)}}"><i class="fa fa-share"></i>Checkout</a>
+                                        <p class="text-right hidden-sm hidden-xs">
+                                            <a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}">
+                                                <i class="fa fa-shopping-cart"></i>View Cart
+                                            </a>&nbsp;&nbsp;&nbsp;
+                                            <a class="btn  checkout-cart" href="{{url('store/checkout',$user_id)}}"><i class="fa fa-share"></i>
+                                                Checkout
+                                            </a>
+                                        </p>
+
+                                        <p class="text-right hidden-md hidden-lg">
+                                            <a href="{{url('')}}">View Checkout <i class="fa fa-shopping-cart"></i></a>
+                                            {{--<a class="btn view-cart" href="{{url('/store/checkout',$user_id)}}">--}}
+                                                {{--<i class="fa fa-shopping-cart"></i>--}}
+                                                {{--View Cart--}}
+                                            {{--</a>&nbsp;&nbsp;&nbsp;--}}
+                                            {{--<a class="btn  checkout-cart" href="{{url('store/checkout',$user_id)}}">--}}
+                                                {{--<i class="fa fa-share"></i>--}}
+                                                {{--Checkout--}}
+                                            {{--</a>--}}
                                         </p>
                                     </div>
                                 </li>
@@ -319,7 +329,7 @@
 
                                                     @foreach($categories as $category)
                                                         <li class="{{$category->name}}">
-                                                            <a href='{{url("/stores/category/evergreen-store/$user_id/$category->id")}}'>{{$category->name}} </a>
+                                                            <a href='#'>{{$category->name}} </a>
                                                         </li>
 
                                                     @endforeach
