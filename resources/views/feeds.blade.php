@@ -11,7 +11,7 @@
             $.post($(this).attr('action'),$(this).serialize(),function(){
 
             }).success(function(){
-                swal('Success','You have successfully saved the settings !','success');
+                swal('Success','You have successfully updated your profile !','success');
             })
         });
 
@@ -353,7 +353,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col2">
-                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
+                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}} </div>
 
                                                                             </div>
                                                                         </li>
