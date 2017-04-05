@@ -457,7 +457,7 @@
                                             <div class="product-item-container">
                                                 <div class="left-block">
                                                     <div class="product-image-container">
-                                                        <img src='{{asset("images/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                                        <img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
                                                     </div>
                                                     <!--Sale Label-->
                                                     <span class="label label-sale">Sale</span>

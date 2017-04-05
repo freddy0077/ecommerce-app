@@ -47,7 +47,9 @@ class ProductsTableSeeder extends Seeder
             'ad' => true,
             "image" => 'samsung-system.jpg',
             'store_id' => $store_id,
-            'sub_category_id' => $sub_category_id
+            'sub_category_id' => $sub_category_id,
+            'sale'  => true,
+            'sale_price'   => $price > 0 ? $price-1:$price
         ]);
         echo "name: $name => id: $id \n";
 

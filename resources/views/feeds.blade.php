@@ -25,7 +25,6 @@
                 }else {
                     location.reload()
                     swal('Success','You have successfully changed your password !','success');
-
                 }
             })
         })
@@ -37,33 +36,74 @@
 //        });
 
         {{--@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id == $user->id)--}}
-        {{--var pusher = new Pusher('d7c6fc127150c78d0f33', {--}}
-            {{--cluster: 'eu',--}}
-            {{--encrypted: true--}}
-        {{--});--}}
+        var pusher = new Pusher('d7c6fc127150c78d0f33', {
+            cluster: 'eu',
+            encrypted: true
+        });
 
-        {{--var channel = pusher.subscribe('chat-room.1');--}}
-        {{--channel.bind('App\\Events\\ChatMessageReceived', function(data) {--}}
-{{--//            alert(data.chatMessage.message);--}}
-            {{--setTimeout(function(){--}}
-                {{--alert('event reached');--}}
-                {{--$.get('/feeds',function(data){--}}
-                    {{--$('#feeds').html(data)--}}
-                {{--}).fail(function(){--}}
-                    {{--alert('error')--}}
-                {{--})--}}
-            {{--},5000);--}}
+        var channel = pusher.subscribe('chat-room.1');
+        channel.bind('App\\Events\\ChatMessageReceived', function(data) {
+//            alert(data.chatMessage.message);
+            setTimeout(function () {
+//                alert('event reached');
+                $.get('/feeds', function (data) {
+                    $('#feeds').html(data)
+                }).fail(function () {
+                    alert('error')
+                })
+            }, 5000);
+        })
 
-            {{--if(window.Notification && Notification.permission !== "denied") {--}}
+
+        var followingChannel = pusher.subscribe('following-channel');
+        followingChannel.bind('App\\Events\\FollowingEvent', function(data) {
+//            alert(data.chatMessage.message);
+            setTimeout(function () {
+//                alert('event reached');
+                $.get('/feeds', function (data) {
+                    $('#feeds').html(data)
+                }).fail(function () {
+                    alert('error')
+                })
+            }, 5000);
+        })
+
+
+        var feedsChannel = pusher.subscribe('feeds-channel');
+        feedsChannel.bind('App\\Events\\FeedsEvent', function(data) {
+            alert(data.chatMessage.message);
+            setTimeout(function () {
+//                alert('event reached');
+                $.get('/feeds', function (data) {
+                    $('#feeds').html(data)
+                }).fail(function () {
+                    alert('error')
+                })
+            }, 5000);
+        })
+
+            var followersChannel = pusher.subscribe('follow-channel');
+            followersChannel.bind('App\\Events\\FollowersEvent', function (data) {
+            alert(data.chatMessage.message);
+                setTimeout(function () {
+                alert('followers event reached');
+                    $.get('/feeds', function (data) {
+                        $('#feeds').html(data)
+                    }).fail(function () {
+                        alert('error')
+                    })
+                }, 5000);
+
+                {{--if(window.Notification && Notification.permission !== "denied") {--}}
                 {{--alert(data.chatMessage.message);--}}
                 {{--Notification.requestPermission(function(status) {  // status is "granted", if accepted by user--}}
-                    {{--var n = new Notification('Shopaholicks', {--}}
-                        {{--body: data.chatMessage,--}}
-                        {{--icon: '{{url('frontend_2/image/logo.png')}}' // optional--}}
-                    {{--});--}}
+                {{--var n = new Notification('Shopaholicks', {--}}
+                {{--body: data.chatMessage,--}}
+                {{--icon: '{{url('frontend_2/image/logo.png')}}' // optional--}}
                 {{--});--}}
-            {{--}--}}
-        {{--});--}}
+                {{--});--}}
+//            }
+            });
 
         {{--@endif--}}
 
@@ -319,7 +359,10 @@
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab_1_11">
                                                             <div class="portlet-body">
-                                                                <ul class="feeds" id="feeds">
+                                                                <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+
+                                                                <div class="feeds" id="feeds">
+                                                                <ul style=" height: 200px; overflow-y: scroll;">
 
                                                                     @foreach($feeds as $feed)
                                                                         <li>
@@ -359,50 +402,46 @@
                                                                         </li>
                                                                     @endforeach
                                                                 </ul>
+                                                                    </div>
                                                             </div>
+                                                                </div>
                                                         </div>
                                                         <!--tab-pane-->
                                                         <div class="tab-pane" id="tab_1_22">
                                                             <div class="tab-pane active" id="tab_1_1_1">
                                                                 <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+                                                                    <div class="following" id="following">
+                                                                        <ul style=" height: 200px; overflow-y: scroll;">
 
-
-
-<!--                                                                    --><?php //var_dump (\GetStream\StreamLaravel\Facades\FeedManager::getUserFeed(Auth::user()->id))  ?>
-
-                                                                    <ul class="feeds" id="feeds">
-
-                                                                        @foreach($following as $fol)
-                                                                        <li>
-                                                                            <div class="col1">
-                                                                                <div class="cont">
-                                                                                    <div class="cont-col1">
-                                                                                        <div class="label label-success">
-                                                                                            <i class="fa fa-bell-o"></i>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="cont-col2">
-                                                                                        {{--<div class="desc"> {{" ".\App\User::getNameById(substr($fol['feed_id'],5,4)) }}--}}
-                                                                                                {{--<span class="label label-danger label-sm"> Take action--}}
-                                                                                                    {{--<a href="{{url('/')}}"><i class="fa fa-eye"></i></a>--}}
-                                                                                                {{--</span>--}}
-                                                                                        {{--</div> --}}
-
-                                                                                        <div class="desc"> {{$fol->store_id }}
-                                                                                                <span class="label label-danger label-sm"> Take action
-                                                                                                    <a href="{{url('/')}}"><i class="fa fa-eye"></i></a>
+                                                                            @foreach($following as $fol)
+                                                                                <li>
+                                                                                    <div class="col1">
+                                                                                        <div class="cont">
+                                                                                            <div class="cont-col1">
+                                                                                                {{--<div class="label label-success">--}}
+                                                                                                    {{--<i class="fa fa-bell-o"></i>--}}
+                                                                                                {{--</div>--}}
+                                                                                            </div>
+                                                                                            <div class="cont-col2">
+                                                                                                <div class="desc">
+                                                                                                    <h4><strong><a href="">{{$fol->name}}</a></strong></h4>
+                                                                                                    {{--<span class="label label-danger label-sm">--}}
+                                                                                                {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
+                                                                                                        {{--Take action--}}
+                                                                                                        {{--<a href="{{url('/follow-user')}}"><i class="fa fa-share"></i></a>--}}
                                                                                                 </span>
+                                                                                                </div>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col2">
-                                                                                <div class="date"> {{\Carbon\Carbon::parse($fol->created_at)->diffForHumans()}} </div>
-{{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d T H:i:s',$fol['created_at'])->diffForHumans()}} </div>--}}
-                                                                            </div>
-                                                                        </li>
-                                                                        @endforeach
-                                                                    </ul>
+                                                                                    <div class="col2">
+                                                                                        <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$fol->created_at)->diffForHumans()}} </div>
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endforeach
+
+                                                                        </ul>
+                                                                    </div>
 
                                                                 </div>
                                                             </div>
@@ -410,39 +449,52 @@
                                                         <div class="tab-pane" id="tab_1_33">
                                                             <div class="tab-pane active" id="tab_1_1_1">
                                                                 <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
+                                                                    <div class="followers" id="followers">
+                                                                        <ul style=" height: 200px; overflow-y: scroll;">
 
-
-
-<!--                                                                    --><?php //var_dump (\GetStream\StreamLaravel\Facades\FeedManager::getUserFeed(Auth::user()->id))  ?>
-
-                                                                    {{--<ul class="feeds" id="feeds">--}}
-
-                                                                        {{--@foreach($activities as $activity)--}}
-                                                                        {{--<li>--}}
-                                                                            {{--<div class="col1">--}}
-                                                                                {{--<div class="cont">--}}
-                                                                                    {{--<div class="cont-col1">--}}
-                                                                                        {{--<div class="label label-success">--}}
-                                                                                            {{--<i class="fa fa-bell-o"></i>--}}
-                                                                                        {{--</div>--}}
-                                                                                    {{--</div>--}}
-                                                                                    {{--<div class="cont-col2">--}}
-                                                                                        {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
-                                                                                                {{--<span class="label label-danger label-sm"> Take action--}}
-                                                                                                    {{--<i class="fa fa-share"></i>--}}
+                                                                            @if(count($followers)== 0 )
+                                                                                <h4>No Followers at the moment ...</h4>
+                                                                                @else
+                                                                            @foreach($followers as $follower)
+                                                                                <li>
+                                                                                    <div class="col1">
+                                                                                        <div class="cont">
+                                                                                            <div class="cont-col1">
+                                                                                                <div class="label label-success">
+                                                                                                    <i class="fa fa-bell-o"></i>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="cont-col2">
+                                                                                                {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
+                                                                                                {{--<span class="label label-danger label-sm">--}}
+                                                                                                {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
+                                                                                                {{--Take action--}}
+                                                                                                {{--</a>--}}
+                                                                                                {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
                                                                                                 {{--</span>--}}
-                                                                                        {{--</div>--}}
-                                                                                    {{--</div>--}}
-                                                                                {{--</div>--}}
-                                                                            {{--</div>--}}
-                                                                            {{--<div class="col2">--}}
-{{--                                                                                <div class="date"> {{ \Carbon\Carbon::createFromDate($activity->created_at)->diffForHumans()}} </div>--}}
-                                                                                {{--<div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$activity->created_at)->diffForHumans()}} </div>--}}
-                                                                            {{--</div>--}}
-                                                                        {{--</li>--}}
-                                                                        {{--@endforeach--}}
-                                                                    {{--</ul>--}}
+                                                                                                {{--</div>--}}
+                                                                                                {{--</div>--}}
+                                                                                                <div class="desc"> {{$follower->name}}
+                                                                                                    <span class="label label-danger label-sm">
+                                                                                                {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
+                                                                                                        Take action
+                                                                                                        {{--</a>--}}
+                                                                                                        {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
+                                                                                                        {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
+                                                                                                </span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col2">
+                                                                                        <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$follower->created_at)->diffForHumans()}} </div>
 
+                                                                                    </div>
+                                                                                </li>
+                                                                            @endforeach
+                                                                                @endif
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

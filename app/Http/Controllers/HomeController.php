@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\ChatMessageReceived;
+use App\Events\FeedsEvent;
+use App\Events\FollowersEvent;
 use App\Fancy;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UserRequest;
@@ -102,18 +104,20 @@ class HomeController extends Controller
 
     public function getFeeds(Request $request){
 
-        $builder = DB::table('watched_shops');
+        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');
 
          $user = Auth::user();
         if($user->has_store){
             $store = Store::whereUserId($user->id)->first();
-            $feeds = $builder->whereStoreId($store->id)->get();
+            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->get();
+            $followers = $builder->whereStoreId($store->id)->get();
+            $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')->where('watched_shops.user_id',$user->id)->get();
+//
         }else {
             $feeds = collect();
+            $followers = collect();
+            $following = collect();
         }
-
-//        $feeds = $builder->get();
-        $following = $builder->where('user_id',$user->id)->get();
 
 //        $stream = new StreamFeed($user->id);
 //        $stream->deleteFeed();
@@ -123,10 +127,10 @@ class HomeController extends Controller
 
 
         if($request->ajax()){
-            return view('partials.feed_partials',compact('activities','following','followers'));
+            return view('partials.feed_partials',compact('feeds','activities','following','followers'));
         }
 
-        return view('feeds',compact('feeds','following','user'));
+        return view('feeds',compact('feeds','following','user','followers'));
     }
 
     public function postSaveProfile(Request $request){
@@ -216,11 +220,15 @@ class HomeController extends Controller
 
     public function postFancyIt($product_id){
         if(Auth::check() && !Fancy::whereUserId(Auth::user()->id)->whereProductId($product_id)->first()) {
+            $user = Auth::user();
             Fancy::create([
                 'id' => Uuid::generate(),
                 'product_id' => $product_id,
-                'user_id' => Auth::user()->id
+                'user_id' => $user->id
             ]);
+            $product = Product::find($product_id);
+
+            \App\Feed::recordAction($product->user_id,"$user->name just fancy'd your product($product->name)");
             return ['message' => 'Product has been added to your fancies !', 'status' => 200];
         }elseif(Auth::guest()){
             return ['message' => 'You need to login to add to fancies !','status' => 401];
@@ -253,7 +261,9 @@ class HomeController extends Controller
 
             $user = Auth::user();
 
-//            event(new ChatMessageReceived("$user->name just liked a product",$user));
+            \App\Feed::recordAction($product->user_id,"$user->name just liked your product($product->name)");
+
+            event(new ChatMessageReceived("$user->name just liked a product",$user));
 
             return ['message' => 'You just liked a product', 'status' => 200, 'likes' => $product->like_counts];
         }
@@ -319,6 +329,7 @@ class HomeController extends Controller
 //            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
 
 //            event(new ChatMessageReceived("you just followed $store_builder->name", $user));
+            event(new FeedsEvent("you just followed $store_builder->name", $user));
 
                 return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 

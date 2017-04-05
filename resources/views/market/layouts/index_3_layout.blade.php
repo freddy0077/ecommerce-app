@@ -54,7 +54,7 @@
     <div class="ip-header">
         <h1 class="ip-logo">
             <a href="#">
-                <img src="{{url('frontend_2/image/logo.png')}}" width="100" height="70" alt="Shopaholicks">
+                <img src="{{url('frontend_2/image/shopaholicks_logos_03.png')}}" width="400" alt="Shopaholicks">
             </a>
         </h1>
         <div class="ip-loader">
@@ -112,7 +112,7 @@
 
 
                                     <li class="account" id="my_account">
-                                        <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>Store Settings </a>
+                                        <a href="{{url('store/store-settings')}}" title="store settings" class="btn btn-xs dropdown-toggle" ><i class="fa fa-shopping-bag" aria-hidden="true"></i>My Shop </a>
                                     </li>
 
                                 @elseif(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->has_store == false)
