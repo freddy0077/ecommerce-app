@@ -538,7 +538,7 @@ class StoreController extends Controller
 
         public function getQuickAddProducts(){
 
-        $sub_categories = SubCategory::all();
+         $sub_categories = ProductCategory::with('subcategories')->get();
 
         return view('store.quick_add_product',compact('sub_categories'));
 
@@ -618,7 +618,8 @@ class StoreController extends Controller
 
     public function getQuickAddProductPartial($count){
 
-        $sub_categories = SubCategory::all();
+        $sub_categories = ProductCategory::with('subcategories')->get();
+
 
         return view('store.partials.quick_add_product_partial',compact('count','sub_categories'));
     }

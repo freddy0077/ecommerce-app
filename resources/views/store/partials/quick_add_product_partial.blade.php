@@ -20,11 +20,22 @@
                     <div class="col-md-3">
                         <select class="form-control" name="sub_category[]" id="category" required>
 
-                            <option></option>
-
                             @foreach($sub_categories as $sub_category)
+                            <option></option>
+                                <optgroup label="{{$sub_category->name}}">
+                                    @foreach($sub_category->subcategories as $sub)
+                                    <option value="{{$sub->id}}">{{$sub->name}}</option>
+                                    @endforeach
+                                </optgroup>
+                                {{--<optgroup label="German Cars">--}}
+                                    {{--<option value="mercedes">Mercedes</option>--}}
+                                    {{--<option value="audi">Audi</option>--}}
+                                {{--</optgroup>--}}
 
-                                <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>
+
+
+
+{{--                                <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>--}}
 
                             @endforeach
 
