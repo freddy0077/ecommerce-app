@@ -66,7 +66,7 @@
 
             var products_limit = '{{$products_limit}}';
 
-            alert(products_limit);
+//            alert(products_limit);
 
 //
     </script>
