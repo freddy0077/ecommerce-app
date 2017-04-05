@@ -59,10 +59,14 @@
         <div class="container">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="">
-{{--                    <img src="{{asset('backend/assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}
-                    <h1>{{config('app.name')}}</h1>
+
+                <a href="{{url('/')}}">
+                    <img src="{{url('frontend_2/image/logo.png')}}" alt="logo" class="logo-default" style="margin-top: -5px">
                 </a>
+                {{--<a href="">--}}
+{{--                    <img src="{{asset('backend/assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}
+                    {{--<h1>{{config('app.name')}}</h1>--}}
+                {{--</a>--}}
             </div>
             <!-- END LOGO -->
             <!-- BEGIN RESPONSIVE MENU TOGGLER -->
