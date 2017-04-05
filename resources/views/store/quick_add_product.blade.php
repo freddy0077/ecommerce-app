@@ -62,10 +62,9 @@
 
                     }
                 }).success(function(data){
-                    alert(data.message);
-//                    swal("Good job!", data.message, "success")
-
-//                    location.href="/store/all-products";
+//                    alert(data.message);
+                    swal("Good job!", data.message, "success")
+                    location.href="/store/all-products";
 
                 });
             }));
