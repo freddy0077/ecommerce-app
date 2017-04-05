@@ -567,7 +567,7 @@ class StoreController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $productCounts = Product::whereStoreId($user_id)->count();
+        $productCounts = Product::whereUserId($user_id)->count();
         $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         if($products_limit <= 0){
@@ -619,7 +619,6 @@ class StoreController extends Controller
     public function getQuickAddProductPartial($count){
 
         $sub_categories = ProductCategory::with('subcategories')->get();
-
 
         return view('store.partials.quick_add_product_partial',compact('count','sub_categories'));
     }
