@@ -61,7 +61,7 @@
             <div class="page-logo">
 
                 <a href="{{url('/')}}">
-                    <img src="{{url('frontend_2/image/logo.png')}}" alt="logo" class="logo-default" style="margin-top: -5px">
+                    <img src="{{url('frontend_2/image/logo.png')}}" width="200" height="70"  alt="logo" class="logo-default" style="margin-top: -5px">
                 </a>
                 {{--<a href="">--}}
 {{--                    <img src="{{asset('backend/assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}

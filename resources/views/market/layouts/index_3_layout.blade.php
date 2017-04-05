@@ -54,7 +54,7 @@
     <div class="ip-header">
         <h1 class="ip-logo">
             <a href="#">
-                <img src="{{url('frontend_2/image/logo.png')}}" alt="Shopaholicks">
+                <img src="{{url('frontend_2/image/logo.png')}}" width="100" height="70" alt="Shopaholicks">
             </a>
         </h1>
         <div class="ip-loader">

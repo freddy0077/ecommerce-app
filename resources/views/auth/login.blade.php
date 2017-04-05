@@ -524,6 +524,14 @@
             .main-agileinfo {
                 margin: 1em auto 3em;
             }
+
+            @media (max-width: 480px){
+                #sign-up{
+                    margin-top: 40px;
+                }
+
+            }
+
         }
         /*-- //responsive-design --*/
 
@@ -552,7 +560,7 @@
                     <div class="w3table">
                         <div class="w3table-cell">
                             {{--<p> Send us a message</p>--}}
-                            <div class="btn">SIGN UP</div>
+                            <div class="btn" id="sign-up">SIGN UP</div>
                         </div>
                     </div>
                 </div>
@@ -566,10 +574,24 @@
                                 {{--<img src="{{url('frontend_2/image/logo.png')}}">--}}
                             </div>
                             <form action="{{url('/login')}}" method="post" id="login-form">
+                                {!! csrf_field() !!}
                                 <input type="text" name="email" placeholder="Email" required=""/>
                                 <input type="Password" name="password" placeholder="Password" required=""/>
                                 <span class="help-block"></span>
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        {{--<ul>--}}
+                                            @foreach ($errors->all() as $error)
+                                                {{--<li>{{ $error }}</li>--}}
+                                            <small style="font-size: 12px;" class="text-danger">{{ $error }}</small>
+                                            @endforeach
+                                        {{--</ul>--}}
+                                    </div>
+                                @endif
+                                <br>
                                 <input type="submit" class="btn btn-login" value="Log in">
+
+
                             </form>
                         </div>
                     </div>
@@ -653,24 +675,26 @@
         })
     })
 
-    $('#login-form').on('submit',function(e){
-        e.preventDefault();
-        $.post('/login',$(this).serialize(),function(data){
+//    $('#login-form').on('submit',function(e){
+//        e.preventDefault();
+//        $.post('/login',$(this).serialize(),function(data){
+//
+//        }).fail(function(data){
+//            for (var field in data.responseJSON) {
+//                var el = $(':input[name="' + field + '"]');
+//                el.parent('.form-group').addClass('has-error');
+//                el.next('.help-block').text(data.responseJSON[field][0]);
+//                el.next('.validation_error').text(data.responseJSON[field][0]);
+////                swal("Error!",data.responseJSON[field][0] , "error");
+//                $('.help-block').text(data.responseJSON[field][0]);
+//            }
+//        }).success(function(data){
+//            $('.btn-login').val('please wait !').attr('disabled',true)
+//            location.href="/home";
+//        })
+//    })
 
-        }).fail(function(data){
-            for (var field in data.responseJSON) {
-                var el = $(':input[name="' + field + '"]');
-                el.parent('.form-group').addClass('has-error');
-                el.next('.help-block').text(data.responseJSON[field][0]);
-                el.next('.validation_error').text(data.responseJSON[field][0]);
-//                swal("Error!",data.responseJSON[field][0] , "error");
-                $('.help-block').text(data.responseJSON[field][0]);
-            }
-        }).success(function(data){
-            $('.btn-login').val('please wait !').attr('disabled',true)
-            location.href="/home";
-        })
-    })
+
 
 
    $('#store').on('click',function(){
