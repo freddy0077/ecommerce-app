@@ -12,7 +12,10 @@
                     <div class="col-md-3"><input type="text" class="form-control" name="name[]" id="name" placeholder="name of product" required></div>
                         <span class="help-block"></span>
 
+                        <div class="hidden-lg hidden-md"><br><br></div>
+
                     <div class="col-md-3"><input type="text" class="form-control" name="price[]" id="price" placeholder="price of product" required></div>
+                        <div class="hidden-lg hidden-md"><br><br></div>
 
                     <div class="col-md-3">
                         <select class="form-control" name="sub_category[]" id="category" required>
@@ -28,9 +31,12 @@
                         </select>
                         {{--<input type="text" class="form-control" name="name" id="name" placeholder="product category">--}}
                     </div>
+                        <div class="hidden-lg hidden-md"><br><br></div>
+
                         <div class="col-md-3">
                             <input type="file" class="form-control" name="image[]" id="image" required>
                         </div>
+                        <div class="hidden-lg hidden-md"><br><br></div>
 
                     </div>
                 </div>

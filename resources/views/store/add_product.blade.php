@@ -32,10 +32,30 @@
 
                     }
                 }).success(function(data) {
-                    if(data.products_limit_reached == true){
-                        swal("Sorry!", 'you have reached your products threshold !', "error");
+                    if(data.status == 403){
+                        swal({
+                                    title: "Sorry",
+                                    text:  "You have reached your products threshold !",
+                                    type: "error",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Upgrade Now !",
+                                    closeOnConfirm: false
+                                },
+                                function(){
+
+                                    swal("Great!", " redirecting to packages...", "success");
+
+                                    setTimeout(function(){
+                                        location.href="/store/packages";
+                                    },2000)
+                                });
+//                        swal("Sorry!", 'you have reached your products threshold !', "error");
+                    }else{
+                        swal("Good job!", 'you have added a product !', "success");
+                        location.href="/store/all-products"
+
                     }
-                    swal("Good job!", 'you have added a product !', "success");
                 });
             }));
 
@@ -109,17 +129,17 @@
 
 
                                         </div>
-                                        <div class="actions">
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-cloud-upload"></i>
-                                            </a>
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-wrench"></i>
-                                            </a>
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-trash"></i>
-                                            </a>
-                                        </div>
+                                        {{--<div class="actions">--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-cloud-upload"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-wrench"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-trash"></i>--}}
+                                            {{--</a>--}}
+                                        {{--</div>--}}
                                     </div>
                                     <div class="portlet-body form">
                                         <!-- BEGIN FORM-->

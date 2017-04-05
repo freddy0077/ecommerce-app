@@ -100,18 +100,18 @@
                                     <i class="icon-share font-green"></i>
                                     <span class="caption-subject font-green bold uppercase">Pricing</span>
                                 </div>
-                                <div class="actions">
-                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                        <i class="icon-cloud-upload"></i>
-                                    </a>
-                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                        <i class="icon-wrench"></i>
-                                    </a>
-                                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>
-                                    <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                        <i class="icon-trash"></i>
-                                    </a>
-                                </div>
+                                {{--<div class="actions">--}}
+                                    {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                        {{--<i class="icon-cloud-upload"></i>--}}
+                                    {{--</a>--}}
+                                    {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                        {{--<i class="icon-wrench"></i>--}}
+                                    {{--</a>--}}
+                                    {{--<a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"> </a>--}}
+                                    {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                        {{--<i class="icon-trash"></i>--}}
+                                    {{--</a>--}}
+                                {{--</div>--}}
                             </div>
                             <div class="portlet-body">
                                 <div class="pricing-content-1">

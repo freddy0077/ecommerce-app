@@ -171,7 +171,7 @@
                 @if(!count($products))
                     <div class="alert alert-block alert-info fade in">
                         <button type="button" class="close" data-dismiss="alert"></button>
-                        <h4 class="alert-heading">NO PRODUCTS IN THIS CATEGORY</h4>
+                        <h4 class="alert-heading">@if(isset($status)){{$status}} @else NO PRODUCTS IN THIS CATEGORY @endif</h4>
                         {{--<p> You have currently not stored any product yet !</p>--}}
                         <p>
                             {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}

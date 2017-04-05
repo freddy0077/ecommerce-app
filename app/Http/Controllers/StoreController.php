@@ -53,7 +53,8 @@ class StoreController extends Controller
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
         $sub_categories = SubCategory::inRandomOrder()->get();
-        return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories'));
+        $status = "NO PRODUCTS YET IN YOUR SHOP !";
+        return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories','status'));
 
     }
 
@@ -398,7 +399,7 @@ class StoreController extends Controller
         $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         if($products_limit <= 0){
-            return ['products_limit_reached' => true];
+            return ['products_limit_reached' => true,'status'=>403];
         }else{
 
             $image = $request->file('image');

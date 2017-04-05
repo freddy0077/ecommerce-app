@@ -49,10 +49,23 @@
 
                 }
             }).success(function(){
-                swal("Good job!", 'you have successfully saved settings reloading page ... !', "success");
-                setTimeout(function(){
-                    location.reload();
-                },2000)
+                swal({
+                            title: "Great",
+                            text: "You have successfully updated your shop settings!",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Add products now !",
+                            closeOnConfirm: false
+                        },
+                        function(){
+
+                            swal("Great!", " redirecting you to add products page", "success");
+
+                            setTimeout(function(){
+                                location.href="/store/add-product";
+                            },2000)
+                        });
 
             });
         }));
@@ -122,17 +135,17 @@
                                             <i class="icon-social-dribbble font-green"></i>
                                             <span class="caption-subject font-green bold uppercase">Store Settings</span>
                                         </div>
-                                        <div class="actions">
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-cloud-upload"></i>
-                                            </a>
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-wrench"></i>
-                                            </a>
-                                            <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                <i class="icon-trash"></i>
-                                            </a>
-                                        </div>
+                                        {{--<div class="actions">--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-cloud-upload"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-wrench"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
+                                                {{--<i class="icon-trash"></i>--}}
+                                            {{--</a>--}}
+                                        {{--</div>--}}
                                     </div>
                                     <div class="portlet-body form">
                                         <!-- BEGIN FORM-->
@@ -433,7 +446,7 @@
                                                     <label class="control-label col-md-3">Enable</label>
                                                     <div class="col-md-4">
                                                         <input type="checkbox" class="form-control" name="enable">
-                                                        <span> Check to enable the store </span>
+                                                        <span> Check to enable the shop </span>
                                                     </div>
                                                 </div>
 

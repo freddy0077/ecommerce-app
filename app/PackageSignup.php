@@ -29,9 +29,14 @@ class PackageSignup extends Model
 
 
 
-       return PackageSignup::leftJoin('packages','packages.id','=','package_signups.package_id')
+           $package_signup = PackageSignup::leftJoin('packages','packages.id','=','package_signups.package_id')
             ->whereUserId($user_id)
-            ->first()
-            ->number_of_products;
+            ->first();
+
+               if($package_signup){
+                return $package_signup->number_of_products;
+               }else {
+                   return 50;
+               }
     }
 }

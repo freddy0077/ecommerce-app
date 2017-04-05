@@ -14,6 +14,8 @@ return [
 
     'name' => 'Shopaholicks',
 
+    'threshold' => 50,
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
