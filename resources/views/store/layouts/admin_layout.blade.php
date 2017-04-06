@@ -53,7 +53,17 @@
     <link href="{{asset('backend/assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('backend/assets/global/plugins/jquery-minicolors/jquery.minicolors.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
-    <link rel="shortcut icon" href="{{asset('backend/favicon.ico')}}" /> </head>
+    <link rel="shortcut icon" href="{{asset('backend/favicon.ico')}}" />
+
+    <style>
+        .page-header .page-header-menu {
+            /*background: #444d58;*/
+            background: #022431;
+            color: #fff !important;
+        }
+    </style>
+
+</head>
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- END HEAD -->
@@ -68,7 +78,7 @@
             <div class="page-logo">
 
                 <a href="{{url('/')}}">
-                    <img src="{{url('frontend_2/image/logo.png')}}"  alt="logo" class="logo-default" style="margin-top: -5px">
+                    <img src="{{url('frontend_2/image/logo.png')}}"  alt="logo" class="logo-default" style="margin-top: 4px">
                 </a>
                 {{--<a href="">--}}
 {{--                    <img src="{{asset('backend/assets/layouts/layout3/img/logo-default.jpg')}}" alt="logo" class="logo-default">--}}
