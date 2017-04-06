@@ -43,6 +43,12 @@
     <link id="color_scheme" href="{{asset('frontend_2/css/home8.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/css/responsive.css')}}" rel="stylesheet">
 
+    <!-- BEGIN PAGE FIRST SCRIPTS -->
+    <script src="{{asset('backend/assets/global/plugins/pace/pace.min.js')}}.." type="text/javascript"></script>
+    <!-- END PAGE FIRST SCRIPTS -->
+    <!-- BEGIN PAGE TOP STYLES -->
+    <link href="{{asset('backend/assets/global/plugins/pace/themes/pace-theme-big-counter.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE TOP STYLES -->
 
 </head>
 

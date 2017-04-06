@@ -24,6 +24,13 @@
     <link href="{{secure_asset('backend/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
 
+    <!-- BEGIN PAGE FIRST SCRIPTS -->
+    <script src="{{asset('backend/assets/global/plugins/pace/pace.min.js')}}.." type="text/javascript"></script>
+    <!-- END PAGE FIRST SCRIPTS -->
+    <!-- BEGIN PAGE TOP STYLES -->
+    <link href="{{asset('backend/assets/global/plugins/pace/themes/pace-theme-big-counter.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE TOP STYLES -->
+
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{secure_asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{secure_asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet" type="text/css" />
