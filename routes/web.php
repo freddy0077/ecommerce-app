@@ -152,6 +152,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/privacy-policy','HomeController@getPrivacyPolicy');
 Route::get('/terms-of-use','HomeController@getTermsOfUse');
+Route::get('/our-team','HomeController@getOurTeam');
 
 Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
     Route::get('/dashboard','StoreController@getDashboard');

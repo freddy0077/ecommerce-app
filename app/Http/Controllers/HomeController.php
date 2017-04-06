@@ -107,6 +107,10 @@ class HomeController extends Controller
         return view('market.terms_of_use');
     }
 
+    public function getOurTeam(){
+        return view('market.our_team');
+    }
+
     public function getFancies(){
         $user = Auth::user();
         $user_id = Auth::id();
