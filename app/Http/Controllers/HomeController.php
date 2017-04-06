@@ -98,6 +98,28 @@ class HomeController extends Controller
         return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores'));
     }
 
+    public function getFancies(){
+        $user = Auth::user();
+        $user_id = Auth::id();
+        if($user->has_store){
+            $store = Store::whereUserId($user->id)->first();
+            $slug = $store->slug;
+        }else {
+            $store = collect();
+            $slug = collect();
+        }
+        $categories = ProductCategory::all();
+        $store = Store::whereUserId($user_id)->first();
+        $sub_categories = SubCategory::inRandomOrder()->get();
+        $fancies = Fancy::leftJoin('products','products.id','=','fancies.product_id')
+            ->leftJoin('stores','stores.id','=','products.store_id')
+            ->where('fancies.user_id',$user->id)
+            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name')
+            ->paginate();
+
+        return view('store.fancies',compact('fancies','store',"user_id",'slug','categories','sub_categories'));
+    }
+
     public function getProfile(){
         return view('profile');
     }

@@ -137,10 +137,11 @@
                                     {{--<li><a href="login.html"><i class="fa fa-pencil-square-o"></i> Login</a></li>--}}
                                     {{--</ul>--}}
                                 </li>
-                                <li class="wishlist"><a href="#" id="wishlist-total" class="top-link-wishlist" title="Fancies"><span>Fancies</span></a></li>
-
+                                @if(\Illuminate\Support\Facades\Auth::check())
+                                <li class="wishlist"><a href="{{url('/fancies')}}" id="wishlist-total" class="top-link-wishlist" title="Fancies"><span>Fancies</span></a></li>
+                               @endif
                                 <li class="checkout"><a href="{{url('/store/checkout',$user_id)}}" class="top-link-checkout" title="Checkout"><span >Checkout</span></a></li>
-                                <li class="login"><a href="{{url('/store/checkout',$user_id)}}" title="Shopping Cart"><span >Shopping Cart</span></a></li>
+                                {{--<li class="login"><a href="{{url('/store/checkout',$user_id)}}" title="Shopping Cart"><span >Shopping Cart</span></a></li>--}}
                             </ul>
                         </div>
                     </div>

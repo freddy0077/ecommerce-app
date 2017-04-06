@@ -146,6 +146,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/check-name','HomeController@getCheckName');
 
+    Route::get('/fancies','HomeController@getFancies');
+
 });
 
 Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
@@ -205,8 +207,6 @@ Route::group(['prefix' => 'store'], function () {
     Route::get('/checkout/{id}','StoreController@getCheckOut');
     Route::post('/check-out/{id}','StoreController@postCheckOut');
     Route::get('/cart-view/{user_id}','StoreController@getCartView');
-
-
 
 
 
