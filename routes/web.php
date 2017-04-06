@@ -148,10 +148,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/fancies','HomeController@getFancies');
 
-    Route::get('/privacy-policy','HomeController@getPrivacyPolicy');
-    Route::get('/terms-of-use','HomeController@getTermsOfUse');
-
 });
+
+Route::get('/privacy-policy','HomeController@getPrivacyPolicy');
+Route::get('/terms-of-use','HomeController@getTermsOfUse');
 
 Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
     Route::get('/dashboard','StoreController@getDashboard');
