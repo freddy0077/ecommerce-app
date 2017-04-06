@@ -102,7 +102,10 @@
                         </div>
                     </div>
                     <div class="header-top-right collapsed-block text-right  col-sm-7 col-xs-12 compact-hidden">
-                        <h5 class="tabBlockTitle visible-xs">More<a class="expander " href="#TabBlock-1"><i class="fa fa-angle-down"></i></a></h5>
+                        <h5 class="tabBlockTitle visible-xs"><a class="expander " href="#TabBlock-1">
+                                <button class="btn btn-success btn-xs">More</button>
+                                {{--<i class="fa fa-angle-down"></i>--}}
+                            </a></h5>
                         <div class="tabBlock" id="TabBlock-1">
                             <ul class="top-link list-inline">
                                 @if(\Illuminate\Support\Facades\Auth::check() && Auth::user()->has_store == true)
