@@ -10,6 +10,8 @@ use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UserRequest;
 use App\Like;
 use App\MarketplaceSignup;
+use App\Notifications\NewShop;
+use App\Notifications\NewSignUp;
 use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
@@ -26,6 +28,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Lavary\Menu\Menu;
 use Webpatser\Uuid\Uuid;
 
@@ -411,17 +414,23 @@ class HomeController extends Controller
         if($request->store == "on"){
 
             $user_id = User::where('email',$request->email)->first()->id;
+            $store_id = Uuid::generate();
 
             Store::create([
-                'id' => Uuid::generate(),
+                'id' => $store_id ,
                 'user_id' => $user_id,
                 'name' => $request->store_name
             ]);
+            $store = Store::find($store_id);
+
+            Notification::send(Store::first(), new NewShop($store));
         }
 
         $user_id= User::whereEmail($request->email)->first();
 
         $user = User::find($user_id->id);
+
+        Notification::send(User::first(), new NewSignUp($user));
 
         Auth::login($user_id);
 
@@ -429,14 +438,13 @@ class HomeController extends Controller
 
     public function getCheckName(StoreRequest $request){
         return $request;
-
-
     }
 
     public function postAddNewShop(StoreRequest $request){
         $user_id = Auth::user()->id;
+        $store_id = Uuid::generate();
         Store::create([
-            'id' => Uuid::generate(),
+            'id' => $store_id,
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'email'  => $request->email,
@@ -450,5 +458,8 @@ class HomeController extends Controller
             'has_store' => true
         ]);
 
+        $store = Store::find($store_id);
+
+        Notification::send(Store::first(), new NewShop($store));
     }
 }

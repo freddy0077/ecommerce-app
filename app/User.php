@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public $incrementing = false;
 
-    protected  $slack_webhook_url = 'https://hooks.slack.com/services/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';
+    protected  $slack_webhook_url = 'https://hooks.slack.com/services/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';
 
     /**
      * The attributes that should be hidden for arrays.

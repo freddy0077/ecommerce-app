@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewSignUp extends Notification
+class NewShop extends Notification
 {
     use Queueable;
 
@@ -18,10 +18,7 @@ class NewSignUp extends Notification
      * @return void
      */
     protected $name;
-    protected $text;
-    protected $shop;
-    protected $amount;
-    protected $qty;
+
     public function __construct($name)
     {
         //
@@ -73,12 +70,12 @@ class NewSignUp extends Notification
 
         return (new SlackMessage())
             ->success()
-            ->content($this->name->name ." just signed up ")
+            ->content($this->name->name ." was just created ")
             ->attachment(function ($attachment)  {
-                $attachment->title('New Signup')
+                $attachment->title('New Shop')
                     ->fields([
                         'Name' => $this->name->name,
-                        "Phone Number" => $this->name->phone_number ,
+                        "Phone Number" => $this->name->phone_number,
                         "Email" => $this->name->email
                     ]);
             });

@@ -740,7 +740,7 @@ class StoreController extends Controller
             $user = Auth::user();
             $shop = Store::whereUserId($user_id)->first();
 
-            Notification::send(User::first(), new NewOrder($user,$shop,$text,$amount,$qty));
+            Notification::send(Order::first(), new NewOrder($user,$shop,$text,$amount,$qty));
 
             $order = Order::with(['items','user' =>function($query){}])
                 ->whereId($order_id)

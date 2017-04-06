@@ -5,18 +5,22 @@ namespace App;
 use GetStream\StreamLaravel\Eloquent\ActivityTrait;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
 
 class Store extends Model
 {
     use Sluggable;
+    use Notifiable;
 
     protected $fillable = ['id','user_id', 'name', 'email', 'phone_number' ,'address', 'domain',
         'city','business_type','about','colour','banner-image'];
     //
 
     protected $casts = ['id' =>'string'];
+
+    protected $slack_hook_url = "https://hooks.slack.com/services/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";
 
     public function productCategory(){
         $this->belongsTo('App\ProductCategory');
@@ -30,6 +34,8 @@ class Store extends Model
         return $this->hasMany(Store::class);
     }
 
+
+
     public function sluggable()
     {
         return [
@@ -37,6 +43,10 @@ class Store extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function routeNotificationForSlack(){
+        return $this->slack_hook_url;
     }
 
     public static function getProductsByCategory($category_id,$user_id){
