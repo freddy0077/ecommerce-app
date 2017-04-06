@@ -453,9 +453,9 @@
                             <div class="modcontent">
                                 <ul class="menu">
                                     {{--<li><a href="#">About Us</a></li>--}}
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Terms of Use</a></li>
-                                    <li><a href="#">The team</a></li>
+                                    <li><a href="{{url('/privacy-policy')}}">Privacy Policy</a></li>
+                                    <li><a href="{{url('/terms-of-use')}}">Terms of Use</a></li>
+                                    <li><a href="{{url('/our-team')}}">The team</a></li>
                                 </ul>
                             </div>
                         </div>
