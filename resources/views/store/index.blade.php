@@ -227,7 +227,13 @@
                                                     <span class="price-new">GH&#162; {{$product->sale_price}}</span>
 
                                                     <span class="price-old">GH&#162; {{$product->price}}</span>
-                                                    <span class="label label-percent">-40%</span>
+
+                                                    {{--<span class="label label-percent">--}}
+                                                        {{--@if($product->price != 0)--}}
+                                                            {{---{{$product->sale_price/$product->price * 100}}%--}}
+
+                                                        {{--@endif--}}
+                                                    {{--</span>--}}
 
                                                 @else
                                                     <span class="price-new">GH&#162; {{$product->price}}</span>
