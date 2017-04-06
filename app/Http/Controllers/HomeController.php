@@ -98,6 +98,15 @@ class HomeController extends Controller
         return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores'));
     }
 
+    public function getPrivacyPolicy(){
+
+        return view('market.privacy_policy');
+    }
+
+    public function getTermsOfUse(){
+        return view('market.terms_of_use');
+    }
+
     public function getFancies(){
         $user = Auth::user();
         $user_id = Auth::id();

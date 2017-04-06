@@ -215,11 +215,11 @@
                                                         <img src="https://placehold.it/30x30" style="width:70px" alt="Filet Mign" title="Filet Mign" class="preview">
                                                     </a>
                                                 </td>
-                                                <td class="text-left"> <a class="cart_product_name" href="product.html">{{$content->name}}</a> </td>
+                                                <td class="text-left"> <a class="cart_product_name" href="#">{{$content->name}}</a> </td>
                                                 <td class="text-center"> x{{$content->qty}} </td>
                                                 <td class="text-center"> GHS {{$content->price}} </td>
                                                 <td class="text-right">
-                                                    <a href="product.html" class="fa fa-edit"></a>
+                                                    <a href="#" class="fa fa-edit"></a>
                                                 </td>
                                                 <td class="text-right">
                                                     <a onclick="cart.remove('{{$content->rowId}}');" class="fa fa-times fa-delete"></a>

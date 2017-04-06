@@ -696,16 +696,18 @@ class StoreController extends Controller
 //        $user_id = Auth::user()->id;
             $store = Store::whereUserId($user_id)->first();
 
-
             Order::create([
                 'id' =>$order_id,
                 'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
                 'user_id' => Auth::user()->id
             ]);
 
+//            return \Gloudemans\Shoppingcart\Facades\Cart::content();
+
             foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
 
                 $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
+//                return $item->rowId;
 //            $text.= "$item->qty \n";
                 OrderItem::create([
                     'id' => Uuid::generate(),
