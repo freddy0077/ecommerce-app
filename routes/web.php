@@ -23,7 +23,7 @@ Route::get('/sms',function(){
 
 $menu = new \Lavary\Menu\Menu();
 $menu->make('MyNavBar', function($menu){
-    $menu->add('Home',array('url'=>''));
+    $menu->add('Home',array('url'=>'https://www.shopaholicks.com'));
 
     if(\App\ProductCategory::first()){
         foreach(\App\ProductCategory::all('id','name') as $category){
