@@ -27,7 +27,7 @@ $menu->make('MyNavBar', function($menu){
 
     if(\App\ProductCategory::first()){
         foreach(\App\ProductCategory::all('id','name') as $category){
-            $menu->add($category->name,array('url' => "category/$category->id"));
+            $menu->add($category->name,array('url' => "https://shopaholicks.com/category/$category->id"));
         }
     }
 
