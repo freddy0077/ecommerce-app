@@ -14,6 +14,7 @@ class ProductCategory extends Model
         'id' => 'string'
     ];
 
+    protected $table = 'product_categories';
     protected $fillable = [ 'id', 'user_id', 'name','image','slug','enable'];
 
     public function products()
