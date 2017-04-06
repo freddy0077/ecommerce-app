@@ -22,15 +22,18 @@ Route::get('/sms',function(){
 
 
 $menu = new \Lavary\Menu\Menu();
-
 $menu->make('MyNavBar', function($menu){
+//    if(\App\ProductCategory::first()){
+//        foreach(\App\ProductCategory::all('id','name') as $category){
+//            $menu->add($category->name,array('url' => "category/$category->id"));
+//        }
+//    }
     $menu->add('Home',array('url'=>''));
 
-    foreach(\App\ProductCategory::all('id','name') as $category){
-            $menu->add($category->name,array('url' => "category/$category->id"));
-    }
-        $menu->add('Blog',array('url'=>''));
+
+    $menu->add('Blog',array('url'=>''));
 });
+
 
 Route::get('/try',function(){
     return \Webpatser\Uuid\Uuid::generate();
