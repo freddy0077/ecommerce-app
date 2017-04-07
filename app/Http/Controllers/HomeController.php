@@ -101,6 +101,10 @@ class HomeController extends Controller
         return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores'));
     }
 
+    public function getSearchMarket(Request $request){
+
+    }
+
     public function getPrivacyPolicy(){
 
         return view('market.privacy_policy');

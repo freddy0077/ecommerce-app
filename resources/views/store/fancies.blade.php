@@ -53,11 +53,11 @@
                             <td class="text-right">
                                 <button class="btn btn-primary"
                                         title="" data-toggle="tooltip"
-                                        onclick="cart.add('{{$fancy->id}}', '{{$fancy->name}}',1,'{{$fancy->price}}','{{$user_id}}')"
-
+                                        onclick="cart.add('{{$fancy->id}}','{{$fancy->name}}',1,'{{$fancy->price}}','{{$user_id}}')"
                                         type="button" data-original-title="Add to Cart"><i class="fa fa-shopping-cart"></i>
                                 </button>
-                                <a class="btn btn-danger" title="" data-toggle="tooltip" href="http://localhost/2.2.0.0-compiled/index.html?route=account/wishlist&amp;remove=48"data-original-title="Remove"><i class="fa fa-times"></i></a>
+                                <a class="btn btn-danger" title="" data-toggle="tooltip"
+                                   href=""data-original-title="Remove"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
 

@@ -9,7 +9,7 @@
     <title>{{config('app.name')}}</title>
     <meta charset="utf-8">
     <meta name="keywords" content="" />
-    <meta name="author" content="Magentech">
+    <meta name="author" content="Evergreen Solutions">
     <meta name="robots" content="index, follow" />
 
     <!-- Mobile specific metas
@@ -43,12 +43,102 @@
     <link id="color_scheme" href="{{asset('frontend_2/css/home8.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/css/responsive.css')}}" rel="stylesheet">
 
+    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">--}}
+    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet">
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/type_8ahead.bundle.min.js"></script>--}}
+
     <!-- BEGIN PAGE FIRST SCRIPTS -->
     <script src="{{asset('backend/assets/global/plugins/pace/pace.min.js')}}.." type="text/javascript"></script>
     <!-- END PAGE FIRST SCRIPTS -->
     <!-- BEGIN PAGE TOP STYLES -->
     <link href="{{asset('backend/assets/global/plugins/pace/themes/pace-theme-big-counter.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE TOP STYLES -->
+
+
+
+    <style type="text/css">
+
+
+        /*.bs-example {*/
+        /*font-family: sans-serif;*/
+        /*position: relative;*/
+        /*margin: 100px;*/
+        /*}*/
+
+
+    </style>
+
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>--}}
+
+    <script>
+        var prefetch = [];
+
+        function buildSearch(_data){
+            $(".search-query").select2({
+                data: _data,
+                ajax: {
+                    url: "/search-query",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            address: params.term, // search term
+                            page: params.page
+                        };
+                    },
+
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                minimumInputLength: 2,
+                templateResult: formatRepo, // omitted for brevity, see the source of this page
+                templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+
+            });
+        }
+
+        buildSearch(prefetch);
+
+        function formatRepo (area) {
+            if (area.loading) return area.text;
+
+            var markup = "<div class='select2-result-repository clearfix'>" +
+                    "<div class='select2-result-repository__meta'>" +
+                    "<div class='select2-result-repository__title'>" + area.name + "</div>";
+
+            markup += "</div></div>";
+
+            return markup;
+        }
+
+        function formatRepoSelection (area) {
+            if(area.text){
+                return area.text;
+            }
+            return area.name;
+        }
+
+
+        $('.search-query').on('change',function(){
+            $('#search-form').submit();
+
+        })
+
+    </script>
 
 </head>
 
@@ -179,13 +269,17 @@
                                     </select>
                                 </div>
 
-                                <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="Enter keywords to search..." name="search">
+                                <input class="autosearch-input form-control search-query" type="text" value="" size="50" autocomplete="off" placeholder="Enter keywords to search..." name="search">
 								<span class="input-group-btn">
-								<button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+								<button type="submit" class="button-search btn btn-primary " name="submit_search"><i class="fa fa-search"></i></button>
 								</span>
                             </div>
                             <input type="hidden" name="route" value="product/search">
                         </form>
+                        {{--<form action="{{url('/search-market')}}" id="search-form">--}}
+                            {{--{!! csrf_field() !!}--}}
+                        {{--<input type="text" class="typeahead" name="term" style=" border-radius: 7px;">--}}
+                        {{--</form>--}}
                     </div>
                     <!-- //Search -->
 
@@ -540,8 +634,6 @@
 
     </footer>
     <!-- //end Footer Container -->
-
-
 </div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="create-shop-modal">
@@ -632,7 +724,6 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-
 <link rel='stylesheet' property='stylesheet'  href='{{asset('frontend_2/css/themecss/cpanel.css')}}' type='text/css' media='all' />
 <!-- Include Libs & Plugins
 ============================================ -->
@@ -649,6 +740,10 @@
 <script type="text/javascript" src="{{asset('frontend_2/js/jquery-ui/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend_2/js/modernizr/modernizr-2.6.2.min.js')}}"></script>
 <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=58d0697a98b6170011a09ff6&product=sticky-share-buttons"></script>
+
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
 
 
 <!-- Theme files
@@ -709,6 +804,80 @@
 
 
     })
+
+//    $('.typeahead').on('change',function(){
+//        alert('hello alert');
+//        $('#search-form').submit();
+//
+//    })
+
+    var prefetch = [];
+
+    function buildSearch(_data){
+        $(".search-query").select2({
+            data: _data,
+            ajax: {
+                url: "/search-query",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        address: params.term, // search term
+                        page: params.page
+                    };
+                },
+
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 2,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+
+        });
+    }
+
+    buildSearch(prefetch);
+
+    function formatRepo (area) {
+        if (area.loading) return area.text;
+
+        var markup = "<div class='select2-result-repository clearfix'>" +
+                "<div class='select2-result-repository__meta'>" +
+                "<div class='select2-result-repository__title'>" + area.name + "</div>";
+
+        markup += "</div></div>";
+
+        return markup;
+    }
+
+    function formatRepoSelection (area) {
+        if(area.text){
+            return area.text;
+        }
+        return area.name;
+    }
+
+
+    $('.search-query').on('change',function(){
+        $('#search-form').submit();
+
+    })
+
 
 
 </script>

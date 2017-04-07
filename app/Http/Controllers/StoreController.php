@@ -638,7 +638,8 @@ class StoreController extends Controller
     }
 
     public function postAddToCart($id,$name,$qty,$price,$user_id){
-        \Gloudemans\Shoppingcart\Facades\Cart::add($id, $name, $qty, $price, ['size' => 'large']);
+
+        \Gloudemans\Shoppingcart\Facades\Cart::add($id, $name, $qty, $price, ['user' => "$user_id"]);
 
         return view('store.partials.shopping_cart_partial',compact('user_id'));
     }
@@ -679,7 +680,8 @@ class StoreController extends Controller
 
         $store = Store::whereUserId($user_id)->first();
         $slug = $store->slug;
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::all()
+        ;
 
         return view('store.checkout',compact('user','store','user_id','slug','categories'));
     }
@@ -701,7 +703,6 @@ class StoreController extends Controller
                 'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
                 'user_id' => Auth::user()->id
             ]);
-
 //            return \Gloudemans\Shoppingcart\Facades\Cart::content();
 
             foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){

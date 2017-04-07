@@ -2,6 +2,28 @@
 
 @section('scripts')
 
+
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>--}}
+
+        {{--<script>--}}
+            {{--var products = new Bloodhound({--}}
+                {{--hint: false,--}}
+                {{--datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),--}}
+                {{--queryTokenizer: Bloodhound.tokenizers.whitespace,--}}
+                {{--remote: {--}}
+                    {{--url: '/search-query?q=%QUERY%',--}}
+                    {{--wildcard: '%QUERY%'--}}
+                {{--}--}}
+            {{--});--}}
+
+            {{--//                     Initializing the typeahead with remote dataset without highlighting--}}
+            {{--$('.typeahead').typeahead(null, {--}}
+                {{--name: 'products',--}}
+                {{--source: products,--}}
+                {{--limit: 20 /* Specify max number of suggestions to be displayed */--}}
+            {{--});--}}
+        {{--</script>--}}
+
 @endsection
 
 @section('content')
@@ -470,13 +492,13 @@
                                                     <div class="caption">
                                                         <h4><a href="#">{{$deal->name}}</a></h4>
                                                         <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                                <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                                            </div>
+                                                            {{--<div class="rating-box">--}}
+                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                                {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                                            {{--</div>--}}
                                                         </div>
 
                                                         <div class="price">

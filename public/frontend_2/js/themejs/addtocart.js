@@ -83,7 +83,6 @@
 						'',
 						'<h3><a href="#">' + name + '</a> added to <a hcref="#"> cart</a>!</h3>',
 						'success');
-
 			})
 
 		},
@@ -97,11 +96,8 @@
 						//'<img src="images/products/"'+product_id+'.jpg' alt="">',
 						'',
 						//'<h3><a href="#">'+name+'</a> added to <a href="#"> cart</a>!</h3>',
-						'<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>',
-						'success');
-
+						'<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>','success');
 			})
-
 		},
 
 		'confirmOrder': function (user_id) {
@@ -120,26 +116,19 @@
 						$('.main-container').html(data)
 					},3000)
 				}
-
 			})
-
 		},
 
 		'checkoutRemove': function (product_id,user_id) {
-
-			$.post('/store/checkout-remove-from-cart/'+product_id,function(data){
+            $.post('/store/checkout-remove-from-cart/'+product_id,function(data){
 				$('#checkout-shopping-cart').html(data);
 				$('#shopping-cart').load('/store/cart-view/'+user_id);
 
-				addProductNotice('Product removed from cart',
-						'', '<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>','success');
+				addProductNotice('Product removed from cart','', '<h3><a href="#">an item</a> removed from <a href="#"> cart</a>!</h3>','success');
 				//alert('removed an item from cart');
 			});
-
 		},
 	}
-
-
 
 	var fancy = {
 		'add': function(product_id) {
@@ -184,4 +173,3 @@
 			theme: type
 		});
 	}
-

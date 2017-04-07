@@ -88,9 +88,9 @@ Route::get('/search-query', 'HomeController@getSearchQuery');
 
 Route::get('/quick-view-product/{id}','HomeController@getQuickView');
 
-
-
 Route::get('/profile','HomeController@getProfile');
+
+Route::get('/search-market','HomeController@getSearchMarket');
 
 
 Route::get('/follow-user/{id}','HomeController@getFollowUser');

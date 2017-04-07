@@ -339,6 +339,11 @@
 <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
 <script>
 
+    $('.remove-column').on('click',function(){
+        alert('hello');
+    })
+
+
     // Enable pusher logging - don't include this in production
 //    Pusher.logToConsole = true;
 //

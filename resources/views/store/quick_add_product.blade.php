@@ -4,7 +4,15 @@
     <script>
 
 
-        $('#add-columns').on('click', function () {
+        function loadScripts(){
+            $('.remove-column').on('click',function(){
+                alert('hello');
+            })
+
+        }
+
+
+        $('.add-columns').on('click', function () {
 
             var columns = $('#product_number').val();
 
@@ -73,8 +81,8 @@
         $('#category').on('change',function(){
             var category_value = $(this).val();
             $( "#sub_category" ).load( "/store/sub-categories-partial/"+category_value );
-
         })
+
     </script>
 @endsection
 
@@ -145,20 +153,35 @@
 
                                         <div class="form-group" id="columns">
                                             {{--<label class="control-label col-md-3"><button class="btn btn-success text-center" id="add-columns">Add Columns</button></label>--}}
-                                           <div class="col-md-2"></div>
+                                           <div class="col-md-2 col-sm-2"></div>
 
-                                            <div class="col-md-4">
+
+                                            <div class="col-md-4 col-sm-4 ">
                                                 <br>
                                                     {{--<label class="control-label col-md-6">Number of Products </label>--}}
                                                     <input type="number" class="form-control" name="product_number" id="product_number" placeholder="Number of Products">
                                                     {{--<div class="help-block"> </div>--}}
                                             </div>
                                             <br>
-                                            <div class="col-md-2">
-                                                <label class="control-label">
-                                                    <button class="btn btn-success text-center" id="add-columns">
-                                                        Add Columns</button>
-                                                </label>
+
+                                            <div class="hidden-xs hidden-sm">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <label class="control-label">
+                                                        <button class="btn btn-success text-center add-columns" id="add-columns">
+                                                            Add Columns</button>
+                                                    </label>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="hidden-lg hidden-md" style="margin-left: 100px;">
+                                                <div class="col-md-2 col-sm-4">
+                                                    <label class="control-label">
+                                                        <button class="btn btn-success text-center add-columns" id="add-columns">
+                                                            Add Columns</button>
+                                                    </label>
+
+                                                </div>
 
                                             </div>
                                             <div class="col-md-4"></div>
