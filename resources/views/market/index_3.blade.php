@@ -498,9 +498,7 @@
 
                                                         @endif
 
-
-
-                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}')" data-toggle="tooltip" title="Add to fancies">
+                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
                                                             @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
                                                                 <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
                                                             @else
@@ -510,7 +508,7 @@
 
                                                         @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
                                                             <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                                <i class="fa fa-thumbs-down like-toggle-{{$product->id}}"></i>
+                                                                <i class="fa fa-thumbs-up like-toggle-{{$product->id}}" style="color: green;"></i>
                                                                 <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
                                                             </button>
                                                         @else

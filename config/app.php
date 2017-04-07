@@ -188,6 +188,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        jeremykenedy\laravelusers\LaravelUsersServiceProvider::class,
 
     ],
 
@@ -247,6 +249,8 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'FeedManager'  => GetStream\StreamLaravel\Facades\FeedManager::class,
         'Menu'       => Lavary\Menu\Facade::class,
+//        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

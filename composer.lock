@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "994ac1b3fe755c22d47c7873ce20aea7",
-    "content-hash": "65fbb57fa6041d0e4fab5759b722e87c",
+    "hash": "a1a11500d198f3fa7e215202b2f45efd",
+    "content-hash": "e2aab70ba25ffe7c2cd79a5c72444be5",
     "packages": [
         {
             "name": "99designs/http-signatures",
@@ -997,6 +997,48 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "jeremykenedy/laravel-users",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/laravel-users.git",
+                "reference": "e4087cb5f660afaa7be1acd4deaee023b3ddbded"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/laravel-users/zipball/e4087cb5f660afaa7be1acd4deaee023b3ddbded",
+                "reference": "e4087cb5f660afaa7be1acd4deaee023b3ddbded",
+                "shasum": ""
+            },
+            "require": {
+                "laravelcollective/html": "^5.3.0",
+                "php": ">=5.6.4"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\laravelusers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jeremykenedy",
+                    "email": "jeremykenedy@gmail.com"
+                }
+            ],
+            "description": "Laravel Users Management Package",
+            "keywords": [
+                "Users",
+                "laravel",
+                "management"
+            ],
+            "time": "2017-03-17 02:17:07"
         },
         {
             "name": "laravel/framework",
