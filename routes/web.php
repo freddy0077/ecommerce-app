@@ -107,6 +107,10 @@ Route::post('/like-it/{product_id}','HomeController@postLikeIt');
 
 Route::post('/watch-shop/{product_id}/{store_id}/{user_id}','HomeController@postWatchShop');
 
+Route::get('form',function(){
+    return view('auth.login_2');
+});
+
 
 
 
