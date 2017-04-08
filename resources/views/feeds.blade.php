@@ -396,7 +396,9 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col2">
-                                                                                <div class="date"> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}} </div>
+                                                                                <div class="date">
+                                                                                    {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}
+                                                                                </div>
 
                                                                             </div>
                                                                         </li>

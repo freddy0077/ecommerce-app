@@ -92,6 +92,10 @@ Route::get('/profile','HomeController@getProfile');
 
 Route::get('/search-market','HomeController@getSearchMarket');
 
+Route::get('/all-feeds','HomeController@getAllFeeds');
+//   return view('all_feeds');
+//});
+
 
 Route::get('/follow-user/{id}','HomeController@getFollowUser');
 

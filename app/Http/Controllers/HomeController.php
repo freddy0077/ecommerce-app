@@ -175,6 +175,36 @@ class HomeController extends Controller
         return view('feeds',compact('feeds','following','user','followers'));
     }
 
+    public function getAllFeeds(Request $request){
+        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');
+
+        $user = Auth::user();
+        if($user->has_store){
+            $store = Store::whereUserId($user->id)->first();
+            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->get();
+            $followers = $builder->whereStoreId($store->id)->get();
+            $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')->where('watched_shops.user_id',$user->id)->get();
+//
+        }else {
+            $feeds = collect();
+            $followers = collect();
+            $following = collect();
+        }
+
+//        $stream = new StreamFeed($user->id);
+//        $stream->deleteFeed();
+//         $activities = $stream->getActivities()['results'];
+//         $following   = $stream->getFollowing()['results'];
+//         $followers   = $stream->getFollowers()['results'];
+
+
+        if($request->ajax()){
+            return view('partials.feed_partials',compact('feeds','activities','following','followers'));
+        }
+
+        return view('all_feeds',compact('feeds','following','user','followers'));
+    }
+
     public function postSaveProfile(Request $request){
         $user = Auth::user();
         User::find($user->id)->update([
