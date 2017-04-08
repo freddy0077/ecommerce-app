@@ -600,7 +600,7 @@ class StoreController extends Controller
 
             }
 
-            return ['message'=>'successful saved '.count($names).' product(s)','status'=>200];
+            return ['message'=>'successful saved '.count($names).' product(s)','status'=>200,'products_limit'=>$products_limit];
         }
 
 

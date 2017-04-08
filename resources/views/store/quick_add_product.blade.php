@@ -12,6 +12,7 @@
         }
 
 
+
         $('.add-columns').on('click', function () {
 
             var columns = $('#product_number').val();
@@ -70,10 +71,30 @@
 
                     }
                 }).success(function(data){
-//                    alert(data.message);
+                    if(data.limit != undefined){
+                        swal({
+                                    title: "Sorry",
+                                    text: "You have exceeded your products threshold",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Upgrade Now!",
+                                    closeOnConfirm: false
+                                },
+                                function(){
+                                    swal("Great!", "You have decided to upgrade. redirecting...", "success");
+                                    setTimeout(function(){
+                                        location.href="marketplace-signup"
+                                    },2000)
+                                });
+                    }else {
+//                        alert(data.limit);
                     swal("Good job!", data.message, "success")
                     location.href="/store/all-products";
 
+
+                    }
+//
                 });
             }));
 //        });
