@@ -41,6 +41,7 @@ class VerifyCsrfToken extends BaseVerifier
         'store/cart-view/*',
         'store/marketplace-packages/*',
         '/store/add-store-banner',
+        'store/product-update-published',
         '/direct-pay/*',
         'admin/confirm-token/*',
         'admin/add-new-package',

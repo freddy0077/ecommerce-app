@@ -424,14 +424,14 @@ class StoreController extends Controller
                 'image' => $input['imagename'],
                 'sub_category_id' => $request->sub_category,
                 'feature' => $request->feature == 'on'? true: false,
-                'publish' => $request->publish == 'on' ? true : false,
+                'published' => $request->published == 'on' ? true : false,
                 'show_buy_button' => $request->show_buy_button == 'on' ? true : false,
                 'ad' => false,
                 'store_id' => $store_id->id
             ]);
 
-            $stream = new StreamFeed($store_id->id);
-            $stream->addActivity($store_id->name,'added','new products');
+//            $stream = new StreamFeed($store_id->id);
+//            $stream->addActivity($store_id->name,'added','new products');
         }
     }
 
@@ -511,7 +511,7 @@ class StoreController extends Controller
                 'image' => $input['imagename'],
                 'sub_category_id' => $request->sub_category,
                 'feature' => $request->feature == 'on'? true: false,
-                'publish' => $request->publish == 'on' ? true : false,
+                'published' => $request->published == 'on' ? true : false,
                 'sale'    => $request->sale == 'on' ? true : false,
                 'sale_price' => $request->sale_price
             ]);
@@ -524,12 +524,36 @@ class StoreController extends Controller
                 'price' => $request->price,
                 'sub_category_id' => $request->sub_category,
                 'feature' => $request->feature == 'on'? true: false,
-                'publish' => $request->publish == 'on' ? true : false,
+                'published' => $request->published == 'on' ? true : false,
                 'sale'    => $request->sale == 'on' ? true : false,
                 'sale_price' => $request->sale_price
             ]);
 
         }
+    }
+
+    public function postProductUpdatePublished(Request $request){
+
+        switch($request->name){
+            case"published":
+                Product::find($request->pk)->update([
+                    'published' => $request->value
+                ]);
+                break;
+            case"price":
+                Product::find($request->pk)->update([
+                    'price' => $request->value
+                ]);
+                break;
+            case"name":
+                Product::find($request->pk)->update([
+                    'name' => $request->value
+                ]);
+                break;
+        }
+
+
+
     }
 
       public function postDeleteProduct($product_id){
@@ -606,12 +630,30 @@ class StoreController extends Controller
 
     }
 
-    public function getAllProducts(){
+    public function getAllProducts(Request $request){
 
-        $user = Auth::user();
-        $products = Product::leftJoin('stores','stores.id','=','products.store_id')
-         ->where('products.user_id',$user->id)
-        ->selectRaw('products.*')->paginate(10);
+          $user = Auth::user();
+        $builder = Product::leftJoin('stores','stores.id','=','products.store_id')
+            ->where('products.user_id',$user->id)
+            ->selectRaw('products.*');
+
+        switch($request->query('order')){
+
+            case"published":
+                $products = $builder->orderBy('products.published','desc')->paginate();
+                break;
+            case"price":
+                $products = $builder->orderBy('products.price','desc')->paginate();
+                break;
+            case"name":
+                $products = $builder->orderBy('products.name','desc')->paginate();
+                break;
+            default:
+                $products=$builder->orderBy('products.created_at','desc')->paginate();
+        }
+
+
+//            $products->paginate(10);
 
         return view('store.all_products',compact('products'));
     }
@@ -790,7 +832,7 @@ class StoreController extends Controller
     }
 
     public function getPackages(){
-        $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->get();
+        $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->take(4)->get();
         $user = Auth::user();
 
         return view('store.packages',compact('packages','user'));

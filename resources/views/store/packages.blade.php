@@ -85,7 +85,7 @@
                         </li>
                         <li>
                             <a href="#">Packages</a>
-                            <i class="fa fa-circle"></i>
+                            {{--<i class="fa fa-circle"></i>--}}
                         </li>
                         {{--<li>--}}
                             {{--<span>General</span>--}}

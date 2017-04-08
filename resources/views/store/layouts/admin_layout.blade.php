@@ -22,6 +22,9 @@
     <link href="{{secure_asset('backend/assets/global/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{secure_asset('backend/assets/global/plugins/uniform/css/uniform.default.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{secure_asset('backend/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <link href="{{asset('backend/assets/global/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE FIRST SCRIPTS -->
@@ -158,6 +161,8 @@
             <!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
             <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
             <div class="hor-menu  ">
+
+
                 @if(!\Illuminate\Support\Facades\Auth::user()->has_store)
                     <ul class="nav navbar-nav">
 
@@ -170,6 +175,8 @@
 
                     </ul>
                     @else
+
+
 
                     <ul class="nav navbar-nav">
                         @if(\Illuminate\Support\Facades\Auth::user()->admin)
@@ -319,6 +326,8 @@
 <script src="{{secure_asset('backend/assets/layouts/layout3/scripts/layout.min.js')}}" type="text/javascript"></script>
 <script src="{{secure_asset('backend/assets/layouts/layout3/scripts/demo.min.js')}}" type="text/javascript"></script>
 <script src="{{secure_asset('backend/assets/layouts/global/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
+
+<script src="{{asset('backend/assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript"></script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js" type="text/javascript"></script>

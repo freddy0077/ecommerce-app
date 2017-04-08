@@ -1,7 +1,37 @@
 @extends('store.layouts.admin_layout')
 
 @section('scripts')
+    <script src="{{asset('backend/assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js')}}" type="text/javascript"></script>
+
     <script>
+
+        $('.published').editable({
+            mode: 'inline',
+            name: 'published',
+            url : '/store/product-update-published',
+            source: [
+                {value: 1, text: 'Yes'},
+                {value: 0, text: 'No'}
+            ]
+        });
+
+        $('.price').editable({
+            mode: 'inline',
+            name: 'price',
+            url : '/store/product-update-published',
+            validate: function(value) {
+                if($.trim(value) == '') return 'This field is required';
+            },
+        });
+
+        $('.name').editable({
+            mode: 'inline',
+            name: 'name',
+            url : '/store/product-update-published',
+            validate: function(value) {
+                if($.trim(value) == '') return 'This field is required';
+            },
+        });
 
         $("#product-form").on('submit',(function(e) {
             e.preventDefault();
@@ -49,7 +79,7 @@
                         $.post('{{url('/store/delete-product')}}/'+product_id,function(){
 
                         }).success(function(data){
-                            swal("Deleted!", "Your "+ name+ " file has been deleted.", "success");
+                            swal("Deleted!", "Your "+ name+ " product has been deleted.", "success");
                             location.reload();
                         })
 
@@ -118,7 +148,7 @@
 
                                   @else
 
-                                    <div class="col-md-12">
+                                    {{--<div class="col-md-12">--}}
                                         <!-- BEGIN BORDERED TABLE PORTLET-->
                                         <div class="portlet light portlet-fit ">
                                             <div class="portlet-title">
@@ -141,24 +171,48 @@
                                                         <thead>
                                                         <tr class="uppercase">
                                                             <th> # </th>
-                                                            <th> Name </th>
-                                                            <th> Price </th>
+                                                            <th>Image</th>
+                                                            <th><a href="{{url('/store/all-products?order=name')}}"> Name</a> </th>
+                                                            <th><a href="{{url('/store/all-products?order=price')}}"> Price </a></th>
                                                             <th> Description </th>
-                                                            <th> Feature </th>
+                                                            <th> <a href="{{url('/store/all-products?order=published')}}">Published </a></th>
                                                             <th> Action </th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                        <?php $i = $products->firstItem() ?>
+<!--                                                        --><?php $i = $products->firstItem() ?>
                                                         @foreach($products as $product)
 
-                                                            <tr>
-                                                                <td>{{$i++}}</td>
-                                                                <td>{{$product->name}}</td>
-                                                                <td>{{$product->price}}</td>
+                                                            <tr {{$product->published==false ? "class=bg-warning":""}}>
+                                                                <td>
+                                                                    {{$i++}}
+                                                                </td>
+                                                                <td><img src='{{asset("images/products/$product->image")}}' class="img-rounded" width="80" height="80"></td>
+
+                                                                <td>
+                                                                    <a href="javascript:;" class="name" id="price" data-type="text" data-pk="{{$product->id}}" data-value="" >
+                                                                        {{$product->name}}
+                                                                    </a>
+                                                                </td>
+
+                                                                {{--<td>{{$product->name}}</td>--}}
+
+                                                                <td>
+                                                                    <a href="javascript:;" class="price" id="price" data-type="text" data-pk="{{$product->id}}" data-value="" >
+                                                                        {{$product->price}}
+                                                                    </a>
+                                                                </td>
+
+                                                                {{--<td>{{$product->price}}</td>--}}
                                                                 <td>{{$product->description}}</td>
-                                                                <td>{{$product->feature == true ? "Yes" : "No"}}</td>
+
+                                                                <td>
+                                                                    <a href="javascript:;" class="published" id="published" data-type="select" data-pk="{{$product->id}}" data-value="" data-original-title="Select State">
+                                                                        {{$product->published == true ? "Yes" : "No"}}
+                                                                    </a>
+                                                                </td>
+                                                                {{--<td>{{$product->published == true ? "Yes" : "No"}}</td>--}}
                                                                 <td>
                                                                     <a href="{{url('/store/edit-product',$product->id)}}" class="btn btn-success">edit</a>
                                                                     <button class="btn btn-danger delete" data-id="{{$product->id}}" data-name="{{$product->name}}">delete</button>
@@ -196,7 +250,7 @@
             <i class="icon-login"></i>
         </a>
         <!-- END QUICK SIDEBAR -->
-    </div>
+    {{--</div>--}}
 
 
 @endsection

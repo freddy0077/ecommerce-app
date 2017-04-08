@@ -11,8 +11,11 @@
     <!-- END PAGE LEVEL SCRIPTS -->
     <script>
 
+//        $("#blockui_sample_2_3").click(function(){App.startPageLoading({message:"Please wait..."}),window.setTimeout(function(){App.stopPageLoading()},2e3)});
 
-            $("#product-form").on('submit',(function(e) {
+
+
+                $("#product-form").on('submit',(function(e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -147,6 +150,10 @@
                                             <div class="form-body">
                                                 <div class="form-group">
                                                 </div>
+
+                                                {{--<p>--}}
+                                                    {{--<a href="javascript:;" class="btn btn-outline sbold red" id="blockui_sample_2_3"> Block Page Without Background Overlay </a>--}}
+                                                {{--</p>--}}
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Product name </label>
                                                     <div class="col-md-4">
@@ -212,7 +219,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Publish</label>
                                                     <div class="col-md-4">
-                                                        <input type="checkbox" class="form-control" name="publish">
+                                                        <input type="checkbox" class="form-control" name="published">
                                                         <span> Check to publish the product </span>
                                                     </div>
                                                 </div>

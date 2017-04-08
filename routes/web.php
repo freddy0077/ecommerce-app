@@ -31,8 +31,34 @@ $menu->make('MyNavBar', function($menu){
         }
     }
 
-
     $menu->add('Blog',array('url'=>''));
+});
+
+$menu = new \Lavary\Menu\Menu();
+$menu->make('AdminNav', function($menu){
+    if(\Illuminate\Support\Facades\Auth::check()  && \Illuminate\Support\Facades\Auth::user()->has_store){
+
+        if(\Illuminate\Support\Facades\Auth::user()->admin){
+            $menu->add('Admin Dashboard',array('url'=>'/admin/dashboard'));
+        }
+
+        $menu->add('Dashboard',array('url'=>'/store/dashboard'));
+        $menu->add('Orders',array('url'=>'/store/orders'));
+        $menu->add('Products',array('url'=>'/store/add-product'));
+
+        $menu->add('MarketPlace',array('url'=>'/store/marketplace-signup'));
+        $menu->add('Settings',array('url'=>'/store/store-settings'));
+        if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->has_store){
+            $id = \Illuminate\Support\Facades\Auth::id();
+            $store = \App\Store::whereUserId($id)->first();
+            $menu->add('My Shop',array('url'=>"stores/$store->slug/$id"));
+        }
+
+    }elseif(\Illuminate\Support\Facades\Auth::check() &&!\Illuminate\Support\Facades\Auth::user()->has_store ) {
+        $menu->add('Back Home ',array('url'=>''));
+    }
+
+
 });
 
 
@@ -176,6 +202,8 @@ Route::group(['middleware' => 'auth','prefix'=>'store'], function () {
     Route::get('/edit-product/{product_id}','StoreController@getEditProduct');
 
     Route::post('/update-product/{product_id}','StoreController@postUpdateProduct');
+
+    Route::post('/product-update-published','StoreController@postProductUpdatePublished');
 
     Route::post('/delete-product/{product_id}','StoreController@postDeleteProduct');
 

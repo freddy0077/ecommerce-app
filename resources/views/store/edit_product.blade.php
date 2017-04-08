@@ -308,8 +308,8 @@
                                                 <div class="form-group">
                                                 <label class="control-label col-md-3">Publish</label>
                                                 <div class="col-md-4">
-                                                    <input type="checkbox" class="form-control" name="publish" {{$product->publish == true ?"checked" :""}}>
-                                                    <span> Check to publish the product </span>
+                                                    <input type="checkbox" class="form-control" name="published" {{$product->published == true ?"checked" :""}}>
+                                                    <span> Check to publish this product </span>
                                                 </div>
                                             </div>
 
@@ -318,7 +318,7 @@
                                                 <label class="control-label col-md-3">Feature</label>
                                                 <div class="col-md-4">
                                                     <input type="checkbox" class="form-control" name="feature" {{$product->feature == true ?"checked" :""}}>
-                                                    <span> Check to feature this product on your shop </span>
+                                                    <span> Check to feature this product in your shop </span>
                                                 </div>
 
                                             </div>
