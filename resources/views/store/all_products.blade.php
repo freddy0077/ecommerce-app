@@ -46,12 +46,13 @@
                         closeOnConfirm: false
                     },
                     function(){
-
                         $.post('{{url('/store/delete-product')}}/'+product_id,function(){
 
+                        }).success(function(data){
+                            swal("Deleted!", "Your "+ name+ " file has been deleted.", "success");
+                            location.reload();
                         })
 
-                        swal("Deleted!", "Your "+ name+ " file has been deleted.", "success");
                     });
         })
 
@@ -117,63 +118,66 @@
 
                                   @else
 
-                                <!-- BEGIN PORTLET-->
-                                <div class="portlet light form-fit ">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-social-dribbble font-green"></i>
-                                            <span class="caption-subject font-green bold uppercase">All Products</span>
+                                    <div class="col-md-12">
+                                        <!-- BEGIN BORDERED TABLE PORTLET-->
+                                        <div class="portlet light portlet-fit ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="icon-settings font-red"></i>
+                                                    <span class="caption-subject font-red sbold uppercase">ALL PRODUCTS</span>
+                                                </div>
+                                                {{--<div class="actions">--}}
+                                                    {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
+                                                        {{--<label class="btn grey-salsa btn-sm active">--}}
+                                                            {{--<input type="radio" name="options" class="toggle" id="option1">Actions</label>--}}
+                                                        {{--<label class="btn grey-salsa btn-sm">--}}
+                                                            {{--<input type="radio" name="options" class="toggle" id="option2">Settings</label>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="table-scrollable table-scrollable-borderless">
+                                                    <table class="table table-hover table-light">
+                                                        <thead>
+                                                        <tr class="uppercase">
+                                                            <th> # </th>
+                                                            <th> Name </th>
+                                                            <th> Price </th>
+                                                            <th> Description </th>
+                                                            <th> Feature </th>
+                                                            <th> Action </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        <?php $i = $products->firstItem() ?>
+                                                        @foreach($products as $product)
+
+                                                            <tr>
+                                                                <td>{{$i++}}</td>
+                                                                <td>{{$product->name}}</td>
+                                                                <td>{{$product->price}}</td>
+                                                                <td>{{$product->description}}</td>
+                                                                <td>{{$product->feature == true ? "Yes" : "No"}}</td>
+                                                                <td>
+                                                                    <a href="{{url('/store/edit-product',$product->id)}}" class="btn btn-success">edit</a>
+                                                                    <button class="btn btn-danger delete" data-id="{{$product->id}}" data-name="{{$product->name}}">delete</button>
+
+                                                                </td>
+                                                            </tr>
+
+                                                        @endforeach
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
-                                        {{--<div class="actions">--}}
-                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
-                                                {{--<i class="icon-cloud-upload"></i>--}}
-                                            {{--</a>--}}
-                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
-                                                {{--<i class="icon-wrench"></i>--}}
-                                            {{--</a>--}}
-                                            {{--<a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">--}}
-                                                {{--<i class="icon-trash"></i>--}}
-                                            {{--</a>--}}
-                                        {{--</div>--}}
+                                        <div class="text-center">{{$products}}</div>
+
+                                        <!-- END BORDERED TABLE PORTLET-->
                                     </div>
-                                    <div class="portlet-body form">
 
-                                        <!-- BEGIN FORM-->
-                                        <table class="table table-bordered">
-
-                                            <tr>
-                                                <th>No.</th>
-                                                <th>Name</th>
-                                                <th>Price</th>
-                                                <th>Description</th>
-                                                <th>Feature</th>
-                                                <th>Action</th>
-                                            </tr>
-
-                                            <?php $i = $products->firstItem() ?>
-                                            @foreach($products as $product)
-
-                                            <tr>
-                                                <td>{{$i++}}</td>
-                                                <td>{{$product->name}}</td>
-                                                <td>{{$product->price}}</td>
-                                                <td>{{$product->description}}</td>
-                                                <td>{{$product->feature == true ? "Yes" : "No"}}</td>
-                                                <td>
-                                                    <a href="{{url('/store/edit-product',$product->id)}}" class="btn btn-success">edit</a>
-                                                    <button class="btn btn-danger delete" data-id="{{$product->id}}" data-name="{{$product->name}}">delete</button>
-
-                                                </td>
-                                            </tr>
-
-                                            @endforeach
-                                        </table>
-                                        <!-- END FORM-->
-                                    </div>
-                                    <div class="text-center">{{$products}}</div>
-
-                                </div>
-                                <!-- END PORTLET-->
                                 @endif
                             </div>
                         </div>
@@ -184,53 +188,13 @@
             </div>
             <!-- END PAGE CONTENT BODY -->
             <!-- END CONTENT BODY -->
+
         </div>
         <!-- END CONTENT -->
         <!-- BEGIN QUICK SIDEBAR -->
         <a href="javascript:;" class="page-quick-sidebar-toggler">
             <i class="icon-login"></i>
         </a>
-        <div class="page-quick-sidebar-wrapper" data-close-on-body-click="false">
-            <div class="page-quick-sidebar">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="javascript:;" data-target="#quick_sidebar_tab_1" data-toggle="tab"> Users
-                            <span class="badge badge-danger">2</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-target="#quick_sidebar_tab_2" data-toggle="tab"> Alerts
-                            <span class="badge badge-success">7</span>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> More
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-bell"></i> Alerts </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-info"></i> Notifications </a>
-                            </li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-speech"></i> Activities </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="javascript:;" data-target="#quick_sidebar_tab_3" data-toggle="tab">
-                                    <i class="icon-settings"></i> Settings </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
         <!-- END QUICK SIDEBAR -->
     </div>
 

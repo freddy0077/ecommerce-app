@@ -116,57 +116,58 @@
                                     </div>
 
                                     @else
-                                            <!-- BEGIN PORTLET-->
-                                    <div class="portlet light form-fit ">
-                                        <div class="portlet-title">
-                                            <div class="caption">
-                                                <i class="icon-social-dribbble font-green"></i>
-                                                <span class="caption-subject font-green bold uppercase">All Orders</span>
+
+                                    <div class="col-md-12">
+                                        <!-- BEGIN BORDERED TABLE PORTLET-->
+                                        <div class="portlet light portlet-fit ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="icon-settings font-red"></i>
+                                                    <span class="caption-subject font-red sbold uppercase">ALL ORDERS</span>
+                                                </div>
+                                                {{--<div class="actions">--}}
+                                                {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
+                                                {{--<label class="btn grey-salsa btn-sm active">--}}
+                                                {{--<input type="radio" name="options" class="toggle" id="option1">Actions</label>--}}
+                                                {{--<label class="btn grey-salsa btn-sm">--}}
+                                                {{--<input type="radio" name="options" class="toggle" id="option2">Settings</label>--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
                                             </div>
-                                            <div class="actions">
-                                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                    <i class="icon-cloud-upload"></i>
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                    <i class="icon-wrench"></i>
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
-                                                    <i class="icon-trash"></i>
-                                                </a>
+                                            <div class="portlet-body">
+                                                <div class="table-scrollable table-scrollable-borderless">
+                                                    <table class="table table-hover table-light table-bordered">
+                                                        <thead>
+                                                        <tr class="uppercase">
+                                                            <th> # </th>
+                                                            <th> Name </th>
+                                                            <th> Amount </th>
+                                                            <th> Date </th>
+                                                            <th> Action </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php $i = $orders->firstItem() ?>
+                                                        @foreach($orders as $order)
+
+                                                            <tr>
+                                                                <td>{{$i++}}</td>
+                                                                <td>{{$order->name}}</td>
+                                                                <td>GHS {{$order->amount }}</td>
+                                                                <td>{{$order->created_at}}</td>
+                                                                <td><a href="{{url('/admin/order-items',$order->id)}}" class="btn btn-success">View</a></td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="portlet-body form">
-                                            <!-- BEGIN FORM-->
-                                            <table class="table table-bordered">
-
-                                                <tr>
-                                                    <td>No.</td>
-                                                    <th>Name</th>
-                                                    <th>Amount</th>
-                                                    <th>Date</th>
-                                                    <th>Action</th>
-                                                </tr>
-
-                                                <?php $i = $orders->firstItem() ?>
-                                                @foreach($orders as $order)
-
-                                                    <tr>
-                                                        <td>{{$i++}}</td>
-                                                        <td>{{$order->name}}</td>
-                                                        <td>GHS {{$order->amount }}</td>
-                                                        <td>{{$order->created_at}}</td>
-                                                        <td><a href="{{url('/admin/order-items',$order->id)}}" class="btn btn-success">View</a></td>
-                                                    </tr>
-                                                @endforeach
-
-
-                                            </table>
-                                            <!-- END FORM-->
                                         </div>
                                         <div class="text-center">{{$orders}}</div>
 
+                                        <!-- END BORDERED TABLE PORTLET-->
                                     </div>
-                                    <!-- END PORTLET-->
+
                                 @endif
                             </div>
                         </div>
