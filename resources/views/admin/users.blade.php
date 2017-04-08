@@ -31,87 +31,116 @@
 
     @section('content')
             <!-- BEGIN PAGE BREADCRUMBS -->
-    <ul class="page-breadcrumb breadcrumb">
-        <li>
-            <a href="index-2.html">Home</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="#">UI Features</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        {{--<li>--}}
-        {{--<span>Tiles</span>--}}
-        {{--</li>--}}
-    </ul>
-    <!-- END PAGE BREADCRUMBS -->
 
+    <div class="page-container">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN PAGE CONTENT BODY -->
+            <div class="page-content">
+                <div class="container">
+                    <!-- BEGIN PAGE BREADCRUMBS -->
+                    <ul class="page-breadcrumb breadcrumb">
+                        {{--<li>--}}
+                        {{--<a href="/">Home</a>--}}
+                        {{--<i class="fa fa-circle"></i>--}}
+                        {{--</li>--}}
+                        <li>
+                            <a href="{{url('/admin/dashboard')}}">Dashboard</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span>All Orders</span>
+                        </li>
+                    </ul>
+                    <!-- END PAGE BREADCRUMBS -->
+                    <!-- BEGIN PAGE CONTENT INNER -->
+                    <div class="page-content-inner">
+                        <div class="row">
+                            <div class="col-md-12">
 
-    <div class="page-content-inner">
+                                @if(!count($users))
+                                    <div class="alert alert-block alert-info fade in">
+                                        <button type="button" class="close" data-dismiss="alert"></button>
+                                        <h3 class="alert-heading">NO ORDERS YET!</h3>
+                                        <p> You currently have no orders !
+                                        </p>
+                                        {{--<p>--}}
+                                        {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
+                                        {{--<a class="btn dark" href="{{url('store/quick-add-products')}}"> Add More Products </a>--}}
+                                        {{--</p>--}}
+                                    </div>
+                                    @else
 
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                {{--<div class="note note-success">--}}
-                {{--<p> Please try to re-size your browser window in order to see the tables in responsive mode. </p>--}}
-                {{--</div>--}}
-                <br>
-                <br>
+                                    {{--<div class="col-md-12">--}}
+                                            <!-- BEGIN BORDERED TABLE PORTLET-->
+                                    <div class="portlet light portlet-fit ">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="icon-settings font-red"></i>
+                                                <span class="caption-subject font-red sbold uppercase">ALL ORDERS</span>
+                                            </div>
+                                            {{--<div class="actions">--}}
+                                            {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
+                                            {{--<label class="btn grey-salsa btn-sm active">--}}
+                                            {{--<input type="radio" name="options" class="toggle" id="option1">Actions</label>--}}
+                                            {{--<label class="btn grey-salsa btn-sm">--}}
+                                            {{--<input type="radio" name="options" class="toggle" id="option2">Settings</label>--}}
+                                            {{--</div>--}}
+                                            {{--</div>--}}
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="table-scrollable table-scrollable-borderless">
+                                                <table class="table table-hover table-light table-bordered">
+                                                    <thead>
 
-                <!-- BEGIN SAMPLE TABLE PORTLET-->
-                <div class="portlet box green">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-cogs"></i>Users Table</div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse"> </a>
-                            {{--<a href="#portlet-config" data-toggle="modal" class="config"> </a>--}}
-                            <a href="javascript:;" class="reload"> </a>
-                            {{--<a href="javascript:;" class="remove"> </a>--}}
+                                                    <tr>
+                                                    <th>No.</th>
+                                                    <th width=""> Name </th>
+                                                    <th> Phone Number </th>
+                                                    <th class="numeric"> Email </th>
+                                                    <th class="numeric"> Has store</th>
+                                                    <th class="numeric"> Datetime </th>
+
+                                                    <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php $i = $users->firstItem() ?>
+                                                    @foreach($users as $user)
+                                                    <tr>
+                                                    <td>{{$i++}}</td>
+                                                    <td> {{$user->name}} </td>
+                                                    <td> {{$user->phone_number}} </td>
+                                                    <td> {{$user->email}} </td>
+                                                    <td> {{$user->has_store ? "Yes" : "No" }} </td>
+                                                    <td>{{$user->created_at}}</td>
+                                                    <td>
+                                                    <button class="btn btn-danger btn-xs" data-id="{{$user->id}}"><i class="fa fa-remove"></i></button> |
+                                                    <button class="btn btn-danger btn-xs" data-id="{{$user->id}}"><i class="fa fa-remove"></i></button> |
+                                                    {{--<button class="btn btn-success confirm-token" data-token="{{$user->id}}">Confirm token</button>--}}
+                                                    </td>
+                                                    </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">{{$users}}</div>
+
+                                    <!-- END BORDERED TABLE PORTLET-->
+                            </div>
+
+                            @endif
                         </div>
                     </div>
-                    <div class="portlet-body flip-scroll">
-                        <table class="table table-bordered table-striped table-condensed flip-content">
-                            <thead class="flip-content">
-                            <tr>
-                                {{--<th>No.</th>--}}
-                                <th width=""> Name </th>
-                                <th> Phone Number </th>
-                                <th class="numeric"> Email </th>
-                                <th class="numeric"> Has store</th>
-                                <th class="numeric"> Datetime </th>
 
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-<!--                            --><?php //$i = \App\User::all()->first(); ?>
-                            @foreach($users as $user)
-                                <tr>
-                                    {{--<td>{{$i++}}</td>--}}
-                                    <td> {{$user->name}} </td>
-                                    <td> {{$user->phone_number}} </td>
-                                    <td> {{$user->email}} </td>
-                                    <td> {{$user->has_store ? "Yes" : "No" }} </td>
-                                    <td>{{$user->created_at}}</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-xs" data-id="{{$user->id}}"><i class="fa fa-remove"></i></button> |
-                                        <button class="btn btn-danger btn-xs" data-id="{{$user->id}}"><i class="fa fa-remove"></i></button> |
-                                        {{--<button class="btn btn-success confirm-token" data-token="{{$user->id}}">Confirm token</button>--}}
-
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {!! $users !!}
-                    </div>
                 </div>
-                <!-- END SAMPLE TABLE PORTLET-->
+                <!-- END PAGE CONTENT INNER -->
             </div>
-            <div class="col-md-1"></div>
-
         </div>
+        <!-- END PAGE CONTENT BODY -->
+        <!-- END CONTENT BODY -->
     </div>
 
 @endsection

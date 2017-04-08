@@ -91,18 +91,20 @@ class AdminController extends Controller
         if($complete = $builder->where('tx_status','complete')->first()){
 
             $user = Auth::user();
-            if(Package::getUserPackage($user->id) != $complete->package_id){
-                Package::whereUserId($user->id)->first()->update([
+            if(PackageSignup::whereUserId($user->id)->first() && Package::getUserPackage($user->id) != $complete->package_id){
+                PackageSignup::whereUserId($user->id)->first()->update([
                     'package_id'  => $complete->package_id
                 ]);
+            }else{
+                PackageSignup::create([
+                    'id' => Uuid::generate(),
+                    'user_id' => $user->id,
+                    'package_id' => $complete->package_id,
+                    'store_id'  => Store::whereUserId($user->id)->first()->id
+                ]);
+
             }
 
-            PackageSignup::create([
-                'id' => Uuid::generate(),
-                'user_id' => $user->id,
-                'package_id' => $complete->package_id,
-                'store_id'  => Store::whereUserId($user->id)->first()->id
-            ]);
         }
 
         return $results;

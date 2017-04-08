@@ -40,7 +40,7 @@
     <style>
 
         .page-content-inner{
-            margin-bottom: 200px;;
+            margin-bottom: 150px;;
         }
 
     </style>
