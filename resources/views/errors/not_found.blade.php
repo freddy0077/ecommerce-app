@@ -30,7 +30,7 @@
 </div>
 <div class="w3-main">
     <div class="agile-info">
-        <h3>SORRY</h3>
+        <h3>Sorry Pal!</h3>
         <h2>4<img src="{{asset('errors/images/confused.gif')}}" alt="image">4</h2>
         <p>An error Occurred in the Application And Your Page could not be Served.</p>
 

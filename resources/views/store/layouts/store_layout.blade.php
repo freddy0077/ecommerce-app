@@ -31,7 +31,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 
     <!-- BEGIN PAGE FIRST SCRIPTS -->
-    <script src="{{asset('')}}../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="{{asset('')}}/assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>
     <!-- END PAGE FIRST SCRIPTS -->
     <!-- BEGIN PAGE TOP STYLES -->
     <link href="../assets/global/plugins/pace/themes/pace-theme-big-counter.css" rel="stylesheet" type="text/css" />
