@@ -25,7 +25,7 @@
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE FIRST SCRIPTS -->
-    <script src="{{asset('backend/assets/global/plugins/pace/pace.min.js')}}.." type="text/javascript"></script>
+    <script src="{{asset('backend/assets/global/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
     <!-- END PAGE FIRST SCRIPTS -->
     <!-- BEGIN PAGE TOP STYLES -->
     <link href="{{asset('backend/assets/global/plugins/pace/themes/pace-theme-big-counter.css')}}" rel="stylesheet" type="text/css" />
