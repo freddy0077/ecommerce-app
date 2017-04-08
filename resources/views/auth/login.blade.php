@@ -783,7 +783,7 @@
     <div class="signup-agileinfo">
         <h3>Sign Up</h3>
         <label class="bar-w3-agile"></label>
-        <p>With Shopaholicks you are able create your own and start selling right away !</p>
+        <p>With Shopaholicks you are able to create your own shop and start selling right away !</p>
         <h6>By creating an account, you agree to our <a href="{{url('/terms-of-use')}}">Terms.</a></h6>
         <!-- Pop up -->
         <div class="more">
