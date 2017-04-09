@@ -118,7 +118,6 @@ Route::get('/profile','HomeController@getProfile');
 
 Route::get('/search-market','HomeController@getSearchMarket');
 
-Route::get('/all-feeds','HomeController@getAllFeeds');
 //   return view('all_feeds');
 //});
 
@@ -173,6 +172,8 @@ Route::group(['prefix' => 'stores'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/feeds','HomeController@getFeeds');
+    Route::get('/all-feeds','HomeController@getAllFeeds');
+
     Route::post('save-profile','HomeController@postSaveProfile');
     Route::post('change-password','HomeController@postChangePassword');
 

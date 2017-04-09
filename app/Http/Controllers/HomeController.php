@@ -381,7 +381,7 @@ class HomeController extends Controller
 
     public function postWatchShop($product_id,$store_id,$user_id)
     {
-        if(Auth::check() && Auth::user()->has_store){
+        if(Auth::check() && Auth::user()->has_store) {
             if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
                 $user = Auth::user();
 
@@ -425,6 +425,10 @@ class HomeController extends Controller
 
                 return ['status' => 401, 'message' => 'Log in to watch a shop'];
             }
+
+        } elseif(Auth::guest()){
+            return ['status' => 401, 'message' => 'Log in to watch a shop'];
+
         }else{
             $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
             if ($watchedshop_exists) {
