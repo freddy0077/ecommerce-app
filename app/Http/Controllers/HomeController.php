@@ -422,9 +422,10 @@ class HomeController extends Controller
 //            $product = Product::find($product_id);
                 if ($watchedshop_exists) {
                     $watchedshop_exists->delete();
+                    return ['message' => "You just unfollowed a shop", 'status' => 404];
+
                 }
 
-                return ['message' => "You just unfollowed a shop", 'status' => 404];
 
 //            return ['status' => 404, 'message' => 'You are already following this shop !'];
             } else {
