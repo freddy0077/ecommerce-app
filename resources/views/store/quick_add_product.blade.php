@@ -90,7 +90,7 @@
                     }else {
 //                        alert(data.limit);
                     swal("Good job!", data.message, "success")
-                    location.href="/store/all-products";
+//                    location.href="/store/all-products";
 
 
                     }

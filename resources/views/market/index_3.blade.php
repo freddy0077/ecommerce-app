@@ -491,6 +491,8 @@
                                                 <div class="right-block">
                                                     <div class="caption">
                                                         <h4><a href="#">{{$deal->name}}</a></h4>
+                                                        <span>Listed in <a href='{{url("stores/$deal->store_slug/$deal->user_id")}}'>{{$deal->store_name}}</a></span>
+
                                                         <div class="ratings">
                                                             {{--<div class="rating-box">--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}

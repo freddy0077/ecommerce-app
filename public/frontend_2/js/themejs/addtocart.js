@@ -20,8 +20,8 @@
 				}
 				else if(data.status == 404) {
 
-                    $('.watch-toggle-'+user_id).addClass('fa fa-eye');
-                    $('.watch-toggle-'+user_id).removeClass('fa fa-eye-slash');
+                    $('.watch-toggle-'+user_id).addClass('fa-eye');
+                    $('.watch-toggle-'+user_id).removeClass('fa-eye-slash');
 
 					addProductNotice('Sorry !', '', '<h3><a href="#">'+data.message+ '!</h3>', 'error');
 				}
@@ -34,8 +34,8 @@
 							'<img src='+image_url+'>',
 							'<h3><a href="#">You are now watching </a>'+ data.store +'<a href="#"></a>!</h3>', 'success');
 
-                    $('.watch-toggle-'+user_id).removeClass('fa fa-eye');
-                    $('.watch-toggle-'+user_id).addClass('fa fa-eye-slash');
+                    $('.watch-toggle-'+user_id).removeClass('fa-eye');
+                    $('.watch-toggle-'+user_id).addClass('fa-eye-slash');
 
 				}
 

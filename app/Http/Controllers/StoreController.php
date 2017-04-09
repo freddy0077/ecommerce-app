@@ -584,19 +584,25 @@ class StoreController extends Controller
 
 //        $image = $request->file('image');
 
+
         $names = $request->get('name');
          $prices = $request->get('price');
         $sub_categories = $request->get('sub_category');
         $images = $request->file('image');
 
         $user_id = Auth::user()->id;
+        $threshold = PackageSignup::getUserPackageThreshold();
 
         $productCounts = Product::whereUserId($user_id)->count();
-        $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
+        $products_limit = $threshold-$productCounts;
 
-        if($products_limit <= 0){
+//        var_dump( $count = count($names)+$productCounts > $threshold ? true: false);exit;
 
-            return ['limit'=>$products_limit,'status'=>401];
+        if($products_limit <= 0) {
+
+            return ['limit' => $products_limit, 'status' => 401];
+        }elseif(count($names)+$productCounts > $threshold){
+            return ['limit' => $products_limit, 'status' => 402];
 
         }else{
 

@@ -381,6 +381,7 @@ class HomeController extends Controller
 
     public function postWatchShop($product_id,$store_id,$user_id)
     {
+        if(Auth::check() && Auth::user()->has_store){
             if (Auth::check() && $store = Store::whereUserId(Auth::user()->id)->first()->id != $store_id && !$watchedshop = WatchedShop::whereUserId(Auth::user()->id)->first()) {
                 $user = Auth::user();
 
@@ -401,7 +402,7 @@ class HomeController extends Controller
 //            $stream->addToManyFeeds($user->name,"just followed", "$store_builder->name",["user:$user->id","user:$user_id"]);
 
 //            event(new ChatMessageReceived("you just followed $store_builder->name", $user));
-            event(new FeedsEvent("you just followed $store_builder->name", $user));
+                event(new FeedsEvent("you just followed $store_builder->name", $user));
 
                 return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
 
@@ -424,6 +425,30 @@ class HomeController extends Controller
 
                 return ['status' => 401, 'message' => 'Log in to watch a shop'];
             }
+        }else{
+            $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
+            if ($watchedshop_exists) {
+                $watchedshop_exists->delete();
+                return ['message' => "You just unfollowed a shop", 'status' => 404];
+            }else {
+                $user = Auth::user();
+
+                WatchedShop::create([
+                    'id' => Uuid::generate(),
+                    'product_id' => $product_id,
+                    'store_id' => $store_id,
+                    'user_id' => $user->id,
+                    'action' => "$user->name just followed your shop"
+                ]);
+                $store_builder = Store::find($store_id);
+                $builder = Product::find($product_id);
+                event(new FeedsEvent("you just followed $store_builder->name", $user));
+
+                return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
+            }
+
+        }
+
     }
 
         public function getFollowUser($id){

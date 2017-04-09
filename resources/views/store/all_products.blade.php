@@ -3,6 +3,12 @@
 @section('scripts')
     <script src="{{asset('backend/assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js')}}" type="text/javascript"></script>
 
+    <style>
+        th{
+            text-decoration: underline;
+        }
+    </style>
+
     <script>
 
         $('.published').editable({
