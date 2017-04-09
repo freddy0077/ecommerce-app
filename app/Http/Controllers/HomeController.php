@@ -456,7 +456,6 @@ class HomeController extends Controller
 
                 return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
             }
-
         }
 
     }

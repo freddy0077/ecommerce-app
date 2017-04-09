@@ -42,8 +42,8 @@ class DeleteFeed extends Command
     {
         //
         WatchedShop::truncate();
-        $user_id = User::whereName($this->argument('name'))->first()->id;
-        $stream = new StreamFeed($user_id);
-        $stream->deleteFeed();
+//        $user_id = User::whereName($this->argument('name'))->first()->id;
+//        $stream = new StreamFeed($user_id);
+//        $stream->deleteFeed();
     }
 }

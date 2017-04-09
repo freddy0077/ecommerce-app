@@ -213,9 +213,62 @@ class StoreController extends Controller
     }
 
 
-    public function postStoreSettings(Request $request){
+    public function postStoreSettings(Request $request)
+    {
 
-        if($request->hasFile('image')) {
+        $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
+        if($request->hasFile('image') && $request->hasFile('banner-image')){
+            $id = Uuid::generate();
+            $date_time = date('Ymdhis');
+
+            $image = $request->file('image');
+//            $image_2 = $request->file('banner-image');
+
+            $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = public_path('images/stores');
+            $img = Image::make($image->getRealPath());
+            $img->resize(200, 50, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['imagename']);
+
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['imagename']);
+
+            $id = Uuid::generate();
+            $date_time = date('Ymdhis');
+
+            $image_2 = $request->file('banner-image');
+
+            $input['image2'] = 'banner' . $id . $date_time . '.' . $image_2->getClientOriginalExtension();
+
+            $destinationPath = public_path('images/stores');
+            $img2 = Image::make($image_2->getRealPath());
+            $img2->resize(870, 260, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['image2']);
+
+            $destinationPath = public_path('/images');
+            $image_2->move($destinationPath, $input['image2']);
+
+            Store::whereUserId(Auth::user()->id)->update([
+                'name' => $request->name,
+                'image' => $input['imagename'],
+                'store_banner' => $input['image2'],
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+                'business_type' => $request->business_type,
+                'domain' => $request->domain,
+                'about' => $request->about,
+                'slug' => $slug,
+                'user_id' => Auth::user()->id,
+                'colour' => $request->colour
+            ]);
+
+        }
+        elseif ($request->hasFile('image')) {
             $this->validate($request, [
                 'name' => 'required',
 //                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -240,9 +293,24 @@ class StoreController extends Controller
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $input['imagename']);
 
+            Store::whereUserId(Auth::user()->id)->update([
+                'name' => $request->name,
+                'image' => $input['imagename'],
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+                'business_type' => $request->business_type,
+                'domain' => $request->domain,
+                'about' => $request->about,
+                'slug' => $slug,
+                'user_id' => Auth::user()->id,
+                'colour' => $request->colour
+            ]);
+
             //Banner Image processing
 
-        }elseif($request->hasFile('banner-image')){
+        } elseif ($request->hasFile('banner-image')) {
 
             $id = Uuid::generate();
             $date_time = date('Ymdhis');
@@ -260,75 +328,9 @@ class StoreController extends Controller
             $destinationPath = public_path('/images');
             $image_2->move($destinationPath, $input['image2']);
 
-        }else {
-            $this->validate($request,[
-                'name' => 'required',
-//                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'phone_number' => 'required',
-                'email' => 'required',
-                'address' => 'required'
-            ]);
-        }
-
-
-        if(User::find(Auth::user()->id)->has_store == true){
-            $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
-
-            if($request->hasFile('image')) {
-                Store::whereUserId(Auth::user()->id)->update([
-                    'name' => $request->name,
-                    'image' => $input['imagename'],
-                    'phone_number' => $request->phone_number,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'city' => $request->city,
-                    'business_type' => $request->business_type,
-                    'domain' => $request->domain,
-                    'about' => $request->about,
-                    'slug' => $slug,
-                    'user_id' => Auth::user()->id,
-                    'colour' => $request->colour
-                ]);
-            }elseif($request->hasFile('banner-image')){
-                    Store::whereUserId(Auth::user()->id)->update([
-                        'name' => $request->name,
-                        'store_banner'=>$input['image2'],
-                        'phone_number' => $request->phone_number,
-                        'email' => $request->email,
-                        'address' => $request->address,
-                        'city' => $request->city,
-                        'business_type' => $request->business_type,
-                        'domain' => $request->domain,
-                        'about' => $request->about,
-                        'slug'  => $slug,
-                        'user_id' => Auth::user()->id,
-                        'colour' => $request->colour
-                    ]);
-
-            }else {
-                Store::whereUserId(Auth::user()->id)->update([
-                    'name' => $request->name,
-                    'phone_number' => $request->phone_number,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'city' => $request->city,
-                    'business_type' => $request->business_type,
-                    'domain' => $request->domain,
-                    'about' => $request->about,
-                    'slug'  => $slug,
-                    'user_id' => Auth::user()->id,
-                    'colour' => $request->colour
-                ]);
-
-            }
-
-
-
-        }else{
-
-            Store::create([
-                'id' => Uuid::generate(),
+            Store::whereUserId(Auth::user()->id)->update([
                 'name' => $request->name,
+                'store_banner' => $input['image2'],
                 'phone_number' => $request->phone_number,
                 'email' => $request->email,
                 'address' => $request->address,
@@ -336,19 +338,68 @@ class StoreController extends Controller
                 'business_type' => $request->business_type,
                 'domain' => $request->domain,
                 'about' => $request->about,
-                'user_id' => Auth::user()->id
+                'slug' => $slug,
+                'user_id' => Auth::user()->id,
+                'colour' => $request->colour
             ]);
 
-            User::find(Auth::user()->id)->update([
-                'has_store' => true
-            ]);
-
-//            $this->saveMainCategories();
-
+        }
+//        elseif($request->file('banner-image') && $request->file('image')){
+//
+//            $id = Uuid::generate();
+//            $date_time = date('Ymdhis');
+//
+//            $image = $request->file('image');
+////            $image_2 = $request->file('banner-image');
+//
+//            $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
+//
+//            $destinationPath = public_path('images/stores');
+//            $img = Image::make($image->getRealPath());
+//            $img->resize(200, 50, function ($constraint) {
+//                $constraint->aspectRatio();
+//            })->save($destinationPath . '/' . $input['imagename']);
+//
+//            $destinationPath = public_path('/images');
+//            $image->move($destinationPath, $input['imagename']);
+//
+//            $id = Uuid::generate();
+//            $date_time = date('Ymdhis');
+//
+//            $image_2 = $request->file('banner-image');
+//
+//            $input['image2'] = 'banner' . $id . $date_time . '.' . $image_2->getClientOriginalExtension();
+//
+//            $destinationPath = public_path('images/stores');
+//            $img2 = Image::make($image_2->getRealPath());
+//            $img2->resize(870, 260, function ($constraint) {
+//                $constraint->aspectRatio();
+//            })->save($destinationPath . '/' . $input['image2']);
+//
+//            $destinationPath = public_path('/images');
+//            $image_2->move($destinationPath, $input['image2']);
+//
+//            Store::whereUserId(Auth::user()->id)->update([
+//                'name' => $request->name,
+//                'image' => $input['image'],
+//                'store_banner' => $input['image2'],
+//                'phone_number' => $request->phone_number,
+//                'email' => $request->email,
+//                'address' => $request->address,
+//                'city' => $request->city,
+//                'business_type' => $request->business_type,
+//                'domain' => $request->domain,
+//                'about' => $request->about,
+//                'slug' => $slug,
+//                'user_id' => Auth::user()->id,
+//                'colour' => $request->colour
+//            ]);
+//
+//        }
             return 'success';
         }
 
-    }
+
 
     public function getMarketPlaceSignUp(){
 
