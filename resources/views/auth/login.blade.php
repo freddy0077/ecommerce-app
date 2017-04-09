@@ -769,7 +769,7 @@
             <br>
             <ul>
                 <li>
-                    <input type="checkbox" id="brand1" value="">
+                    <input type="checkbox" id="brand1" name="remember_me" value="">
                     <label for="brand1"><span></span>Keep me signed in</label>
                 </li>
             </ul>

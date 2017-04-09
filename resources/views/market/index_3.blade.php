@@ -186,47 +186,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="button-group">
-                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
-
-                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
-                                                    </button>
-                                                @else
-                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
-                                                    </button>
-
-                                                @endif
-
-                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
-                                                    @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
-                                                        <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
-                                                    @else
-                                                        <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
-                                                    @endif
-                                                </button>
-
-                                                @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
-                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}" style="color: green;"></i>
-                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
-                                                    </button>
-                                                @else
-                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
-                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
-                                                    </button>
-
-                                                @endif
-
-
-                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
-
-
-                                                {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-
-                                            </div>
+                                            @include('market.partials.button_groups_partial')
 
                                         </div><!-- right block -->
                                     </div>
@@ -287,47 +247,7 @@
 
                                             </div>
 
-                                            <div class="button-group">
-                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($product->store_id)->first())
-
-                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye-slash watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
-                                                    </button>
-                                                @else
-                                                    <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$product->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                        <i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
-                                                    </button>
-
-                                                @endif
-
-                                                <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');">
-                                                    @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
-                                                        <i class="fa fa-heart fancy-toggle-{{$product->id}}"></i>
-                                                    @else
-                                                        <i class="fa fa-heart-o fancy-toggle-{{$product->id}}"></i>
-                                                    @endif
-                                                </button>
-
-                                                @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($product->id)->first())
-                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}" style="color: green;"></i>
-                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
-                                                    </button>
-                                                @else
-                                                    <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');">
-                                                        <i class="fa fa-thumbs-up like-toggle-{{$product->id}}"></i>
-                                                        <i class="like-counts-{{$product->id}}">{{$product->like_counts}} </i>
-                                                    </button>
-
-                                                @endif
-
-
-                                                <button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
-
-
-                                                {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-
-                                            </div>
+                                            @include('market.partials.button_groups_partial')
 
                                         </div><!-- right block -->
                                     </div>
@@ -474,24 +394,24 @@
                                     <!-- Begin extraslider-inner -->
                                     <div class="so-extraslider products-list grid product-style__8"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="3" data-items_column1="2" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
                                         <!--Begin Items-->
-                                        @foreach($best_deals as $deal)
+                                        @foreach($best_deals as $product)
                                         <div class="ltabs-item product-layout">
                                             <div class="product-item-container">
                                                 <div class="left-block">
                                                     <div class="product-image-container">
-                                                        <img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                                        <img src='{{asset("images/products/$product->image")}}'  alt="" class="img-responsive" />
                                                     </div>
                                                     <!--Sale Label-->
                                                     <span class="label label-sale">Sale</span>
 
                                                     <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$deal->id)}}">>  Quickview</a>
+                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                                     <!--end full quick view block-->
                                                 </div>
                                                 <div class="right-block">
                                                     <div class="caption">
-                                                        <h4><a href="#">{{$deal->name}}</a></h4>
-                                                        <span>Listed in <a href='{{url("stores/$deal->store_slug/$deal->user_id")}}'>{{$deal->store_name}}</a></span>
+                                                        <h4><a href="#">{{$product->name}}</a></h4>
+                                                        <span>Listed in <a href='{{url("stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a></span>
 
                                                         <div class="ratings">
                                                             {{--<div class="rating-box">--}}
@@ -504,52 +424,13 @@
                                                         </div>
 
                                                         <div class="price">
-                                                            <span class="price-new">{{$deal->sale_price}}</span>
-                                                            <span class="price-old">{{$deal->price}}</span>
+                                                            <span class="price-new">{{$product->sale_price}}</span>
+                                                            <span class="price-old">{{$product->price}}</span>
                                                         </div>
                                                     </div>
 
-                                                    <div class="button-group">
-                                                        @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($deal->store_id)->first())
+                                                    @include('market.partials.button_groups_partial')
 
-                                                            <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}','{{$deal->user_id}}');">
-                                                                <i class="fa fa-eye-slash watch-toggle-{{$deal->user_id}}"></i> <span class="button-group__text"></span>
-                                                            </button>
-                                                        @else
-                                                            <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$product->store_id}}','{{$product->user_id}}');">
-                                                                <i class="fa fa-eye watch-toggle-{{$deal->user_id}}"></i> <span class="button-group__text"></span>
-                                                            </button>
-
-                                                        @endif
-
-                                                        <button class="wishlist" type="button" onclick="fancy.add('{{$deal->id}}');">
-                                                            @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())
-                                                                <i class="fa fa-heart fancy-toggle-{{$deal->id}}"></i>
-                                                            @else
-                                                                <i class="fa fa-heart-o fancy-toggle-{{$deal->id}}"></i>
-                                                            @endif
-                                                        </button>
-
-                                                        @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($deal->id)->first())
-                                                            <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
-                                                                <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}" style="color: green;"></i>
-                                                                <i class="like-counts-{{$product->id}}">{{$deal->like_counts}} </i>
-                                                            </button>
-                                                        @else
-                                                            <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
-                                                                <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}"></i>
-                                                                <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
-                                                            </button>
-
-                                                        @endif
-
-
-                                                        <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>
-
-
-                                                        {{--<button class="compare" type="button"  onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-
-                                                    </div>
 
                                                 </div><!-- right block -->
                                             </div>
@@ -566,211 +447,96 @@
                                 <h3 class="modtitle modtitle--small">Most Viewed </h3>
                                 <div id="so_extraslider2__home8" class="so-extraslider--home8 ">
 
-                                    <!-- Begin extraslider-inner -->
-                                    {{--<div class="so-extraslider products-list grid product-style__8"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="3" data-items_column1="2" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">--}}
-                                        {{--<!--Begin Items-->--}}
-                                        {{--<div class="ltabs-item product-layout">--}}
-                                            {{--<div class="product-item-container">--}}
-                                                {{--<div class="left-block">--}}
-                                                    {{--<div class="product-image-container second_img">--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/1_2_12.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/3_3_15.jpg')}}"  alt="Apple Cinema 30&quot;" class="img_0 img-responsive" />--}}
-                                                    {{--</div>--}}
-                                                    {{--<!--Sale Label-->--}}
+                                    <div class="so-extraslider products-list grid product-style__8"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column0="3" data-items_column1="2" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                                        <!--Begin Items-->
+                                        @foreach($most_viewed_products as $deal)
+                                            <div class="ltabs-item product-layout">
+                                                <div class="product-item-container">
+                                                    <div class="left-block">
+                                                        <div class="product-image-container">
+                                                            <img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                                        </div>
+                                                        <!--Sale Label-->
+                                                        {{--<span class="label label-sale">Sale</span>--}}
+                                                        <span class="label label-counts">{{$deal->view_counts}}</span>
 
+                                                        <!--full quick view block-->
+                                                        <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$deal->id)}}">>  Quickview</a>
+                                                        <!--end full quick view block-->
+                                                    </div>
+                                                    <div class="right-block">
+                                                        <div class="caption">
+                                                            <h4><a href="#">{{$deal->name}}</a></h4>
+                                                            <span>Listed in <a href='{{url("stores/$deal->store_slug/$deal->user_id")}}'>{{$deal->store_name}}</a></span>
 
-                                                    {{--<!--full quick view block-->--}}
-                                                    {{--<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>--}}
-                                                    {{--<!--end full quick view block-->--}}
-                                                {{--</div>--}}
-                                                {{--<div class="right-block">--}}
-                                                    {{--<div class="caption">--}}
-                                                        {{--<h4><a href="product.html">Qurem mazem numa..</a></h4>--}}
-                                                        {{--<div class="ratings">--}}
-                                                            {{--<div class="rating-box">--}}
+                                                            <div class="ratings">
+                                                                {{--<div class="rating-box">--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
                                                                 {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
+                                                                {{--</div>--}}
+                                                            </div>
 
-                                                        {{--<div class="price">--}}
-                                                            {{--<span class="price-new">$50.00</span>--}}
-                                                            {{--<span class="price-old">$62.00</span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
+                                                            <div class="price">
+                                                                <span class="price-new">{{$deal->sale_price}}</span>
+                                                                <span class="price-old">{{$deal->price}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button-group">
+                                                            {{--<button class="compare" type="button"><i class="fa fa-eye">{{$deal->view_counts}}</i>  </button>--}}
 
-                                                    {{--<div class="button-group">--}}
-                                                        {{--<button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>--}}
-                                                        {{--<button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>--}}
-                                                        {{--<button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div><!-- right block -->--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
+                                                        @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($deal->store_id)->first())
 
-                                        {{--<div class="ltabs-item product-layout">--}}
-                                            {{--<div class="product-item-container">--}}
-                                                {{--<div class="left-block">--}}
-                                                    {{--<div class="product-image-container  ">--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/3_3_15.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
-                                                    {{--</div>--}}
-                                                    {{--<!--Sale Label-->--}}
-                                                    {{--<span class="label label-new">new</span>--}}
-                                                    {{--<!--full quick view block-->--}}
-                                                    {{--<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>--}}
-                                                    {{--<!--end full quick view block-->--}}
-                                                {{--</div>--}}
-                                                {{--<div class="right-block">--}}
-                                                    {{--<div class="caption">--}}
-                                                        {{--<h4><a href="product.html">Suma fuma direm mase</a></h4>--}}
-                                                        {{--<div class="ratings">--}}
-                                                            {{--<div class="rating-box">--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
+                                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}','{{$deal->user_id}}');">
+                                                                    <i style="color:green" class="icon-user-following watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                                                                </button>
+                                                            @else
+                                                                <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}','{{$deal->user_id}}');">
+                                                                    {{--<i class="fa fa-eye watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>--}}
+                                                                    <i class="icon-user-follow watch-toggle-{{$deal->user_id}}"></i> <span class="button-group__text"></span>
+                                                                </button>
 
-                                                        {{--<div class="price">--}}
-                                                            {{--<span class="price-new">$150.00</span>--}}
+                                                            @endif
 
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
+                                                            <button class="wishlist" type="button" onclick="fancy.add('{{$deal->id}}');">
+                                                                @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($deal->id)->first())
+                                                                    <i class="fa fa-heart fancy-toggle-{{$deal->id}}"></i>
+                                                                @else
+                                                                    <i class="fa fa-heart-o fancy-toggle-{{$deal->id}}"></i>
+                                                                @endif
+                                                            </button>
 
-                                                    {{--<div class="button-group">--}}
-                                                        {{--<button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>--}}
-                                                        {{--<button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>--}}
-                                                        {{--<button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div><!-- right block -->--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="ltabs-item product-layout">--}}
-                                            {{--<div class="product-item-container">--}}
-                                                {{--<div class="left-block">--}}
-                                                    {{--<div class="product-image-container ">--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/2_4_14.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
-                                                    {{--</div>--}}
-                                                    {{--<!--Sale Label-->--}}
-                                                    {{--<span class="label label-new">new</span>--}}
-                                                    {{--<!--full quick view block-->--}}
-                                                    {{--<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>--}}
-                                                    {{--<!--end full quick view block-->--}}
-                                                {{--</div>--}}
-                                                {{--<div class="right-block">--}}
-                                                    {{--<div class="caption">--}}
-                                                        {{--<h4><a href="product.html">Pumasi dema nones mame</a></h4>--}}
-                                                        {{--<div class="ratings">--}}
-                                                            {{--<div class="rating-box">--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
+                                                            @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($deal->id)->first())
+                                                                <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
+                                                                    <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}" style="color: green;"></i>
+                                                                    <i class="like-counts-{{$product->id}}">{{$deal->like_counts}} </i>
+                                                                </button>
+                                                            @else
+                                                                <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
+                                                                    <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}"></i>
+                                                                    <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
+                                                                </button>
 
-                                                        {{--<div class="price">--}}
-                                                            {{--<span class="price-new">$120.00</span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-
-                                                    {{--<div class="button-group">--}}
-                                                        {{--<button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>--}}
-                                                        {{--<button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>--}}
-                                                        {{--<button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div><!-- right block -->--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-
-                                        {{--<div class="ltabs-item product-layout">--}}
-                                            {{--<div class="product-item-container">--}}
-                                                {{--<div class="left-block">--}}
-                                                    {{--<div class="product-image-container ">--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/3_3_15.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
-                                                    {{--</div>--}}
-                                                    {{--<!--Sale Label-->--}}
-                                                    {{--<span class="label label-sale">Sale</span>--}}
-                                                    {{--<!--full quick view block-->--}}
-                                                    {{--<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>--}}
-                                                    {{--<!--end full quick view block-->--}}
-                                                {{--</div>--}}
-                                                {{--<div class="right-block">--}}
-                                                    {{--<div class="caption">--}}
-                                                        {{--<h4><a href="product.html">Taetem hasem razem pokam </a></h4>--}}
-                                                        {{--<div class="ratings">--}}
-                                                            {{--<div class="rating-box">--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-
-                                                        {{--<div class="price">--}}
-                                                            {{--<span class="price-new">$120.00</span>--}}
-                                                            {{--<span class="price-old">$162.00</span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-
-                                                    {{--<div class="button-group">--}}
-                                                        {{--<button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>--}}
-                                                        {{--<button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>--}}
-                                                        {{--<button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div><!-- right block -->--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="ltabs-item product-layout">--}}
-                                            {{--<div class="product-item-container">--}}
-                                                {{--<div class="left-block">--}}
-                                                    {{--<div class="product-image-container  ">--}}
-                                                        {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/4_3_52.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
-                                                    {{--</div>--}}
-                                                    {{--<!--Sale Label-->--}}
-                                                    {{--<!--<span class="label label-sale">Sale</span>-->--}}
-                                                    {{--<!--full quick view block-->--}}
-                                                    {{--<a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="quickview.html">  Quickview</a>--}}
-                                                    {{--<!--end full quick view block-->--}}
-                                                {{--</div>--}}
-                                                {{--<div class="right-block">--}}
-                                                    {{--<div class="caption">--}}
-                                                        {{--<h4><a href="product.html">Trai Kuma pekaem mame </a></h4>--}}
-                                                        {{--<div class="ratings">--}}
-                                                            {{--<div class="rating-box">--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                                {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="price">--}}
-                                                            {{--<span class="price-new">$110.00</span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-
-                                                    {{--<div class="button-group">--}}
-                                                        {{--<button class="addToCart addToCart--notext" type="button" onclick="cart.add('42', '1');"><i class="fa fa-shopping-cart"></i> <span class="button-group__text">Add to Cart</span></button>--}}
-                                                        {{--<button class="wishlist" type="button" onclick="wishlist.add('42');"><i class="fa fa-heart"></i>  </button>--}}
-                                                        {{--<button class="compare" type="button" onclick="compare.add('42');"><i class="fa fa-exchange"></i>  </button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div><!-- right block -->--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-
-                                        {{--<!--End Items-->--}}
+                                                            @endif
 
 
-                                    {{--</div>--}}
-                                    <!--End extraslider-inner -->
+                                                            {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>--}}
+
+
+
+                                                        </div>
+
+                                                    </div><!-- right block -->
+                                                </div>
+                                            </div>
+                                            @endforeach
+
+                                                    <!--End Items-->
+
+                                    </div>
+
                                 </div>
                             </div>
 

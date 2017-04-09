@@ -93,12 +93,15 @@ class HomeController extends Controller
             ->take(10)
             ->get();
 
+        $most_viewed_products =  $allProducts->collapse()->sortByDesc('view_counts')->take(10);
+        $most_viewed_products = $most_viewed_products->values()->all();
+
 //        if($request->ajax()){
 //            return view('market.partials.more_popular_products',compact('second_set','nextpageurl'));
 //        }
 
 //        return view('market.index',compact('products','nextpageurl'));
-        return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores'));
+        return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores','most_viewed_products'));
     }
 
     public function getSearchMarket(Request $request){
@@ -376,6 +379,9 @@ class HomeController extends Controller
     public function getQuickView($product_id){
         $gallery = ProductGallery::whereProductId($product_id)->orderBy('created_at','desc')->take(3)->get();
         $product = Product::find($product_id);
+        $product->update([
+            'view_counts' => $product->view_counts+1
+        ]);
         return view('market.partials.quick_view',compact('product','gallery'));
     }
 

@@ -42,6 +42,7 @@
     <link href="{{asset('frontend_2/css/footer5.css')}}" rel="stylesheet">
     <link id="color_scheme" href="{{asset('frontend_2/css/home8.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/css/responsive.css')}}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">--}}
     <link href="{{asset('css/select2.min.css')}}" rel="stylesheet">

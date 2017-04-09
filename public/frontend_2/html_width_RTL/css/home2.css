@@ -3196,7 +3196,14 @@ h2.title-category {
 .label-sale {
   background: #e74c3c;
   top: 10px;
-  right: 10px; }
+  right: 10px;
+}
+
+.label-counts {
+  background: green;
+  top: 10px;
+  right: 10px;
+}
   .label-sale:after {
     content: "";
     border-top: 9px solid #e74c3c;
