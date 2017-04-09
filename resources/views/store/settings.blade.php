@@ -125,10 +125,12 @@
                     <!-- END PAGE BREADCRUMBS -->
                     <!-- BEGIN PAGE CONTENT INNER -->
                     <div class="page-content-inner">
-                        <div class="note note-danger">
+                        @if(!$store->enabled)
+                        <div class="note note-warning">
                             <h4 class="block">Important! {{$store->name}}  is still not enabled ! </h4>
                             <p> Click here to enable it.</p>
                         </div>
+                        @endif
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- BEGIN PORTLET-->
