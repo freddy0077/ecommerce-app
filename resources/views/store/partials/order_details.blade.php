@@ -77,7 +77,7 @@
                         <td class="text-right">{{$item->qty * \App\Product::getProductName($item->product_id)->price}}</td>
                         <td style="white-space: nowrap;" class="text-right"> <a class="btn btn-primary" title="" data-toggle="tooltip" href="#" data-original-title="Reorder">
                                 <i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-danger" title="" data-toggle="tooltip" href="return.html" data-original-title="Return"><i class="fa fa-reply"></i></a>
+                            <a class="btn btn-danger" title="" data-toggle="tooltip" href="#" data-original-title="Return"><i class="fa fa-reply"></i></a>
                         </td>
                     </tr>
 
