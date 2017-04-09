@@ -444,7 +444,7 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Enable</label>
                                                     <div class="col-md-4">
-                                                        <input type="checkbox" class="form-control" name="enable">
+                                                        <input type="checkbox" class="form-control" name="enabled" {{$store->enabled ? "checked" : ""}}>
                                                         <span> Check to enable the shop </span>
                                                     </div>
                                                 </div>
@@ -459,7 +459,7 @@
                                                             <p>You are currently on our  <i class="text-info">Free Plan</i></p>
 
                                                         @endif
-                                                            <a href="{{url('/store/packages')}}" class="btn btn-success">Change Package</a>
+                                                            <a href="{{url('/store/packages')}}" target="_blank" class="btn btn-success">Change Package</a>
 
                                                     </div>
                                                 </div>

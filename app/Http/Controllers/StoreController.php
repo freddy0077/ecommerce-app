@@ -264,7 +264,9 @@ class StoreController extends Controller
                 'about' => $request->about,
                 'slug' => $slug,
                 'user_id' => Auth::user()->id,
-                'colour' => $request->colour
+                'colour' => $request->colour,
+                'enabled' => $request->enabled =="on" ? true :false
+
             ]);
 
         }
@@ -305,7 +307,9 @@ class StoreController extends Controller
                 'about' => $request->about,
                 'slug' => $slug,
                 'user_id' => Auth::user()->id,
-                'colour' => $request->colour
+                'colour' => $request->colour,
+                'enabled' => $request->enabled =="on" ? true :false
+
             ]);
 
             //Banner Image processing
@@ -340,62 +344,25 @@ class StoreController extends Controller
                 'about' => $request->about,
                 'slug' => $slug,
                 'user_id' => Auth::user()->id,
-                'colour' => $request->colour
+                'colour' => $request->colour,
+                'enabled' => $request->enabled =="on" ? true :false
             ]);
-
+        }else{
+            Store::whereUserId(Auth::user()->id)->update([
+                'name' => $request->name,
+                'phone_number' => $request->phone_number,
+                'email' => $request->email,
+                'address' => $request->address,
+                'city' => $request->city,
+                'business_type' => $request->business_type,
+                'domain' => $request->domain,
+                'about' => $request->about,
+                'slug' => $slug,
+                'user_id' => Auth::user()->id,
+                'colour' => $request->colour,
+                'enabled' => $request->enabled =="on" ? true :false
+            ]);
         }
-//        elseif($request->file('banner-image') && $request->file('image')){
-//
-//            $id = Uuid::generate();
-//            $date_time = date('Ymdhis');
-//
-//            $image = $request->file('image');
-////            $image_2 = $request->file('banner-image');
-//
-//            $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
-//
-//            $destinationPath = public_path('images/stores');
-//            $img = Image::make($image->getRealPath());
-//            $img->resize(200, 50, function ($constraint) {
-//                $constraint->aspectRatio();
-//            })->save($destinationPath . '/' . $input['imagename']);
-//
-//            $destinationPath = public_path('/images');
-//            $image->move($destinationPath, $input['imagename']);
-//
-//            $id = Uuid::generate();
-//            $date_time = date('Ymdhis');
-//
-//            $image_2 = $request->file('banner-image');
-//
-//            $input['image2'] = 'banner' . $id . $date_time . '.' . $image_2->getClientOriginalExtension();
-//
-//            $destinationPath = public_path('images/stores');
-//            $img2 = Image::make($image_2->getRealPath());
-//            $img2->resize(870, 260, function ($constraint) {
-//                $constraint->aspectRatio();
-//            })->save($destinationPath . '/' . $input['image2']);
-//
-//            $destinationPath = public_path('/images');
-//            $image_2->move($destinationPath, $input['image2']);
-//
-//            Store::whereUserId(Auth::user()->id)->update([
-//                'name' => $request->name,
-//                'image' => $input['image'],
-//                'store_banner' => $input['image2'],
-//                'phone_number' => $request->phone_number,
-//                'email' => $request->email,
-//                'address' => $request->address,
-//                'city' => $request->city,
-//                'business_type' => $request->business_type,
-//                'domain' => $request->domain,
-//                'about' => $request->about,
-//                'slug' => $slug,
-//                'user_id' => Auth::user()->id,
-//                'colour' => $request->colour
-//            ]);
-//
-//        }
             return 'success';
         }
 
