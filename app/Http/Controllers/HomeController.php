@@ -104,6 +104,8 @@ class HomeController extends Controller
         return view('market.index_3',compact('products','categories','second_set','nextpageurl','best_deals','featured_stores','most_viewed_products'));
     }
 
+
+
     public function getSearchMarket(Request $request){
 
     }
@@ -119,6 +121,12 @@ class HomeController extends Controller
 
     public function getOurTeam(){
         return view('market.our_team');
+    }
+
+    public function getAllShops(){
+        $shops = Store::inRandomOrder()->paginate();
+//        $second_set = Store::inRandomOrder()->skip(6)->paginate();
+        return view('all_shops',compact('shops','second_set'));
     }
 
     public function getFancies(){
@@ -409,8 +417,9 @@ class HomeController extends Controller
             $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
             event(new FeedsEvent("you just followed $store_builder->name", $user));
+            $image = $store_builder->image == null ? "https://placehold.it/60x60":$store_builder->image;
 
-            return ['status' => 200, 'image_url' => asset("images/stores/$store_builder->image"), 'product_name' => $builder->name, 'store' => $store_builder->name];
+            return ['status' => 200, 'image_url' => asset("images/stores/$image"),  'store' => $store_builder->name];
         }
     }
 

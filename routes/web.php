@@ -16,15 +16,17 @@
 //}
 
 Route::get('/sms',function(){
-    $sms = new \App\KodeSms();
-    var_dump( $sms->SendSms("Hello Ghana",'233577690501'));
+//    $sms = new \App\KodeSms();
+//    var_dump( $sms->SendSms("Hello Ghana",'233577690501'));
+    return \App\Store::inRandomOrder()->get();
+
 });
 
 
 $menu = new \Lavary\Menu\Menu();
 $menu->make('MyNavBar', function($menu){
     $menu->add('Home',array('url'=>'https://www.shopaholicks.com'));
-
+    $menu->add('All Shops',array('url'=>'https://www.shopaholicks.com/all-shops'));
     if(\App\ProductCategory::first()){
         foreach(\App\ProductCategory::all('id','name') as $category){
             $menu->add($category->name,array('url' => "https://www.shopaholicks.com/category/$category->id"));
@@ -109,6 +111,8 @@ Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 Route::any('/', 'HomeController@index');
+
+Route::any('/all-shops', 'HomeController@getAllShops');
 
 Route::get('/search-query', 'HomeController@getSearchQuery');
 

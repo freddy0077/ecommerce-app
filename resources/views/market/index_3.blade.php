@@ -152,7 +152,7 @@
                                             {{--<span class="label label-new">New</span>--}}
 
                                             <!--full quick view block-->
-                                            <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
+                                            <a class="quickview iframe-link" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                             <!--end full quick view block-->
                                         </div>
                                         <div class="right-block">
@@ -217,7 +217,7 @@
                                                 <span class="label label-sale">Sale</span>
                                                 @endif
                                             <!--full quick view block-->
-                                            <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
+                                            <a class="quickview iframe-link" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                             <!--end full quick view block-->
                                         </div>
                                         <div class="right-block">
@@ -490,7 +490,7 @@
                                                         @if(\Illuminate\Support\Facades\Auth::check() && \App\WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($deal->store_id)->first())
 
                                                                 <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}','{{$deal->user_id}}');">
-                                                                    <i style="color:green" class="icon-user-following watch-toggle-{{$product->user_id}}"></i> <span class="button-group__text"></span>
+                                                                    <i style="color:green" class="icon-user-following watch-toggle-{{$deal->user_id}}"></i> <span class="button-group__text"></span>
                                                                 </button>
                                                             @else
                                                                 <button class="addToCart addToCart--notext" type="button"  onclick="watch.add('{{$deal->id}}', '{{$deal->store_id}}','{{$deal->user_id}}');">
@@ -511,7 +511,7 @@
                                                             @if(\Illuminate\Support\Facades\Auth::check()&& \App\Like::whereUserId(Auth::user()->id)->whereProductId($deal->id)->first())
                                                                 <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
                                                                     <i class="fa fa-thumbs-up like-toggle-{{$deal->id}}" style="color: green;"></i>
-                                                                    <i class="like-counts-{{$product->id}}">{{$deal->like_counts}} </i>
+                                                                    <i class="like-counts-{{$deal->id}}">{{$deal->like_counts}} </i>
                                                                 </button>
                                                             @else
                                                                 <button class="compare" type="button"  onclick="likes.add('{{$deal->id}}');">
@@ -521,10 +521,7 @@
 
                                                             @endif
 
-
                                                             {{--<button class="compare" type="button"  onclick="likes.add('{{$product->id}}');"><i  class="addthis_inline_share_toolbox"></i></button>--}}
-
-
 
                                                         </div>
 

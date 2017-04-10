@@ -58,7 +58,7 @@
 
                                         <div class="button-group">
 
-                                            <button class="addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
+                                            <button class="addToCart addToCart--notext" type="button" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->sale ? $product->sale_price : $product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
 
                                         </div>
 
@@ -248,7 +248,7 @@
                                         </div>
 
                                         <div class="button-group">
-                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
+                                            <button class="addToCart" type="button" data-toggle="tooltip" title="Add to Cart" onclick="cart.add('{{$product->id}}', '{{$product->name}}',1,'{{$product->sale ? $product->sale_price : $product->price}}','{{$user_id}}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs"></span></button>
 
                                             <button class="wishlist" type="button" onclick="fancy.add('{{$product->id}}');" data-toggle="tooltip" title="Add to fancies">
                                                 @if(\Illuminate\Support\Facades\Auth::check() && \App\Fancy::whereProductId($product->id)->first())

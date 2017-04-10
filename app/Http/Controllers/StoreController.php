@@ -37,8 +37,13 @@ use Webpatser\Uuid\UuidFacade;
 class StoreController extends Controller
 {
     //
-    public function __construct()
+    protected $cart;
+    protected $image;
+    public function __construct(Cart $cart)
     {
+        $this->cart = $cart;
+//        $this->image = $image;
+
 //        $this->middleware('auth');
     }
 
@@ -227,10 +232,13 @@ class StoreController extends Controller
             $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
 
             $destinationPath = public_path('images/stores');
+
+
             $img = Image::make($image->getRealPath());
             $img->resize(200, 50, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath . '/' . $input['imagename']);
+
 
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $input['imagename']);
