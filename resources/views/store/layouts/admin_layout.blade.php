@@ -239,19 +239,24 @@
                             <li class="menu-dropdown classic-menu-dropdown ">
 
                                 <?php
-                                $store = \App\Store::whereUserId(Auth::user()->id)->first()->slug;
+                                $store = \App\Store::whereUserId(Auth::user()->id)->first();
                                 $user_id = Auth::user()->id;
 
                                 ?>
-                                <a href='{{url("stores/$store/$user_id")}}'> My Shop
+                                @if($store->enabled)
+                                <a href='{{url("stores/$store->slug/$user_id")}}' target="_blank"> My Shop
                                     <span class="arrow"></span>
                                 </a>
+                                    @else
+                                        <a href='{{url("stores/$store->slug/$user_id")}}' target="_blank"> Preview  Shop
+                                            <span class="arrow"></span>
+                                        </a>
+
+                                    @endif
 
                                 {{--<a href="https://{{$store}}.shopaholicks.com/shop"> My Shop--}}
                                 {{--<span class="arrow"></span>--}}
                                 {{--</a>--}}
-
-
 
                             </li>
 

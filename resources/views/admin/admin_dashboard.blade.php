@@ -66,17 +66,16 @@
                     <div class="tile-body">
                         <i class="fa fa-user"></i>
                     </div>
-                    <a href="{{url('admin/users')}}">
+
                         <div class="tile-object">
-                            <div class="name"> Members </div>
-                            <div class="number"> {{$users}} </div>
+                            <a href="{{url('admin/users')}}"><div class="name"> Members </div> </a>
+                            <a href="{{url('admin/users')}}"> <div class="number"> {{$users}} </div></a>
                         </div>
-                    </a>
 
                 </div>
                 <div class="tile double bg-blue-madison">
                     <div class="tile-body">
-                        <img src="../assets/pages/media/profile/photo1.jpg" alt="">
+                        <img src="" alt="">
                         <h4>Announcements</h4>
                         <p> Easily style icon color, size, shadow, and anything that's possible with CSS. </p>
                     </div>

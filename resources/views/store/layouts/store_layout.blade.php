@@ -89,6 +89,11 @@
 
 <body class="res layout-subpage banners-effect-6">
 <div id="wrapper" class="wrapper-full ">
+    @if(!$store->enabled)
+    <div class="bg-primary" style=" color:white; width:100%; height:50px;  position:fixed; z-index: 2000;" >
+        <p class="text-center h3" style="padding-bottom: 20px;">Your Shop is still not enabled !</p>
+    </div>
+    @endif
     <!-- Header Container  -->
     <header id="header" class=" variantleft type_1">
         <!-- Header Top -->

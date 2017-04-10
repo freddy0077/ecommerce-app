@@ -128,7 +128,7 @@
                         @if(!$store->enabled)
                         <div class="note note-warning">
                             <h4 class="block">Important! {{$store->name}}  is still not enabled ! </h4>
-                            <p> Click here to enable it.</p>
+                            <p><a href="#enable"> Click here to enable it.</a></p>
                         </div>
                         @endif
                         <div class="row">
@@ -447,7 +447,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group" id="enable">
                                                     <label class="control-label col-md-3">Enable</label>
                                                     <div class="col-md-4">
                                                         <input type="checkbox" class="form-control" name="enabled" {{$store->enabled ? "checked" : ""}}>

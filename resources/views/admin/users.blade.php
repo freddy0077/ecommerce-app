@@ -49,7 +49,7 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span>All Orders</span>
+                            <span>All Users</span>
                         </li>
                     </ul>
                     <!-- END PAGE BREADCRUMBS -->

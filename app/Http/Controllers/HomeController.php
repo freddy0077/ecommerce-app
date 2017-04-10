@@ -61,7 +61,9 @@ class HomeController extends Controller
             $number_of_products = $signup ? $signup->number_of_products : 50;
              $products = Product::leftJoin('stores','stores.user_id','=','products.user_id')
                  ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image,stores.user_id')
-                 ->where('products.user_id',$user->id)->take($number_of_products)->get();
+                 ->where('products.user_id',$user->id)
+                 ->where('stores.enabled',true)
+                 ->take($number_of_products)->get();
             $allProducts->push($products);
         }
 
@@ -124,7 +126,7 @@ class HomeController extends Controller
     }
 
     public function getAllShops(){
-        $shops = Store::inRandomOrder()->paginate();
+        $shops = Store::whereEnabled(true)->inRandomOrder()->paginate();
 //        $second_set = Store::inRandomOrder()->skip(6)->paginate();
         return view('all_shops',compact('shops','second_set'));
     }
@@ -255,6 +257,8 @@ class HomeController extends Controller
             ->leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
             ->where('product_categories.id',$category_id)
+            ->where('stores.enabled',true)
+            ->inRandomOrder()
             ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,product_categories.name as category_name')
             ->orderBy('products.like_counts','desc');
 
@@ -266,6 +270,7 @@ class HomeController extends Controller
          $nextpageurl = $second_set->nextpageurl();
 
         $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
+            ->inRandomOrder()
             ->take(3)
             ->get();
 
