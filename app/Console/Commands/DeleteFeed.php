@@ -14,7 +14,7 @@ class DeleteFeed extends Command
      *
      * @var string
      */
-    protected $signature = 'delete:feed {name}';
+    protected $signature = 'delete:feed';
 
     /**
      * The console command description.

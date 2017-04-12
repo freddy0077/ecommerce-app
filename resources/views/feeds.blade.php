@@ -45,13 +45,13 @@
         channel.bind('App\\Events\\ChatMessageReceived', function(data) {
 //            alert(data.chatMessage.message);
             setTimeout(function () {
-//                alert('event reached');
+                alert('event reached');
                 $.get('/feeds', function (data) {
                     $('#feeds').html(data)
                 }).fail(function () {
                     alert('error')
                 })
-            }, 5000);
+            }, 1000);
         })
 
 

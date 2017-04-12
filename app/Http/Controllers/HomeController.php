@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\ChatMessageReceived;
 use App\Events\FeedsEvent;
 use App\Events\FollowersEvent;
+use App\Events\LikeEvent;
 use App\Fancy;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UserRequest;
+use App\Jobs\FeedsJob;
 use App\Like;
 use App\MarketplaceSignup;
 use App\Notifications\NewShop;
@@ -20,6 +22,7 @@ use App\StreamFeed;
 use App\SubCategory;
 use App\User;
 use App\WatchedShop;
+use Carbon\Carbon;
 use GetStream\Stream\Client;
 use GetStream\Stream\Feed;
 use GetStream\StreamLaravel\Enrich;
@@ -194,7 +197,7 @@ class HomeController extends Controller
         $user = Auth::user();
         if($user->has_store){
             $store = Store::whereUserId($user->id)->first();
-            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->get();
+            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->paginate();
             $followers = $builder->whereStoreId($store->id)->get();
             $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')->where('watched_shops.user_id',$user->id)->get();
 //
@@ -270,6 +273,7 @@ class HomeController extends Controller
          $nextpageurl = $second_set->nextpageurl();
 
         $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
+            ->where('stores.enabled',true)
             ->inRandomOrder()
             ->take(3)
             ->get();
@@ -307,6 +311,9 @@ class HomeController extends Controller
     }
 
     public function postFancyIt($product_id){
+
+        $product = Product::find($product_id);
+
         if(Auth::check() && !Fancy::whereUserId(Auth::user()->id)->whereProductId($product_id)->first()) {
             $user = Auth::user();
             Fancy::create([
@@ -314,10 +321,8 @@ class HomeController extends Controller
                 'product_id' => $product_id,
                 'user_id' => $user->id
             ]);
-            $product = Product::find($product_id);
-
-            \App\Feed::recordAction($product->user_id,"$user->name just fancy'd your product($product->name)");
-            return ['message' => 'Product has been added to your fancies !', 'status' => 200];
+            \App\Feed::sendFeedToJob($product,'fancy');
+            return ['message' => "You just fancy'd $product->name", 'status' => 200];
         }elseif(Auth::guest()){
             return ['message' => 'You need to login to add to fancies !','status' => 401];
 
@@ -326,7 +331,9 @@ class HomeController extends Controller
             if($fancy_exists){
                 $fancy_exists->delete();
             }
-            return ['message' => "You have unfancy'd this product!",'status' => 401];
+            \App\Feed::sendFeedToJob($product,'unfancy');
+
+            return ['message' => "You just unfancy'd this product!",'status' => 401];
         }
     }
 
@@ -347,11 +354,7 @@ class HomeController extends Controller
                 'like_counts' => $product->like_counts + 1
             ]);
 
-            $user = Auth::user();
-
-            \App\Feed::recordAction($product->user_id,"$user->name just liked your product($product->name)");
-
-            event(new ChatMessageReceived("$user->name just liked a product",$user));
+            \App\Feed::sendFeedToJob($product,'like');
 
             return ['message' => 'You just liked a product', 'status' => 200, 'likes' => $product->like_counts];
         }
@@ -372,6 +375,7 @@ class HomeController extends Controller
                 ]);
             }
 
+            \App\Feed::sendFeedToJob($product,'unlike');
 
             return ['message' => "You just unliked a product",'status' => 401,'likes'=>$product->like_counts];
         }
@@ -400,12 +404,16 @@ class HomeController extends Controller
 
     public function postWatchShop($product_id,$store_id,$user_id)
     {
+        $store_builder = Store::find($store_id);
+
         if (Auth::guest()) {
             return ['status' => 401, 'message' => 'Log in to watch a shop'];
         } elseif (Auth::check() && WatchedShop::whereUserId(Auth::user()->id)->whereStoreId($store_id)->first()) {
             $watchedshop_exists = WatchedShop::whereUserId(\Illuminate\Support\Facades\Auth::user()->id)->whereStoreId($store_id)->first();
 //            if ($watchedshop_exists) {
             $watchedshop_exists->delete();
+            \App\Feed::sendFeedToJob($store_builder,'unfollow');
+
             return ['message' => "You just unfollowed a shop", 'status' => 404];
         } else {
 
@@ -418,10 +426,10 @@ class HomeController extends Controller
                 'user_id' => $user->id,
                 'action' => "$user->name just followed your shop"
             ]);
-            $store_builder = Store::find($store_id);
-            $store_builder = Store::find($store_id);
+//            $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
-            event(new FeedsEvent("you just followed $store_builder->name", $user));
+            \App\Feed::sendFeedToJob($store_builder,'follow');
+//            event(new FeedsEvent("you just followed $store_builder->name", $user));
             $image = $store_builder->image == null ? "https://placehold.it/60x60":$store_builder->image;
 
             return ['status' => 200, 'image_url' => asset("images/stores/$image"),  'store' => $store_builder->name];
