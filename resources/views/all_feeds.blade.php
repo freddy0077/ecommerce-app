@@ -31,8 +31,32 @@
 
             $('#timeline-form').on('submit',function(e){
                 e.preventDefault();
-                $.post('/add-to-timeline',$('#timeline-form').serialize(),function(){
 
+//                $.post('/add-to-timeline',$('#timeline-form').serialize(),function(){
+//
+//                })
+
+                $.ajax({
+                    url:"{{url('/add-to-timeline')}}",
+                    type:"POST",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    beforeSend:function() {
+                      $('#post-btn').text('posting...').attr('disabled',true)
+                    },
+                    complete:function( data ) {
+//                        $('#post-btn').text('posting...')
+//                        $('#post-btn').text('posting...').attr('disabled',true)
+                        $('#post-btn').text('post to timeline').attr('disabled',false);
+                        $('#message').val('')
+                        messageCount();
+
+
+                    }
+//                    success:function(){
+//                        $('#post-btn').text('post to timeline').attr('disabled',false);
+//
+//                    }
                 })
             })
         </script>
@@ -121,7 +145,7 @@
                                                     <form action="{{url('/add-to-timeline')}}" id="timeline-form">
                                                     <textarea class="form-control" name="message" id="message" maxlength="140" required style="position: relative; top: -20px;" placeholder="What do you want your followers to know ?"></textarea>
                                                     <span class="pull-left" id="count"></span>
-                                                    <button class="btn btn-success pull-right">post to timeline</button>
+                                                    <button id="post-btn" class="btn btn-success pull-right">post to timeline</button>
                                                     </form>
                                                             <span class="font-grey-cascade">
 
