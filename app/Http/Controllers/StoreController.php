@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Webpatser\Uuid\Uuid;
@@ -238,6 +239,8 @@ class StoreController extends Controller
             $img->resize(200, 50, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath . '/' . $input['imagename']);
+
+            Storage::put($input['imagename'], $img);
 
 
             $second_image = Image::make($image->getRealPath());
