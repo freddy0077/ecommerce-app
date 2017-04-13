@@ -240,7 +240,7 @@ class StoreController extends Controller
                 $constraint->aspectRatio();
             })->save($destinationPath . '/' . $input['imagename']);
 
-            Storage::put($input['imagename'], $img);
+//            Storage::put($input['imagename'], $img);
 
 
             $second_image = Image::make($image->getRealPath());
