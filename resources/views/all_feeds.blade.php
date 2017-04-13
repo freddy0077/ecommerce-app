@@ -200,7 +200,7 @@
                                                             <span class="font-grey-cascade">
                                                                     @if($feed->other != "")
                                                                         <?php $store = \App\Store::whereImage($feed->other)->first(); ?>
-                                                                    <a href='{{"/stores/$store->slug/$store->user_id"}}'>
+                                                                    <a target="_blank" href='{{"/stores/$store->slug/$store->user_id"}}'>
                                                                     <img src='{{url("/images/stores/$feed->other")}}' width="80" height="80" class="img-rounded" />
                                                                     </a>
                                                                 @endif
