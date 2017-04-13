@@ -229,6 +229,8 @@
 
                                     <li class="signin"><a href="{{url('/feeds')}}" class="top-link-checkout" title="profile"><i class="fa fa-user" ></i> Profile</a></li>
 
+                                    <li class="signin"><a href="{{url('/all-feeds')}}" class="top-link-checkout" title="feeds"><i class="fa fa-feed" ></i> Feeds</a></li>
+
                                     <li class="signin"><a href="{{url('/logout')}}" class="top-link-checkout" title="sign out"><i class="fa fa-sign-out" ></i> Sign out</a></li>
 
                                 @else

@@ -348,13 +348,13 @@
                                                         <li class="active">
                                                             <a href="#tab_1_11" data-toggle="tab"> Feeds </a>
                                                         </li>
-                                                        <li>
-                                                            <a href="#tab_1_22" data-toggle="tab">Following  </a>
-                                                        </li>
+                                                        {{--<li>--}}
+                                                            {{--<a href="#tab_1_22" data-toggle="tab">Following  </a>--}}
+                                                        {{--</li>--}}
 
-                                                        <li>
-                                                            <a href="#tab_1_33" data-toggle="tab">Followers  </a>
-                                                        </li>
+                                                        {{--<li>--}}
+                                                            {{--<a href="#tab_1_33" data-toggle="tab">Followers  </a>--}}
+                                                        {{--</li>--}}
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab_1_11">
@@ -362,16 +362,14 @@
                                                                 <div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 
                                                                 <div class="feeds" id="feeds">
-                                                                <ul style=" height: 200px; overflow-y: scroll;">
+                                                                <ul style=" height: 200px; overflow-y: scroll; list-style: none;">
 
                                                                     @foreach($feeds as $feed)
                                                                         <li>
                                                                             <div class="col1">
                                                                                 <div class="cont">
                                                                                     <div class="cont-col1">
-                                                                                        <div class="label label-success">
-                                                                                            <i class="fa fa-bell-o"></i>
-                                                                                        </div>
+                                                                                        {{--s--}}
                                                                                     </div>
                                                                                     <div class="cont-col2">
                                                                                         {{--<div class="desc"> {{$activity['actor'].' '.$activity['verb'].' '.$activity['object']}}--}}
@@ -384,13 +382,13 @@
                                                                                         {{--</div>--}}
                                                                                     {{--</div>--}}
                                                                                         <div class="desc"> {{$feed->action}}
-                                                                                            <span class="label label-danger label-sm">
+                                                                                            {{--<span class="label label-danger label-sm">--}}
                                                                                                 {{--<a href="{{url('/follow-feed',$activity['foreign_id'])}}">--}}
-                                                                                                Take action
+                                                                                                {{--Take action--}}
                                                                                                 {{--</a>--}}
                                                                                                 {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
                                                                                                 {{--<a href="{{url('/follow-user',$activity['id'])}}"><i class="fa fa-share"></i></a>--}}
-                                                                                                </span>
+                                                                                                {{--</span>--}}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

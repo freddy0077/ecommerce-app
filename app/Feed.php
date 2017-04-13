@@ -36,7 +36,7 @@ class Feed extends Model
 
             case"like":
                 $message = "$user->name just liked your product($product->name)";
-                dispatch(new FeedsJob($product->user_id,$user,$message));
+                dispatch(new FeedsJob($product->user_id,$user,$message,$other));
 
                 break;
             case"unlike":
