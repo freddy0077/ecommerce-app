@@ -2,6 +2,12 @@
 
 @section('scripts')
         <script>
+            function messageCount(){
+                var currentString = $("#message").val()
+                $('#count').html(currentString.length)
+            }
+            $('#message').on('keyup',messageCount);
+
             Pusher.logToConsole = true;
 
             {{--@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id == $user->id)--}}
@@ -113,8 +119,8 @@
                                                 <div class="timeline-body-content">
 
                                                     <form action="{{url('/add-to-timeline')}}" id="timeline-form">
-                                                    <textarea class="form-control" name="message" required style="position: relative; top: -20px;" placeholder="What do you want your followers to know ?"></textarea>
-                                                    <span class="pull-left">hel</span>
+                                                    <textarea class="form-control" name="message" id="message" maxlength="140" required style="position: relative; top: -20px;" placeholder="What do you want your followers to know ?"></textarea>
+                                                    <span class="pull-left" id="count"></span>
                                                     <button class="btn btn-success pull-right">post to timeline</button>
                                                     </form>
                                                             <span class="font-grey-cascade">
