@@ -50,6 +50,11 @@ class Feed extends Model
                 $message = "you just unfollowed $product->name";
                 dispatch(new FeedsJob($user->id,$user,$message));
                 break;
+            case"timeline":
+                $message = $product;
+                dispatch(new FeedsJob($user->id,$user,$message));
+                break;
+
         }
     }
 }

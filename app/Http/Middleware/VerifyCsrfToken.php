@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
         '/',
+        '/add-to-timeline',
         '/register-user',
         '/register-new-user',
         '/register',

@@ -178,6 +178,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/feeds','HomeController@getFeeds');
     Route::get('/all-feeds','HomeController@getAllFeeds');
 
+    Route::post('/add-to-timeline','HomeController@postAddToTimeline');
+
     Route::post('save-profile','HomeController@postSaveProfile');
     Route::post('change-password','HomeController@postChangePassword');
 

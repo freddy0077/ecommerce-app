@@ -1,5 +1,38 @@
 @extends('store.layouts.admin_layout')
 
+@section('scripts')
+        <script>
+            Pusher.logToConsole = true;
+
+            {{--@if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id == $user->id)--}}
+            var pusher = new Pusher('d7c6fc127150c78d0f33', {
+                cluster: 'eu',
+                encrypted: true
+            });
+
+            var channel = pusher.subscribe('chat-room.1');
+            channel.bind('App\\Events\\ChatMessageReceived', function(data) {
+//            alert(data.chatMessage.message);
+//                setTimeout(function () {
+//                    alert('all feeds event reached');
+                    $.get('/all-feeds', function (data) {
+                        $('#feeds').html(data)
+                    }).fail(function () {
+                        alert('error')
+                    })
+//                }, 1000);
+            })
+
+            $('#timeline-form').on('submit',function(e){
+                e.preventDefault();
+                $.post('/add-to-timeline',$('#timeline-form').serialize(),function(){
+
+                })
+            })
+        </script>
+
+@endsection
+
 @section('content')
         <!-- BEGIN CONTAINER -->
 <div class="page-container">
@@ -41,7 +74,7 @@
                 <!-- BEGIN PAGE CONTENT INNER -->
                 <div class="page-content-inner">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="portlet light portlet-fit ">
                                 <div class="portlet-title">
                                     <div class="caption">
@@ -59,6 +92,41 @@
                                     {{--</div>--}}
                                 </div>
                                 <div class="portlet-body">
+                                    <div class="timeline">
+                                        <!-- TIMELINE ITEM -->
+                                        <div class="timeline-item">
+                                            <div class="timeline-badge">
+                                                {{--                                                <img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
+                                                <img class="timeline-badge-userpic" src="{{url('frontend_2/image/shopaholicks_logos_03.png')}}"> </div>
+                                            <div class="timeline-body">
+                                                <div class="timeline-body-arrow"> </div>
+                                                {{--<div class="timeline-body-head">--}}
+                                                    {{--<div class="timeline-body-head-caption">--}}
+                                                        {{--<a href="javascript:;" class="timeline-body-title font-blue-madison pull-right" style="position: absolute; left:73%;">--}}
+                                                            {{--<small> </small>--}}
+                                                        {{--</a>--}}
+                                                        {{--<span class="timeline-body-time font-grey-cascade">--}}
+{{--                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}--}}
+                                                        {{--</span>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                <div class="timeline-body-content">
+
+                                                    <form action="{{url('/add-to-timeline')}}" id="timeline-form">
+                                                    <textarea class="form-control" name="message" required style="position: relative; top: -20px;" placeholder="What do you want your followers to know ?"></textarea>
+                                                    <span class="pull-left">hel</span>
+                                                    <button class="btn btn-success pull-right">post to timeline</button>
+                                                    </form>
+                                                            <span class="font-grey-cascade">
+
+                                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END TIMELINE ITEM -->
+                                    </div>
+
+                                    <div class="feeds" id="feeds">
                                     @foreach($feeds as $feed)
                                     <div class="timeline">
                                         <!-- TIMELINE ITEM -->
@@ -70,60 +138,15 @@
                                                 <div class="timeline-body-arrow"> </div>
                                                 <div class="timeline-body-head">
                                                     <div class="timeline-body-head-caption">
-                                                        <a href="javascript:;" class="timeline-body-title font-blue-madison">
-                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}
-                                                        </a>
+                                                        <i class="timeline-body-title pull-right font-grey-cascade" style="position: absolute; left:73%;">
+                                                           <small> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</small>
+                                                        </i>
                                                         <span class="timeline-body-time font-grey-cascade">
 {{--                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}--}}
                                                         </span>
                                                     </div>
                                                     <div class="timeline-body-head-actions">
                                                         <div class="btn-group">
-                                                            <button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu pull-right" role="menu">
-                                                                <li>
-                                                                    <a href="javascript:;">Action </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Another action </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Something else here </a>
-                                                                </li>
-                                                                <li class="divider"> </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Separated link </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="timeline-body-content">
-                                                            <span class="font-grey-cascade">
-                                                               {{$feed->action}}
-                                                            </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END TIMELINE ITEM -->
-                                    </div>
-                                    @endforeach
-                                    {{--<div class="timeline">--}}
-                                        {{--<!-- TIMELINE ITEM -->--}}
-                                        {{--<div class="timeline-item">--}}
-                                            {{--<div class="timeline-badge">--}}
-                                                {{--<img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
-                                            {{--<div class="timeline-body">--}}
-                                                {{--<div class="timeline-body-arrow"> </div>--}}
-                                                {{--<div class="timeline-body-head">--}}
-                                                    {{--<div class="timeline-body-head-caption">--}}
-                                                        {{--<a href="javascript:;" class="timeline-body-title font-blue-madison">Andres Iniesta</a>--}}
-                                                        {{--<span class="timeline-body-time font-grey-cascade">Replied at 7:45 PM</span>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="timeline-body-head-actions">--}}
-                                                        {{--<div class="btn-group">--}}
                                                             {{--<button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
                                                                 {{--<i class="fa fa-angle-down"></i>--}}
                                                             {{--</button>--}}
@@ -142,22 +165,29 @@
                                                                     {{--<a href="javascript:;">Separated link </a>--}}
                                                                 {{--</li>--}}
                                                             {{--</ul>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="timeline-body-content">--}}
-                                                            {{--<span class="font-grey-cascade">--}}
-                                                                {{--Lorem ipsum dolor sit amet, consectetuer adipiscing elit,--}}
-                                                            {{--</span>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<!-- END TIMELINE ITEM -->--}}
-                                    {{--</div>--}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-body-content">
+                                                            <span class="font-grey-cascade">
+                                                               {{$feed->action}}
+                                                            </span>
+                                                    <br>
+                                                   <button><i class="fa fa-thumbs-up text-center"></i></button>
+                                                    <button><i class="fa fa-heart"></i></button>
+                                                    <button><i class="icon-user-following"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END TIMELINE ITEM -->
+                                    </div>
+                                    @endforeach
+                                    </div>
+                                        <button class="" style="float:right; position: relative; bottom: 20px;">load more..</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="portlet light portlet-fit ">
                                 <div class="portlet-title">
                                     <div class="caption">
@@ -178,8 +208,7 @@
                                     <div class="timeline">
                                         <!-- TIMELINE ITEM -->
                                         <div class="timeline-item">
-                                            <div class="timeline-badge">
-                                                <img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>
+                                            {{--<div class="timeline-badge"><img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
                                             <div class="timeline-body">
                                                 <div class="timeline-body-arrow"> </div>
                                                 <div class="timeline-body-head">
@@ -223,7 +252,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="portlet light portlet-fit ">
                                 <div class="portlet-title">
                                     <div class="caption">

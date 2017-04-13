@@ -3,13 +3,17 @@
 namespace App\Jobs;
 
 use App\Events\ChatMessageReceived;
+use App\Feed;
 use App\Product;
+use App\Store;
+use App\WatchedShop;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 class FeedsJob implements ShouldQueue
 {
@@ -42,5 +46,13 @@ class FeedsJob implements ShouldQueue
     {
         \App\Feed::recordAction($this->user_id,$this->message);
         event(new ChatMessageReceived($this->message,$this->user));
+
+//        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');
+//        $store = Store::whereUserId(Auth::id)->first();
+//        $followers = $builder->whereStoreId($store->id)->get();
+//        foreach($followers as $follower){
+//            Feed::recordAction($follower->user_id,$this->message);
+//        }
+
     }
 }
