@@ -240,8 +240,12 @@ class StoreController extends Controller
             })->save($destinationPath . '/' . $input['imagename']);
 
 
+            $second_image = Image::make($image->getRealPath());
             $destinationPath = public_path('/images');
-            $image->move($destinationPath, $input['imagename']);
+            $second_image->resize(300, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . '/' . $input['imagename']);
+//            $image->move($destinationPath, $input['imagename']);
 
             $id = Uuid::generate();
             $date_time = date('Ymdhis');

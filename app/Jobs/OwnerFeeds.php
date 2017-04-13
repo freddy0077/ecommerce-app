@@ -48,15 +48,8 @@ class FeedsJob implements ShouldQueue
     public function handle()
     {
         \App\Feed::recordAction($this->user_id,$this->message,$this->other);
-        \App\Feed::recordAction($this->user->id,$this->message,$this->other);
         event(new ChatMessageReceived($this->message,$this->user));
 
-//        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');
-//        $store = Store::whereUserId(Auth::id())->first();
-//        $followers = $builder->whereStoreId($store->id)->get();
-//        foreach($followers as $follower){
-//            Feed::recordAction($follower->user_id,$this->message);
-//        }
 
     }
 }

@@ -40,12 +40,12 @@
 
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail" style="height:300px; overflow: hidden">
-                        <?php $image= $shop->image == null ? "https://placehold.it/300x200":asset('images/stores/'.$shop->image) ?>
-                        <img src='{{$image}}' class="img-rounded">
+                        <?php $image= $shop->image == null ? "https://placehold.it/300x200":asset('images/'.$shop->image) ?>
+                        <img src='{{$image}}' height="200" class="img-rounded">
                         <div class="caption">
                             <h4 class="text-center"><strong>{{$shop->name}}</strong></h4>
                             <p>
-                                {{--{{$shop->about}}--}}
+                                {{substr($shop->about,0,30)}}
                             </p>
                             {{--<a href="#" class="btn btn-default btn-xs pull-right" role="button">--}}
                                 {{--<i class="glyphicon glyphicon-edit"></i></a> <a href="#" class="btn btn-info btn-xs" role="button">Button</a> --}}
