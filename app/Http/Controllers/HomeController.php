@@ -202,7 +202,8 @@ class HomeController extends Controller
             $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')->where('watched_shops.user_id',$user->id)->get();
 //
         }else {
-            $feeds = collect();
+            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->paginate(7);
+//            $feeds = collect();
             $followers = collect();
             $following = collect();
         }
@@ -440,7 +441,21 @@ class HomeController extends Controller
    public function postAddToTimeline(Request $request){
        $user = Auth::user();
 //       \App\Feed::recordAction($user->id,$request->message);
+       if($user->has_store){
+           $builder = DB::table('watched_shops');
+           $store = Store::whereUserId(Auth::id())->first();
+           $followers = $builder->whereStoreId($store->id)->get();
+           foreach($followers as $follower){
+               if($follower->user_id != $user->id){
+                   \App\Feed::recordAction($follower->user_id,$request->message);
+               }
+           }
+       }
+
+
        \App\Feed::sendFeedToJob($request->message,'timeline');
+
+
    }
 
     public function getFollowUser($id){

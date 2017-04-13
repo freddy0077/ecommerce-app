@@ -48,7 +48,7 @@ class FeedsJob implements ShouldQueue
         event(new ChatMessageReceived($this->message,$this->user));
 
 //        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');
-//        $store = Store::whereUserId(Auth::id)->first();
+//        $store = Store::whereUserId(Auth::id())->first();
 //        $followers = $builder->whereStoreId($store->id)->get();
 //        foreach($followers as $follower){
 //            Feed::recordAction($follower->user_id,$this->message);

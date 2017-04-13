@@ -18,7 +18,7 @@
                     $.get('/all-feeds', function (data) {
                         $('#feeds').html(data)
                     }).fail(function () {
-                        alert('error')
+//                        alert('error')
                     })
 //                }, 1000);
             })
