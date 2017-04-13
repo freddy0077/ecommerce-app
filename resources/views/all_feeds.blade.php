@@ -297,8 +297,9 @@
                                                 <!-- END TIMELINE ITEM -->
                                             </div>
                                         @endforeach
+                                            <button class="" style="float:right; position: relative; bottom: 20px;">load more..</button>
+
                                     @endif
-                                        <button class="" style="float:right; position: relative; bottom: 20px;">load more..</button>
 
                                 </div>
                             </div>
