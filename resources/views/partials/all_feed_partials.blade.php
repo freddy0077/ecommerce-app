@@ -9,9 +9,9 @@
                 <div class="timeline-body-arrow"> </div>
                 <div class="timeline-body-head">
                     <div class="timeline-body-head-caption">
-                        <a href="javascript:;" class="timeline-body-title font-blue-madison pull-right" style="position: absolute; left:73%;">
+                        <i class="timeline-body-title pull-right font-grey-cascade" style="position: absolute; left:73%;">
                             <small> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</small>
-                        </a>
+                        </i>
                                                         <span class="timeline-body-time font-grey-cascade">
 {{--                                                            {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}--}}
                                                         </span>
@@ -41,7 +41,15 @@
                 </div>
                 <div class="timeline-body-content">
                                                             <span class="font-grey-cascade">
-                                                               {{$feed->action}}
+                                                                    @if($feed->other != "")
+                                                                    <?php $store = \App\Store::whereImage($feed->other)->first(); ?>
+                                                                    <a href='{{"/stores/$store->slug/$store->user_id"}}'>
+                                                                        <img src='{{url("/images/stores/$feed->other")}}' width="80" height="80" class="img-rounded" />
+                                                                    </a>
+                                                                @endif
+                                                                {{"  " . $feed->action}}
+
+                                                                <br>
                                                             </span>
                     <br>
                     <button><i class="fa fa-thumbs-up text-center"></i></button>

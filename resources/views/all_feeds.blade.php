@@ -50,8 +50,6 @@
                         $('#post-btn').text('post to timeline').attr('disabled',false);
                         $('#message').val('')
                         messageCount();
-
-
                     }
 //                    success:function(){
 //                        $('#post-btn').text('post to timeline').attr('disabled',false);
@@ -200,7 +198,15 @@
                                                 </div>
                                                 <div class="timeline-body-content">
                                                             <span class="font-grey-cascade">
-                                                               {{$feed->action}}
+                                                                    @if($feed->other != "")
+                                                                        <?php $store = \App\Store::whereImage($feed->other)->first(); ?>
+                                                                    <a href='{{"/stores/$store->slug/$store->user_id"}}'>
+                                                                    <img src='{{url("/images/stores/$feed->other")}}' width="80" height="80" class="img-rounded" />
+                                                                    </a>
+                                                                @endif
+                                                                        {{"  " . $feed->action}}
+
+                                                                    <br>
                                                             </span>
                                                     <br>
                                                    <button><i class="fa fa-thumbs-up text-center"></i></button>
@@ -225,63 +231,78 @@
                                         <span class="caption-subject bold font-green uppercase"> Following</span>
                                         {{--<span class="caption-helper">default option...</span>--}}
                                     </div>
-                                    <div class="actions">
-                                        {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
-                                            {{--<label class="btn red btn-outline btn-circle btn-sm active">--}}
-                                                {{--<input type="radio" name="options" class="toggle" id="option1">Settings</label>--}}
-                                            {{--<label class="btn  red btn-outline btn-circle btn-sm">--}}
-                                                {{--<input type="radio" name="options" class="toggle" id="option2">Tools</label>--}}
-                                        {{--</div>--}}
-                                    </div>
+                                    {{--<div class="actions">--}}
+                                    {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
+                                    {{--<label class="btn red btn-outline btn-circle btn-sm active">--}}
+                                    {{--<input type="radio" name="options" class="toggle" id="option1">Settings</label>--}}
+                                    {{--<label class="btn  red btn-outline btn-circle btn-sm">--}}
+                                    {{--<input type="radio" name="options" class="toggle" id="option2">Tools</label>--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="timeline">
-                                        <!-- TIMELINE ITEM -->
-                                        <div class="timeline-item">
-                                            {{--<div class="timeline-badge"><img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
-                                            <div class="timeline-body">
-                                                <div class="timeline-body-arrow"> </div>
-                                                <div class="timeline-body-head">
-                                                    <div class="timeline-body-head-caption">
-                                                        <a href="javascript:;" class="timeline-body-title font-blue-madison">Andres Iniesta</a>
-                                                        <span class="timeline-body-time font-grey-cascade">Replied at 7:45 PM</span>
-                                                    </div>
-                                                    <div class="timeline-body-head-actions">
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu pull-right" role="menu">
-                                                                <li>
-                                                                    <a href="javascript:;">Action </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Another action </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Something else here </a>
-                                                                </li>
-                                                                <li class="divider"> </li>
-                                                                <li>
-                                                                    <a href="javascript:;">Separated link </a>
-                                                                </li>
-                                                            </ul>
+                                    @if(count($following)== 0 )
+                                        <h4>You are not following any shop at the moment!</h4>
+                                    @else
+                                        @foreach($following as $follow)
+                                            <div class="timeline">
+                                                <!-- TIMELINE ITEM -->
+                                                <div class="timeline">
+                                                    <!-- TIMELINE ITEM -->
+                                                    <div class="timeline-item">
+                                                        <div class="timeline-badge"><img class="timeline-badge-userpic" src="https://placehold.it/100x100"> </div>
+                                                        <div class="timeline-body">
+                                                            <div class="timeline-body-arrow"> </div>
+                                                            <div class="timeline-body-head">
+                                                                <div class="timeline-body-head-caption">
+                                                                    <a href="javascript:;" class="timeline-body-title font-blue-madison">{{$follow->name}}</a>
+                                                            <span class="timeline-body-time font-grey-cascade">
+
+                                                                <small> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$follow->created_at)->diffForHumans()}}</small>
+
+                                                            </span>
+                                                                </div>
+                                                                <div class="timeline-body-head-actions">
+                                                                    {{--<div class="btn-group">--}}
+                                                                        {{--<button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
+                                                                            {{--<i class="fa fa-angle-down"></i>--}}
+                                                                        {{--</button>--}}
+                                                                        {{--<ul class="dropdown-menu pull-right" role="menu">--}}
+                                                                            {{--<li>--}}
+                                                                                {{--<a href="javascript:;">Action </a>--}}
+                                                                            {{--</li>--}}
+                                                                            {{--<li>--}}
+                                                                                {{--<a href="javascript:;">Another action </a>--}}
+                                                                            {{--</li>--}}
+                                                                            {{--<li>--}}
+                                                                                {{--<a href="javascript:;">Something else here </a>--}}
+                                                                            {{--</li>--}}
+                                                                            {{--<li class="divider"> </li>--}}
+                                                                            {{--<li>--}}
+                                                                                {{--<a href="javascript:;">Separated link </a>--}}
+                                                                            {{--</li>--}}
+                                                                        {{--</ul>--}}
+                                                                    {{--</div>--}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="timeline-body-content">
+                                                            <span class="font-grey-cascade">
+                                                               {{"You started following $follow->name ". \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$follow->created_at)->diffForHumans()}}
+                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <!-- END TIMELINE ITEM -->
                                                 </div>
-                                                <div class="timeline-body-content">
-                                                            <span class="font-grey-cascade">
-                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                                                            </span>
-                                                </div>
+                                                <!-- END TIMELINE ITEM -->
                                             </div>
-                                        </div>
-                                        <!-- END TIMELINE ITEM -->
-                                    </div>
+                                        @endforeach
+                                    @endif
+                                        <button class="" style="float:right; position: relative; bottom: 20px;">load more..</button>
 
                                 </div>
                             </div>
-                        </div>
+                                </div>
                         <div class="col-md-3">
                             <div class="portlet light portlet-fit ">
                                 <div class="portlet-title">
@@ -300,47 +321,53 @@
                                     {{--</div>--}}
                                 </div>
                                 <div class="portlet-body">
+                                    @if(count($followers)== 0 )
+                                        <h4>No Followers at the moment ...</h4>
+                                    @else
                                     @foreach($followers as $follower)
                                     <div class="timeline">
                                         <!-- TIMELINE ITEM -->
                                         <div class="timeline">
                                             <!-- TIMELINE ITEM -->
                                             <div class="timeline-item">
-                                                <div class="timeline-badge">
-                                                    <img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>
+                                                <div class="timeline-badge"><img class="timeline-badge-userpic" src="https://placehold.it/100x100"> </div>
                                                 <div class="timeline-body">
                                                     <div class="timeline-body-arrow"> </div>
                                                     <div class="timeline-body-head">
                                                         <div class="timeline-body-head-caption">
-                                                            <a href="javascript:;" class="timeline-body-title font-blue-madison">Andres Iniesta</a>
-                                                            <span class="timeline-body-time font-grey-cascade">Replied at 7:45 PM</span>
+                                                            <a href="javascript:;" class="timeline-body-title font-blue-madison">{{$follower->name}}</a>
+                                                            <span class="timeline-body-time font-grey-cascade">
+
+                                                                <small> {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$follower->followed_at)->diffForHumans()}}</small>
+
+                                                            </span>
                                                         </div>
                                                         <div class="timeline-body-head-actions">
                                                             <div class="btn-group">
-                                                                <button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
-                                                                    <i class="fa fa-angle-down"></i>
-                                                                </button>
-                                                                <ul class="dropdown-menu pull-right" role="menu">
-                                                                    <li>
-                                                                        <a href="javascript:;">Action </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:;">Another action </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:;">Something else here </a>
-                                                                    </li>
-                                                                    <li class="divider"> </li>
-                                                                    <li>
-                                                                        <a href="javascript:;">Separated link </a>
-                                                                    </li>
-                                                                </ul>
+                                                                {{--<button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
+                                                                    {{--<i class="fa fa-angle-down"></i>--}}
+                                                                {{--</button>--}}
+                                                                {{--<ul class="dropdown-menu pull-right" role="menu">--}}
+                                                                    {{--<li>--}}
+                                                                        {{--<a href="javascript:;">Action </a>--}}
+                                                                    {{--</li>--}}
+                                                                    {{--<li>--}}
+                                                                        {{--<a href="javascript:;">Another action </a>--}}
+                                                                    {{--</li>--}}
+                                                                    {{--<li>--}}
+                                                                        {{--<a href="javascript:;">Something else here </a>--}}
+                                                                    {{--</li>--}}
+                                                                    {{--<li class="divider"> </li>--}}
+                                                                    {{--<li>--}}
+                                                                        {{--<a href="javascript:;">Separated link </a>--}}
+                                                                    {{--</li>--}}
+                                                                {{--</ul>--}}
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="timeline-body-content">
                                                             <span class="font-grey-cascade">
-                                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                                               {{"$follower->name followed you ". \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$follower->followed_at)->diffForHumans()}}
                                                             </span>
                                                     </div>
                                                 </div>
@@ -350,20 +377,26 @@
                                         <!-- END TIMELINE ITEM -->
                                     </div>
                                     @endforeach
+                                        <button class="" style="float:right; position: relative; bottom: 20px;">load more..</button>
+                                    @endif
+
+                                </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    </div>
 
                     </div>
                 </div>
                 <!-- END PAGE CONTENT INNER -->
             </div>
-        </div>
+        {{--</div>--}}
         <!-- END PAGE CONTENT BODY -->
         <!-- END CONTENT BODY -->
-    </div>
+    {{--</div>--}}
     <!-- END CONTENT -->
-</div>
+{{--</div>--}}
 <!-- END CONTAINER -->
 
 @endsection

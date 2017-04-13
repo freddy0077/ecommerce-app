@@ -12,15 +12,16 @@ class Feed extends Model
     //
     protected $fillable = ['id','user_id','action','other'];
 
-    public static function recordAction($user_id,$action){
+    public static function recordAction($user_id,$action,$other=""){
         Feed::create([
             'id' => Uuid::generate(),
             'user_id' => $user_id,
-            'action' => $action
+            'action' => $action,
+            'other' => $other
         ]);
     }
 
-    public static function sendFeedToJob($product,$type){
+    public static function sendFeedToJob($product,$type,$other=""){
         $user = Auth::user();
         switch($type){
             case"fancy":
@@ -52,7 +53,7 @@ class Feed extends Model
                 break;
             case"timeline":
                 $message = $product;
-                dispatch(new FeedsJob($user->id,$user,$message));
+                dispatch(new FeedsJob($user->id,$user,$message,$other));
                 break;
 
         }

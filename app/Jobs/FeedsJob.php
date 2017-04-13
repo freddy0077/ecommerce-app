@@ -29,11 +29,14 @@ class FeedsJob implements ShouldQueue
     protected $user;
     protected $user_id;
     protected $message;
-    public function __construct($user_id,$user,$message)
+    protected $other;
+    public function __construct($user_id,$user,$message,$other="")
     {
         $this->user_id = $user_id;
         $this->message = $message;
         $this->user = $user;
+        $this->other = $other;
+
         //
     }
 
@@ -44,7 +47,7 @@ class FeedsJob implements ShouldQueue
      */
     public function handle()
     {
-        \App\Feed::recordAction($this->user_id,$this->message);
+        \App\Feed::recordAction($this->user_id,$this->message,$this->other);
         event(new ChatMessageReceived($this->message,$this->user));
 
 //        $builder = DB::table('watched_shops')->leftJoin('users','users.id','=','watched_shops.user_id');

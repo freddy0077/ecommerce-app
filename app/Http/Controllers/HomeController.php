@@ -198,8 +198,14 @@ class HomeController extends Controller
         if($user->has_store){
             $store = Store::whereUserId($user->id)->first();
             $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->paginate(7);
-            $followers = $builder->whereStoreId($store->id)->get();
-            $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')->where('watched_shops.user_id',$user->id)->get();
+            $followers = $builder->whereStoreId($store->id)
+                ->selectRaw('users.*,watched_shops.created_at as followed_at')
+                ->orderBy('watched_shops.created_at','desc')
+                ->paginate(7);
+            $following = WatchedShop::leftJoin('stores','stores.id','=','watched_shops.store_id')
+//                ->leftJoin('stores','stores.id','=')
+                ->where('watched_shops.user_id',$user->id)
+                ->paginate(7);
 //
         }else {
             $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->paginate(7);
@@ -447,14 +453,11 @@ class HomeController extends Controller
            $followers = $builder->whereStoreId($store->id)->get();
            foreach($followers as $follower){
                if($follower->user_id != $user->id){
-                   \App\Feed::recordAction($follower->user_id,$request->message);
+                   \App\Feed::recordAction($follower->user_id,$request->message,$store->image);
                }
            }
        }
-
-
        \App\Feed::sendFeedToJob($request->message,'timeline');
-
 
    }
 
