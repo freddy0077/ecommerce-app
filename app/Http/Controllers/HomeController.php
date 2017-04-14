@@ -7,9 +7,11 @@ use App\Events\FeedsEvent;
 use App\Events\FollowersEvent;
 use App\Events\LikeEvent;
 use App\Fancy;
+use App\FeedReaction;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UserRequest;
 use App\Jobs\FeedsJob;
+use App\Jobs\NotificationsJob;
 use App\Like;
 use App\MarketplaceSignup;
 use App\Notifications\NewShop;
@@ -222,10 +224,10 @@ class HomeController extends Controller
 
 
         if($request->ajax()){
-            return view('partials.all_feed_partials',compact('feeds','activities','following','followers'));
+            return view('partials.all_feed_partials',compact('feeds','activities','following','followers','feed_reactions'));
         }
 
-        return view('all_feeds',compact('feeds','following','user','followers'));
+        return view('all_feeds',compact('feeds','following','user','followers','feed_reactions'));
     }
 
     public function postSaveProfile(Request $request){
@@ -461,6 +463,21 @@ class HomeController extends Controller
 
    }
 
+    public function postAddFeedReaction(Request $request){
+        FeedReaction::create([
+            'id' =>Uuid::generate(),
+            'user_id'=> Auth::id(),
+            'feed_id' => $request->feed_id,
+            'comment' => $request->comment
+        ]);
+
+        $user = Auth::user();
+
+        dispatch(new FeedsJob($user->id,$user,$request->comment));
+
+//        \App\Feed::sendFeedToJob($request->message,'timeline');
+    }
+
     public function getFollowUser($id){
             $user = Auth::user();
             $stream = new StreamFeed($user->id);
@@ -491,17 +508,17 @@ class HomeController extends Controller
             ]);
             $store = Store::find($store_id);
 
-            Notification::send(Store::first(), new NewShop($store));
+            dispatch(new NotificationsJob($store,'newShop'));
+
+//            Notification::send(Store::first(), new NewShop($store));
         }
 
         $user_id= User::whereEmail($request->email)->first();
 
         $user = User::find($user_id->id);
 
-        Notification::send(User::first(), new NewSignUp($user));
-
+        dispatch(new NotificationsJob($user,'signup'));
         Auth::login($user_id);
-
     }
 
     public function getCheckName(StoreRequest $request){
@@ -521,13 +538,14 @@ class HomeController extends Controller
             'user_id' => $user_id
         ]);
 
-
         User::find($user_id)->update([
             'has_store' => true
         ]);
 
         $store = Store::find($store_id);
 
-        Notification::send(Store::first(), new NewShop($store));
+        dispatch(new NotificationsJob($store,'newShop'));
+
+//        Notification::send(Store::first(), new NewShop($store));
     }
 }

@@ -3,8 +3,16 @@
         <!-- TIMELINE ITEM -->
         <div class="timeline-item">
             <div class="timeline-badge">
-                {{--                                                <img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
-                <img class="timeline-badge-userpic" src="{{url('frontend_2/image/shopaholicks_logos_03.png')}}"> </div>
+                @if($feed->other != '')
+                    <?php $store = \App\Store::whereImage($feed->other)->first(); ?>
+                    {{--                                                <img class="timeline-badge-userpic" src="{{asset('backend/assets/pages/media/users/avatar80_1.jpg')}}"> </div>--}}
+                    <a target="_blank" href='{{"/stores/$store->slug/$store->user_id"}}'>
+                        <img class="timeline-badge-userpic" src="{{url("/images/stores/$feed->other")}}">
+                    </a>
+                @else
+                    <img class="timeline-badge-userpic" src="{{url("/images/stores/$feed->other")}}">
+                @endif
+            </div>
             <div class="timeline-body">
                 <div class="timeline-body-arrow"> </div>
                 <div class="timeline-body-head">
@@ -41,20 +49,20 @@
                 </div>
                 <div class="timeline-body-content">
                                                             <span class="font-grey-cascade">
-                                                                    @if($feed->other != "")
-                                                                    <?php $store = \App\Store::whereImage($feed->other)->first(); ?>
-                                                                    <a href='{{"/stores/$store->slug/$store->user_id"}}'>
-                                                                        <img src='{{url("/images/stores/$feed->other")}}' width="80" height="80" class="img-rounded" />
-                                                                    </a>
-                                                                @endif
-                                                                {{"  " . $feed->action}}
+                                                                        <small> {{"   " ." $feed->action"}}</small>
 
-                                                                <br>
+                                                                    <br>
                                                             </span>
                     <br>
-                    <button><i class="fa fa-thumbs-up text-center"></i></button>
-                    <button><i class="fa fa-heart"></i></button>
-                    <button><i class="icon-user-following"></i></button>
+                    @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
+                        <button class="btn "><i style="color: green;" class="fa fa-thumbs-up text-center"></i></button>
+                    @else
+                        <button class="btn"><i class="fa fa-thumbs-up text-center"></i></button>
+                    @endif
+                    <button class="add-comment btn" data-id="{{$feed->id}}"><i class="fa fa-comment"></i></button>
+                    <br><br>
+                    @include('partials.comment_form_partial')
+                    {{--<button><i class="icon-user-following"></i></button>--}}
                 </div>
             </div>
         </div>

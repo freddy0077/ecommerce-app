@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Webpatser\Uuid\Uuid;
-use Webpatser\Uuid\UuidFacade;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 class StoreController extends Controller
 {
@@ -240,7 +240,11 @@ class StoreController extends Controller
                 $constraint->aspectRatio();
             })->save($destinationPath . '/' . $input['imagename']);
 
-//            Storage::put($input['imagename'], $img);
+//            Storage::put($input['imagename'], $image);
+//
+//            $s3 = Storage::disk('s3');
+//            $filePath = $image->getRealPath();
+//            $s3->put($filePath, file_get_contents($image));
 
 
             $second_image = Image::make($image->getRealPath());

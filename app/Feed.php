@@ -12,6 +12,8 @@ class Feed extends Model
     //
     protected $fillable = ['id','user_id','action','other'];
 
+    protected $casts = ['id' => 'string'];
+
     public static function recordAction($user_id,$action,$other=""){
         Feed::create([
             'id' => Uuid::generate(),
