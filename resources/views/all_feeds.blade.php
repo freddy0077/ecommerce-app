@@ -265,7 +265,6 @@
     </style>
         <script>
 
-            $(document).ready(function(){
                 $('#timeline-form').on('submit',function(e){
                     e.preventDefault();
                     $.ajax({

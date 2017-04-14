@@ -23,18 +23,18 @@ Route::get('/sms',function(){
 });
 
 
-$menu = new \Lavary\Menu\Menu();
-$menu->make('MyNavBar', function($menu){
-    $menu->add('Home',array('url'=>'https://www.shopaholicks.com'));
-    $menu->add('All Shops',array('url'=>'https://www.shopaholicks.com/all-shops'));
-    if(\App\ProductCategory::first()){
-        foreach(\App\ProductCategory::all('id','name') as $category){
-            $menu->add($category->name,array('url' => "https://www.shopaholicks.com/category/$category->id"));
-        }
-    }
-
-    $menu->add('Blog',array('url'=>''));
-});
+//$menu = new \Lavary\Menu\Menu();
+//$menu->make('MyNavBar', function($menu){
+//    $menu->add('Home',array('url'=>'https://www.shopaholicks.com'));
+//    $menu->add('All Shops',array('url'=>'https://www.shopaholicks.com/all-shops'));
+//    if(\App\ProductCategory::first()){
+//        foreach(\App\ProductCategory::all('id','name') as $category){
+//            $menu->add($category->name,array('url' => "https://www.shopaholicks.com/category/$category->id"));
+//        }
+//    }
+//
+//    $menu->add('Blog',array('url'=>''));
+//});
 
 $menu = new \Lavary\Menu\Menu();
 $menu->make('AdminNav', function($menu){
