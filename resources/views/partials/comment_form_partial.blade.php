@@ -275,7 +275,7 @@
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
                         <div class="comment-head">
-                            <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$reaction->name}}</a></h6>
+                            <h6 class="comment-name by-author"><a>{{$reaction->name}}</a></h6>
                             <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$reaction->created_at)->diffForHumans()}}</span>
                             {{--<i class="fa fa-reply"></i>--}}
                             <i class="fa fa-thumbs-up"></i>

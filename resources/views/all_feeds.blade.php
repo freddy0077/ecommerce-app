@@ -290,12 +290,6 @@
                     })
                 })
 
-                feedScripts();
-            })
-
-
-            function feedScripts(){
-
                 $('.add-comment').on('click',function(){
                     var id = $(this).data('id');
 //                alert(id)
@@ -324,7 +318,8 @@
                         })
                     })
                 });
-            }
+//            }
+            })
 
 
             function messageCount(){
@@ -348,14 +343,11 @@
 //                    alert('all feeds event reached');
                     $.get('/all-feeds', function (data) {
                         $('#feeds').html(data)
-                        feedScripts();
                     }).fail(function () {
 //                        alert('error')
                     })
 //                }, 1000);
             })
-
-
 
         </script>
 
