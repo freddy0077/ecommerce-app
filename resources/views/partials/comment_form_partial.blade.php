@@ -1,3 +1,5 @@
+
+
 <style>
     /**
  * Oscuro: #283035
@@ -5,6 +7,7 @@
  * Detalle: #c7cacb
  * Fondo: #dee1e3
  ----------------------------------*/
+
     * {
         margin: 0;
         padding: 0;
@@ -284,7 +287,7 @@
             <li>
                 <div class="comment-main-level">
                     <!-- Avatar -->
-                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                    <div class="comment-avatar"><img src="https://placehold.it/80x80" alt=""></div>
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
                         <div class="comment-head">

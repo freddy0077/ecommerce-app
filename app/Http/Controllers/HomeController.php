@@ -199,7 +199,10 @@ class HomeController extends Controller
         $user = Auth::user();
         if($user->has_store){
             $store = Store::whereUserId($user->id)->first();
-            $feeds = \App\Feed::whereUserId(Auth::id())->orderBy('created_at','desc')->paginate(7);
+            $feeds = \App\Feed::leftJoin('users','users.id','=','feeds.user_id')->whereUserId(Auth::id())
+                ->selectRaw('feeds.*,users.name')
+                ->orderBy('created_at','desc')
+                ->paginate(7);
             $followers = $builder->whereStoreId($store->id)
                 ->selectRaw('users.*,watched_shops.created_at as followed_at')
                 ->orderBy('watched_shops.created_at','desc')
@@ -470,11 +473,8 @@ class HomeController extends Controller
             'feed_id' => $request->feed_id,
             'comment' => $request->comment
         ]);
-
         $user = Auth::user();
-
-        dispatch(new FeedsJob($user->id,$user,$request->comment));
-
+        dispatch(new FeedsJob($user->id,$user,$request->comment,$request->feed_id,'reactions'));
 //        \App\Feed::sendFeedToJob($request->message,'timeline');
     }
 

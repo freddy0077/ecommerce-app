@@ -57,7 +57,6 @@ class Feed extends Model
                 $message = $product;
                 dispatch(new FeedsJob($user->id,$user,$message,$other));
                 break;
-
         }
     }
 

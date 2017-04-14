@@ -2,64 +2,330 @@
 
 @section('scripts')
     <style>
-        body {
-            font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
-            background: #dee1e3;
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: #03658c;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        /*body {*/
+        /*font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;*/
+        /*background: #dee1e3;*/
+        /*}*/
+
+        /** ====================
+         * Lista de Comentarios
+         =======================*/
+        .comments-container {
+            margin: 60px auto 15px;
+            width: 768px;
+        }
+
+        .comments-container h1 {
+            font-size: 36px;
+            color: #283035;
+            font-weight: 400;
+        }
+
+        .comments-container h1 a {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .comments-list {
+            margin-top: 30px;
+            position: relative;
+        }
+
+        /**
+         * Lineas / Detalles
+         -----------------------*/
+        .comments-list:before {
+            content: '';
+            width: 2px;
+            height: 100%;
+            background: #c7cacb;
+            position: absolute;
+            left: 32px;
+            top: 0;
+        }
+
+        .comments-list:after {
+            content: '';
+            position: absolute;
+            background: #c7cacb;
+            bottom: 0;
+            left: 27px;
+            width: 7px;
+            height: 7px;
+            border: 3px solid #dee1e3;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .reply-list:before, .reply-list:after {display: none;}
+        .reply-list li:before {
+            content: '';
+            width: 60px;
+            height: 2px;
+            background: #c7cacb;
+            position: absolute;
+            top: 25px;
+            left: -55px;
+        }
+
+
+        .comments-list li {
+            margin-bottom: 15px;
+            display: block;
+            position: relative;
+        }
+
+        .comments-list li:after {
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            width: 0;
+        }
+
+        .reply-list {
+            padding-left: 88px;
+            clear: both;
+            margin-top: 15px;
+        }
+        /**
+         * Avatar
+         ---------------------------*/
+        .comments-list .comment-avatar {
+            width: 65px;
+            height: 65px;
+            position: relative;
+            z-index: 99;
+            float: left;
+            border: 3px solid #FFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .comments-list .comment-avatar img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .reply-list .comment-avatar {
+            width: 50px;
+            height: 50px;
+        }
+
+        .comment-main-level:after {
+            content: '';
+            width: 0;
+            height: 0;
+            display: block;
+            clear: both;
+        }
+        /**
+         * Caja del Comentario
+         ---------------------------*/
+        .comments-list .comment-box {
+            width: 680px;
+            float: right;
+            position: relative;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+        }
+
+        .comments-list .comment-box:before, .comments-list .comment-box:after {
+            content: '';
+            height: 0;
+            width: 0;
+            position: absolute;
+            display: block;
+            border-width: 10px 12px 10px 0;
+            border-style: solid;
+            border-color: transparent #FCFCFC;
+            top: 8px;
+            left: -11px;
+        }
+
+        .comments-list .comment-box:before {
+            border-width: 11px 13px 11px 0;
+            border-color: transparent rgba(0,0,0,0.05);
+            left: -12px;
+        }
+
+        .reply-list .comment-box {
+            width: 610px;
+        }
+        .comment-box .comment-head {
+            background: #FCFCFC;
+            padding: 10px 12px;
+            border-bottom: 1px solid #E5E5E5;
+            overflow: hidden;
+            -webkit-border-radius: 4px 4px 0 0;
+            -moz-border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .comment-box .comment-head i {
+            float: right;
+            margin-left: 14px;
+            position: relative;
+            top: 2px;
+            color: #A6A6A6;
+            cursor: pointer;
+            -webkit-transition: color 0.3s ease;
+            -o-transition: color 0.3s ease;
+            transition: color 0.3s ease;
+        }
+
+        .comment-box .comment-head i:hover {
+            color: #03658c;
+        }
+
+        .comment-box .comment-name {
+            color: #283035;
+            font-size: 14px;
+            font-weight: 700;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .comment-box .comment-name a {
+            color: #283035;
+        }
+
+        .comment-box .comment-head span {
+            float: left;
+            color: #999;
+            font-size: 13px;
+            position: relative;
+            top: 1px;
+        }
+
+        .comment-box .comment-content {
+            background: #FFF;
+            padding: 12px;
+            font-size: 15px;
+            color: #595959;
+            -webkit-border-radius: 0 0 4px 4px;
+            -moz-border-radius: 0 0 4px 4px;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
+        .comment-box .comment-name.by-author:after {
+            content: 'author';
+            background: #03658c;
+            color: #FFF;
+            font-size: 12px;
+            padding: 3px 5px;
+            font-weight: 700;
+            margin-left: 10px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        /** =====================
+         * Responsive
+         ========================*/
+        @media only screen and (max-width: 766px) {
+            .comments-container {
+                width: 480px;
+            }
+
+            .comments-list .comment-box {
+                width: 390px;
+            }
+
+            .reply-list .comment-box {
+                width: 320px;
+            }
         }
     </style>
         <script>
-            $('#timeline-form').on('submit',function(e){
-                e.preventDefault();
-                $.ajax({
-                    url:"{{url('/add-to-timeline')}}",
-                    type:"POST",
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    beforeSend:function() {
-                        $('#post-btn').text('posting...').attr('disabled',true)
-                    },
-                    complete:function( data ) {
-//                        $('#post-btn').text('posting...')
-//                        $('#post-btn').text('posting...').attr('disabled',true)
-                        $('#post-btn').text('post to timeline').attr('disabled',false);
-                        $('#message').val('')
-                        messageCount();
-                    }
-//                    success:function(){
-//                        $('#post-btn').text('post to timeline').attr('disabled',false);
-//
-//                    }
-                })
+
+            $(document).ready(function(){
+                feedScripts();
             })
 
-            $('.add-comment').on('click',function(){
-                var id = $(this).data('id');
-//                alert(id)
-                var commentArea = $('#comment-area-'+id);
-                commentArea.css('display','')
 
-                $('#feed-reaction-form-'+id).on('submit',function (e){
+            function feedScripts(){
+
+                $('#timeline-form').on('submit',function(e){
                     e.preventDefault();
                     $.ajax({
-                        url:$(this).attr('action'),
+                        url:"{{url('/add-to-timeline')}}",
                         type:"POST",
                         data: $(this).serialize(),
                         dataType: 'json',
                         beforeSend:function() {
-                            $('#comment-btn-'+id).text('commenting...').attr('disabled',true)
+                            $('#post-btn').text('posting...').attr('disabled',true)
                         },
-                        complete:function( ) {
-                            $('#comment-btn'+id).val('comment').attr('disabled',false);
-//                            $('#message').val('')
-//                        messageCount();
-                            commentArea.hide()
-                        },
-                    success:function(){
-                        $('#comment-btn'+id).val('comment').attr('disabled',false);
-                    }
+                        complete:function( data ) {
+//                        $('#post-btn').text('posting...')
+//                        $('#post-btn').text('posting...').attr('disabled',true)
+                            $('#post-btn').text('post to timeline').attr('disabled',false);
+                            $('#message').val('')
+                            messageCount();
+                        }
+//                    success:function(){
+//                        $('#post-btn').text('post to timeline').attr('disabled',false);
+//
+//                    }
                     })
                 })
-            });
+
+                $('.add-comment').on('click',function(){
+                    var id = $(this).data('id');
+//                alert(id)
+                    var commentArea = $('#comment-area-'+id);
+                    commentArea.css('display','')
+
+                    $('#feed-reaction-form-'+id).on('submit',function (e){
+                        e.preventDefault();
+                        $.ajax({
+                            url:$(this).attr('action'),
+                            type:"POST",
+                            data: $(this).serialize(),
+                            dataType: 'json',
+                            beforeSend:function() {
+                                $('#comment-btn-'+id).text('commenting...').attr('disabled',true)
+                            },
+                            complete:function( ) {
+                                $('#comment-btn'+id).val('comment').attr('disabled',false);
+//                            $('#message').val('')
+//                        messageCount();
+                                commentArea.hide()
+                            },
+                            success:function(){
+                                $('#comment-btn'+id).val('comment').attr('disabled',false);
+                            }
+                        })
+                    })
+                });
+
+            }
 
 
             function messageCount(){
@@ -83,6 +349,7 @@
 //                    alert('all feeds event reached');
                     $.get('/all-feeds', function (data) {
                         $('#feeds').html(data)
+                        feedScripts();
                     }).fail(function () {
 //                        alert('error')
                     })
@@ -236,34 +503,38 @@
                                                                         </div>
                                                                         <div class="timeline-body-head-actions">
                                                                             <div class="btn-group">
-                                                                                {{--<button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
-                                                                                {{--<i class="fa fa-angle-down"></i>--}}
-                                                                                {{--</button>--}}
-                                                                                {{--<ul class="dropdown-menu pull-right" role="menu">--}}
-                                                                                {{--<li>--}}
-                                                                                {{--<a href="javascript:;">Action </a>--}}
-                                                                                {{--</li>--}}
-                                                                                {{--<li>--}}
-                                                                                {{--<a href="javascript:;">Another action </a>--}}
-                                                                                {{--</li>--}}
-                                                                                {{--<li>--}}
-                                                                                {{--<a href="javascript:;">Something else here </a>--}}
-                                                                                {{--</li>--}}
-                                                                                {{--<li class="divider"> </li>--}}
-                                                                                {{--<li>--}}
-                                                                                {{--<a href="javascript:;">Separated link </a>--}}
-                                                                                {{--</li>--}}
-                                                                                {{--</ul>--}}
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="timeline-body-content">
-                                                            <span class="font-grey-cascade">
-                                                                        <small> {{"   " ." $feed->action"}}</small>
+                                                                        <li>
+                                                                            <div class="comment-main-level">
+                                                                                <!-- Avatar -->
+                                                                                {{--<div class="comment-avatar"><img src="https://placehold.it/80x80" alt=""></div>--}}
+                                                                                <!-- Contenedor del Comentario -->
+                                                                                <div class="comment-box">
+                                                                                    <div class="comment-head">
+                                                                                        {{--<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$feed->name}}</a></h6>--}}
+                                                                                        <h6 class="comment-name by-author">{{$feed->name}}</h6>
+                                                                                        <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</span>
+                                                                                        <i class="fa fa-reply"></i>
+                                                                                        <i class="fa fa-heart"></i>
+                                                                                    </div>
+                                                                                    <div class="comment-content">
+                                                                                        {{$feed->action}}
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                                    <br>
-                                                            </span>
-                                                                        <br>
+                                                                        </li>
+
+
+                                                            {{--<span class="font-grey-cascade">--}}
+                                                                        {{--<small> {{"   " ." $feed->action"}}</small>--}}
+
+                                                                    {{--<br>--}}
+                                                            {{--</span>--}}
+                                                                        {{--<br>--}}
                                                                         @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
                                                                             <button class="btn "><i style="color: green;" class="fa fa-thumbs-up text-center"></i></button>
                                                                         @else
