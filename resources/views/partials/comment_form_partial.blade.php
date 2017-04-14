@@ -1,12 +1,4 @@
-
-
 <style>
-    /**
- * Oscuro: #283035
- * Azul: #03658c
- * Detalle: #c7cacb
- * Fondo: #dee1e3
- ----------------------------------*/
 
     * {
         margin: 0;
@@ -25,14 +17,6 @@
         list-style-type: none;
     }
 
-    /*body {*/
-        /*font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;*/
-        /*background: #dee1e3;*/
-    /*}*/
-
-    /** ====================
-     * Lista de Comentarios
-     =======================*/
     .comments-container {
         margin: 60px auto 15px;
         width: 768px;
@@ -293,8 +277,8 @@
                         <div class="comment-head">
                             <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$reaction->name}}</a></h6>
                             <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$reaction->created_at)->diffForHumans()}}</span>
-                            <i class="fa fa-reply"></i>
-                            <i class="fa fa-heart"></i>
+                            {{--<i class="fa fa-reply"></i>--}}
+                            <i class="fa fa-thumbs-up"></i>
                         </div>
                         <div class="comment-content">
                             {{$reaction->comment}}

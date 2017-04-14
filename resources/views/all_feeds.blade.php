@@ -266,12 +266,6 @@
         <script>
 
             $(document).ready(function(){
-                feedScripts();
-            })
-
-
-            function feedScripts(){
-
                 $('#timeline-form').on('submit',function(e){
                     e.preventDefault();
                     $.ajax({
@@ -295,6 +289,12 @@
 //                    }
                     })
                 })
+
+                feedScripts();
+            })
+
+
+            function feedScripts(){
 
                 $('.add-comment').on('click',function(){
                     var id = $(this).data('id');
@@ -516,8 +516,8 @@
                                                                                         {{--<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$feed->name}}</a></h6>--}}
                                                                                         <h6 class="comment-name by-author">{{$feed->name}}</h6>
                                                                                         <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</span>
-                                                                                        <i class="fa fa-reply"></i>
-                                                                                        <i class="fa fa-heart"></i>
+                                                                                        {{--<i class="fa fa-reply"></i>--}}
+                                                                                        {{--<i class="fa fa-thumbs"></i>--}}
                                                                                     </div>
                                                                                     <div class="comment-content">
                                                                                         {{$feed->action}}
