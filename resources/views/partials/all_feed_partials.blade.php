@@ -26,34 +26,38 @@
                     </div>
                     <div class="timeline-body-head-actions">
                         <div class="btn-group">
-                            {{--<button class="btn btn-circle green btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions--}}
-                            {{--<i class="fa fa-angle-down"></i>--}}
-                            {{--</button>--}}
-                            {{--<ul class="dropdown-menu pull-right" role="menu">--}}
-                            {{--<li>--}}
-                            {{--<a href="javascript:;">Action </a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                            {{--<a href="javascript:;">Another action </a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                            {{--<a href="javascript:;">Something else here </a>--}}
-                            {{--</li>--}}
-                            {{--<li class="divider"> </li>--}}
-                            {{--<li>--}}
-                            {{--<a href="javascript:;">Separated link </a>--}}
-                            {{--</li>--}}
-                            {{--</ul>--}}
                         </div>
                     </div>
                 </div>
                 <div class="timeline-body-content">
-                                                            <span class="font-grey-cascade">
-                                                                        <small> {{"   " ." $feed->action"}}</small>
+                    <li>
+                        <div class="comment-main-level">
+                            <!-- Avatar -->
+                            {{--<div class="comment-avatar"><img src="https://placehold.it/80x80" alt=""></div>--}}
+                            <!-- Contenedor del Comentario -->
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    {{--<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$feed->name}}</a></h6>--}}
+                                    <h6 class="comment-name by-author">{{$feed->name}}</h6>
+                                    <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</span>
+                                    <i class="fa fa-reply"></i>
+                                    <i class="fa fa-heart"></i>
+                                </div>
+                                <div class="comment-content">
+                                    {{$feed->action}}
+                                </div>
+                            </div>
+                        </div>
 
-                                                                    <br>
-                                                            </span>
-                    <br>
+                    </li>
+
+
+                    {{--<span class="font-grey-cascade">--}}
+                    {{--<small> {{"   " ." $feed->action"}}</small>--}}
+
+                    {{--<br>--}}
+                    {{--</span>--}}
+                    {{--<br>--}}
                     @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
                         <button class="btn "><i style="color: green;" class="fa fa-thumbs-up text-center"></i></button>
                     @else
