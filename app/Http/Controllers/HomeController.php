@@ -477,6 +477,43 @@ class HomeController extends Controller
 //        \App\Feed::sendFeedToJob($request->message,'timeline');
     }
 
+    public function postLikeFeedReaction($feed_id){
+        $user = Auth::user();
+
+        if($reaction = FeedReaction::whereFeedId($feed_id)->whereUserId($user->id)->first()){
+            if($reaction->like == true) {
+                $reaction->update([
+                    'like' => false
+                ]);
+
+                $message = "You just unliked a feed";
+                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+                return ['status'=>201,'message'=>$message];
+
+            }elseif($reaction->like == false){
+                $reaction->update([
+                    'like' => true
+                ]);
+
+                $message = "You just liked a feed";
+                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+                return ['status'=>202,'message'=>$message];
+
+            }else {
+                FeedReaction::create([
+                    'id' =>Uuid::generate(),
+                    'user_id'=> Auth::id(),
+                    'feed_id' => $feed_id,
+                    'like' => true
+                ]);
+            }
+        }
+
+        $message = "$user->name just liked your feed";
+        dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+//        \App\Feed::sendFeedToJob($request->message,'timeline');
+    }
+
     public function getFollowUser($id){
             $user = Auth::user();
             $stream = new StreamFeed($user->id);

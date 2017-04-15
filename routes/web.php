@@ -182,6 +182,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/add-feed-reaction','HomeController@postAddFeedReaction');
 
+    Route::post('/like-feed-reaction/{id}','HomeController@postLikeFeedReaction');
+
     Route::post('save-profile','HomeController@postSaveProfile');
     Route::post('change-password','HomeController@postChangePassword');
 

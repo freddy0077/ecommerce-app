@@ -16,6 +16,7 @@ class VerifyCsrfToken extends BaseVerifier
         '/',
         '/add-to-timeline',
         '/add-feed-reaction',
+        '/like-feed-reaction/*',
         '/register-user',
         '/register-new-user',
         '/register',

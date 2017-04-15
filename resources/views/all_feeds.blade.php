@@ -264,9 +264,9 @@
         }
     </style>
         <script>
-
             loadScripts()
             function loadScripts(){
+
                 $('#timeline-form').off('submit').on('submit',function(e){
                     e.preventDefault();
                     $.ajax({
@@ -289,6 +289,22 @@
 //
 //                    }
                     })
+                })
+
+                $('.like').off('click').on('click',function(){
+                    var id = $(this).data('like');
+
+                    $('#like-feed-'+id).off('click').on('click',function(){
+
+                        $.post('{{url("/like-feed-reaction")}}/'+id,function(data){
+                            switch(data.status){
+                                case 201:
+                                    alert('unliked');
+                                    break;
+                            }
+
+                        })
+                    });
                 })
 
                 $('.add-comment').off('click').on('click',function(){
@@ -520,17 +536,12 @@
 
                                                                         </li>
 
+                                                                        <?php $like_counts = \App\FeedReaction::whereFeedId($feed->id)->whereLike(true)->count();  ?>
 
-                                                            {{--<span class="font-grey-cascade">--}}
-                                                                        {{--<small> {{"   " ." $feed->action"}}</small>--}}
-
-                                                                    {{--<br>--}}
-                                                            {{--</span>--}}
-                                                                        {{--<br>--}}
-                                                                        @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
-                                                                            <button class="btn "><i style="color: green;" class="fa fa-thumbs-up text-center"></i></button>
+                                                                    @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
+                                                                            <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i style="color: green;" class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></button>
                                                                         @else
-                                                                            <button class="btn"><i class="fa fa-thumbs-up text-center"></i></button>
+                                                                            <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></button>
                                                                         @endif
                                                                         <button class="add-comment btn" data-id="{{$feed->id}}"><i class="fa fa-comment"></i></button>
                                                                         <br><br>

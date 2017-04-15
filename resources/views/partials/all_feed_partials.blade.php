@@ -40,8 +40,8 @@
                                     {{--<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{$feed->name}}</a></h6>--}}
                                     <h6 class="comment-name by-author">{{$feed->name}}</h6>
                                     <span>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$feed->created_at)->diffForHumans()}}</span>
-                                    <i class="fa fa-reply"></i>
-                                    <i class="fa fa-heart"></i>
+                                    {{--<i class="fa fa-reply"></i>--}}
+                                    {{--<i class="fa fa-thumbs"></i>--}}
                                 </div>
                                 <div class="comment-content">
                                     {{$feed->action}}
@@ -51,17 +51,15 @@
 
                     </li>
 
+                    <?php $like_counts = \App\FeedReaction::whereFeedId($feed->id)->whereLike(true)->count();  ?>
 
-                    {{--<span class="font-grey-cascade">--}}
-                    {{--<small> {{"   " ." $feed->action"}}</small>--}}
 
-                    {{--<br>--}}
-                    {{--</span>--}}
-                    {{--<br>--}}
-                    @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
-                        <button class="btn "><i style="color: green;" class="fa fa-thumbs-up text-center"></i></button>
+                @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
+                        <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}">
+                            <i style="color: green;" class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i>
+                        </button>
                     @else
-                        <button class="btn"><i class="fa fa-thumbs-up text-center"></i></button>
+                        <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></button>
                     @endif
                     <button class="add-comment btn" data-id="{{$feed->id}}"><i class="fa fa-comment"></i></button>
                     <br><br>
