@@ -266,7 +266,7 @@
 @if(count(App\FeedReaction::feedReactionByFeedId($feed->id)))
     <h2>Comments</h2>
 
-    <ul id="comments-list" class="comments-list">
+    {{--<ul id="comments-list" class="comments-list">--}}
         @foreach(\App\FeedReaction::feedReactionByFeedId($feed->id) as $reaction)
             <li>
                 <div class="comment-main-level">
@@ -290,6 +290,6 @@
             {{--<strong>{{$reaction->name}} :</strong><span>{{$reaction->comment}}</span>--}}
             <br>
         @endforeach
-    </ul>
+    {{--</ul>--}}
 
 @endif

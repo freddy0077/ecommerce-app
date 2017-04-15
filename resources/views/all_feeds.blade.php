@@ -299,10 +299,9 @@
                         $.post('{{url("/like-feed-reaction")}}/'+id,function(data){
                             switch(data.status){
                                 case 201:
-//                                    alert('unliked');
+                                    alert('unliked');
                                     break;
                             }
-
                         })
                     });
                 })
@@ -533,17 +532,16 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </li>
 
                                                                         <?php $like_counts = \App\FeedReaction::whereFeedId($feed->id)->whereLike(true)->count();  ?>
 
                                                                     @if(\App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first() && \App\FeedReaction::whereUserId(Auth::id())->whereFeedId($feed->id)->first()->like == true)
-                                                                            <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i style="color: green;" class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></button>
+                                                                            <a class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i style="color: green;" class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></a>
                                                                         @else
-                                                                            <button class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></button>
+                                                                            <a class="btn like" data-like="{{$feed->id}}" id="like-feed-{{$feed->id}}"><i class="fa fa-thumbs-up text-center like" id="like-feed-{{$feed->id}}">{{$like_counts}}</i></a>
                                                                         @endif
-                                                                        <button class="add-comment btn" data-id="{{$feed->id}}"><i class="fa fa-comment"></i></button>
+                                                                        <a class="add-comment btn" data-id="{{$feed->id}}"><i class="fa fa-comment"></i></a>
                                                                         <br><br>
                                                                         @include('partials.comment_form_partial')
                                                                         {{--<button><i class="icon-user-following"></i></button>--}}
