@@ -285,7 +285,6 @@
                         </div>
                     </div>
                 </div>
-
             </li>
             {{--<strong>{{$reaction->name}} :</strong><span>{{$reaction->comment}}</span>--}}
             <br>
