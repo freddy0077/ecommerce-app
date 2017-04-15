@@ -51,17 +51,14 @@ class FeedsJob implements ShouldQueue
     public function handle()
     {
         if($this->type == "reactions"){
-            FeedReaction::create([
-                'id' => Uuid::generate(),
-                'user_id'=> $this->user_id,
-                'feed_id' => $this->other,
-                'comment' => $this->message
-            ]);
+
+            event(new ChatMessageReceived($this->message,$this->user));
 
         }else {
             \App\Feed::recordAction($this->user_id,$this->message,$this->other);
 //        \App\Feed::recordAction($this->user->id,$this->message,$this->other);
+            event(new ChatMessageReceived($this->message,$this->user));
+
         }
-        event(new ChatMessageReceived($this->message,$this->user));
     }
 }
