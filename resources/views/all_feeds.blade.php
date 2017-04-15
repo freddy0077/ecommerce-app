@@ -299,7 +299,7 @@
                         $.post('{{url("/like-feed-reaction")}}/'+id,function(data){
                             switch(data.status){
                                 case 201:
-                                    alert('unliked');
+//                                    alert('unliked');
                                     break;
                             }
 
