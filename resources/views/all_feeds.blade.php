@@ -265,7 +265,9 @@
     </style>
         <script>
 
-                $('#timeline-form').on('submit',function(e){
+            loadScripts()
+            function loadScripts(){
+                $('#timeline-form').off('submit').on('submit',function(e){
                     e.preventDefault();
                     $.ajax({
                         url:"{{url('/add-to-timeline')}}",
@@ -289,7 +291,7 @@
                     })
                 })
 
-                $('.add-comment').on('click',function(){
+                $('.add-comment').off('click').on('click',function(){
                     var id = $(this).data('id');
 //                alert(id)
                     var commentArea = $('#comment-area-'+id);
@@ -317,7 +319,7 @@
                         })
                     })
                 });
-//            }
+            }
 
 
             function messageCount(){
@@ -341,6 +343,7 @@
 //                    alert('all feeds event reached');
                     $.get('/all-feeds', function (data) {
                         $('#feeds').html(data)
+                        loadScripts();
                     }).fail(function () {
 //                        alert('error')
                     })

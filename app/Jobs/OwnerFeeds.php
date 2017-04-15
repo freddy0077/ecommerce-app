@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
-class FeedsJob implements ShouldQueue
+class OwnerFeeds implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable
 //        SerializesModels

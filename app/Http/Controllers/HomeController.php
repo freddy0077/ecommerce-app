@@ -463,7 +463,6 @@ class HomeController extends Controller
            }
        }
        \App\Feed::sendFeedToJob($request->message,'timeline');
-
    }
 
     public function postAddFeedReaction(Request $request){
