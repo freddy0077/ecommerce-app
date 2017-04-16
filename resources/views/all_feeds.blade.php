@@ -297,11 +297,11 @@
                     $('#like-feed-'+id).off('click').on('click',function(){
 
                         $.post('{{url("/like-feed-reaction")}}/'+id,function(data){
-                            switch(data.status){
-                                case 201:
-                                    alert('unliked');
-                                    break;
-                            }
+//                            switch(data.status){
+//                                case 201:
+//                                    alert('unliked');
+//                                    break;
+//                            }
                         })
                     });
                 })

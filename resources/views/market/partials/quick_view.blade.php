@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from demo.smartaddons.com/templates/html/market/quickview.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Mar 2017 21:38:56 GMT -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -31,12 +30,16 @@
 
     <!-- Libs CSS
 ============================================ -->
-    <link rel="stylesheet" href="{{asset('frontend_2/css/bootstrap/css/bootstrap.min.css')}}">
+    {{--<link rel="stylesheet" href="{{asset('frontend_2/css/bootstrap/css/bootstrap.min.css')}}">--}}
     <link href="{{asset('frontend_2/css/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/js/datetimepicker/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/js/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/css/themecss/lib.css')}}" rel="stylesheet">
     <link href="{{asset('frontend_2/js/jquery-ui/jquery-ui.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('frontend_2/css/bootstrap/css/bootstrap.min.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+
+
 
 
     <!-- Theme CSS
@@ -91,26 +94,40 @@
                                 </div>
                                 <!-- Review ---->
                                 <div class="box-review form-group">
-                                    <div class="ratings">
-                                        <div class="rating-box">
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
-                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                    <div class="product-box-desc">
+                                        <div class="inner-box-desc">
+
+                                            <h4>Views</h4>
+                                            <p>
+                                                This product has {{$product->view_counts}} views so far
+                                            </p>
+
                                         </div>
                                     </div>
+
+                                    {{--<div class="ratings">--}}
+                                        {{--<div class="rating-box">--}}
+                                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                            {{--<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                            {{--<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     {{--<a class="reviews_button" href="quickview.php.html" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews </a>--}}
                                 </div>
 
                                 <div class="product-label form-group">
                                     <div class="product_page_price price">
-                                        @if($product->sale)
+
+                                    @if($product->sale)
                                             <span class="price-new">GH&#162; {{$product->sale_price}}</span>
                                             <span class="price-old">GH&#162; {{$product->price}}</span>
                                         @else
                                             <span class="price-new">GH&#162; {{$product->price}}</span>
                                         @endif
+                                        @include('market.partials.button_groups_partial')
+
                                     </div>
                                     {{--<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">--}}
                                         {{--<span class="price-new" itemprop="price">GHS {{$product->price}} </span>--}}
@@ -121,11 +138,50 @@
 
                                 <div class="product-box-desc">
                                     <div class="inner-box-desc">
-                                        @if($product->description =="")
+
+                                        <h4><strong>Shop</strong> </h4>
+                                        <p>
+                                            <span>Listed in <a href='{{url("stores/$product->store_slug/$product->user_id")}}'>{{$product->store_name}}</a></span>
+                                        </p>
+
+                                        <div class="price-tax" style="text-decoration: underline"><span>Shop's Info </span></div>
+                                        <div class="reward"><span>Shop's Products : </span> {{\App\Product::whereStoreId($product->store_id)->count()}} </div>
+                                        @if(count($followers)< 3)
+                                        <div class="brand"><span>Shop's Followers : </span>
+                                                @foreach($followers as $follower)
+                                                <a href="#">
+                                                    {{$follower->name}},
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                            @else
+
+                                            <div class="brand"><span>Shop's Followers : </span>
+                                                    @foreach($followers as $follower)
+                                                    <a href="#">
+                                                        {{$follower->name}},
+                                                    </a>
+                                                @endforeach
+                                                and more...
+                                            </div>
+
+                                        @endif
+                                        {{--<div class="model"><span>Product Code: </span> Product 15 </div>--}}
+                                        {{--<div class="reward"><span>Reward Points: </span> 100 </div>--}}
+                                    </div>
+                                </div>
+
+                                <div class="product-box-desc">
+                                    <div class="inner-box-desc">
                                         <h4>Description</h4>
+
+                                    @if($product->description !="")
                                         <p>
                                             {{$product->decription}}
                                         </p>
+                                            @else
+
+                                            <p>No Description added by shop</p>
                                         @endif
                                         {{--<div class="price-tax"><span>Ex Tax: </span> $60.00 </div>--}}
                                         {{--<div class="reward"><span>Price in reward points: </span> 400 </div>--}}
@@ -134,6 +190,34 @@
                                         {{--<div class="reward"><span>Reward Points: </span> 100 </div>--}}
                                     </div>
                                 </div>
+
+                                <div class="product-box-desc">
+                                    <div class="inner-box-desc">
+
+                                        <h4>Likes</h4>
+                                        <p>
+                                          This product has  {{$product->like_counts}} likes
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                {{--<div class="product-box-desc">--}}
+                                    {{--<div class="inner-box-desc">--}}
+
+                                        {{--<h4>Likes</h4>--}}
+                                        {{--<p>--}}
+                                            {{--This product has  {{$product->like_counts}} likes--}}
+                                        {{--</p>--}}
+
+                                        {{--<div class="price-tax"><span>Ex Tax: </span> $60.00 </div>--}}
+                                        {{--<div class="reward"><span>Price in reward points: </span> 400 </div>--}}
+                                        {{--<div class="brand"><span>Brand: </span><a href="#">Apple </a>		 </div>--}}
+                                        {{--<div class="model"><span>Product Code: </span> Product 15 </div>--}}
+                                        {{--<div class="reward"><span>Reward Points: </span> 100 </div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
                                 <!-- end box info product -->
 
                             </div>

@@ -69,7 +69,7 @@
 {{--                            <h4 class="">{{strtoupper($store->name)}}</h4>--}}
 
                         @foreach($featured_stores as $store)
-                            <div class="col-sm-4 col-xs-12 banner-item">
+                            <div class="col-sm-4  col-xs-4 banner-item">
                                 <div class="banners banner__img">
                                     <div>
                                         <a title="Static Image" href="#">

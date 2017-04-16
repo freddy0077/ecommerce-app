@@ -199,8 +199,9 @@ class HomeController extends Controller
         $user = Auth::user();
         if($user->has_store){
             $store = Store::whereUserId($user->id)->first();
-            $feeds = \App\Feed::leftJoin('users','users.id','=','feeds.user_id')->whereUserId(Auth::id())
-                ->selectRaw('feeds.*,users.name')
+            $feeds = \App\Feed::leftJoin('users','users.id','=','feeds.user_id')->where('feeds.user_id',Auth::id())
+                ->leftJoin('stores','stores.user_id','=','users.id')
+                ->selectRaw('feeds.*,users.name,stores.id as store_id,stores.name as store_name,stores.image as store_image')
                 ->orderBy('created_at','desc')
                 ->paginate(7);
             $followers = $builder->whereStoreId($store->id)
@@ -407,11 +408,16 @@ class HomeController extends Controller
 
     public function getQuickView($product_id){
         $gallery = ProductGallery::whereProductId($product_id)->orderBy('created_at','desc')->take(3)->get();
-        $product = Product::find($product_id);
+        $product = Product::leftJoin('stores','stores.user_id','=','products.user_id')
+            ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image,stores.user_id')
+            ->where('products.id',$product_id)
+            ->first();
+//        $product = Product::find($product_id);
         $product->update([
             'view_counts' => $product->view_counts+1
         ]);
-        return view('market.partials.quick_view',compact('product','gallery'));
+        $followers = \App\WatchedShop::leftJoin('users','users.id','=','watched_shops.user_id')->whereStoreId($product->store_id)->take(5)->get();
+        return view('market.partials.quick_view',compact('product','gallery','followers'));
     }
 
     public function postWatchShop($product_id,$store_id,$user_id)
@@ -441,7 +447,6 @@ class HomeController extends Controller
 //            $store_builder = Store::find($store_id);
             $builder = Product::find($product_id);
             \App\Feed::sendFeedToJob($store_builder,'follow');
-//            event(new FeedsEvent("you just followed $store_builder->name", $user));
             $image = $store_builder->image == null ? "https://placehold.it/60x60":$store_builder->image;
 
             return ['status' => 200, 'image_url' => asset("images/stores/$image"),  'store' => $store_builder->name];
@@ -458,7 +463,7 @@ class HomeController extends Controller
            $followers = $builder->whereStoreId($store->id)->get();
            foreach($followers as $follower){
                if($follower->user_id != $user->id){
-                   \App\Feed::recordAction($follower->user_id,$request->message,$store->image);
+                   \App\Feed::recordAction($follower->user_id,$request->message,$store->image,$store->id);
                }
            }
        }
@@ -473,13 +478,12 @@ class HomeController extends Controller
             'comment' => $request->comment
         ]);
         $user = Auth::user();
-        dispatch(new FeedsJob($user->id,$user,$request->comment,$request->feed_id,'reactions'));
+        dispatch(new FeedsJob($user->id,$user,$request->comment,$request->feed_id,'reactions',''));
 //        \App\Feed::sendFeedToJob($request->message,'timeline');
     }
 
     public function postLikeFeedReaction($feed_id){
         $user = Auth::user();
-
 
         if($reaction = FeedReaction::whereFeedId($feed_id)->whereUserId($user->id)->first()){
             if($reaction->like == true) {
@@ -488,7 +492,7 @@ class HomeController extends Controller
                 ]);
 
                 $message = "You just unliked a feed";
-                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions',''));
                 return ['status'=>201,'message'=>$message];
 
             }elseif($reaction->like == false){
@@ -497,7 +501,7 @@ class HomeController extends Controller
                 ]);
 
                 $message = "You just liked a feed";
-                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+                dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions',''));
                 return ['status'=>202,'message'=>$message];
             }
         }
@@ -510,7 +514,7 @@ class HomeController extends Controller
             ]);
             $message = "feed reaction created";
 
-            dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions'));
+            dispatch(new FeedsJob($user->id,$user,$message,$feed_id,'reactions',""));
             return ['status'=>202,'message'=>$message];
 
         }

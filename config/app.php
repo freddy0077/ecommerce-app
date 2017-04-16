@@ -174,6 +174,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         GetStream\StreamLaravel\StreamLaravelServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
+        Intouch\LaravelNewrelic\NewrelicServiceProvider::class,
 //        Vinkla\Pusher\PusherServiceProvider::class,
         /*
          * Package Service Providers...
@@ -251,6 +252,7 @@ return [
         'Menu'       => Lavary\Menu\Facade::class,
 //        'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Newrelic' => Intouch\LaravelNewrelic\Facades\Newrelic::class,
 
     ],
 

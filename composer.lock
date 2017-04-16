@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f6f3cd2bcfed757e09478ddec6f822ad",
-    "content-hash": "54cc8a49d9d645ea63f55489f20c86a8",
+    "hash": "7aaba0c2fb1021f5eb31662a041f3088",
+    "content-hash": "187882bf8b5392a3102765acdafe670c",
     "packages": [
         {
             "name": "99designs/http-signatures",
@@ -932,6 +932,91 @@
                 "laravel"
             ],
             "time": "2015-09-22 15:22:47"
+        },
+        {
+            "name": "intouch/laravel-newrelic",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/In-Touch/laravel-newrelic.git",
+                "reference": "4c99149eb5032feaeac889e3f455ffcf92a869d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/In-Touch/laravel-newrelic/zipball/4c99149eb5032feaeac889e3f455ffcf92a869d9",
+                "reference": "4c99149eb5032feaeac889e3f455ffcf92a869d9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "intouch/newrelic": ">=1.0.2",
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Intouch\\LaravelNewrelic": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Leckey",
+                    "email": "pleckey@intouchinsight.com"
+                }
+            ],
+            "description": "Laravel 5 NewRelic Integration",
+            "homepage": "https://github.com/In-Touch/laravel-newrelic",
+            "keywords": [
+                "laravel",
+                "new relic",
+                "newrelic"
+            ],
+            "time": "2017-04-04 14:55:18"
+        },
+        {
+            "name": "intouch/newrelic",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/In-Touch/newrelic.git",
+                "reference": "20db6cb25a9eb88e504e16829077c56828c176cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/In-Touch/newrelic/zipball/20db6cb25a9eb88e504e16829077c56828c176cc",
+                "reference": "20db6cb25a9eb88e504e16829077c56828c176cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Intouch\\Newrelic": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Patrick Leckey",
+                    "email": "pleckey@intouchinsight.com"
+                }
+            ],
+            "description": "Namespaced Wrapper for NewRelic PHP Agent",
+            "homepage": "http://github.com/In-Touch/newrelic/",
+            "keywords": [
+                "new relic",
+                "newrelic"
+            ],
+            "time": "2014-08-18 12:08:45"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -3603,12 +3688,12 @@
             "version": "0.9.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
                 "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
                 "shasum": ""
             },
