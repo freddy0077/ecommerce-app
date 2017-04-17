@@ -170,8 +170,11 @@
                     <div class="navbar-logo col-md-3 col-sm-12 col-xs-12">
                         <?php $store = \App\Store::whereUserId($user_id)->first() ?>
 
-                        <a href='{{url("/stores/$slug/$user_id")}}'>
-                            <img src='{{asset("images/stores")}}/{{$store->image}}' width="100" height="100" title="{{$store->name}}" class="img-responsive" alt="{{$store->name}}" />
+{{--                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
+
+
+                            <a href='{{url("/stores/$slug/$user_id")}}'>
+                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}' width="200" height="50" title="{{$store->name}}" class="img-responsive" alt="{{$store->name}}" />
                             {{--<img src="cinqueterre.jpg" class="img-responsive" alt="Cinque Terre">--}}
                         </a>
                     </div>

@@ -68,6 +68,7 @@ class HomeController extends Controller
                  ->selectRaw('products.*,stores.id as store_id,stores.name as store_name,stores.slug as store_slug,stores.image as store_image,stores.user_id')
                  ->where('products.user_id',$user->id)
                  ->where('stores.enabled',true)
+                 ->where('published',true)
                  ->take($number_of_products)->get();
             $allProducts->push($products);
         }
@@ -529,6 +530,10 @@ class HomeController extends Controller
             $stream = new StreamFeed($user->id);
             $stream->followFeed("flat",$id);
         }
+
+    public function getSmsValidation(){
+        return view('auth.sms_validation');
+    }
 
     public function postRegisterNewUser(UserRequest $request){
               User::create([

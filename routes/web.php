@@ -151,6 +151,8 @@ Route::get('form',function(){
 
 Route::post('/register-user','HomeController@postRegisterUser');
 
+Route::get('/sms-validation','HomeController@getSmsValidation');
+
 Route::group(['domain' => '{slug}.shopaholicks.com'], function () {
 //    if (\Illuminate\Support\Facades\Auth::check()){
         Route::get("shop", function ($slug) {
@@ -192,6 +194,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/check-name','HomeController@getCheckName');
 
     Route::get('/fancies','HomeController@getFancies');
+    Route::get('send-sms/{recipient}/{message}/{alias}','StoreController@sendSms');
 
 });
 

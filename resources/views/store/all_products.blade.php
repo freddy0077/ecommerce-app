@@ -178,10 +178,11 @@
                                                         <tr class="uppercase">
                                                             <th> # </th>
                                                             <th>Image</th>
-                                                            <th><a href="{{url('/store/all-products?order=name')}}"> Name</a> </th>
-                                                            <th><a href="{{url('/store/all-products?order=price')}}"> Price </a></th>
-                                                            <th> Description </th>
-                                                            <th> <a href="{{url('/store/all-products?order=published')}}">Published </a></th>
+                                                            <th><a href="{{url(\App\Product::queryByOrder('name'))}}"> Name</a> </th>
+                                                            <th><a href="{{url(\App\Product::queryByOrder('price'))}}"> Price </a></th>
+                                                            {{--<th> Description </th>--}}
+                                                            <th> <a href="{{url(\App\Product::queryByOrder('published'))}}">Published </a></th>
+                                                            <th> <a href="{{url(\App\Product::queryByOrder('date'))}}">Date </a></th>
                                                             <th> Action </th>
                                                         </tr>
                                                         </thead>
@@ -194,7 +195,11 @@
                                                                 <td>
                                                                     {{$i++}}
                                                                 </td>
-                                                                <td><img src='{{asset("images/products/$product->image")}}' class="img-rounded" width="80" height="80"></td>
+                                                                <td>
+{{--                                                                    <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
+
+                                                                    <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' class="img-rounded" width="80" height="80">
+                                                                </td>
 
                                                                 <td>
                                                                     <a href="javascript:;" class="name" id="price" data-type="text" data-pk="{{$product->id}}" data-value="" >
@@ -211,13 +216,16 @@
                                                                 </td>
 
                                                                 {{--<td>{{$product->price}}</td>--}}
-                                                                <td>{{$product->description}}</td>
+                                                                {{--<td>{{$product->description}}</td>--}}
 
                                                                 <td>
                                                                     <a href="javascript:;" class="published" id="published" data-type="select" data-pk="{{$product->id}}" data-value="" data-original-title="Select State">
                                                                         {{$product->published == true ? "Yes" : "No"}}
                                                                     </a>
                                                                 </td>
+
+                                                                <td>{{$product->created_at}}</td>
+
                                                                 {{--<td>{{$product->published == true ? "Yes" : "No"}}</td>--}}
                                                                 <td>
                                                                     <a href="{{url('/store/edit-product',$product->id)}}" class="btn btn-success">edit</a>

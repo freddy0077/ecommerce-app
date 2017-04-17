@@ -73,7 +73,9 @@
                                 <div class="banners banner__img">
                                     <div>
                                         <a title="Static Image" href="#">
-                                            <img src='{{asset("images/stores/$store->image")}}' alt="Static Image"></a>
+{{--                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
+
+                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}' alt="Static Image"></a>
                                     </div>
                                 </div>
                                 <div class="banner__info">
@@ -141,8 +143,10 @@
                                     <div class="product-item-container">
                                         <div class="left-block">
                                             <div class="product-image-container second_img">
-                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />
-                                                <img src="{{asset("images/products/$product->image")}}"   alt="{{$product->name}}" class="img-responsive img_0" />
+                                                {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' class="img-rounded" width="80" height="80">--}}
+                                                {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
                                             </div>
                                             @if($product->sale)
                                             <span class="label label-sale">Sale</span>
@@ -150,7 +154,6 @@
 
                                                     <!--Sale Label-->
                                             {{--<span class="label label-new">New</span>--}}
-
                                             <!--full quick view block-->
                                             <a class="quickview iframe-link" data-fancybox-type="iframe"  href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                             <!--end full quick view block-->
@@ -210,8 +213,11 @@
                                     <div class="product-item-container">
                                         <div class="left-block">
                                             <div class="product-image-container second_img">
-                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />
-                                                <img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+
+                                                {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />--}}
+                                                {{--<img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />--}}
                                             </div>
                                             @if($product->sale)
                                                 <span class="label label-sale">Sale</span>
@@ -399,13 +405,15 @@
                                             <div class="product-item-container">
                                                 <div class="left-block">
                                                     <div class="product-image-container">
-                                                        <img src='{{asset("images/products/$product->image")}}'  alt="" class="img-responsive" />
+                                                        <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+
+{{--                                                        <img src='{{asset("images/products/$product->image")}}'  alt="" class="img-responsive" />--}}
                                                     </div>
                                                     <!--Sale Label-->
                                                     <span class="label label-sale">Sale</span>
 
                                                     <!--full quick view block-->
-                                                    <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
+                                                    <a class="quickview iframe-link" data-fancybox-type="iframe" href="{{url('/quick-view-product',$product->id)}}">  Quickview</a>
                                                     <!--end full quick view block-->
                                                 </div>
                                                 <div class="right-block">
@@ -454,14 +462,16 @@
                                                 <div class="product-item-container">
                                                     <div class="left-block">
                                                         <div class="product-image-container">
-                                                            <img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />
+                                                            <img src='{{\Illuminate\Support\Facades\Storage::url("products/$deal->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+
+                                                            {{--<img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
                                                         </div>
                                                         <!--Sale Label-->
                                                         {{--<span class="label label-sale">Sale</span>--}}
                                                         <span class="label label-counts">{{$deal->view_counts}}</span>
 
                                                         <!--full quick view block-->
-                                                        <a class="quickview iframe-link visible-lg" data-fancybox-type="iframe" href="{{url('/quick-view-product',$deal->id)}}">>  Quickview</a>
+                                                        <a class="quickview iframe-link" data-fancybox-type="iframe" href="{{url('/quick-view-product',$deal->id)}}">>  Quickview</a>
                                                         <!--end full quick view block-->
                                                     </div>
                                                     <div class="right-block">

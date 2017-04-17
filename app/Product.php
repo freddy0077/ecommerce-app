@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 class Product extends Model
@@ -45,6 +46,10 @@ class Product extends Model
         ];
     }
 
+    public static function queryByOrder($order){
+     return \Illuminate\Support\Facades\Request::query('order') == "$order" ? "/store/all-products":"/store/all-products?order=$order";
+}
+
     public static function processImage($image,$image_name){
 
             $destinationPath = public_path('images/products');
@@ -53,6 +58,8 @@ class Product extends Model
                 $constraint->aspectRatio();
 //            })->save($destinationPath.'/'.$input['imagename']);
             })->save($destinationPath.'/'.$image_name);
+
+           Storage::disk('s3')->put("/products/$image_name", $img->getEncoded());
 
             $destinationPath = public_path('/images');
 //            $image->move($destinationPath, $input['imagename']);

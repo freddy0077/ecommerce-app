@@ -70,18 +70,18 @@
                         <div class="row">
                             <div class="content-product-left  col-sm-6 col-xs-12 ">
                                 <div class="large-image  ">
-                                    <img itemprop="image" class="product-image-zoom" src='{{asset("images/products/$product->image")}}' data-zoom-image="{{asset("images/products/$product->image")}}" title="Bint Beef" alt="Bint Beef" />
+                                    <img itemprop="image" class="product-image-zoom" src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' data-zoom-image="{{asset("images/products/$product->image")}}" title="Bint Beef" alt="Bint Beef" />
                                 </div>
 
                                 <div id="thumb-slider" class="owl-theme owl-loaded owl-drag full_slider">
                                     @foreach($gallery as $gal)
-                                    <a data-index="0" class="img thumbnail " data-image="{{asset("images/products/$gal->image")}}" title="Bint Beef">
-                                        <img src="{{asset("images/products/$gal->image")}}" title="{{$product->name}}" alt="{{$product->name}}" />
+                                    <a data-index="0" class="img thumbnail " data-image='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' title="{{$product->name}}">
+                                        <img src='{{\Illuminate\Support\Facades\Storage::url("products/$gal->image")}}' title="{{$product->name}}" alt="{{$product->name}}" />
                                     </a>
                                     @endforeach
 
-                                        <a data-index="0" class="img thumbnail " data-image="{{asset("images/products/$product->image")}}" title="Bint Beef">
-                                            <img src="{{asset("images/products/$product->image")}}" title="{{$product->name}}" alt="{{$product->name}}" />
+                                        <a data-index="0" class="img thumbnail " data-image='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' title="{{$product->name}}">
+                                            <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' title="{{$product->name}}" alt="{{$product->name}}" />
                                         </a>
 
                                 </div>

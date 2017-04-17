@@ -87,8 +87,10 @@
                                 <div>
                                     {{--                                        <a  href="#"><img src="{{asset('frontend_2/image/demo/shop/category/electronic-cat.png')}}" alt=" 30&quot;"><br></a>--}}
                                     <a  href="#">
+                                        {{--                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
+
                                         {{--<img src="https://placehold.it/870x260" alt=" 30&quot;">--}}
-                                        <img src="/images/stores/{{$store->store_banner}}" alt=" 30&quot;">
+                                        <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}' class="img-responsive" width="870" height="260" alt="{{$store->name}}">
                                         <br>
                                     </a>
                                     <br>

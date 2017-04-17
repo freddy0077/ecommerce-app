@@ -224,148 +224,21 @@ class StoreController extends Controller
 
         $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
         if($request->hasFile('image') && $request->hasFile('banner-image')){
-            $id = Uuid::generate();
-            $date_time = date('Ymdhis');
 
-            $image = $request->file('image');
-//            $image_2 = $request->file('banner-image');
+            Store::processAllImages($request,$slug);
 
-            $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
-
-            $destinationPath = public_path('images/stores');
-
-
-            $img = Image::make($image->getRealPath());
-            $img->resize(200, 50, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['imagename']);
-
-//            Storage::put($input['imagename'], $image);
-//
-//            $s3 = Storage::disk('s3');
-//            $filePath = $image->getRealPath();
-//            $s3->put($filePath, file_get_contents($image));
-
-
-            $second_image = Image::make($image->getRealPath());
-            $destinationPath = public_path('/images');
-            $second_image->resize(300, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['imagename']);
-//            $image->move($destinationPath, $input['imagename']);
-
-            $id = Uuid::generate();
-            $date_time = date('Ymdhis');
-
-            $image_2 = $request->file('banner-image');
-
-            $input['image2'] = 'banner' . $id . $date_time . '.' . $image_2->getClientOriginalExtension();
-
-            $destinationPath = public_path('images/stores');
-            $img2 = Image::make($image_2->getRealPath());
-            $img2->resize(870, 260, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['image2']);
-
-            $destinationPath = public_path('/images');
-            $image_2->move($destinationPath, $input['image2']);
-
-            Store::whereUserId(Auth::user()->id)->update([
-                'name' => $request->name,
-                'image' => $input['imagename'],
-                'store_banner' => $input['image2'],
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'business_type' => $request->business_type,
-                'domain' => $request->domain,
-                'about' => $request->about,
-                'slug' => $slug,
-                'user_id' => Auth::user()->id,
-                'colour' => $request->colour,
-                'enabled' => $request->enabled =="on" ? true :false
-
-            ]);
-
-        }
-        elseif ($request->hasFile('image')) {
+        }elseif ($request->hasFile('image')) {
             $this->validate($request, [
-                'name' => 'required',
-//                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'phone_number' => 'required',
-                'email' => 'required',
-                'address' => 'required'
-            ]);
-            $id = Uuid::generate();
-            $date_time = date('Ymdhis');
-
-            $image = $request->file('image');
-//            $image_2 = $request->file('banner-image');
-
-            $input['imagename'] = $id . $date_time . '.' . $image->getClientOriginalExtension();
-
-            $destinationPath = public_path('images/stores');
-            $img = Image::make($image->getRealPath());
-            $img->resize(200, 50, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['imagename']);
-
-            $destinationPath = public_path('/images');
-            $image->move($destinationPath, $input['imagename']);
-
-            Store::whereUserId(Auth::user()->id)->update([
-                'name' => $request->name,
-                'image' => $input['imagename'],
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'business_type' => $request->business_type,
-                'domain' => $request->domain,
-                'about' => $request->about,
-                'slug' => $slug,
-                'user_id' => Auth::user()->id,
-                'colour' => $request->colour,
-                'enabled' => $request->enabled =="on" ? true :false
-
+                'name' => 'required', //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'phone_number' => 'required','email' => 'required', 'address' => 'required'
             ]);
 
-            //Banner Image processing
+            Store::processLogo($request,$slug);
 
         } elseif ($request->hasFile('banner-image')) {
 
-            $id = Uuid::generate();
-            $date_time = date('Ymdhis');
+            Store::processBannerImage($request,$slug);
 
-            $image_2 = $request->file('banner-image');
-
-            $input['image2'] = 'banner' . $id . $date_time . '.' . $image_2->getClientOriginalExtension();
-
-            $destinationPath = public_path('images/stores');
-            $img2 = Image::make($image_2->getRealPath());
-            $img2->resize(870, 260, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($destinationPath . '/' . $input['image2']);
-
-            $destinationPath = public_path('/images');
-            $image_2->move($destinationPath, $input['image2']);
-
-            Store::whereUserId(Auth::user()->id)->update([
-                'name' => $request->name,
-                'store_banner' => $input['image2'],
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'business_type' => $request->business_type,
-                'domain' => $request->domain,
-                'about' => $request->about,
-                'slug' => $slug,
-                'user_id' => Auth::user()->id,
-                'colour' => $request->colour,
-                'enabled' => $request->enabled =="on" ? true :false
-            ]);
         }else{
             Store::whereUserId(Auth::user()->id)->update([
                 'name' => $request->name,
@@ -442,12 +315,15 @@ class StoreController extends Controller
             $image = $request->file('image');
             $input['imagename'] = $id.$date_time.'.'.$image->getClientOriginalExtension();
 
-
             $destinationPath = public_path('images/products');
             $img = Image::make($image->getRealPath());
             $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$input['imagename']);
+
+            $image_name = $input['imagename'];
+
+            Storage::disk('s3')->put("/products/$image_name", $img->getEncoded());
 
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $input['imagename']);
@@ -501,7 +377,7 @@ class StoreController extends Controller
                 'name' =>'required',
 //                'image' => 'dimensions:min_width=300,min_height=300',
                 'description' => 'required',
-            'sub_category' =>'required',
+                'sub_category' =>'required',
 //            'category' => 'required',
                 'price' => 'required'
             ]);
@@ -588,9 +464,6 @@ class StoreController extends Controller
                 ]);
                 break;
         }
-
-
-
     }
 
       public function postDeleteProduct($product_id){
@@ -661,7 +534,6 @@ class StoreController extends Controller
                         'image' =>  $input['imagename'],
                         'sub_category_id' => $sub_categories[$key],
                         'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
-
                     ]);
                 }
 
@@ -683,16 +555,32 @@ class StoreController extends Controller
         switch($request->query('order')){
 
             case"published":
-                $products = $builder->orderBy('products.published','desc')->paginate();
+                if($request->query('order') == 'published') {
+                    $products = $builder->orderBy('products.published', 'desc')->paginate()->appends('order',$request->query('order'));;
+                }else{
+                    $products = $builder->paginate();
+                }
                 break;
             case"price":
-                $products = $builder->orderBy('products.price','desc')->paginate();
+                if($request->query('order') == 'price') {
+                    $products = $builder->orderBy('products.price', 'desc')->paginate()->appends('order',$request->query('order'));
+                }else{
+                    $products = $builder->paginate();
+                }
                 break;
             case"name":
-                $products = $builder->orderBy('products.name','desc')->paginate();
+                if($request->query('order') == 'name'){
+                    $products = $builder->orderBy('products.name','desc')->paginate()->appends('order',$request->query('order'));
+                }else{
+                    $products = $builder->paginate();
+                }
                 break;
             default:
-                $products=$builder->orderBy('products.created_at','desc')->paginate();
+                if($request->query('order') == 'date'){
+                    $products=$builder->orderBy('products.created_at','desc')->paginate()->appends('order',$request->query('order'));
+                }else {
+                    $products=$builder->paginate();
+                }
         }
 
 
@@ -907,6 +795,66 @@ class StoreController extends Controller
         return $results;
 
     }
+
+    public function sendSms($recipient, $message, $sender_alias){
+        // API CREDENTIALS FOR IMPERIAL PEKING
+        $apiKey = "b9744510-22e4-11e7-9c25-99beb05ce346";
+        $apiSecret = "KhXWRU";
+
+        $post = compact('recipient', 'message', 'sender_alias');
+        $options = array(
+            CURLOPT_HTTPHEADER => array(
+                "ApiKey: $apiKey",
+                "ApiSecret: $apiSecret"
+            )
+        );
+        $response = self::do_web_request('http://api.kodesms.com/sms/send', $post, $options);
+        return json_decode($response, true);
+    }
+
+    function do_web_request($url, $post_arg = false, $options = array()) {
+        /* initializing curl */
+        $curl_handle = curl_init($url);
+        /* set this option the curl_exec function return the response */
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+        /* follow the redirection */
+        curl_setopt($curl_handle, CURLOPT_FOLLOWLOCATION, 1);
+        //ssl fix
+        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, 0);
+        if($options){
+            if($post_arg && isset($options[CURLOPT_HTTPHEADER])){
+                $headers = $options[CURLOPT_HTTPHEADER];
+                unset($options[CURLOPT_HTTPHEADER]);
+            }
+            curl_setopt_array($curl_handle, $options);
+        }
+
+        if ($post_arg) {
+            curl_setopt($curl_handle, CURLOPT_POST, 1);
+
+            if(is_array($post_arg) || is_object($post_arg)){
+                $post_arg = http_build_query($post_arg);
+            }
+            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $post_arg);
+            if(isset($headers)){
+                $headers = array_merge(array('Content-Type: application/x-www-form-urlencoded'), $headers);
+            }else{
+                $headers = array('Content-Type: application/x-www-form-urlencoded');
+            }
+            curl_setopt($curl_handle, CURLOPT_HTTPHEADER, $headers);
+        }
+
+        /* invoke the request */
+        $response = curl_exec($curl_handle);
+        //var_dump($response);
+
+        /* cleanup curl stuff */
+        curl_close($curl_handle);
+
+        return $response;
+    }
+
 
 
 }

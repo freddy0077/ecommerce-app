@@ -207,7 +207,8 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Image</label>
                                                     <div class="col-md-4">
-                                                      <img src="/images/products/{{$product->image}}"  class="img-thumbnail"><br><br>
+                                                      <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  class="img-thumbnail"><br><br>
+{{--                                                      <img src="/images/products/{{$product->image}}"  class="img-thumbnail"><br><br>--}}
                                                         <span><button type="button" id="change-image" class="btn btn-default">change</button></span>
                                                     </div>
                                                 </div>
@@ -295,7 +296,7 @@
 
                                                 @foreach(\App\ProductGallery::whereProductId($product->id)->orderBy('created_at','desc')->take(3)->get() as $gallery)
                                                         <div class="col-md-3">
-                                                            <img src="/images/products/{{$gallery->image}}"  class="img-thumbnail"><br><br>
+                                                            <img src='{{\Illuminate\Support\Facades\Storage::url("products/$gallery->image")}}'  class="img-thumbnail"><br><br>
                                                             {{--<span><button type="button" id="change-image" class="btn btn-default">change</button></span>--}}
                                                         </div>
                                                     @endforeach

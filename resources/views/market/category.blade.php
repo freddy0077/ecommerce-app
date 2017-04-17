@@ -44,11 +44,13 @@
                             {{--                            <h4 class="">{{strtoupper($store->name)}}</h4>--}}
 
                             @foreach($featured_stores as $store)
-                                <div class="col-sm-4 col-xs-12 banner-item">
+                                <div class="col-sm-4  col-xs-4 banner-item">
                                     <div class="banners banner__img">
                                         <div>
                                             <a title="Static Image" href="#">
-                                                <img src='{{asset("images/stores/$store->image")}}' alt="Static Image"></a>
+                                                {{--                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
+
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}' alt="Static Image"></a>
                                         </div>
                                     </div>
                                     <div class="banner__info">
@@ -58,7 +60,6 @@
                                     </div>
 
                                 </div>
-
                             @endforeach
 
                             {{--<div class="col-sm-4 col-xs-12 banner-item hidden-xs">--}}

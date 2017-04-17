@@ -240,7 +240,8 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Logo</label>
                                                     <div class="col-md-4">
-                                                        <img src="/images/stores/{{$store->image}}"  class="img-thumbnail"><br><br>
+{{--                                                        <img src="/images/stores/{{$store->image}}"  class="img-thumbnail"><br><br>--}}
+                                                        <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}'  class="img-thumbnail"><br><br>
                                                         <span><button type="button" id="change-image" class="btn btn-default">change</button></span><br>
                                                         <span><small><i>Recommended size: 200 x 50</i></small></span>
                                                     </div>
@@ -315,7 +316,8 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Banner </label>
                                                     <div class="col-md-4">
-                                                        <img src="/images/stores/{{$store->store_banner}}"  class="img-thumbnail"><br><br>
+                                                        <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>
+{{--                                                        <img src="/images/stores/{{$store->store_banner}}"  class="img-thumbnail"><br><br>--}}
                                                         <span><button type="button" id="change-banner" class="btn btn-default">change banner</button></span><br>
                                                         <span><small><i>Recommended size: 870 x 260</i></small></span>
                                                     </div>
