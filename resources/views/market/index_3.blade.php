@@ -5,7 +5,7 @@
         <style>
             .img_dimensions{
                 display: block;
-                max-width:200px;
+                max-width:180px;
                 max-height:120px;
                 width: auto;
                 height: auto;
