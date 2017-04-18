@@ -6,7 +6,7 @@
             .img_dimensions{
                 display: block;
                 max-width:180px;
-                max-height:180px;
+                max-height:200px;
                 width: auto;
                 height: auto;
             }
