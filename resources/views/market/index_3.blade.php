@@ -75,7 +75,7 @@
                                         <a title="Static Image" href="#">
 {{--                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
 
-                                            <img src='{{\Illuminate\Support\Facades\Storage::url("stores/$store->image")}}' alt="Static Image"></a>
+                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}' alt="Static Image"></a>
                                     </div>
                                 </div>
                                 <div class="banner__info">
