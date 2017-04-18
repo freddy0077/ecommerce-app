@@ -40,7 +40,7 @@
 
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail" style="height:300px; overflow: hidden">
-                        <?php $image= $shop->image == null ? "https://placehold.it/300x200":\Illuminate\Support\Facades\Storage::url("images/$shop->image") ?>
+                        <?php $image= $shop->image == null ? "https://placehold.it/300x200":\Illuminate\Support\Facades\Storage::url("images/$shop->store_banner") ?>
                         <img src='{{$image}}' height="200" class="img-rounded">
                         <div class="caption">
                             <h4 class="text-center"><strong>{{$shop->name}}</strong></h4>
