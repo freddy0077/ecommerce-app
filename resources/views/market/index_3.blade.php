@@ -215,9 +215,9 @@
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
                                         <div class="left-block">
-                                            <div class="product-image-container second_img">
+                                            <div class="product-image-container">
                                                 <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+{{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
 
                                                 {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />--}}
                                                 {{--<img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />--}}
