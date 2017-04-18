@@ -2,6 +2,17 @@
 
 @section('scripts')
 
+        <style>
+            .img_dimensions{
+                display: block;
+                max-width:230px;
+                max-height:95px;
+                width: auto;
+                height: auto;
+            }
+
+        </style>
+
 
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.1.1/typeahead.bundle.min.js"></script>--}}
 
@@ -146,7 +157,7 @@
                                                 {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' class="img-rounded" width="80" height="80">--}}
 {{--                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
 {{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
-                                                <img data-src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="" width="150" height="150" class="img-responsive" />
+                                                <img data-src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="" width="150" height="150" class="img-responsive img_dimensions" />
                                                 {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' width="150" height="150"   alt="{{$product->name}}" class="img-responsive img_0" />--}}
 
 {{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
