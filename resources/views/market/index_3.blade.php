@@ -75,7 +75,7 @@
                                         <a title="Static Image" href="#">
 {{--                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->store_banner")}}'  class="img-thumbnail"><br><br>--}}
 
-                                            <img src='{{\Illuminate\Support\Facades\Storage::url("images/$store->image")}}' alt="Static Image"></a>
+                                            <img src='{{\Illuminate\Support\Facades\Storage::url("stores/$store->image")}}' alt="Static Image"></a>
                                     </div>
                                 </div>
                                 <div class="banner__info">
@@ -142,11 +142,14 @@
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
                                         <div class="left-block">
-                                            <div class="product-image-container second_img">
+                                            <div class="product-image-container">
                                                 {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' class="img-rounded" width="80" height="80">--}}
-                                                {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
+{{--                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
+{{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
                                                 <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+
+{{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
+
                                             </div>
                                             @if($product->sale)
                                             <span class="label label-sale">Sale</span>

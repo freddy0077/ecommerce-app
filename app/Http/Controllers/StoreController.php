@@ -54,8 +54,8 @@ class StoreController extends Controller
 
     public function getStore($slug,$user_id){
 
-        $products = Product::inRandomOrder()->whereUserId($user_id)->paginate(12);
-        $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
+        $products = Product::inRandomOrder()->whereUserId($user_id)->where('published',true)->paginate(12);
+        $latest_products = Product::whereUserId($user_id)->where('published',true)->orderBy('created_at','desc')->take(5)->get();
         $categories = ProductCategory::all();
         $store = Store::whereUserId($user_id)->first();
         $sub_categories = SubCategory::inRandomOrder()->get();
@@ -70,6 +70,7 @@ class StoreController extends Controller
          ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
          ->where('product_categories.id',$category_id)
          ->where('products.user_id',$user_id)
+         ->where('published',true)
          ->selectRaw('products.*')
             ->paginate(12);
         $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
