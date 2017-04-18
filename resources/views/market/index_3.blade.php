@@ -228,7 +228,7 @@
                                     <div class="product-item-container">
                                         <div class="left-block">
                                             <div class="product-image-container">
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
 {{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
 
                                                 {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />--}}
@@ -297,7 +297,7 @@
 
                                         <div class="left-block">
                                             <div class="product-image-container second_img">
-                                                <img src='{{asset("images/categories/$category->image")}}' style="width: 180px!important; height: 150px!important;" width="180" height="200"  alt="" class="img-rounded img-responsive" />
+                                                <img src='{{asset("images/categories/$category->image")}}' style="width: 180px!important; height: 150px!important;" width="180" height="200"  alt="" class="img-rounded img-responsive " />
 
                                                 {{--<img src="https://placehold.it/180x200"  alt="" class="img-responsive" />--}}
                                                 {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/8_3.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive img_0" />--}}
@@ -420,7 +420,7 @@
                                             <div class="product-item-container">
                                                 <div class="left-block">
                                                     <div class="product-image-container">
-                                                        <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                        <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
 
 {{--                                                        <img src='{{asset("images/products/$product->image")}}'  alt="" class="img-responsive" />--}}
                                                     </div>
@@ -477,7 +477,7 @@
                                                 <div class="product-item-container">
                                                     <div class="left-block">
                                                         <div class="product-image-container">
-                                                            <img src='{{\Illuminate\Support\Facades\Storage::url("products/$deal->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                            <img src='{{\Illuminate\Support\Facades\Storage::url("products/$deal->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
 
                                                             {{--<img src='{{asset("images/products/$deal->image")}}'  alt="Apple Cinema 30&quot;" class="img-responsive" />--}}
                                                         </div>
