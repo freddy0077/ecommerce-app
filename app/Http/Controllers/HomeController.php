@@ -90,6 +90,7 @@ class HomeController extends Controller
          $best_deals =$best_deals->collapse()->all();
 
          $featured_stores =  MarketplaceSignup::leftJoin('stores','stores.id','marketplace_signups.store_id')
+             ->inRandomOrder()
              ->take(3)
              ->get();
 
