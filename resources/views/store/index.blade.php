@@ -46,7 +46,7 @@
                         <div class="product-latest-item">
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="#"><img src='{{asset("images/products/$product->image")}}' alt="{{$product->name}}" title="{{$product->image}}" class="img-responsive" style="width: 100px; height: 82px;"></a>
+                                    <a href="#"><img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' alt="{{$product->name}}" title="{{$product->image}}" class="img-responsive" style="width: 100px; height: 82px;"></a>
                                 </div>
                                 <div class="media-body">
                                     <div class="caption">
