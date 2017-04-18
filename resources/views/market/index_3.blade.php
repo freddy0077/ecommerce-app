@@ -146,7 +146,8 @@
                                                 {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' class="img-rounded" width="80" height="80">--}}
 {{--                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
 {{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img data-src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="" width="150" height="150" class="img-responsive" />
+                                                {{--<img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}' width="150" height="150"   alt="{{$product->name}}" class="img-responsive img_0" />--}}
 
 {{--                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />--}}
 

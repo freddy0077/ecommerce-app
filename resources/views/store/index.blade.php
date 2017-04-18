@@ -189,7 +189,7 @@
                                     <div class="left-block">
                                         <div class="product-image-container">
                                             <img data-src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'
-                                                 src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="" width="150" height="150 class="img-responsive" />
+                                                 src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="" width="150" height="150" class="img-responsive" />
 {{--                                            <img data-src='{{asset("images/products/$product->image")}}' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"  alt=" 30&quot;" class="img_0 img-responsive" />--}}
                                         </div>
                                         <!--Sale Label-->
