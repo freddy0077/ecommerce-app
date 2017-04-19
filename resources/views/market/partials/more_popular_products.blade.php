@@ -8,6 +8,17 @@
     @endif
 </script>
 
+<style>
+    .img_dimensions{
+        display: block;
+        max-width:180px;
+        max-height:120px;
+        width: auto;
+        height: auto;
+    }
+
+</style>
+
 <div class="row">
 <!-- Begin extraslider-inner -->
 <div class="so-extraslider products-list grid owl2-carousel owl2-theme owl2-loaded owl2-responsive-768"  data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="25" data-items_column0="5" data-items_column1="4" data-items_column2="3"  data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="yes" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
@@ -22,7 +33,7 @@
             <div class="left-block">
                 <div class="product-image-container">
 {{--                    <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />--}}
-                    <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                    <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
                 </div>
                 <!--Sale Label-->
                 {{--<span class="label label-sale">Sale</span>--}}

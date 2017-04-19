@@ -2,6 +2,17 @@
 
 @section('scripts')
 
+    <style>
+        .img_dimensions{
+            display: block;
+            max-width:180px;
+            max-height:120px;
+            width: auto;
+            height: auto;
+        }
+
+    </style>
+
         <script>
             var nextPageUrl  = {!! $nextpageurl?"\"$nextpageurl\";":"null;" !!}
 
@@ -128,7 +139,7 @@
                                         <div class="left-block">
                                             <div class="product-image-container">
 {{--                                                <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("images/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("images/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
                                             </div>
                                             @if($product->sale)
                                                 <span class="label label-sale">Sale</span>
@@ -199,7 +210,7 @@
                                     <div class="product-item-container">
                                         <div class="left-block">
                                             <div class="product-image-container">
-                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0 img_dimensions" />
 
                                                 {{--<img src='{{isset($product->image)?asset("images/products/$product->image"):""}}' alt="{{$product->name}}" class="img-responsive" />--}}
                                                 {{--<img src="{{asset("images/products/$product->image")}}"   alt="{{$product->name}}" class="img-responsive img_0" />--}}
