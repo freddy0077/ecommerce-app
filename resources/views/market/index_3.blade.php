@@ -293,11 +293,12 @@
                                         <!--Begin Items-->
                                 <div class="ltabs-item product-layout">
                                     <div class="product-item-container">
-                                        <h4 class="text-center text-dark"><a href="{{url('/category',$category->id)}}">{{$category->name}} </a></h4>
+                                        <h4 class="text-center text-dark"><a href="{{url('/category',$category->id)}}">
+                                                {{strtoupper($category->name)}} </a></h4>
 
                                         <div class="left-block">
                                             <div class="product-image-container second_img">
-                                                <img src='{{asset("images/categories/$category->image")}}' style="width: 180px!important; height: 150px!important;" width="180" height="200"  alt="" class="img-rounded img-responsive " />
+                                                <img src='{{\Illuminate\Support\Facades\Storage::url("categories/$category->image")}}' style="width: 180px!important; height: 150px!important;" width="180" height="200"  alt="" class="img-rounded img-responsive " />
 
                                                 {{--<img src="https://placehold.it/180x200"  alt="" class="img-responsive" />--}}
                                                 {{--<img src="{{asset('frontend_2/image/demo/shop/product/home8/8_3.jpg')}}"  alt="Apple Cinema 30&quot;" class="img-responsive img_0" />--}}
