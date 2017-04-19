@@ -142,7 +142,7 @@ class AdminController extends Controller
     }
 
     public function getProductCategories(){
-        $categories = ProductCategory::with('subcategories')->paginate();
+        $categories = ProductCategory::with('subcategories')->orderBy('enable','desc')->paginate();
         return view('admin.product_categories',compact('categories'));
     }
 

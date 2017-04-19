@@ -131,19 +131,19 @@
 
     @section('content')
             <!-- BEGIN PAGE BREADCRUMBS -->
-    <ul class="page-breadcrumb breadcrumb">
-        <li>
-            <a href="#">Dashboard</a>
-            <i class="fa fa-circle"></i>
-        </li>
-        <li>
-            <a href="#">Packages</a>
-            <i class="fa fa-circle"></i>
-        </li>
+    {{--<ul class="page-breadcrumb breadcrumb">--}}
+        {{--<li>--}}
+            {{--<a href="#">Dashboard</a>--}}
+            {{--<i class="fa fa-circle"></i>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="#">Packages</a>--}}
+            {{--<i class="fa fa-circle"></i>--}}
+        {{--</li>--}}
         {{--<li>--}}
         {{--<span>Tiles</span>--}}
         {{--</li>--}}
-    </ul>
+    {{--</ul>--}}
     <!-- END PAGE BREADCRUMBS -->
 
 
@@ -190,7 +190,7 @@
                             @foreach($categories as $category)
                                 <tr>
                                     {{--<td>{{$i++}}</td>--}}
-                                    <td> {{$category->image}} </td>
+                                    <td> <img src='{{\Illuminate\Support\Facades\Storage::url("categories/$category->image")}}' width="80" height="80" /> </td>
                                     <td> {{$category->name}} </td>
                                     <td>
                                         <ul>
@@ -204,7 +204,9 @@
                                     <td>
                                         <button class="btn btn-success btn-xs add-subcategory" data-name="{{$category->name}}" data-id="{{$category->id}}"><i class="fa fa-plus"></i></button> |
 
-                                        <button class="btn btn-danger btn-xs edit-category" data-name="{{$category->name}}" data-enable="{{$category->enable}}" data-id="{{$category->id}}"><i class="fa fa-pencil-square"></i></button> |
+                                        <button class="btn btn-warning btn-xs edit-category" data-name="{{$category->name}}" data-enable="{{$category->enable}}" data-id="{{$category->id}}"><i class="fa fa-pencil-square"></i></button> |
+
+                                        <button class="btn btn-danger btn-xs delete-category" data-enable="{{$category->enable}}" data-id="{{$category->id}}"><i class="fa fa-remove"></i></button> |
 
                                     </td>
                                 </tr>
