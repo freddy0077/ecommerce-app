@@ -20,9 +20,9 @@
     <div class="ltabs-item product-layout">
         <div class="product-item-container">
             <div class="left-block">
-                <div class="product-image-container second_img">
-                    <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />
-                    <img src="{{asset("images/products/$product->image")}}"  alt="{{$product->name}}" class="img-responsive img_0" />
+                <div class="product-image-container">
+{{--                    <img src='{{isset($product->image)?asset("images/products/$product->image"):""}}'  alt="{{$product->name}}" class="img-responsive" />--}}
+                    <img src='{{\Illuminate\Support\Facades\Storage::url("products/$product->image")}}'  alt="{{$product->name}}" class="img-responsive img_0" />
                 </div>
                 <!--Sale Label-->
                 {{--<span class="label label-sale">Sale</span>--}}
