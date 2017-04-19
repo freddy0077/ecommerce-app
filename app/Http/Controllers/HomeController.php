@@ -96,6 +96,7 @@ class HomeController extends Controller
 
         $categories = ProductCategory::leftJoin('sub_categories','sub_categories.product_category_id','=','product_categories.id')
             ->leftJoin('products','products.sub_category_id','=','sub_categories.id')
+            ->where('product_categories.enable',true)
             ->distinct()
 //            ->orderBy('products.like_counts')
             ->selectRaw('product_categories.*')

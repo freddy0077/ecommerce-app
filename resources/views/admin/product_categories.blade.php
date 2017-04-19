@@ -36,13 +36,45 @@
 //                $('#edit-enable').append('<option value="true">true</option>')
 //            }
             $('#edit-category-id').val($(this).data('id'))
+
             $('.name').val($(this).data('name'))
+
+            var enable = $(this).data('enable');
+
+            if(enable == 1){
+                $('#enable').attr('checked',true);
+                $('#uniform-enable > span').addClass('checked')
+            }
+
             $('#edit-category-modal').modal();
 
         })
 
         $('#edit-category-form').on('submit',function(e){
             e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'), // Url to which the request is send
+                type: "POST",             // Type of request to be send, called as method
+                data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+                contentType: false,       // The content type used when sending data to the server.
+                cache: false,             // To unable request pages to be cached
+                processData:false,        // To send DOMDocument or non processed data file it is set to false
+            }).fail(function(data){
+                for (var field in data.responseJSON) {
+                    var el = $(':input[name="' + field + '"]');
+                    el.parent('.form-group').addClass('has-error');
+                    el.next('.help-block').text(data.responseJSON[field][0]);
+                    el.next('.validation_error').text(data.responseJSON[field][0]);
+                    swal("Error!",data.responseJSON[field][0] , "error");
+
+                }
+            }).success(function(data) {
+
+                    swal("Good job!", 'You just updated a category !', "success");
+//                    location.href="/store/all-products"
+            });
+
             $.post($(this).attr('action'),$(this).serialize(),function(){
 
             }).success(function(){
@@ -173,7 +205,6 @@
                                         <button class="btn btn-success btn-xs add-subcategory" data-name="{{$category->name}}" data-id="{{$category->id}}"><i class="fa fa-plus"></i></button> |
 
                                         <button class="btn btn-danger btn-xs edit-category" data-name="{{$category->name}}" data-enable="{{$category->enable}}" data-id="{{$category->id}}"><i class="fa fa-pencil-square"></i></button> |
-                                        {{--<button class="btn btn-success confirm-token" data-token="{{$user->id}}">Confirm token</button>--}}
 
                                     </td>
                                 </tr>
@@ -205,9 +236,6 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="name" placeholder="Name of category" required>
                             </div>
-                            {{--<div class="col-sm-6">--}}
-                                {{--<input type="number" class="form-control" name="charge" placeholder="Charge" required>--}}
-                            {{--</div>--}}
                         </div>
 
                         <br>
@@ -236,17 +264,26 @@
                         <input type="hidden" class="form-control" name="edit_category_id" id="edit-category-id">
 
                         <div class="row">
-                            <div class="col-sm-10">
+                            <div class="col-sm-3"><label><strong>Name</strong></label></div>
+                            <div class="col-sm-9">
                                 <input type="text" class="form-control name" name="edit_category_name" placeholder="Name of category" required>
                             </div>
-                            {{--<div class="col-sm-6">--}}
-                                {{--<input type="number" class="form-control" name="charge" placeholder="Charge" required>--}}
-                                {{--<select class="form-control" name="enable" id="edit-enable">--}}
-                                    {{--<option class="current-enable-value"></option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        </div>
+                            <br>
+                            <br>
 
+                            <div class="col-sm-3"><label><strong>Image</strong></label></div>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control image"  name="image" id="image">
+                            </div>
+                        </div>
+<br>
+<br>
+                        <div class="row">
+                            <div class="col-sm-4"><label><strong>Enable</strong></label></div>
+                            <div class="col-sm-6">
+                                <input type="checkbox" class="form-control" name="enable" id="enable">
+                            </div>
+                        </div>
                         <br>
                     </div>
                     <div class="modal-footer">

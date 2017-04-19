@@ -267,7 +267,7 @@
                                 <div class="select_category filter_type icon-select">
                                     <select class="no-border" name="category_id">
                                         <option value="all">All Categories</option>
-                                        @foreach(\App\ProductCategory::all('id','name') as $category)
+                                        @foreach(\App\ProductCategory::whereEnable(true)->get(['id','name']) as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>

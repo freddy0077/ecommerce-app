@@ -111,8 +111,15 @@ class AdminController extends Controller
     }
 
     public function getUsers(){
-        $users = User::paginate();
+        $builder = User::leftJoin('stores','stores.user_id','=','users.id');
+
+            $users = $builder->selectRaw('users.*,stores.id as store_id')
+            ->paginate();
         return view('admin.users',compact('users'));
+    }
+
+    public function getStore(){
+
     }
 
     public function getPackages(){
@@ -149,7 +156,8 @@ class AdminController extends Controller
 
     public function postUpdateCategory(Request $request){
         ProductCategory::find($request->edit_category_id)->update([
-            'name' => $request->edit_category_name
+            'name' => $request->edit_category_name,
+            'enable' => $request->enable == "on"?true : false
         ]);
     }
 

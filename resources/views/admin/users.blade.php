@@ -61,8 +61,8 @@
                                 @if(!count($users))
                                     <div class="alert alert-block alert-info fade in">
                                         <button type="button" class="close" data-dismiss="alert"></button>
-                                        <h3 class="alert-heading">NO ORDERS YET!</h3>
-                                        <p> You currently have no orders !
+                                        <h3 class="alert-heading">NO USERS YET!</h3>
+                                        <p> You currently have no users !
                                         </p>
                                         {{--<p>--}}
                                         {{--<a class="btn purple" href="{{url('store/add-product')}}"> Add New Product </a>--}}
