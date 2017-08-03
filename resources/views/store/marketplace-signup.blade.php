@@ -26,14 +26,13 @@
                         $('#signup-package-modal').hide();
 
                         swal({
-                                    title: "Mobile Money Payment Request",
+                            title: "Mobile Money Payment Request",
                                     text: data.description +'. click OK after approving it',
                                     type: "info",
                                     showCancelButton: true,
                                     closeOnConfirm: false,
                                     showLoaderOnConfirm: true,
-                                },
-                                function(){
+                                }, function(){
                                     setTimeout(function(){
                                         $.post('/admin/confirm-token/'+token,function(confirmData){
                                             if(confirmData.tx_status != undefined && confirmData.tx_status == 'complete'){

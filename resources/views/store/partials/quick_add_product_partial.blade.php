@@ -40,12 +40,6 @@
                                     <option value="{{$sub->id}}">{{$sub->name}}</option>
                                     @endforeach
                                 </optgroup>
-                                {{--<optgroup label="German Cars">--}}
-                                    {{--<option value="mercedes">Mercedes</option>--}}
-                                    {{--<option value="audi">Audi</option>--}}
-                                {{--</optgroup>--}}
-
-
 
 
 {{--                                <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>--}}
@@ -88,31 +82,3 @@
     {{--</form>--}}
     <!-- END FORM-->
 </div>
-
-
-
-{{--<div class="form-body">--}}
-    {{--<div class="form-group">--}}
-    {{--</div>--}}
-    {{--<div class="form-group">--}}
-        {{--<label class="control-label col-md-3">Product name </label>--}}
-        {{--<div class="col-md-4">--}}
-
-            {{--<input type="text" class="form-control" name="name" id="name">--}}
-
-            {{--<div class="help-block"> </div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<div class="form-group">--}}
-        {{--<label class="control-label col-md-3">Price</label>--}}
-        {{--<div class="col-md-4">--}}
-            {{--<input type="number" class="form-control" name="price">--}}
-            {{--<span class="help-block">  </span>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<div class="form-group " id="sub_category">--}}
-
-    {{--</div>--}}
-{{--</div>--}}

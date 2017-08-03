@@ -855,7 +855,4 @@ class StoreController extends Controller
 
         return $response;
     }
-
-
-
 }
