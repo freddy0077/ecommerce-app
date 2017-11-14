@@ -42,10 +42,11 @@ class StoreController extends Controller
     //
     protected $cart;
     protected $image;
+    protected $user;
     public function __construct(Cart $cart)
     {
         $this->cart = $cart;
-//        $this->image = $image;
+        $this->user = Auth::user();
 
 //        $this->middleware('auth');
     }
@@ -102,14 +103,11 @@ class StoreController extends Controller
 
 
     public function getDashboard(){
-//        OrderItem::with('product',)
-        $user_id = Auth::user()->id;
-//
          $products = TopSellingProduct::leftJoin('products','products.id','=','top_selling_products.product_id')
-            ->where('top_selling_products.user_id',$user_id)->orderBy('count','desc')
+            ->where('top_selling_products.user_id',$this->user->id)->orderBy('count','desc')
             ->take(10)
             ->get();
-        $order_builder = Order::whereUserId($user_id);
+        $order_builder = Order::whereUserId($this->user->id);
         $count = $order_builder->count();
         $average = $order_builder->avg('amount');
 
@@ -117,17 +115,15 @@ class StoreController extends Controller
     }
 
     public function getIndex(){
-
-        $user = Auth::user()->id;
          $store = Store::leftJoin('users','users.id','=','stores.user_id')
-           ->whereUserId($user)
+           ->whereUserId($this->user->id)
            ->selectRaw('stores.*')
             ->first();
 
          $products = Product::leftJoin('sub_categories','sub_categories.id','=','products.sub_category_id')
             ->leftJoin('product_categories','product_categories.id','=','sub_categories.product_category_id')
             ->leftJoin('users','users.id','=','product_categories.user_id')
-            ->where('users.id',$user)
+            ->where('users.id',$this->user->id)
             ->selectRaw('products.*,users.name as user_name')
             ->take(10)->get();
         $categories = ProductCategory::all('id','name');
@@ -137,27 +133,20 @@ class StoreController extends Controller
     }
 
     public function getAddStore(){
-        $store = Store::where('stores.user_id',Auth::user()->id)
-            ->first();
-
             return view('store.add_store');
     }
 
     public function getEditStore(){
 
-        $store = Store::where('stores.user_id',Auth::user()->id)
-            ->first();
+        $store = Store::where('stores.user_id',$this->user->id)->first();
 
         return view('store.edit_store',compact('store'));
     }
 
     public function postUpdateStore(Request $request){
-        $userId = Auth::user()->id;
-
-        $store = Store::whereUserId($userId)->first();
+        $store = Store::whereUserId($this->user->id)->first();
 
         $store->update([
-
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
@@ -180,7 +169,7 @@ class StoreController extends Controller
 
             $image = $request->file('image');
 
-            $input['imagename'] = Auth::user()->id;
+            $input['imagename'] = $this->user->id;
 
 
             $destinationPath = public_path('images/store_banners');
@@ -204,15 +193,15 @@ class StoreController extends Controller
             'address' => $request->address,
             'domain' => $request->domain,
             'location' => $request->location,
-            'user_id' => Auth::user()->id,
+            'user_id' => $this->user->id,
         ]);
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find($this->user->id);
         $user->has_store = true;
         $user->save();
 
         $slug = Store::whereId($id)->first()->slug;
-        return ['message' => 'success','status'=>200,'slug'=> $slug];
+        return \response()->json(['message' => 'success','status'=>200,'slug'=> $slug])->setStatusCode(200);
     }
 
     public function getStoreSettings(){
@@ -220,7 +209,7 @@ class StoreController extends Controller
           $store = Store::leftJoin('package_signups','package_signups.store_id','=','stores.id')
               ->leftJoin('packages','packages.id','=','package_signups.package_id')
               ->selectRaw('stores.*,packages.name as package_name')
-            ->where('stores.user_id',Auth::user()->id)->first();
+            ->where('stores.user_id',$this->user->id)->first();
 
         return view('store.settings',compact('store'));
     }
@@ -247,7 +236,7 @@ class StoreController extends Controller
             Store::processBannerImage($request,$slug);
 
         }else{
-            Store::whereUserId(Auth::user()->id)->update([
+            Store::whereUserId($this->user->id)->update([
                 'name' => $request->name,
                 'phone_number' => $request->phone_number,
                 'email' => $request->email,
@@ -257,12 +246,12 @@ class StoreController extends Controller
                 'domain' => $request->domain,
                 'about' => $request->about,
                 'slug' => $slug,
-                'user_id' => Auth::user()->id,
+                'user_id' => $this->user->id,
                 'colour' => $request->colour,
                 'enabled' => $request->enabled =="on" ? true :false
             ]);
         }
-            return 'success';
+            return \response()->json(['message'=>'success'])->setStatusCode(200);
         }
 
 
@@ -282,15 +271,15 @@ class StoreController extends Controller
 
     public function getAddProduct(Request $request){
 
-        if(!Auth::user()->has_store){
+        if(!$this->user->has_store){
 
             return redirect('');
 
         }
         $categories = ProductCategory::all('id','name');
-        $store_id = Store::where('user_id',Auth::user()->id)->first();
+        $store = Store::where('user_id',$this->user->id)->first();
 
-         $productCounts = Product::whereStoreId($store_id->id)->count();
+         $productCounts = Product::whereStoreId($store->id)->count();
          $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         return view('store.add_product',compact('categories','products_limit'));
@@ -310,7 +299,7 @@ class StoreController extends Controller
         $id = Uuid::generate();
         $date_time = date('Ymdhis');
 
-        $store_id = Store::where('user_id',Auth::user()->id)->first();;
+        $store_id = Store::where('user_id',$this->user->id)->first();;
 
         $productCounts = Product::whereStoreId($store_id->id)->count();
         $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
@@ -338,7 +327,7 @@ class StoreController extends Controller
             Product::create([
                 'id' => $id,
                 'name' => $request->name,
-                'user_id' => Auth::user()->id,
+                'user_id' =>$this->user->id,
                 'description'=> $request->description,
                 'price' => $request->price,
                 'image' => $input['imagename'],
@@ -364,11 +353,6 @@ class StoreController extends Controller
     }
 
     public function postUpdateProduct(Request $request,$product_id){
-
-
-//           var_dump( $request->file('gallery'));
-//            var_dump($request->file('image'));
-//        exit;
 
         if($request->hasFile('image')){
             $this->validate($request,[
@@ -407,7 +391,7 @@ class StoreController extends Controller
                         'id' => Uuid::generate(),
                         'product_id' => $product_id,
                         'image' =>   $input['imagename'],
-                        'user_id' => Auth::user()->id
+                        'user_id' =>$this->user->id
                     ]
                 );
 
@@ -425,7 +409,7 @@ class StoreController extends Controller
 
             Product::find($product_id)->update([
                 'name' => $request->name,
-                'user_id' => Auth::user()->id,
+                'user_id' =>$this->user->id,
                 'description'=> $request->description,
                 'price' => $request->price,
                 'image' => $input['imagename'],
@@ -439,7 +423,7 @@ class StoreController extends Controller
         }else {
             Product::find($product_id)->update([
                 'name' => $request->name,
-                'user_id' => Auth::user()->id,
+                'user_id' => $this->user->id,
                 'description'=> $request->description,
                 'price' => $request->price,
                 'sub_category_id' => $request->sub_category,
@@ -533,7 +517,7 @@ class StoreController extends Controller
                         'description' =>'',
                         'image' =>  $input['imagename'],
                         'sub_category_id' => $sub_categories[$key],
-                        'store_id' => Store::whereUserId(Auth::user()->id)->first()->id,
+                        'store_id' => Store::whereUserId($this->user->id)->first()->id,
                     ]);
                 }
 
@@ -545,10 +529,8 @@ class StoreController extends Controller
     }
 
     public function getAllProducts(Request $request){
-
-          $user = Auth::user();
         $builder = Product::leftJoin('stores','stores.id','=','products.store_id')
-            ->where('products.user_id',$user->id)
+            ->where('products.user_id',$this->user->id)
             ->selectRaw('products.*');
 
         switch($request->query('order')){
@@ -582,8 +564,6 @@ class StoreController extends Controller
                 }
         }
 
-
-//            $products->paginate(10);
 
         return view('store.all_products',compact('products'));
     }
@@ -667,21 +647,17 @@ class StoreController extends Controller
         }else {
             $order_id = Uuid::generate();
             $text = "";
-//        $user_id = Auth::user()->id;
             $store = Store::whereUserId($user_id)->first();
 
             Order::create([
                 'id' =>$order_id,
                 'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
-                'user_id' => Auth::user()->id
+                'user_id' => $this->user->id
             ]);
-//            return \Gloudemans\Shoppingcart\Facades\Cart::content();
 
             foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
 
                 $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
-//                return $item->rowId;
-//            $text.= "$item->qty \n";
                 OrderItem::create([
                     'id' => Uuid::generate(),
                     'product_id' => $item->id,
@@ -710,22 +686,18 @@ class StoreController extends Controller
 
 
             \Gloudemans\Shoppingcart\Facades\Cart::destroy();
-            $user = Auth::user();
-            $shop = Store::whereUserId($user_id)->first();
+            $shop = Store::whereUserId($this->user->id)->first();
 
-            Notification::send(Order::first(), new NewOrder($user,$shop,$text,$amount,$qty));
+            Notification::send(Order::first(), new NewOrder($this->user,$shop,$text,$amount,$qty));
 
-            $order = Order::with(['items','user' =>function($query){}])
-                ->whereId($order_id)
-                ->first();
-
+            $order = Order::with(['items','user' =>function($query){}])->whereId($order_id)->first();
             return view('store.partials.order_details',compact('order_id','order','user_id'));
         }
     }
 
     public function getOrders(){
         $orders = Order::leftJoin('users','users.id','=','orders.user_id')
-            ->whereUserId(Auth::user()->id)
+            ->whereUserId($this->user->id)
             ->selectRaw('orders.*,users.name')
             ->paginate();
 
@@ -734,26 +706,20 @@ class StoreController extends Controller
 
     public function getOrderItems($order_id){
 
-         $order = Order::with(['items','user' =>function($query){}])
-            ->whereId($order_id)
-            ->first();
-//        return OrderItem::with('order','product')->get();
+         $order = Order::with(['items','user' =>function($query){}])->whereId($order_id)->first();
 
         return view('store.order_items',compact('order'));
-
     }
 
     public function saveMainCategories()
     {
         $mainCategories = ['Clothing','Beauty & Accessories','Home & Appliances','Electronics',
             'Arts & Photography','Agric & Food'];
-        $user = Auth::user();
-
         foreach ($mainCategories as $key => $category) {
 
             ProductCategory::create([
                 'id' => Uuid::generate(),
-                'user_id' => $user->id,
+                'user_id' =>$this->user->id,
                 'name' => $category,
                 'image' => '',
             ]);
@@ -763,7 +729,7 @@ class StoreController extends Controller
 
     public function getPackages(){
         $packages = \App\Package::whereType('upgrade_package')->orderBy('charge')->take(4)->get();
-        $user = Auth::user();
+        $user =$this->user;
 
         return view('store.packages',compact('packages','user'));
     }
@@ -776,7 +742,7 @@ class StoreController extends Controller
 //          $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
             $name = $request->name;
             $phone_number = $request->phone_number;
-            $email =        Auth::user()->email;
+            $email =  $this->user->email;
             $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
 
         }catch(MpowerPaymentException $e){
@@ -791,7 +757,7 @@ class StoreController extends Controller
             'transaction_id' => $results['transaction_id'],
             'token'         => $results['token'],
             'mobile_invoice_no' => $results['mobile_invoice_no'],
-            'user_id'           => Auth::user()->id,
+            'user_id'           => $this->user->id,
             'amount'            => $amount,
             'package_id'        => $request->package_id
         ]);
