@@ -92,3 +92,7 @@ if ($err) {
     }
 
 }
+
+class MpowerPaymentException extends \Exception{
+
+}

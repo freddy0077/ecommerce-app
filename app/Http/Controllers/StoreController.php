@@ -6,6 +6,7 @@ use App\Feed;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\StoreRequest;
 use App\MpowerPayment;
+use App\MpowerPaymentException;
 use App\Notifications\NewOrder;
 use App\Order;
 use App\OrderItem;
@@ -23,6 +24,7 @@ use App\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Gloudemans\Shoppingcart\Cart;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -54,14 +56,18 @@ class StoreController extends Controller
 
     public function getStore($slug,$user_id){
 
-        $products = Product::inRandomOrder()->whereUserId($user_id)->where('published',true)->paginate(12);
-        $latest_products = Product::whereUserId($user_id)->where('published',true)->orderBy('created_at','desc')->take(5)->get();
-        $categories = ProductCategory::all();
-        $store = Store::whereUserId($user_id)->first();
-        $sub_categories = SubCategory::inRandomOrder()->get();
-        $status = "NO PRODUCTS YET IN YOUR SHOP !";
-        return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories','status'));
 
+        try{
+            $products = Product::inRandomOrder()->whereUserId($user_id)->where('published',true)->paginate(12);
+            $latest_products = Product::whereUserId($user_id)->where('published',true)->orderBy('created_at','desc')->take(5)->get();
+            $categories = ProductCategory::all();
+            $store = Store::whereUserId($user_id)->first();
+            $sub_categories = SubCategory::inRandomOrder()->get();
+            $status = "NO PRODUCTS YET IN YOUR SHOP !";
+            return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories','status'));
+        }catch(\Exception $e){
+            return redirect()->back();
+        }
     }
 
     public function getStoreCategory($slug,$user_id,$category_id){
@@ -772,14 +778,20 @@ class StoreController extends Controller
 
     public function postMpowerDirectPay(Request $request,$amount)
     {
-        $mpowerpayment = new MpowerPayment();
+        try{
+            $mpowerpayment = new MpowerPayment();
 //        $mpowerpayment->MTN="AIRTEL";
-        $mpowerpayment->MTN=$request->mobile_money;
+            $mpowerpayment->MTN=$request->mobile_money;
 //        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
-        $name = $request->name;
-        $phone_number = $request->phone_number;
-        $email =        Auth::user()->email;
-        $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
+            $name = $request->name;
+            $phone_number = $request->phone_number;
+            $email =        Auth::user()->email;
+            $results = $mpowerpayment->MobilePayment($name,$phone_number,$email,$amount);
+
+        }catch(MpowerPaymentException $e){
+
+        }
+
         Payment::create([
             'id' =>Uuid::generate(),
             'response_code' => $results['response_code'],
@@ -798,61 +810,18 @@ class StoreController extends Controller
     }
 
     public function sendSms($recipient, $message, $sender_alias){
-        // API CREDENTIALS FOR IMPERIAL PEKING
-        $apiKey = "b9744510-22e4-11e7-9c25-99beb05ce346";
-        $apiSecret = "KhXWRU";
 
-        $post = compact('recipient', 'message', 'sender_alias');
-        $options = array(
-            CURLOPT_HTTPHEADER => array(
-                "ApiKey: $apiKey",
-                "ApiSecret: $apiSecret"
-            )
+        $client = new Client();
+        $body = compact('recipient', 'message', 'sender_alias');
+        $response = $client->post( \config('app.SMS_API_URL_ENDPOINT'),
+            [
+                'ApiKey' => \config('app.sms_api_key'),
+                'ApiSecret' => \config('app.sms_api_secret'),
+                'body'=>$body
+            ]
         );
-        $response = self::do_web_request('http://api.kodesms.com/sms/send', $post, $options);
+        $response = $client->send($response);
+
         return json_decode($response, true);
-    }
-
-    function do_web_request($url, $post_arg = false, $options = array()) {
-        /* initializing curl */
-        $curl_handle = curl_init($url);
-        /* set this option the curl_exec function return the response */
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-        /* follow the redirection */
-        curl_setopt($curl_handle, CURLOPT_FOLLOWLOCATION, 1);
-        //ssl fix
-        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl_handle, CURLOPT_SSL_VERIFYHOST, 0);
-        if($options){
-            if($post_arg && isset($options[CURLOPT_HTTPHEADER])){
-                $headers = $options[CURLOPT_HTTPHEADER];
-                unset($options[CURLOPT_HTTPHEADER]);
-            }
-            curl_setopt_array($curl_handle, $options);
-        }
-
-        if ($post_arg) {
-            curl_setopt($curl_handle, CURLOPT_POST, 1);
-
-            if(is_array($post_arg) || is_object($post_arg)){
-                $post_arg = http_build_query($post_arg);
-            }
-            curl_setopt($curl_handle, CURLOPT_POSTFIELDS, $post_arg);
-            if(isset($headers)){
-                $headers = array_merge(array('Content-Type: application/x-www-form-urlencoded'), $headers);
-            }else{
-                $headers = array('Content-Type: application/x-www-form-urlencoded');
-            }
-            curl_setopt($curl_handle, CURLOPT_HTTPHEADER, $headers);
-        }
-
-        /* invoke the request */
-        $response = curl_exec($curl_handle);
-        //var_dump($response);
-
-        /* cleanup curl stuff */
-        curl_close($curl_handle);
-
-        return $response;
     }
 }
