@@ -486,6 +486,7 @@ class StoreController extends Controller
     }
 
     public function postQuickAddProducts(Request $request){
+
         if($request->hasFile('image')){
             $this->validate($request,[
                 'name' =>'required',
@@ -497,27 +498,19 @@ class StoreController extends Controller
         }
 
         $date_time = date('Ymdhis');
-
-
-//        $image = $request->file('image');
-
-
+        $user_id = Auth::id();
         $names = $request->get('name');
          $prices = $request->get('price');
         $sub_categories = $request->get('sub_category');
         $images = $request->file('image');
 
-        $user_id = Auth::user()->id;
         $threshold = PackageSignup::getUserPackageThreshold();
-
         $productCounts = Product::whereUserId($user_id)->count();
         $products_limit = $threshold-$productCounts;
 
-//        var_dump( $count = count($names)+$productCounts > $threshold ? true: false);exit;
-
         if($products_limit <= 0) {
 
-            return ['limit' => $products_limit, 'status' => 401];
+            return \response()->json(['limit' => $products_limit, 'status' => 401])->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_PRECONDITION_FAILED);
         }elseif(count($names)+$productCounts > $threshold){
             return ['limit' => $products_limit, 'status' => 402];
 
@@ -545,8 +538,7 @@ class StoreController extends Controller
                 }
 
             }
-
-            return ['message'=>'successful saved '.count($names).' product(s)','status'=>200,'products_limit'=>$products_limit];
+            return \response()->json( ['message'=>'successful saved '.count($names).' product(s)','products_limit'=>$products_limit])->setStatusCode(200);
         }
 
 
@@ -780,9 +772,8 @@ class StoreController extends Controller
     {
         try{
             $mpowerpayment = new MpowerPayment();
-//        $mpowerpayment->MTN="AIRTEL";
             $mpowerpayment->MTN=$request->mobile_money;
-//        $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
+//          $results = $mpowerpayment->MobilePayment('Frederick','0241715148','frederickankamah988@gmail.com',1);
             $name = $request->name;
             $phone_number = $request->phone_number;
             $email =        Auth::user()->email;
@@ -813,10 +804,10 @@ class StoreController extends Controller
 
         $client = new Client();
         $body = compact('recipient', 'message', 'sender_alias');
-        $response = $client->post( \config('app.SMS_API_URL_ENDPOINT'),
+        $response = $client->post( \env('SMS_API_URL_ENDPOINT'),
             [
-                'ApiKey' => \config('app.sms_api_key'),
-                'ApiSecret' => \config('app.sms_api_secret'),
+                'ApiKey' => \env('sms_api_key'),
+                'ApiSecret' => \env('sms_api_secret'),
                 'body'=>$body
             ]
         );
