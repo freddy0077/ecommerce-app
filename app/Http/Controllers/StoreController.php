@@ -42,31 +42,39 @@ class StoreController extends Controller
     //
     protected $cart;
     protected $image;
+
+    /**
+     * @var \Illuminate\Contracts\Auth\Authenticatable|null
+     *
+     */
     protected $user;
+    protected $store;
     public function __construct(Cart $cart)
     {
+        //        $this->middleware('auth');
         $this->cart = $cart;
-        $this->user = Auth::user();
-
-//        $this->middleware('auth');
-    }
-
-    public function getStoreDomain(){
-
+        $this->middleware(function($request, $next){
+            $this->user = Auth::user();
+            $this->store = Store::whereUserId($this->user->id)->first();
+            return $next($request);
+        });
     }
 
     public function getStore($slug,$user_id){
 
-
         try{
-            $products = Product::inRandomOrder()->whereUserId($user_id)->where('published',true)->paginate(12);
-            $latest_products = Product::whereUserId($user_id)->where('published',true)->orderBy('created_at','desc')->take(5)->get();
             $categories = ProductCategory::all();
-            $store = Store::whereUserId($user_id)->first();
+            $store = $this->store;
             $sub_categories = SubCategory::inRandomOrder()->get();
+            $products_builder = Product::whereUserId($user_id)->wherePublished(true);
+
+            $products = $products_builder->inRandomOrder()->paginate(12);
+            $latest_products = $products_builder->orderBy('created_at','desc')->take(5)->get();
+
             $status = "NO PRODUCTS YET IN YOUR SHOP !";
             return view('store.index',compact('products','latest_products','categories','slug','user_id','store','sub_categories','status'));
         }catch(\Exception $e){
+
             return redirect()->back();
         }
     }
@@ -83,7 +91,7 @@ class StoreController extends Controller
         $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
 
         $categories = ProductCategory::all();
-        $store = Store::whereUserId($user_id)->first();
+        $store = $this->store;
 
         $sub_categories = SubCategory::whereProductCategoryId($category_id)->get();
         return view('store.index',compact('products','categories','slug','user_id','sub_categories','store','latest_products'));
@@ -94,7 +102,7 @@ class StoreController extends Controller
 
         $products = Product::paginate(12);
         $categories = ProductCategory::whereUserId($user_id)->get();
-        $store = Store::whereUserId($user_id)->first();
+        $store = $this->store;
         $latest_products = Product::whereUserId($user_id)->orderBy('created_at','desc')->take(5)->get();
 
         return view('store.index',compact('products','categories','slug','user_id','store','latest_products'));
@@ -138,15 +146,14 @@ class StoreController extends Controller
 
     public function getEditStore(){
 
-        $store = Store::where('stores.user_id',$this->user->id)->first();
+//        $store = Store::where('stores.user_id',$this->user->id)->first();
+        $store = $this->store;
 
         return view('store.edit_store',compact('store'));
     }
 
     public function postUpdateStore(Request $request){
-        $store = Store::whereUserId($this->user->id)->first();
-
-        $store->update([
+        $this->store->update([
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'address' => $request->address,
@@ -217,42 +224,48 @@ class StoreController extends Controller
 
     public function postStoreSettings(Request $request)
     {
+        try {
 
-        $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
-        if($request->hasFile('image') && $request->hasFile('banner-image')){
 
-            Store::processAllImages($request,$slug);
+            $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
+            if ($request->hasFile('image') && $request->hasFile('banner-image')) {
 
-        }elseif ($request->hasFile('image')) {
-            $this->validate($request, [
-                'name' => 'required', //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'phone_number' => 'required','email' => 'required', 'address' => 'required'
-            ]);
+                Store::processAllImages($request, $slug);
 
-            Store::processLogo($request,$slug);
+            } elseif ($request->hasFile('image')) {
+                $this->validate($request, [
+                    'name' => 'required', //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'phone_number' => 'required', 'email' => 'required', 'address' => 'required'
+                ]);
 
-        } elseif ($request->hasFile('banner-image')) {
+                Store::processLogo($request, $slug);
 
-            Store::processBannerImage($request,$slug);
+            } elseif ($request->hasFile('banner-image')) {
 
-        }else{
-            Store::whereUserId($this->user->id)->update([
-                'name' => $request->name,
-                'phone_number' => $request->phone_number,
-                'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'business_type' => $request->business_type,
-                'domain' => $request->domain,
-                'about' => $request->about,
-                'slug' => $slug,
-                'user_id' => $this->user->id,
-                'colour' => $request->colour,
-                'enabled' => $request->enabled =="on" ? true :false
-            ]);
+                Store::processBannerImage($request, $slug);
+
+            } else {
+                $this->store->update([
+                    'name' => $request->name,
+                    'phone_number' => $request->phone_number,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'city' => $request->city,
+                    'business_type' => $request->business_type,
+                    'domain' => $request->domain,
+                    'about' => $request->about,
+                    'slug' => $slug,
+                    'user_id' => $this->user->id,
+                    'colour' => $request->colour,
+                    'enabled' => $request->enabled == "on" ? true : false
+                ]);
+            }
+            return \response()->json(['message' => 'success'])->setStatusCode(200);
+        }catch (\Exception $e){
+            return \response()->json(['message' => 'Action cannot be completed at this time!'])->setStatusCode(500);
         }
-            return \response()->json(['message'=>'success'])->setStatusCode(200);
-        }
+    }
+
 
 
 
@@ -265,7 +278,6 @@ class StoreController extends Controller
     public function getMarketPlacePackages($package_id){
 
         return Package::whereType('marketplace_upgrade')->find($package_id);
-
     }
 
 
@@ -274,12 +286,10 @@ class StoreController extends Controller
         if(!$this->user->has_store){
 
             return redirect('');
-
         }
         $categories = ProductCategory::all('id','name');
-        $store = Store::where('user_id',$this->user->id)->first();
 
-         $productCounts = Product::whereStoreId($store->id)->count();
+         $productCounts = Product::whereStoreId($this->store->id)->count();
          $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         return view('store.add_product',compact('categories','products_limit'));
@@ -299,9 +309,7 @@ class StoreController extends Controller
         $id = Uuid::generate();
         $date_time = date('Ymdhis');
 
-        $store_id = Store::where('user_id',$this->user->id)->first();;
-
-        $productCounts = Product::whereStoreId($store_id->id)->count();
+        $productCounts = Product::whereStoreId($this->store->id)->count();
         $products_limit = PackageSignup::getUserPackageThreshold()-$productCounts;
 
         if($products_limit <= 0){
@@ -319,7 +327,8 @@ class StoreController extends Controller
 
             $image_name = $input['imagename'];
 
-            Storage::disk('s3')->put("/products/$image_name", $img->getEncoded());
+//            Storage::disk('s3')->put("/products/$image_name", $img->getEncoded());
+            Storage::disk('public')->put("/products/$image_name", $img->getEncoded());
 
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $input['imagename']);
@@ -336,11 +345,8 @@ class StoreController extends Controller
                 'published' => $request->published == 'on' ? true : false,
                 'show_buy_button' => $request->show_buy_button == 'on' ? true : false,
                 'ad' => false,
-                'store_id' => $store_id->id
+                'store_id' => $this->store->id
             ]);
-
-//            $stream = new StreamFeed($store_id->id);
-//            $stream->addActivity($store_id->name,'added','new products');
         }
     }
 
@@ -366,10 +372,8 @@ class StoreController extends Controller
         }else {
             $this->validate($request,[
                 'name' =>'required',
-//                'image' => 'dimensions:min_width=300,min_height=300',
                 'description' => 'required',
                 'sub_category' =>'required',
-//            'category' => 'required',
                 'price' => 'required'
             ]);
         }
