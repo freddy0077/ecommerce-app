@@ -358,15 +358,16 @@ class StoreController extends Controller
 
     }
 
-    public function postUpdateProduct(Request $request,$product_id){
-
+    /**
+     * @param $request Request
+     */
+    private function validateProductRequest($request){
         if($request->hasFile('image')){
             $this->validate($request,[
                 'name' =>'required',
                 'image' => 'dimensions:min_width=300,min_height=300',
                 'description' => 'required',
-            'sub_category' =>'required',
-//            'category' => 'required',
+                'sub_category' =>'required',
                 'price' => 'required'
             ]);
         }else {
@@ -377,12 +378,16 @@ class StoreController extends Controller
                 'price' => 'required'
             ]);
         }
+    }
+
+    public function postUpdateProduct(Request $request,$product_id){
+
+        $this->validateProductRequest($request);
 
         if($request->hasFile('gallery')){
             $gallery = $request->file('gallery');
 
             foreach($gallery as $gal){
-
                 $date_time = date('Ymdhis');
 
                 $image = $gal;
@@ -442,19 +447,20 @@ class StoreController extends Controller
 
     public function postProductUpdatePublished(Request $request){
 
+        $product = Product::find($request->pk);
         switch($request->name){
             case"published":
-                Product::find($request->pk)->update([
+                $product->update([
                     'published' => $request->value
                 ]);
                 break;
             case"price":
-                Product::find($request->pk)->update([
+                $product->update([
                     'price' => $request->value
                 ]);
                 break;
             case"name":
-                Product::find($request->pk)->update([
+                $product->update([
                     'name' => $request->value
                 ]);
                 break;
@@ -465,7 +471,7 @@ class StoreController extends Controller
           Product::find($product_id)->delete();
       }
 
-        public function getQuickAddProducts(){
+     public function getQuickAddProducts(){
 
          $sub_categories = ProductCategory::with('subcategories')->get();
 
@@ -473,64 +479,68 @@ class StoreController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     *
+     */
     public function postQuickAddProducts(Request $request){
 
-        if($request->hasFile('image')){
-            $this->validate($request,[
-                'name' =>'required',
-//                'image' => 'required',
-//                'image' => 'dimensions:min_width=300,min_height=300',
-//                'description' => 'required',
+    try {
+        if ($request->hasFile('image')) {
+            $this->validate($request, [
+                'name' => 'required',
                 'price' => 'required'
             ]);
         }
 
         $date_time = date('Ymdhis');
-        $user_id = Auth::id();
+        $user_id = $this->user->id;
         $names = $request->get('name');
-         $prices = $request->get('price');
+        $prices = $request->get('price');
         $sub_categories = $request->get('sub_category');
         $images = $request->file('image');
 
         $threshold = PackageSignup::getUserPackageThreshold();
         $productCounts = Product::whereUserId($user_id)->count();
-        $products_limit = $threshold-$productCounts;
+        $products_limit = $threshold - $productCounts;
+        $test = true;
+        if (count($names) + $productCounts > $threshold) {
+//        if($test){
+            return \response()->json(['limit' => $products_limit])
+                ->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_PRECONDITION_FAILED);
 
-        if($products_limit <= 0) {
+        } else {
 
-            return \response()->json(['limit' => $products_limit, 'status' => 401])->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_PRECONDITION_FAILED);
-        }elseif(count($names)+$productCounts > $threshold){
-            return ['limit' => $products_limit, 'status' => 402];
-
-        }else{
-
-            foreach($names as $key=>$name){
+            foreach ($names as $key => $name) {
                 $product_id = Uuid::generate();
 
                 $rules = array('image' => 'dimensions:min_width=300,min_height=300'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
-                $validator = Validator::make(array('image'=> $images[$key]), $rules);
-                if($validator->passes()){
-                    $input['imagename'] = $product_id.$date_time.'.'.$images[$key]->getClientOriginalExtension();
-                    Product::processImage($images[$key],$input['imagename']);
+                $validator = Validator::make(array('image' => $images[$key]), $rules);
+                if ($validator->passes()) {
+                    $input['imagename'] = $product_id . $date_time . '.' . $images[$key]->getClientOriginalExtension();
+                    Product::processImage($images[$key], $input['imagename']);
 
                     Product::create([
                         'id' => $product_id,
                         'name' => $name,
-                        'user_id' =>$user_id ,
+                        'user_id' => $user_id,
                         'price' => $prices[$key],
-                        'description' =>'',
-                        'image' =>  $input['imagename'],
+                        'description' => '',
+                        'image' => $input['imagename'],
                         'sub_category_id' => $sub_categories[$key],
-                        'store_id' => Store::whereUserId($this->user->id)->first()->id,
+                        'store_id' => $this->store->id,
                     ]);
                 }
 
             }
-            return \response()->json( ['message'=>'successful saved '.count($names).' product(s)','products_limit'=>$products_limit])->setStatusCode(200);
+            return \response()->json(['message' => 'successful saved ' . count($names) . ' product(s)', 'products_limit' => $products_limit])->setStatusCode(200);
         }
-
-
+    }catch (\Exception $e){
+        return \response()->json(['message' => 'There was an error processing your request '])
+            ->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR);
     }
+
+     }
 
     public function getAllProducts(Request $request){
         $builder = Product::leftJoin('stores','stores.id','=','products.store_id')
@@ -567,7 +577,6 @@ class StoreController extends Controller
                     $products=$builder->paginate();
                 }
         }
-
 
         return view('store.all_products',compact('products'));
     }
@@ -774,15 +783,18 @@ class StoreController extends Controller
 
         $client = new Client();
         $body = compact('recipient', 'message', 'sender_alias');
-        $response = $client->post( \env('SMS_API_URL_ENDPOINT'),
+
+         $response = $client->post( \env('SMS_API_URL_ENDPOINT'),
             [
-                'ApiKey' => \env('sms_api_key'),
-                'ApiSecret' => \env('sms_api_secret'),
-                'body'=>$body
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'ApiKey' => \env('sms_api_key'),
+                    'ApiSecret' => \env('sms_api_secret')
+                ],
+                'form_params'=>[$body]
             ]
         );
-        $response = $client->send($response);
 
-        return json_decode($response, true);
+//        return json_decode($response, true);
     }
 }
