@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Feed;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\StoreRequest;
+use App\Hubtel\HubtelPaymentAdapter;
 use App\MpowerPayment;
 use App\MpowerPaymentException;
 use App\Notifications\NewOrder;
@@ -225,7 +226,6 @@ class StoreController extends Controller
     public function postStoreSettings(Request $request)
     {
         try {
-
 
             $slug = SlugService::createSlug(Store::class, 'slug', $request->name);
             if ($request->hasFile('image') && $request->hasFile('banner-image')) {
@@ -475,9 +475,16 @@ class StoreController extends Controller
 
          $sub_categories = ProductCategory::with('subcategories')->get();
 
-        return view('store.quick_add_product',compact('sub_categories'));
+         $threshold = PackageSignup::getUserPackageThreshold();
+         $productCounts = Product::whereUserId($this->user->id)->count();
+         $products_limit = $threshold - $productCounts;
 
-    }
+        return view('store.quick_add_product',
+            compact('sub_categories','products_limit')
+        );
+
+     }
+
 
     /**
      * @param Request $request
@@ -503,6 +510,7 @@ class StoreController extends Controller
         $threshold = PackageSignup::getUserPackageThreshold();
         $productCounts = Product::whereUserId($user_id)->count();
         $products_limit = $threshold - $productCounts;
+
         $test = true;
         if (count($names) + $productCounts > $threshold) {
 //        if($test){
@@ -510,7 +518,6 @@ class StoreController extends Controller
                 ->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_PRECONDITION_FAILED);
 
         } else {
-
             foreach ($names as $key => $name) {
                 $product_id = Uuid::generate();
 
@@ -536,11 +543,11 @@ class StoreController extends Controller
             return \response()->json(['message' => 'successful saved ' . count($names) . ' product(s)', 'products_limit' => $products_limit])->setStatusCode(200);
         }
     }catch (\Exception $e){
+//        if($e instanceof Exc)
         return \response()->json(['message' => 'There was an error processing your request '])
             ->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
-
-     }
 
     public function getAllProducts(Request $request){
         $builder = Product::leftJoin('stores','stores.id','=','products.store_id')
@@ -641,12 +648,9 @@ class StoreController extends Controller
     }
 
     public function getCheckOut($user_id){
-
-
         $store = Store::whereUserId($user_id)->first();
         $slug = $store->slug;
-        $categories = ProductCategory::all()
-        ;
+        $categories = ProductCategory::all();
 
         return view('store.checkout',compact('user','store','user_id','slug','categories'));
     }
@@ -701,7 +705,7 @@ class StoreController extends Controller
             \Gloudemans\Shoppingcart\Facades\Cart::destroy();
             $shop = Store::whereUserId($this->user->id)->first();
 
-            Notification::send(Order::first(), new NewOrder($this->user,$shop,$text,$amount,$qty));
+//            Notification::send(Order::first(), new NewOrder($this->user,$shop,$text,$amount,$qty));
 
             $order = Order::with(['items','user' =>function($query){}])->whereId($order_id)->first();
             return view('store.partials.order_details',compact('order_id','order','user_id'));
@@ -797,4 +801,14 @@ class StoreController extends Controller
 
 //        return json_decode($response, true);
     }
+
+    public function payment(){
+        return \response()->json(['message'=>new HubtelPaymentAdapter()]);
+    }
+
+    public function payCallBack(){
+        return \response()->json(['message'=> 'success']);
+    }
+
+    //TODO: use this template for individual stores. http://preview.themeforest.net/item/smarttech-ecommerce-html-template/full_screen_preview/20756752?_ga=2.66687846.939882631.1510791577-1918128547.1509975764
 }
