@@ -6,6 +6,8 @@ use App\Feed;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\StoreRequest;
 use App\Hubtel\HubtelPaymentAdapter;
+use App\KodeSms;
+use App\KodeSmsAdapter;
 use App\MpowerPayment;
 use App\MpowerPaymentException;
 use App\Notifications\NewOrder;
@@ -17,6 +19,7 @@ use App\Payment;
 use App\Product;
 use App\ProductCategory;
 use App\ProductGallery;
+use App\ProductOrderFacade;
 use App\Store;
 use App\StreamFeed;
 use App\SubCategory;
@@ -58,7 +61,7 @@ class StoreController extends Controller
             $this->user = Auth::user();
             $this->store = Store::whereUserId($this->user->id)->first();
             return $next($request);
-        });
+        })->except('sendSms');
     }
 
     public function getStore($slug,$user_id){
@@ -493,12 +496,12 @@ class StoreController extends Controller
     public function postQuickAddProducts(Request $request){
 
     try {
-        if ($request->hasFile('image')) {
-            $this->validate($request, [
-                'name' => 'required',
-                'price' => 'required'
-            ]);
-        }
+//        if ($request->hasFile('image')) {
+//            $this->validate($request, [
+//                'name' => 'required',
+//                'price' => 'required'
+//            ]);
+//        }
 
         $date_time = date('Ymdhis');
         $user_id = $this->user->id;
@@ -640,11 +643,10 @@ class StoreController extends Controller
 
     public function getCartContents(){
         return \Gloudemans\Shoppingcart\Facades\Cart::content();
-//       return \Gloudemans\Shoppingcart\Facades\Cart::total();
     }
 
     public function getCartDestroy(){
-        return \Gloudemans\Shoppingcart\Facades\Cart::destroy();
+         \Gloudemans\Shoppingcart\Facades\Cart::destroy();
     }
 
     public function getCheckOut($user_id){
@@ -663,44 +665,27 @@ class StoreController extends Controller
 
         }else {
             $order_id = Uuid::generate();
-            $text = "";
-            $store = Store::whereUserId($user_id)->first();
+//            $text = "";
+//            $store = Store::whereUserId($user_id)->first();
+//
+//            Order::create([
+//                'id' =>$order_id,
+//                'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
+//                'user_id' => $this->user->id
+//            ]);
+//
+//            foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
+//
+//                $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
+//                OrderItem::create([
+//                    'id' => Uuid::generate(),
+//                    'product_id' => $item->id,
+//                    'qty' => $item->qty,
+//                    'order_id' => $order_id,
+//                ]);
 
-            Order::create([
-                'id' =>$order_id,
-                'amount' => \Gloudemans\Shoppingcart\Facades\Cart::subtotal(),
-                'user_id' => $this->user->id
-            ]);
-
-            foreach(\Gloudemans\Shoppingcart\Facades\Cart::content() as $item){
-
-                $text.= "item :  $item->name => GHS $item->price * $item->qty \n";
-                OrderItem::create([
-                    'id' => Uuid::generate(),
-                    'product_id' => $item->id,
-                    'qty' => $item->qty,
-                    'order_id' => $order_id,
-                ]);
-
-                $top_selling_product = TopSellingProduct::whereProductId($item->id)->whereUserId($user_id);
-
-                if($top_selling_product->first()){
-                    $top_selling_product->update([
-                        'count' => $top_selling_product->first()->count+1
-                    ]);
-                }else {
-                    TopSellingProduct::create([
-                        'id' => Uuid::generate(),
-                        'user_id' => $user_id,
-                        'store_id' => $store->id,
-                        'product_id' => $item->id,
-                        'count' => 1
-                    ]);
-                }
-            }
-            $amount="GHS".\Gloudemans\Shoppingcart\Facades\Cart::subtotal();
-            $qty = \Gloudemans\Shoppingcart\Facades\Cart::count();
-
+            $order = new ProductOrderFacade('');
+            $order->generateOrder();
 
             \Gloudemans\Shoppingcart\Facades\Cart::destroy();
             $shop = Store::whereUserId($this->user->id)->first();
@@ -783,23 +768,10 @@ class StoreController extends Controller
 
     }
 
-    public function sendSms($recipient, $message, $sender_alias){
+    public function sendSms(){
+        $sms = new \App\Sms\KodeSmsAdapter(new \App\Sms\KodeSms());
 
-        $client = new Client();
-        $body = compact('recipient', 'message', 'sender_alias');
-
-         $response = $client->post( \env('SMS_API_URL_ENDPOINT'),
-            [
-                'headers' => [
-                    'Content-Type' => 'application/x-www-form-urlencoded',
-                    'ApiKey' => \env('sms_api_key'),
-                    'ApiSecret' => \env('sms_api_secret')
-                ],
-                'form_params'=>[$body]
-            ]
-        );
-
-//        return json_decode($response, true);
+        return $sms->sendSms('hello fred', '0240120250');
     }
 
     public function payment(){

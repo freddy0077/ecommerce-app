@@ -7,6 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Webpatser\Uuid\Uuid;
 
+/**
+ * App\Feed
+ *
+ * @mixin \Eloquent
+ * @property string $id
+ * @property int $user_id
+ * @property string $action
+ * @property string|null $other
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property string|null $store_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereOther($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereStoreId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Feed whereUserId($value)
+ */
 class Feed extends Model
 {
     //

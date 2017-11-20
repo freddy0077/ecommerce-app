@@ -14,6 +14,48 @@ use Intervention\Image\Facades\Image;
 use Webpatser\Uuid\Uuid;
 
 
+/**
+ * App\Store
+ *
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Store[] $packageSignups
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store findSimilarSlugs(\Illuminate\Database\Eloquent\Model $model, $attribute, $config, $slug)
+ * @mixin \Eloquent
+ * @property string $id
+ * @property int $user_id
+ * @property string $name
+ * @property string|null $image
+ * @property string|null $phone_number
+ * @property string|null $email
+ * @property string|null $address
+ * @property string|null $domain
+ * @property string|null $slug
+ * @property string|null $city
+ * @property string|null $business_type
+ * @property string|null $about
+ * @property int $enabled
+ * @property string|null $colour
+ * @property string|null $store_banner
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereAbout($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereBusinessType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereColour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereDomain($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store wherePhoneNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereStoreBanner($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Store whereUserId($value)
+ */
 class Store extends Model
 {
     use Sluggable;
